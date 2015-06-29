@@ -236,7 +236,6 @@
                 <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $act->id_act;?>">
                   Borrar Cédula <?php echo $act->id_act;?>
                 </button>
-
                 <!-- Modal -->
                 <div class="modal fade" id="myModal_<?php echo $act->id_act;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
@@ -251,7 +250,6 @@
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar operación</button>
                         <a href="<?php echo base_url('actividades/borrar_act').'/'.$act->id_act;?>" class="btn btn-danger" role="button">Si, estoy seguro. Elimina Cédula <?php echo $act->id_act;?></a>
-                        
                       </div>
                     </div>
                   </div>
