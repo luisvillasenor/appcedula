@@ -4,10 +4,10 @@ class Actividades extends CI_Controller {
 		session_start();
 		parent::__construct();
         $this->load->library('email');
+        $this->load->model('fc_model');
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url('admin/logout')); // Redirecciona la controlador "admin/logout"
-		}//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
-        
+		}
 	}
 	public function index(){
         
@@ -15,6 +15,7 @@ class Actividades extends CI_Controller {
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		
@@ -24,10 +25,12 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         
+        
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
     
@@ -104,6 +107,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -136,6 +142,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -170,6 +179,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -204,6 +216,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -239,6 +254,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         /* Variables de la Página */
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
@@ -279,10 +297,13 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('categorias_model');// LISTADO DE CATEGORIAS PARA QUE EL USUARIO SELECCIONE UNA OPCION
         $this->load->model('coordinadores_model');
             
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
@@ -317,6 +338,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('actividades_model');
         $this->load->model('coordinadores_model');
@@ -335,6 +359,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -371,6 +398,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -407,6 +437,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -443,6 +476,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -497,6 +533,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -530,6 +569,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -563,6 +605,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
@@ -592,37 +637,19 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data);
 		
 	}
-	public function editar_act(){
-		$e_mail   = $_SESSION['username'];
-        $grupo    = $_SESSION['grupo'];
-        $id_coord = $_SESSION['id_coord'];
-		$data['onlyusername'] = strstr($e_mail,'@',true);
-		$this->load->model('actividades_model');
-        $this->load->model('categorias_model');
-        $this->load->model('coordinadores_model');
-        // LISTADO DE CATEGORIAS PARA QUE EL USUARIO SELECCIONE UNA OPCION
-		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
-        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
-        foreach ($data['get_all_coords'] as $coords ) {
-    
-                        if($id_coord == $coords->id_coord) {
-                            
-                            $data['miCoordinacion']= $coords->coordinacion;
-                        }
-        }
-        $id_act = $this->input->post('id_act');
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
-		$this->load->view('actividades_editar_view',$data);
-	}
+	
     public function editar_actividad($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
         // LISTADO DE CATEGORIAS PARA QUE EL USUARIO SELECCIONE UNA OPCION
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -641,6 +668,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('categorias_model');
@@ -666,12 +696,15 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('coordinadores_model');
         
         $id_act = $this->input->post('id_act');
-        
+
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
     
@@ -697,6 +730,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -725,6 +761,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -747,6 +786,9 @@ class Actividades extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
 		$this->load->model('actividades_model');
@@ -770,6 +812,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$id_act = $this->input->post('id_act');
         $this->load->model('actividades_model');
@@ -791,6 +836,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -814,6 +862,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -837,6 +888,9 @@ class Actividades extends CI_Controller {
     	$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('coordinadores_model');
@@ -863,6 +917,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -892,6 +949,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $data['title']= 'Master Plan del Festival de Calaveras';
         
@@ -947,24 +1007,10 @@ class Actividades extends CI_Controller {
         }
 		$this->load->view('is_actividad_view',$data);
     }
-    public function borrar_act()
+    public function borrar_act($id_act)
     {
-        $e_mail   = $_SESSION['username'];
-        $grupo    = $_SESSION['grupo'];
-        $id_coord = $_SESSION['id_coord'];
-		$data['onlyusername'] = strstr($e_mail,'@',true);
-        $id_act = $this->input->post('id_act');
         $this->load->model('actividades_model');
-        $this->load->model('coordinadores_model');
-        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
-        foreach ($data['get_all_coords'] as $coords ) {
-    
-                        if($id_coord == $coords->id_coord) {
-                            
-                            $data['miCoordinacion']= $coords->coordinacion;
-                        }
-        }
-		$this->actividades_model->delete($id_act);
+        $this->actividades_model->delete($id_act);
         redirect('actividades/');
     }
     public function en_desarrollo()
@@ -972,6 +1018,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('coordinadores_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -990,6 +1039,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('coordinadores_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -1010,6 +1062,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $data['title']= 'Padrón Único de Proveedores del Estado de Aguascalientes';
         $this->load->model('coordinadores_model');
@@ -1068,6 +1123,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Si Autorizar';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -1119,6 +1177,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Si Autorizar';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -1170,6 +1231,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Si Autorizar';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -1221,6 +1285,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'No Autorizar';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -1261,6 +1328,9 @@ class Actividades extends CI_Controller {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'No Autorizar';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -1548,6 +1618,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('coordinadores_model');        
@@ -1581,6 +1654,9 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('coordinadores_model');

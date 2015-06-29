@@ -2,7 +2,13 @@
   <div class="navbar-inner">     
       <ul class="nav pull-left">  
         <li>
-          <a href="<?php echo base_url();?>captura/index"><i class="icon-home"></i></a>
+          <a href="<?php echo base_url();?>captura/index"><i class="icon-home"></i>
+            <?php foreach ($get_fc as $fc) {
+              if ($fc->id_fc === $edicion) {
+                echo $fc->edicion ." (".$fc->anio.")";
+              }
+            } ?>
+          </a>
         </li>
         <li class="dropdown">          
           <a class="dropdown-toggle" data-toggle="dropdown" ><strong>Captura</strong>

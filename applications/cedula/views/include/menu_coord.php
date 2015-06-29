@@ -3,7 +3,13 @@
   <div class="navbar-inner">     
       <ul class="nav">  
         <li>
-          <a href="<?php echo base_url('actividades/index');?>"><i class="icon-home icon-white navbar-icon-home"></i> AppCedula</a>
+          <a href="<?php echo base_url('actividades/index');?>"><i class="icon-home icon-white navbar-icon-home"></i>
+            <?php foreach ($get_fc as $fc) {
+              if ($fc->id_fc === $edicion) {
+                echo $fc->edicion ." (".$fc->anio.")";
+              }
+            } ?>
+          </a>
         </li>
               <li>                
                 <?php $atributos = array('class' => 'navbar-form pull-left'); 

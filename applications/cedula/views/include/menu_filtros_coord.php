@@ -6,7 +6,7 @@
           <li>                
             <?php $atributos = array('class' => 'navbar-form pull-left'); 
                 echo form_open(base_url('actividades/filtrar_resp'), $atributos); ?>                    
-                <select class="span8" name="email" id="email" onchange="this.form.submit()">
+                <select class="span12" name="email" id="email" onchange="this.form.submit()">
                   <option>Responsables</option>
                   <?php foreach ($get_resp as $resp ) :?>                      
                     <option value="<?php echo $resp->e_mail;?>"><?php echo $resp->e_mail;?></option>                                      
@@ -19,7 +19,7 @@
           <li>                
             <?php $atributos = array('class' => 'navbar-form pull-left'); 
                 echo form_open(base_url('actividades/filtrar_cedula'), $atributos); ?>                    
-                <select class="span8" name="id_act" id="id_act" onchange="this.form.submit()">
+                <select class="span12" name="id_act" id="id_act" onchange="this.form.submit()">
                   <option>Cédulas</option>
                   <?php foreach ($get_all_actividades as $acts ) :?>                      
                     <option value="<?php echo $acts->id_act;?>"><?php echo $acts->actividad;?></option>
@@ -32,11 +32,12 @@
           <li>                
             <div class="btn-group">
               <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Ordenar Cédulas Por:
+                Ordenar y Filtrar Cédulas:
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- dropdown menu links -->
+                <li class="dropdown-header">Ordenar:</li>
                 <li>
                     <a href="<?php echo base_url('actividades/ordenar_id_asc');?>" data-toggle="tooltip" title="Orden Ascendente"><span> ID: Asc - Desc </span><i class="icon-chevron-up"></i></a>
                 </li>
@@ -49,19 +50,7 @@
                   <li>
                     <a href="<?php echo base_url('actividades/ordenar_act_desc');?>" data-toggle="tooltip" title="Ordena Descendente"><span> Cédula: Z - A </span><i class="icon-chevron-down"></i></a>
                 </li>
-              </ul>
-            </div>
-          </li>          
-        </div>
-            
-        <div class="span3">          
-          <li>                
-            <div class="btn-group">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Filtro Por Status: 
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
+                <li class="dropdown-header">Filtro por Status:</li>
                 <!-- dropdown menu links --> 
                 <li>
                     <a href="<?php echo base_url('actividades/filtrar_status/0');?>" data-toggle="tooltip" title="Orden Ascendente"><span name="flag" id="flag" class="label label-warning"><small>Pendiente</small></span></a>
@@ -75,10 +64,14 @@
                 <li>
                     <a href="<?php echo base_url('actividades/filtrar_status/4');?>" data-toggle="tooltip" title="Orden Ascendente"><span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span></a>
                 </li>
+
               </ul>
+
             </div>
           </li>          
         </div>
+            
+        
             
             
         

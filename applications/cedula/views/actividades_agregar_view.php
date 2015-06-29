@@ -94,21 +94,21 @@ color:white;
         
         <div class="well"><h3>Agregar una Nueva Cédula de Actividad</h3></div>  
         
-      
-        
       <?php $attributes = array('name' => 'nuevacedula', 'id' => 'nuevacedula', 'class' => 'form-signin');
         echo form_open(base_url('actividades/insert_act'),$attributes); ?>
         <fieldset>
-                   
           <table>
             <tr>
             <th rowspan="1">CÉDULA</th>
             <td>
+                <label><?php foreach ($get_fc as $fc) { if ($fc->id_fc === $edicion) { echo $fc->edicion ." (".$fc->anio.")";}}?></label>
+                <input type="hidden" name="edicion" id="edicion" value="<?php echo $edicion;?>">
+                <span class="help-block"><small>Edicion actual del Festival de Calaveras</small></span>
                 <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí el Nombre de la Actividad..."> </i>
-                <?php 
-                          echo form_label('Nombre de la Cédula:',  'actividad' ) ; 
-                          echo form_input('actividad', set_value('actividad'), 'id="actividad" class="input-block-level input-xxlarge" placeholder="Escriba aquí el Nombre de la Actividad..."');
-                      ?> 
+                <?php
+                  echo form_label('Nombre de la Cédula:',  'actividad' ) ; 
+                  echo form_input('actividad', set_value('actividad'), 'id="actividad" class="input-block-level input-xxlarge" placeholder="Escriba aquí el Nombre de la Actividad..."');
+                ?> 
                 <span class="help-block"><small>Evite utilizar estos simbolos en el texto: %,&,$,¬,|,",#,@</small></span>
                 <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Descripción de la Actividad..."> </i>
                 <p>

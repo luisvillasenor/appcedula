@@ -76,7 +76,7 @@ class Movimientos extends CI_Controller {
         $this->load->model('movimientos_model');
         $this->load->model('actividades_model');
         
-        if (!$this->movimientos_model->insert_entry($tipo_mov, $monto_mov, $comm_mov, $e_mail, $id_act)) {
+        /*if (!$this->movimientos_model->insert_entry($tipo_mov, $monto_mov, $comm_mov, $e_mail, $id_act)) {
             echo "HAY UN PROBLEMA AL REGISTRAR LOS DATOS EN LA BASE DE DATOS";
         }else{
             $data['movimientos'] = strstr($e_mail,'@',true);
@@ -84,9 +84,9 @@ class Movimientos extends CI_Controller {
             
             }
             $this->actualizar_pres_soli();
-        }
+        }*/
         
-        redirect('actividades/vista_previa/'id_act);
+        //redirect('actividades/vista_previa/'id_act);
 	}
     
     /**** VISTA TIPO FORMULARIO PARA CREATE ****/

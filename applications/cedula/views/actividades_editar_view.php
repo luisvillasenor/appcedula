@@ -105,6 +105,17 @@
                 <label>ID: <?php echo $act->id_act;?></label>
                 <input id="id_act" name="id_act" type="hidden" value="<?php echo $act->id_act;?>">
                 <input id="status_act" name="status_act" type="hidden" value="<?php echo $act->status_act;?>">
+                <input id="edicion" name="edicion" type="hidden" value="<?php echo $act->id_fc;?>">
+                <label>
+                    <?php 
+                    foreach ($get_fc as $fc) 
+                    {
+                        if ($fc->id_fc === $act->id_fc) 
+                        { 
+                            echo $fc->edicion ." (".$fc->anio.")";
+                        }
+                    }?>
+                </label>
                 <textarea class="input-xxlarge" id="actividad" name="actividad" type="text" value="<?php echo $act->actividad;?>"><?php echo $act->actividad;?></textarea>
                 <label></label>
                 <textarea class="input-xxlarge" id="descripcion" name="descripcion" type="text" value="<?php echo $act->descripcion;?>"><?php echo $act->descripcion;?></textarea>
@@ -219,6 +230,35 @@
             
           <p><br>
           <button type="submit" class="btn btn-primary">Actualizar Cédula</button>
+          <?php
+            if ($act->costo_secture == 0) { ?>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $act->id_act;?>">
+                  Borrar Cédula <?php echo $act->id_act;?>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal_<?php echo $act->id_act;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?php echo $act->id_act;?></h4>
+                      </div>
+                      <div class="modal-body">
+                        <h3>Se eliminará la Cédula permanentemente, ¿esta seguro?</h3>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar operación</button>
+                        <a href="<?php echo base_url('actividades/borrar_act').'/'.$act->id_act;?>" class="btn btn-danger" role="button">Si, estoy seguro. Elimina Cédula <?php echo $act->id_act;?></a>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+          <?php } ?>
+
         </fieldset>
       <?php echo form_close(); ?>
     
@@ -231,18 +271,6 @@
 
 <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js'); ?>"></script>
 
-<script src="<?php echo base_url('bootstrap/js/bootstrap.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-alert.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-button.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-carousel.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-collapse.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-dropdown.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-modal.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-popover.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-scrollspy.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-tab.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-tooltip.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-transition.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-typeahead.js'); ?>"></script>
+
 </body>
 </html>

@@ -443,7 +443,7 @@ class Actividades_model extends CI_Model
         $this->is_costo_publico = $_POST['is_costo_publico'];
         $this->ubicacion        = strtoupper($_POST['ubicacion']);
         $this->id_coord         = $_POST['id_coord'];
-        $this->id_fc            = 4;
+        $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = 0;
 
         $this->db->insert('actividades', $this);
@@ -541,7 +541,7 @@ class Actividades_model extends CI_Model
         
         $this->hora_ini         = $_POST['hora_ini'];
         $this->hora_fin         = $_POST['hora_fin'];
-        $this->id_fc            = $_POST['id_fc'];
+        $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = $_POST['id_resp'];
         
         $this->db->where('id_act', $this->id_act);

@@ -3,7 +3,13 @@
   <div class="navbar-inner">     
       <ul class="nav">  
         <li>
-          <a href="<?php echo base_url('actividades/index');?>"><i class="icon-home icon-white"></i></a>
+          <a href="<?php echo base_url('actividades/index');?>"><i class="icon-home icon-white"></i>
+            <?php foreach ($get_fc as $fc) {
+              if ($fc->id_fc === $edicion) {
+                echo $fc->edicion ." (".$fc->anio.")";
+              }
+            } ?>
+          </a>
             
         </li>
               <li>                
@@ -21,7 +27,7 @@
                   
       </ul>      
       <ul class="nav pull-right">
-               <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
+        <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
           <!--<li><a data-toggle="modal" href="<?php echo base_url();?>/actividades/resumen"><i class="icon-comment"></i> RESUMEN &raquo;</a></li>-->
         <li class="dropdown">  
           <a class="dropdown-toggle" data-toggle="dropdown">  
@@ -34,8 +40,20 @@
             <li><a data-toggle="modal" href="<?php echo base_url('users/index');?>"><i class="icon-user"></i> Administrador de Responsables &raquo;</a></li>
               <li><a data-toggle="modal" href="<?php echo base_url('coordinadores/index');?>"><i class="icon-bookmark"></i> Administrador de Coordinaciones &raquo;</a></li>
               <li><a data-toggle="modal" href="<?php echo base_url('categorias/index');?>"><i class="icon-briefcase"></i> Administrador de Categorías &raquo;</a></li>
-              
               <li><a data-toggle="modal" href="<?php echo base_url('comentarios/index');?>"><i class="icon-comment"></i> Cronología de Comentarios &raquo;</a></li>
+        <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS ADMINISTRADORES */
+        $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
+          switch ($app) {
+              case 'oscarmorales@app.com':  ?>
+                <li><a data-toggle="modal" href="<?php echo base_url('movimientos/');?>"><i class="icon-book"></i> GESTION PRESUPUESTO &raquo;</a></li>
+                <?php break;      
+              case 'appcedula@app.com':     ?>
+                <li><a data-toggle="modal" href="<?php echo base_url('movimientos/');?>"><i class="icon-book"></i> GESTION PRESUPUESTO &raquo;</a></li>
+                <?php break;
+              default:                                            
+                break; 
+            } 
+        ?>
               
           </ul>
         </li>

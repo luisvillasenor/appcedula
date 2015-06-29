@@ -4,6 +4,7 @@ class Comentarios extends CI_Controller {
 		session_start();
 		parent::__construct();
         $this->load->library('email');
+        $this->load->model('fc_model');
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url()); // Redirecciona la controlador "admin/index"
 		}//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
@@ -13,6 +14,8 @@ class Comentarios extends CI_Controller {
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $data['title']= 'Comentarios';
 		$this->load->model('comentarios_model');
@@ -36,6 +39,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('coordinadores_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -54,6 +60,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('comentarios_model');
         $this->load->model('actividades_model');
@@ -76,6 +85,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];// Usuario en Session
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $id_act = $this->input->post('id_act');
         $usuario = $this->input->post('usuario');// Autor de la Cédula (e_mail de la tabla actividades)
@@ -115,6 +127,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('comentarios_model');
         $this->load->model('actividades_model');
@@ -136,6 +151,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];// Usuario en Session
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $id_act = $this->input->post('id_act');
         $usuario = $this->input->post('usuario');// Autor de la Cédula (e_mail de la tabla actividades)
@@ -176,6 +194,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('actividades_model');
         $this->load->model('comentarios_model');  
@@ -197,6 +218,9 @@ class Comentarios extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);        
         $this->load->model('actividades_model');
         $this->load->model('comentarios_model');
