@@ -1,0 +1,49 @@
+      body {
+         background:#FDFCF7;
+    }
+    #subheader {
+      background-color: #CCC;
+      margin: auto;
+      height: 20px;
+      width: 100%;
+      text-align: center;
+      word-spacing: normal;
+      letter-spacing: normal;
+      vertical-align: middle;
+      white-space: normal;
+      display: inline-block;      
+    }
+    #wrapper {
+      background-color: transparent;
+      margin-top: 70px;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      
+    }
+
+table, th, td
+{
+border-collapse:collapse;
+border:1px solid black;
+}
+th, td
+{
+padding:15px;
+}
+        th
+{
+background-color:#FE9042;
+color:white;
+}
+
+
+   
+    footer {
+      background-color: #AAA;
+      clear: both;
+      position: fixed;      
+      bottom: 0px;
+      text-align: center;;
+    }
+
