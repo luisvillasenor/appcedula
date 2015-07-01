@@ -103,7 +103,7 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data); 
 	}
     /***** FUNCIONES PARA EL FILTRO DE CÉDULAS *****/
-    public function ordenar_id_asc(){
+    public function ordenar_id_asc(){ 
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
