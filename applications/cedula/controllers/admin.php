@@ -150,7 +150,8 @@ class Admin extends CI_Controller {
 		//CARGA LOGIN VIEW
 		$this->load->model('fc_model');
 		$data['get_fc'] = $this->fc_model->get_fc();
-		$this->load->view('login_view',$data);
+		//$this->load->view('login_view',$data);
+		redirect(base_url());
 		
 	}
 
