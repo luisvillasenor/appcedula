@@ -68,47 +68,13 @@
               </ul>
 
             </div>
-          </li>
+          </li>          
         </div>
-        <?php /* GETOR DE PRESUPUESTO.- VISTA SOLO PARA LOS ADMINISTRATIVO */
-        $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
-          switch ($app) {
-              case 'oscarmorales@app.com':  ?>
-                <div class="span3">          
-                  <li>                
-                    <?php $atributos = array('class' => 'navbar-form pull-left'); 
-                        echo form_open(base_url().'actividades/filtrar_coords', $atributos); ?>                    
-                        <select name="id_coord" id="id_coord" onchange="this.form.submit()">
-                          <option>Coordinaciones</option>
-                          <?php foreach ($get_all_coords as $coords ) :?>                      
-                            <option value="<?php echo $coords->id_coord;?>"><?php echo $coords->coordinacion;?></option>
-                          <?php endforeach; ?>
-                        </select>
-                    <?php echo form_close(); ?>
-                  </li>
-                  </div>
-                <?php break;      
-              case 'appcedula@app.com':     ?>
-                <div class="span3">          
-                  <li>                
-                    <?php $atributos = array('class' => 'navbar-form pull-left'); 
-                        echo form_open(base_url().'actividades/filtrar_coords', $atributos); ?>                    
-                        <select name="id_coord" id="id_coord" onchange="this.form.submit()">
-                          <option>Coordinaciones</option>
-                          <?php foreach ($get_all_coords as $coords ) :?>                      
-                            <option value="<?php echo $coords->id_coord;?>"><?php echo $coords->coordinacion;?></option>
-                          <?php endforeach; ?>
-                        </select>
-                        
-                    <?php echo form_close(); ?>
-                  </li>
-                  </div>
-                <?php break;
-              default:                                            
-                break; 
-            } 
-        ?>
-                
+            
+        
+            
+            
+        
         </div>
       </ul>      
   </div>  

@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Necesidades extends CI_Controller {
+class Compras extends CI_Controller {
 	public function __construct(){ /* Esta funcion debe de ir en cada controlador para verificar si la sesion y el usuario siguen conectados */
 		session_start();
 		parent::__construct();
@@ -119,7 +119,7 @@ class Necesidades extends CI_Controller {
                 
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
         $this->load->view('necesidades_view',$data);
 	}
     public function edit_nec($id_act,$id_nec){

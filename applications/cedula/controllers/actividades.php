@@ -9,13 +9,14 @@ class Actividades extends CI_Controller {
 			redirect(base_url('admin/logout')); // Redirecciona la controlador "admin/logout"
 		}
 	}
-	public function index(){
+
+    public function index(){
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
-        $data['edicion']  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		
@@ -26,7 +27,7 @@ class Actividades extends CI_Controller {
         $this->load->model('comentarios_model');
         
         
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -40,9 +41,9 @@ class Actividades extends CI_Controller {
                         }
         }
                 
-		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
-        $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
                 
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_view',$data);
@@ -118,7 +119,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         //$this->load->model('responsables_model');                
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -129,10 +130,10 @@ class Actividades extends CI_Controller {
             }
         }
         
-		$data['get_all_orderbyID_asc'] = $this->actividades_model->get_all_orderbyID_asc($e_mail,$grupo,$id_coord);
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_all_orderbyID_asc'] = $this->actividades_model->get_all_orderbyID_asc($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_id_asc_view',$data);        
@@ -153,7 +154,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         //$this->load->model('responsables_model');                
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -166,10 +167,10 @@ class Actividades extends CI_Controller {
                         }
         }
         
-		$data['get_all_orderbyID_desc'] = $this->actividades_model->get_all_orderbyID_desc($e_mail,$grupo,$id_coord);
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_all_orderbyID_desc'] = $this->actividades_model->get_all_orderbyID_desc($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_id_desc_view',$data);        
@@ -190,7 +191,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         //$this->load->model('responsables_model');                
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -203,10 +204,10 @@ class Actividades extends CI_Controller {
                         }
         }
         
-		$data['get_all_orderbyACT_asc'] = $this->actividades_model->get_all_orderbyACT_asc($e_mail,$grupo,$id_coord);
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_all_orderbyACT_asc'] = $this->actividades_model->get_all_orderbyACT_asc($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_act_asc_view',$data);        
@@ -227,7 +228,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         //$this->load->model('responsables_model');                
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -240,10 +241,10 @@ class Actividades extends CI_Controller {
                         }
         }
         
-		$data['get_all_orderbyACT_desc'] = $this->actividades_model->get_all_orderbyACT_desc($e_mail,$grupo,$id_coord);
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_all_orderbyACT_desc'] = $this->actividades_model->get_all_orderbyACT_desc($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         
 		$this->load->view('header_view',$data);
         $this->load->view('actividades_order_act_desc_view',$data);        
@@ -267,15 +268,15 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         /* Variables tipo Array para almacenar las consultas a la base de datos */
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();        
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
-        $data['get_all_status'] = $this->actividades_model->get_all_status($e_mail,$grupo,$id_coord,$status);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+        $data['get_all_status'] = $this->actividades_model->get_all_status($e_mail,$grupo,$id_coord,$status,$edicion);
         /* Reglas del Negocio */
         foreach ($data['get_all_coords'] as $coords ) {    
             if($id_coord == $coords->id_coord) {                
@@ -360,7 +361,7 @@ class Actividades extends CI_Controller {
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
-        $data['edicion']  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
@@ -370,7 +371,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         //$this->load->model('responsables_model');                
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
@@ -384,10 +385,10 @@ class Actividades extends CI_Controller {
         }
         		
 		$txt = $this->input->post('txt');
-		$data['get_one_act'] = $this->actividades_model->get_one_act($txt,$e_mail);
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_one_act'] = $this->actividades_model->get_one_act($txt,$e_mail,$edicion);
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         
         $this->load->view('header_view',$data);
         $this->load->view('actividades_one_view',$data);
@@ -472,6 +473,47 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data);
 		
 	}
+
+    public function filtrar_coords(){
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['title']= 'Mis Cédulas';
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $this->load->model('categorias_model');
+        $this->load->model('coordinadores_model');
+        $this->load->model('comentarios_model');
+        //$this->load->model('responsables_model');                
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_registros'] = $this->necesidades_model->get_registros();
+        $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+    
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+                
+        $coord = $this->input->post('id_coord');
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+        $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_filtro_por_coord'] = $this->actividades_model->get_filtro_por_coord($grupo,$coord);
+        
+        $this->load->view('header_view',$data);
+        $this->load->view('filtrar_coords_view',$data);
+        $this->load->view('footer_view',$data);
+        
+    }
+
     public function filtrar_resumen_cedula(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
@@ -762,10 +804,35 @@ class Actividades extends CI_Controller {
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
-        $data['edicion']  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
         $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $this->load->model('coordinadores_model');
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
+        $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
+        $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+    
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+		$this->load->view('necesidades_view',$data);
+	}
+    public function compras_act($id_act){
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('coordinadores_model');
         $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
@@ -780,8 +847,11 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-		$this->load->view('necesidades_view',$data);
-	}
+        $this->load->view('header_view',$data); 
+        $this->load->view('compras_view',$data);
+        $this->load->view('footer_view',$data);
+        
+    }    
     public function comentarios_act($id_act){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
@@ -927,11 +997,11 @@ class Actividades extends CI_Controller {
         $this->load->model('comentarios_model');
         $this->load->model('coordinadores_model');
         $this->load->model('movimientos_model');
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_all_movs'] = $this->movimientos_model->get_all_movs($id_act);
         $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_cal_id_act'] = $this->actividades_model->get_cal_id_act($id_act);
         $data['get_all_com_act'] = $this->comentarios_model->get_all_com_act($id_act,$e_mail,$grupo,$id_coord);
@@ -1679,9 +1749,55 @@ class Actividades extends CI_Controller {
         $this->vista_previa($id_act);        
         
 	}
+
+
     
     
-    
+
+///////////// COPIAR Y PEGAR UN REGISTRO //////////
+    public function copiar($id_act)
+    {
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $total = '';
+        $bloq = '5';
+
+        $reg = $this->actividades_model->get_one_to_copi($id_act);
+
+        if ($edicion != 5) {
+            if (is_array($reg) === TRUE) {
+                $last_id = $this->actividades_model->paste($reg,$ed = 5);
+                echo $last_id;
+                echo "<br>";
+                $this->actividades_model->bloqueo($id_act,$bloq);
+            }else{echo "NO ES UN ARRAY";}            
+        }else{echo "EDICION NO VALIDA";}
+
+        $nec = $this->necesidades_model->get_all_nec_act($id_act);
+        if (is_array($nec) === TRUE) {
+            $this->necesidades_model->paste($nec,$last_id);
+            $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act = $last_id);
+            foreach ($data['get_total_act'] as $tot ) : 
+                $total += $tot->total_act; 
+            endforeach;        
+            $this->actividades_model->update_costo_secture($id_act,$total);             
+        }else{echo "NO ES UN ARRAY";}
+
+        $this->index();
+        
+    }
+///////////////////////////////////////////////////
+
+
+
+
     
 }
 

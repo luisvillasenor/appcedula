@@ -1,7 +1,3 @@
-<footer>
-    &copy 2014 S7Mx Software. Sistema de Control de Cédulas Ver. 1.2.2
-</footer>    
-
 <script src="<?php echo base_url('bootstrap/js/jquery-1.9.1.min.js'); ?>"></script>
 <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js'); ?>"></script>
 <script src="js/bootstrap.js"></script>

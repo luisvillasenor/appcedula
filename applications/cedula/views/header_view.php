@@ -26,6 +26,34 @@
       white-space: normal;
       display: inline-block;      
     }
+
+    #subheader2 {
+      background-color: #eee;
+      margin: auto;
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      word-spacing: normal;
+      letter-spacing: normal;
+      vertical-align: middle;
+      white-space: normal;
+      display: inline-block;      
+    }
+
+    #subheader3 {
+      background-color: #eee;
+      color: red;
+      margin: auto;
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      word-spacing: normal;
+      letter-spacing: normal;
+      vertical-align: middle;
+      white-space: normal;
+      display: inline-block;      
+    }
+
     #wrapper {
       background-color: transparent;
       margin-top: 70px;

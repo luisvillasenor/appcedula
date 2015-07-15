@@ -1,16 +1,16 @@
 <?php
-class Necesidades_model extends CI_Model 
+class Compras_model extends CI_Model 
 {
     // Definicion de variables iguales a los votos de los campos de la tabla 
-    var $id_nec = '';
-    var $descripcionec = '';
-    var $observaciones = '';
+    var $id_comp = '';
     var $id_act = '';
+    var $concepto = '';
+    var $observaciones = '';    
     var $cantidad = '';
     var $precio_unitario = '';
     var $iva = '';
     var $precio_total = '';
-    var $encargado = '';
+    var $proveedor = '';
     
         
     function __construct()
@@ -23,26 +23,26 @@ class Necesidades_model extends CI_Model
     function get_all()
     {
         // Llama a la tabla de la base de datos y se trae como respuesta TODOS los registro. 
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get('compras');
         return $query->result();
     }
     function get_one_nec($txt)
     {
         $res = $txt;
-        //$res = $this->descripcion = $_POST['id_nec'];
+        //$res = $this->descripcion = $_POST['id_comp'];
         $this->db->select('*');
-        $this->db->like('descripcionec', $res);
-        $query = $this->db->get('necesidades');
+        $this->db->like('concepto', $res);
+        $query = $this->db->get('compras');
         return $query->result();
     }
     
-    function get_one_nec_edit($id_nec)
+    function get_one_nec_edit($id_comp)
     {
-        $res = $id_nec;
-        //$res = $this->descripcion = $_POST['id_nec'];
+        $res = $id_comp;
+        //$res = $this->descripcion = $_POST['id_comp'];
         $this->db->select('*');
-        $this->db->where('id_nec', $res);
-        $query = $this->db->get('necesidades');
+        $this->db->where('id_comp', $res);
+        $query = $this->db->get('compras');
         return $query->result();
     }
     
@@ -50,115 +50,97 @@ class Necesidades_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
-        $this->db->order_by('id_nec','asc');
-        $query = $this->db->get('necesidades_test');
+        $this->db->order_by('id_comp','asc');
+        $query = $this->db->get('compras');
         return $query->result();
     }
     
     function get_total_act($id_act)
     {
-        // Obtiene el total del costo de la cédula de actividad. Sumatoria de sus necesidades
+        // Obtiene el total del costo de la cédula de actividad. Sumatoria de sus compras
         $this->db->select('sum(precio_total) as total_act,sum(iva) as tot_iva,(sum(precio_total) + sum(iva)) as tot_tot');
         $this->db->where('id_act', $id_act);
-        $query = $this->db->get('necesidades_test');
+        $query = $this->db->get('compras');
         return $query->result();
     }
     
-    function get_all_nec_act_by_encargado_asc($id_act)
+    function get_all_nec_act_by_proveedor_asc($id_act)
     {
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
-        $this->db->order_by('encargado','asc');
-        $query = $this->db->get('necesidades');
+        $this->db->order_by('proveedor','asc');
+        $query = $this->db->get('compras');
         return $query->result();
     }
-    function get_all_nec_act_by_encargado_desc($id_act)
+    function get_all_nec_act_by_proveedor_desc($id_act)
     {
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
-        $this->db->order_by('encargado','desc');
-        $query = $this->db->get('necesidades');
+        $this->db->order_by('proveedor','desc');
+        $query = $this->db->get('compras');
         return $query->result();
     }
     
     function get_nec()
     {
         $res = '';
-        $res = $this->id_coord = $_POST['id_nec'];
+        $res = $this->id_coord = $_POST['id_comp'];
         $this->db->select('*');
-        $this->db->where('id_nec', $res);
-        $this->db->order_by('descripcionec','asc');
-        $query = $this->db->get('necesidades');
+        $this->db->where('id_comp', $res);
+        $this->db->order_by('concepto','asc');
+        $query = $this->db->get('compras');
         return $query->result();            
 
     }
 
-    function get_all_necesidades()
+    function get_all_compras()
     {
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get('compras');
         return $query->result();
     }
 
     function insert_entry($id_act)
     {
         $this->id_act          = $id_act;
-        $this->descripcionec   = strtoupper($_POST['descripcionec']);
+        $this->concepto   = strtoupper($_POST['concepto']);
         $this->observaciones   = strtoupper($_POST['observaciones']);
         $this->cantidad        = (int)$_POST['cantidad'];
         $this->precio_unitario = $_POST['precio_unitario'];
         $this->iva             = ($this->cantidad * $this->precio_unitario)*0.16 ;
         $this->precio_total    = ($this->cantidad * $this->precio_unitario) ;
-        $this->encargado       = strtoupper($_POST['encargado']);
+        $this->proveedor       = strtoupper($_POST['proveedor']);
         //$this->quien_modifica  = $e_mail;
     
-        $this->db->insert('necesidades', $this);
-    }
-
-    function paste($nec,$last_id)
-    {
-        foreach ($nec as $value) {
-            $data['id_act']          = $last_id;
-            $data['descripcionec']   = $value->descripcionec;
-            $data['observaciones']   = $value->observaciones;
-            $data['cantidad']        = (int)$value->cantidad;
-            $data['precio_unitario'] = $value->precio_unitario;
-            $data['iva']             = ($value->cantidad * $value->precio_unitario)*0.16;
-            $data['precio_total']    = ($value->cantidad * $value->precio_unitario);
-            $data['encargado']       = $value->encargado;
-            $this->db->insert('necesidades_test', $data);            
-        }
-        
-        
-        
+        $this->db->insert('compras', $this);
     }
 
     function update_entry($e_mail)
     {
-        $this->id_nec          = $_POST['id_nec'];
-        $this->descripcionec   = strtoupper($_POST['descripcionec']);
+        $this->id_comp          = $_POST['id_comp'];
+        $this->concepto   = strtoupper($_POST['concepto']);
         $this->observaciones   = strtoupper($_POST['observaciones']);
         $this->id_act          = $_POST['id_act'];
         $this->cantidad        = (int)$_POST['cantidad'];
         $this->precio_unitario = $_POST['precio_unitario'];
         $this->iva             = ($this->cantidad * $this->precio_unitario)*0.16 ;
         $this->precio_total    = ($this->cantidad * $this->precio_unitario) ;
-        $this->encargado       = strtoupper($_POST['encargado']);
+        $this->proveedor       = strtoupper($_POST['proveedor']);
         $this->fecha_ult_modificacion = date('Y-m-d H:i:s'); 
         $this->quien_modifica  = $e_mail; 
         
-        $this->db->where('id_nec', $this->id_nec);
-        $this->db->update('necesidades', $this);
+        $this->db->where('id_comp', $this->id_comp);
+        $this->db->update('compras', $this);
     }
     
-    function delete($id_nec)
+    function delete($id_comp)
     {
-        $this->db->delete('necesidades', array('id_nec' => $id_nec)); 
+        $this->db->delete('compras', array('id_comp' => $id_comp)); 
     }
     
     function get_registros()
     {
         $this->db->select('id_act as id_act,count(*) as regs');
-        $this->db->from('necesidades');
+        $this->db->from('compras');
         $this->db->group_by('id_act');         
         return $query = $this->db->get();
     }

@@ -8,6 +8,13 @@ class Movimientos extends CI_Controller {
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url()); // Redirecciona la controlador "admin/index"
 		}
+        $this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $this->load->model('categorias_model');
+        $this->load->model('coordinadores_model');
+        $this->load->model('comentarios_model');
+        $this->load->model('movimientos_model');
+        $this->load->model('fc_model');
 	}
         
     /***********************************************************/
@@ -16,18 +23,43 @@ class Movimientos extends CI_Controller {
     /***********************************************************/
     /***********************************************************/
     
-    /**** READ ALL ****/    
-    public function index(){
-		$e_mail = $_SESSION['username'];
-		$data['onlyusername'] = strstr($e_mail,'@',true);
-		$this->load->model('movimientos_model');
-		$data['get_all_movs'] = $this->movimientos_model->get_all_movs();
-		$this->load->view('movimientos_view',$data);
-    }
+    /**** READ ALL ****/
+    public function index(){        
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['title']= 'Gestion de Presupuesto';
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_registros'] = $this->necesidades_model->get_registros();
+        $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+    
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+                
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+        $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+                
+        $this->load->view('header_view',$data); 
+        $this->load->view('movimientos_view',$data);
+        $this->load->view('footer_view',$data); 
+    }        
+
     public function movimientos($id_act){
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
-		$this->load->model('movimientos_model');
+		
 		$data['get_all_movs'] = $this->movimientos_model->get_all_movs();
 		$this->load->view('movimientos_view',$data);
 	}
@@ -36,7 +68,7 @@ class Movimientos extends CI_Controller {
 	public function edit_resp($id_mov){
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
-        $this->load->model('movimientos_model');
+        
         $data['get_one_mov_edit'] = $this->movimientos_model->get_one_mov_edit($id_mov);        
         $this->load->view('movimientos_editar_view',$data);
 	}
@@ -49,7 +81,7 @@ class Movimientos extends CI_Controller {
         $id_mov = $this->input->post('id_mov');
         $responsable = $this->input->post('responsable');             
         
-		$this->load->model('movimientos_model');        
+		      
 		$this->movimientos_model->update_entry($id_mov,$responsable); 
         
         redirect('movimientos/index');
@@ -73,8 +105,7 @@ class Movimientos extends CI_Controller {
         
         
         /** REGLAS DEL NEGOCIO **/        
-        $this->load->model('movimientos_model');
-        $this->load->model('actividades_model');
+        
         
         /*if (!$this->movimientos_model->insert_entry($tipo_mov, $monto_mov, $comm_mov, $e_mail, $id_act)) {
             echo "HAY UN PROBLEMA AL REGISTRAR LOS DATOS EN LA BASE DE DATOS";

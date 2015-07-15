@@ -11,6 +11,7 @@ class Fc_model extends CI_Model {
     }
 
     function get_fc(){
+        $this->db->where('status',1);
         $this->db->order_by('anio','desc');
         $query = $this->db->get('fc');
         return $query->result();

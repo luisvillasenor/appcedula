@@ -163,7 +163,8 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                                 <th><span name="flag" id="flag" class="label label-warning"><h3>Pendiente Aprobación</h3></span></th>
                         <?php break;
                               } ?>
-                    </span>                    
+                    </span>
+                    <span>EDICION 201<?php echo $actividades->id_fc;?></span>
                 </thead>
                 <tr>
                     <th>ACTIVIDAD</th>

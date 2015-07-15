@@ -41,20 +41,6 @@
               <li><a data-toggle="modal" href="<?php echo base_url('coordinadores/index');?>"><i class="icon-bookmark"></i> Administrador de Coordinaciones &raquo;</a></li>
               <li><a data-toggle="modal" href="<?php echo base_url('categorias/index');?>"><i class="icon-briefcase"></i> Administrador de Categorías &raquo;</a></li>
               <li><a data-toggle="modal" href="<?php echo base_url('comentarios/index');?>"><i class="icon-comment"></i> Cronología de Comentarios &raquo;</a></li>
-        <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS ADMINISTRADORES */
-        $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
-          switch ($app) {
-              case 'oscarmorales@app.com':  ?>
-                <li><a data-toggle="modal" href="<?php echo base_url('movimientos/');?>"><i class="icon-book"></i> GESTION PRESUPUESTO &raquo;</a></li>
-                <?php break;      
-              case 'appcedula@app.com':     ?>
-                <li><a data-toggle="modal" href="<?php echo base_url('movimientos/');?>"><i class="icon-book"></i> GESTION PRESUPUESTO &raquo;</a></li>
-                <?php break;
-              default:                                            
-                break; 
-            } 
-        ?>
-              
           </ul>
         </li>
           

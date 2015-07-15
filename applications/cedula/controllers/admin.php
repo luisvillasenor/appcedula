@@ -47,7 +47,6 @@ class Admin extends CI_Controller {
 
 		$rol = '';
 		
-
 		if ( isset($_SESSION['username']) == FALSE ){
 			//redirect('admin/login');
             $this->logout();
@@ -56,10 +55,10 @@ class Admin extends CI_Controller {
 			//redirect(base_url());
 		}
 
-		//$this->load->library('form_validation');
+		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email_address', 'Dirección de Email', 'required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[4]');
-		//$this->form_validation->set_rules('edicion', 'Edicion de Trabajo', 'required');
+		$this->form_validation->set_rules('edicion', 'Edicion de Trabajo', 'required');
 
 
 		if ( $this->form_validation->run() !== false ) {

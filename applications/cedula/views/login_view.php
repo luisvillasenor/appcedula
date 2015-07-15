@@ -94,10 +94,10 @@
                     <?php echo form_label('Edicion de Trabajo',  'edicion' ) ; ?>
 
                       <select class="input-block-level" name="edicion" id="edicion">
-                        <option>Seleccione edicion de trabajo</option>
-                        <?php //foreach ($get_fc as $acts ) :?>                      
-                          <option value="5" selected> 2015 ( EDICION XXI )</option>
-                        <?php //endforeach; ?>
+                        <option>Seleccione Edicion de Trabajo</option>
+                        <?php foreach ($get_fc as $acts ) :?>
+                          <option value="<?php echo $acts->id_fc;?>"><?php echo $acts->edicion; ?> (<?php echo $acts->anio;?>)</option>                          
+                        <?php endforeach; ?>
                       </select>
                       
                   </p>
