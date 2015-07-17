@@ -317,28 +317,31 @@ class Actividades_model extends CI_Model
         
         return $query->result();
     }
-    function get_one_act_edit($id_act,$e_mail,$grupo,$id_coord)
+    function get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion)
     {
         
         switch ($grupo) {
               case 'administrador':
                 $this->db->select('*');
+                $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get('actividades_test');        
                 break;
               case 'coordinador':
                 $this->db->select('*');
+                $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
                 //$this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get('actividades_test');        
                 break;
               default:
                 $this->db->select('*');
+                $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
                 //$this->db->where('id_coord', $id_coord);
                 //$this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get('actividades_test');              
                 break;
             } 
                 
@@ -630,7 +633,7 @@ class Actividades_model extends CI_Model
         $this->id_resp          = $_POST['id_resp'];
         
         $this->db->where('id_act', $this->id_act);
-        $this->db->update('actividades', $this);
+        $this->db->update('actividades_test', $this);
     }
  
     function update_tot_act($id_act,$e_mail,$total,$actividad,$descripcion,$justificacion,$id_categoria,$quienpropone,$empresa,$puesto,$domicilio,$telefono,$email,$web,$fecha_act,$fecha_aut,$costo_secture,$costo_publico,$is_costo_secture,$is_costo_publico,$ubicacion,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$d9,$d10,$hora_ini,$hora_fin,$id_coord,$status_act)

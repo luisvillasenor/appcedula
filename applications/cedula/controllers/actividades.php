@@ -76,7 +76,7 @@ class Actividades extends CI_Controller {
         }
         //$data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
         
-		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord);
+		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         // Numero de Registros Totales
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
@@ -703,7 +703,7 @@ class Actividades extends CI_Controller {
                         }
         }
         
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('actividades_editar_view',$data);
 	}
     public function editar_fechas_act($id_act){
@@ -758,10 +758,10 @@ class Actividades extends CI_Controller {
 		
         $is_ok = $this->actividades_model->update_entry($e_mail);        
         if($is_ok){
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
             $this->load->view('is_Nok_view',$data);
         }else{
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
             $this->load->view('is_ok_view',$data);
         }
         
