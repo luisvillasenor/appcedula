@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <div id="wrapper" class="row-fluid">
-        
+         
         <?php include 'include/nav_actividades.php';  ?>
 
         <div class="span10">

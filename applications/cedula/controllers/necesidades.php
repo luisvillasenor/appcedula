@@ -48,7 +48,7 @@ class Necesidades extends CI_Controller {
                         }
         }
         $id_act = $this->input->post('id_act');
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('necesidades_agregar_view',$data);
 	}
     public function add_nec(){
@@ -115,9 +115,9 @@ class Necesidades extends CI_Controller {
         foreach ($data['get_total_act'] as $tot ) : 
             $total += $tot->total_act; 
         endforeach;        
-        $this->actividades_model->update_tot_act($id_act,$e_mail,$total,$actividad,$descripcion,$justificacion,$id_categoria,$quienpropone,$empresa,$puesto,$domicilio,$telefono,$email,$web,$fecha_act,$fecha_aut,$costo_secture,$costo_publico,$is_costo_secture,$is_costo_publico,$ubicacion,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$d9,$d10,$hora_ini,$hora_fin,$id_coord,$status_act);
+        $this->actividades_model->update_tot_act($id_act,$total);
                 
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $this->load->view('necesidades_view',$data);
@@ -141,7 +141,7 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_one_nec_edit'] = $this->necesidades_model->get_one_nec_edit($id_nec);
         $this->load->view('necesidades_editar_view',$data);
 	}
@@ -164,7 +164,7 @@ class Necesidades extends CI_Controller {
                         }
         }
         $id_act = $this->input->post('id_act');
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('coordinador_one_view',$data);
 	}
     public function editar_nec(){
@@ -252,11 +252,11 @@ class Necesidades extends CI_Controller {
         foreach ($data['get_total_act'] as $tot ) : 
             $total += $tot->total_act;
         endforeach;        
-        $this->actividades_model->update_tot_act($id_act,$e_mail,$total,$actividad,$descripcion,$justificacion,$id_categoria,$quienpropone,$empresa,$puesto,$domicilio,$telefono,$email,$web,$fecha_act,$fecha_aut,$costo_secture,$costo_publico,$is_costo_secture,$is_costo_publico,$ubicacion,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$d9,$d10,$hora_ini,$hora_fin,$id_coord,$status_act);
+        $this->actividades_model->update_tot_act($id_act,$total);
                 
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $this->load->view('necesidades_view',$data);
         
 		
@@ -348,11 +348,11 @@ class Necesidades extends CI_Controller {
         foreach ($data['get_total_act'] as $tot ) : 
             $total += $tot->total_act;
         endforeach;        
-        $this->actividades_model->update_tot_act($id_act,$e_mail,$total,$actividad,$descripcion,$justificacion,$id_categoria,$quienpropone,$empresa,$puesto,$domicilio,$telefono,$email,$web,$fecha_act,$fecha_aut,$costo_secture,$costo_publico,$is_costo_secture,$is_costo_publico,$ubicacion,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$d9,$d10,$hora_ini,$hora_fin,$id_coord,$status_act);
+        $this->actividades_model->update_tot_act($id_act,$total);
                 
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
-        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail);
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $this->load->view('necesidades_view',$data);
     }
      public function is_borrar_nec($id_act,$id_nec)
@@ -375,7 +375,7 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$data['get_one_nec_edit'] = $this->necesidades_model->get_one_nec_edit($id_nec);
         $this->load->view('is_necesidad_view',$data);
     }

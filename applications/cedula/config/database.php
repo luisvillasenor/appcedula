@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'sECTUREd15';
+$db['default']['password'] = 'sECTUREd1';
 $db['default']['database'] = 'appcedula';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

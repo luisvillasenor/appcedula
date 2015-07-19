@@ -1,78 +1,96 @@
-<?php if ( ($edicion = $_SESSION['fc']) != 5) { ?>
+<?php 
 
-<!-- Button to trigger modal -->
-<a href="#myModal" class="btn btn-mini" data-toggle="modal" title="Pasar Cédula No. <?php echo $actividades->id_act;?> a EDICION 201<?php echo $edicion+1;?>"><i class="icon-share-alt"></i></a>
-     
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <?php echo $actividades->id_act; ?>
-    <br>
-    <?php echo $actividades->id_fc; ?>
-    <br>
-    <?php echo $edicion; ?>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a href="<?php echo base_url('actividades/copiar');?>/<?php echo $actividades->id_act; ?>" class="btn btn-primary">Save changes</a>
-  </div>
-</div>
-<!-- End Modal -->
 
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-<?php } else {?>
-<a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-<?php } ?><!-- Fin del IF -->
-  <?php if($actividades->costo_secture == 0) { ?>
-    <!--<a href="<?php echo base_url();?>/actividades/is_borrar_act/<?php echo $actividades->id_act;?>" data-toggle="tooltip" title="Borrar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-trash"></i></a>Fin del IF -->
-  <?php } ?> 
-  </td><td>
+$edicion = $_SESSION['fc'];
+if ( $edicion != '5') { ?>
 
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
-<?php } else {?>
-<a class="btn btn-mini disabled" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
-<?php } ?><!-- Fin del IF -->
-<a class="btn btn-mini disabled" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a>                  </td><td>
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-<a class="btn btn-mini disabled" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-<?php } else {?>
-<a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-<?php } ?><!-- Fin del IF -->
-<a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
+
+      <?php if($actividades->status_act == 5) { ?>
+
+      <?php } else {?>
+
+              <!-- Button to trigger modal -->
+              <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal"><i class="icon-white icon-share-alt"></i><strong> Activar </strong></button>
+              <!-- Modal -->
+              <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="myModalLabel">Considere lo siguiente</h3>
+                </div>
+                <div class="modal-body">
+                <p>Al Activar la cédula:</p>
+                  <ul>
+                    <li><p>Se creará una copia en la Edición 201<?php echo $edicion+1;?></p></li>
+                    <li>La nueva cédula tendra un ID diferente, sin embargo el nombre y todo lo demás permanecerá igual</li>
+                    <li>La nueva cédula tendrá como Status <span class="label label-danger">No Aprobado</span></li>
+                    <li><p>Para ver y trabajar la nueva cédula, debe salir y volver a entrar al Sistema seleccionando
+                   la Edición de Trabajo del 201<?php echo $edicion+1;?></p></li>
+                   <li>La vieja cédula se guarda como histórico y verá un candadito en el campo "Status"</li>     
+                  </ul>
+                  <p>Cualquier ayuda que necesite maque la extensión 4336 o 4306.</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                  <a href="<?php echo base_url('actividades/copiar');?>/<?php echo $actividades->id_act; ?>" class="btn btn-success">Activar Cédula para FC EDICION 201<?php echo $edicion+1;?></a>
+                </div>
+              </div>
+              <!-- End Modal -->
+
+      <?php } ?><!-- Fin del IF -->
+
+
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
+      <?php } ?><!-- Fin del IF -->
+
+      </td>
+      <td>
+
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini disabled" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
+      <?php } ?><!-- Fin del IF -->
+
+      <a class="btn btn-mini disabled" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a>                  </td><td>
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <a class="btn btn-mini disabled" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <?php } ?><!-- Fin del IF -->
+
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
 
 
 <?php }else{ ?>
 
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-<?php } else {?>
-<a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-<?php } ?><!-- Fin del IF -->
-  <?php if($actividades->costo_secture == 0) { ?>
-    <!--<a href="<?php echo base_url();?>/actividades/is_borrar_act/<?php echo $actividades->id_act;?>" data-toggle="tooltip" title="Borrar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-trash"></i></a>Fin del IF -->
-  <?php } ?> 
-  </td><td>
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
+      <?php } ?><!-- Fin del IF -->
+  
+      </td>
+      <td>
 
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
 
-<?php } else {?>
-<a class="btn btn-mini" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
-<?php } ?><!-- Fin del IF -->
-<a class="btn btn-mini" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a>                  </td><td>
-<?php if($actividades->status_act == 5) { ?>
-<a class="btn btn-mini disabled" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-<?php } else {?>
-<a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-<?php } ?><!-- Fin del IF -->
-<a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>
+      <?php } ?><!-- Fin del IF -->
+
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a>                  </td><td>
+      <?php if($actividades->status_act == 5) { ?>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <?php } else {?>
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <?php } ?><!-- Fin del IF -->
+
+      <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
 
 
 <?php } ?>

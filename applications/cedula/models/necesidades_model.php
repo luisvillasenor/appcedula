@@ -17,7 +17,8 @@ class Necesidades_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
-        $this->load->database();
+        //$this->load->database();
+        define("NECESIDADES", "necesidades_test");
     }
             
     function get_all()
@@ -42,7 +43,7 @@ class Necesidades_model extends CI_Model
         //$res = $this->descripcion = $_POST['id_nec'];
         $this->db->select('*');
         $this->db->where('id_nec', $res);
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     
@@ -51,7 +52,7 @@ class Necesidades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
         $this->db->order_by('id_nec','asc');
-        $query = $this->db->get('necesidades_test');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     
@@ -60,7 +61,7 @@ class Necesidades_model extends CI_Model
         // Obtiene el total del costo de la cédula de actividad. Sumatoria de sus necesidades
         $this->db->select('sum(precio_total) as total_act,sum(iva) as tot_iva,(sum(precio_total) + sum(iva)) as tot_tot');
         $this->db->where('id_act', $id_act);
-        $query = $this->db->get('necesidades_test');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     
@@ -111,7 +112,7 @@ class Necesidades_model extends CI_Model
         $this->encargado       = strtoupper($_POST['encargado']);
         //$this->quien_modifica  = $e_mail;
     
-        $this->db->insert('necesidades', $this);
+        $this->db->insert(NECESIDADES, $this);
     }
 
     function paste($nec,$last_id)
@@ -125,7 +126,7 @@ class Necesidades_model extends CI_Model
             $data['iva']             = ($value->cantidad * $value->precio_unitario)*0.16;
             $data['precio_total']    = ($value->cantidad * $value->precio_unitario);
             $data['encargado']       = $value->encargado;
-            $this->db->insert('necesidades_test', $data);            
+            $this->db->insert(NECESIDADES, $data);            
         }
         
         
@@ -147,12 +148,12 @@ class Necesidades_model extends CI_Model
         $this->quien_modifica  = $e_mail; 
         
         $this->db->where('id_nec', $this->id_nec);
-        $this->db->update('necesidades', $this);
+        $this->db->update(NECESIDADES, $this);
     }
     
     function delete($id_nec)
     {
-        $this->db->delete('necesidades', array('id_nec' => $id_nec)); 
+        $this->db->delete(NECESIDADES, array('id_nec' => $id_nec)); 
     }
     
     function get_registros()

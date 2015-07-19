@@ -731,7 +731,7 @@ class Actividades extends CI_Controller {
                         }
         }
         
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('fechas_editar_view',$data);
 	}
 	public function actualizar_act(){
@@ -745,6 +745,7 @@ class Actividades extends CI_Controller {
         $this->load->model('coordinadores_model');
         
         $id_act = $this->input->post('id_act');
+        $id_fc = $this->input->post('id_fc');
 
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -756,7 +757,7 @@ class Actividades extends CI_Controller {
                         }
         }
 		
-        $is_ok = $this->actividades_model->update_entry($e_mail);        
+        $is_ok = $this->actividades_model->update_entry($e_mail,$edicion = $id_fc);
         if($is_ok){
             $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
             $this->load->view('is_Nok_view',$data);
@@ -964,7 +965,7 @@ class Actividades extends CI_Controller {
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
         $this->load->model('coordinadores_model');
-        $data['get_cal_act'] = $this->actividades_model->get_cal_act($e_mail,$grupo,$id_coord);
+        $data['get_cal_act'] = $this->actividades_model->get_cal_act($e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
     
@@ -1769,9 +1770,10 @@ class Actividades extends CI_Controller {
         $total = '';
         $bloq = '5';
 
+        // Arreglo que contiene el registro completo a copiar.
         $reg = $this->actividades_model->get_one_to_copi($id_act);
 
-        if ($edicion != 5) {
+        if ($edicion != 5) { 
             if (is_array($reg) === TRUE) {
                 $last_id = $this->actividades_model->paste($reg,$ed = 5);
                 echo $last_id;
@@ -1790,7 +1792,8 @@ class Actividades extends CI_Controller {
             $this->actividades_model->update_costo_secture($id_act,$total);             
         }else{echo "NO ES UN ARRAY";}
 
-        $this->index();
+        redirect(base_url('actividades/index'));
+        //$this->index();
         
     }
 ///////////////////////////////////////////////////

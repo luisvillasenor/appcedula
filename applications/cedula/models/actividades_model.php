@@ -53,6 +53,8 @@ class Actividades_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         //$this->load->database();
+        define("ACTIVIDADES", "actividades_test");
+
     }
     
         
@@ -66,7 +68,7 @@ class Actividades_model extends CI_Model
                 $this->db->select('*');
                 $this->db->where('e_mail', $e_mail);
                 $this->db->like('actividad', $txt);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             }         
         
@@ -91,7 +93,7 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('actividad','ASC');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->where('id_fc', $edicion);
@@ -99,10 +101,15 @@ class Actividades_model extends CI_Model
                 $this->db->or_where('e_mail', $e_mail);
                 $query = $this->db->get('actividades');        
                 break;
+              case 'gestor':
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
               default:
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades_test');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }         
         
@@ -123,6 +130,12 @@ class Actividades_model extends CI_Model
                 $this->db->group_by('e_mail');
                 $query = $this->db->get('actividades');        
                 break;
+              case 'gestor':
+                $this->db->select('e_mail');
+                $this->db->where('e_mail', $e_mail);
+                $this->db->group_by('e_mail');
+                $query = $this->db->get('actividades');        
+                break;
               default:
                 $this->db->group_by('e_mail');
                 $this->db->where('e_mail', $e_mail);
@@ -135,25 +148,32 @@ class Actividades_model extends CI_Model
     
     
     function get_all_orderbyID_asc($e_mail,$grupo,$id_coord,$edicion)
-    {        
+    {
+        $test = '_test';
         switch ($grupo) {
               case 'administrador':
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('id_act','ASC');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('id_fc', $edicion);
-                $this->db->where('id_coord', $id_coord);
-                $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $this->db->or_where('id_coord', $id_coord);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              case 'gestor':
+                $this->db->order_by('id_act','ASC');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }        
         return $query->result();
@@ -164,20 +184,26 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('id_act','DESC');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->order_by('id_act','DESC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              case 'gestor':
+                $this->db->order_by('id_act','DESC');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->order_by('id_act','DESC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }         
         
@@ -191,20 +217,20 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('actividad','ASC');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->order_by('actividad','ASC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }  
         
@@ -216,20 +242,26 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('actividad','DESC');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->order_by('actividad','DESC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              case 'gestor':
+                $this->db->order_by('actividad','DESC');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->order_by('id_act','DESC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             } 
         
@@ -243,7 +275,7 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_fc', $edicion);
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('status_act', $status);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->order_by('id_act','ASC');
@@ -252,36 +284,46 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('status_act', $status);
                 $this->db->where('e_mail', $e_mail);                
-                $query = $this->db->get('actividades');                
+                $query = $this->db->get(ACTIVIDADES);                
+                break;
+              case 'gestor':
+                $this->db->order_by('id_act','ASC');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('status_act', $status);
+                $this->db->where('e_mail', $e_mail);                
+                $query = $this->db->get(ACTIVIDADES);                
                 break;
               default:
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('status_act', $status);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             }        
         return $query->result(); 
     }
     
-    function get_cal_act($e_mail,$grupo,$id_coord)
+    function get_cal_act($e_mail,$grupo,$id_coord,$edicion)
     {
         switch ($grupo) {
               case 'administrador':
                 $this->db->select('actividad,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
-                $query = $this->db->get('actividades');        
+                $this->db->where('id_fc', $edicion);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('actividad,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
+                $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('actividad,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
+                $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             } 
         
@@ -304,14 +346,14 @@ class Actividades_model extends CI_Model
                 $this->db->select('*');
                 $this->db->where('id_fc', $edicion);
                 $this->db->like('actividad', $txt);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               default:
                 $this->db->select('*');
                 $this->db->where('e_mail', $e_mail);
                 $this->db->where('id_fc', $edicion);
                 $this->db->like('actividad', $txt);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             }         
         
@@ -325,7 +367,7 @@ class Actividades_model extends CI_Model
                 $this->db->select('*');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
-                $query = $this->db->get('actividades_test');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('*');
@@ -333,7 +375,7 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
                 //$this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades_test');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('*');
@@ -341,7 +383,7 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_act', $id_act);
                 //$this->db->where('id_coord', $id_coord);
                 //$this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades_test');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             } 
                 
@@ -354,9 +396,51 @@ class Actividades_model extends CI_Model
     {
         $this->db->where('id_act', $id_act);
         $this->db->limit(1);
-        $query = $this->db->get('actividades');        
+        $query = $this->db->get(ACTIVIDADES);
         return $query->result();
     }
+
+    function paste($reg,$ed)
+    {
+        foreach ($reg as $value) {
+            $data['e_mail']           = $value->e_mail;
+            $data['actividad']        = $value->actividad;
+            $data['descripcion']      = $value->descripcion;
+            $data['justificacion']    = $value->justificacion;
+            $data['id_categoria']     = $value->id_categoria;
+            $data['quienpropone']     = $value->quienpropone;
+            $data['empresa']          = $value->empresa;
+            $data['puesto']           = $value->puesto;
+            $data['domicilio']        = $value->domicilio;
+            $data['telefono']         = $value->telefono;
+            $data['email']            = $value->email;
+            $data['web']              = $value->web;
+            $data['costo_secture']    = $value->costo_secture;
+            $data['costo_publico']    = $value->costo_publico;
+            $data['is_costo_secture'] = $value->is_costo_secture;
+            $data['is_costo_publico'] = $value->is_costo_publico;
+            $data['ubicacion']        = $value->ubicacion;
+            $data['id_coord']         = $value->id_coord;
+            $data['id_fc']            = $ed;
+            $data['id_resp']          = $value->id_resp;
+            $data['fecha_alta']       = date('Y-m-d H:i:s');
+            $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s');
+            $data['status_act']       = 1;
+            $data['pres_ant']         = $value->pres_eje;
+            $data['pres_aut']         = 0;
+            $data['pres_eje']         = 0;
+            $data['pres_soli']        = 0;
+        }
+        $this->db->insert(ACTIVIDADES, $data);
+        return $this->db->insert_id();
+    }
+
+    function bloqueo($id_act,$bloq) {
+        $data = array('status_act' => $bloq);
+        $this->db->where('id_act',$id_act);
+        $this->db->update(ACTIVIDADES,$data );
+    }
+
 ///////////////////////////////////////////////////
 
     function get_filtro_por_resp($txt,$grupo,$id_coord)
@@ -499,43 +583,9 @@ class Actividades_model extends CI_Model
         $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = 0;
 
-        $this->db->insert('actividades', $this);
+        $this->db->insert(ACTIVIDADES, $this);
     }
 
-    function paste($reg,$ed)
-    {
-        foreach ($reg as $value) {
-            $data['e_mail']           = $value->e_mail;
-            $data['actividad']        = $value->actividad;
-            $data['descripcion']      = $value->descripcion;
-            $data['justificacion']    = $value->justificacion;
-            $data['id_categoria']     = $value->id_categoria;
-            $data['quienpropone']     = $value->quienpropone;
-            $data['empresa']          = $value->empresa;
-            $data['puesto']           = $value->puesto;
-            $data['domicilio']        = $value->domicilio;
-            $data['telefono']         = $value->telefono;
-            $data['email']            = $value->email;
-            $data['web']              = $value->web;
-            $data['costo_secture']    = $value->costo_secture;
-            $data['costo_publico']    = $value->costo_publico;
-            $data['is_costo_secture'] = $value->is_costo_secture;
-            $data['is_costo_publico'] = $value->is_costo_publico;
-            $data['ubicacion']        = $value->ubicacion;
-            $data['id_coord']         = $value->id_coord;
-            $data['id_fc']            = $ed;
-            $data['id_resp']          = $value->id_resp;
-            $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s');
-            $data['status_act']       = 1;
-            $data['pres_ant']         = $value->pres_eje;
-            $data['pres_aut']         = 0;
-            $data['pres_eje']         = 0;
-            $data['pres_soli']        = 0;
-        }
-        
-        $this->db->insert('actividades_test', $data);
-        return $this->db->insert_id();
-    }
 
 
     function update_entry($e_mail,$edicion)
@@ -629,55 +679,19 @@ class Actividades_model extends CI_Model
         
         $this->hora_ini         = $_POST['hora_ini'];
         $this->hora_fin         = $_POST['hora_fin'];
-        $this->id_fc            = $_POST['edicion'];
+        $this->id_fc            = $edicion;
         $this->id_resp          = $_POST['id_resp'];
         
         $this->db->where('id_act', $this->id_act);
-        $this->db->update('actividades_test', $this);
+        $this->db->update(ACTIVIDADES, $this);
     }
  
-    function update_tot_act($id_act,$e_mail,$total,$actividad,$descripcion,$justificacion,$id_categoria,$quienpropone,$empresa,$puesto,$domicilio,$telefono,$email,$web,$fecha_act,$fecha_aut,$costo_secture,$costo_publico,$is_costo_secture,$is_costo_publico,$ubicacion,$d1,$d2,$d3,$d4,$d5,$d6,$d7,$d8,$d9,$d10,$hora_ini,$hora_fin,$id_coord,$status_act)
+    function update_tot_act($id_act,$total)
     {
-        $this->id_act           = $id_act;        
-        $this->costo_secture    = $total;
-        $this->e_mail           = $e_mail;
-        $this->status_act       = $status_act;
+        $data['costo_secture'] = $total;        
         
-        $this->actividad        = $actividad;
-        $this->descripcion      = $descripcion;
-        $this->justificacion    = $justificacion;
-        $this->id_categoria     = $id_categoria;
-        $this->quienpropone     = $quienpropone;
-        $this->empresa          = $empresa;
-        $this->puesto           = $puesto;
-        $this->domicilio        = $domicilio;
-        $this->telefono         = $telefono;
-        $this->email            = $email;
-        $this->web              = $web;
-        $this->fecha_act        = $fecha_act;
-        $this->fecha_aut        = $fecha_aut;
-        
-        $this->costo_publico    = $costo_publico;
-        $this->is_costo_secture = $is_costo_secture;
-        $this->is_costo_publico = $is_costo_publico;
-        $this->ubicacion        = $ubicacion;
-        $this->id_coord         = $id_coord;
-        
-        $this->d1        = $d1;
-        $this->d2        = $d2;
-        $this->d3        = $d3;
-        $this->d4        = $d4;
-        $this->d5        = $d5;
-        $this->d6        = $d6;
-        $this->d7        = $d7;
-        $this->d8        = $d8;
-        $this->d9        = $d9;
-        $this->d10        = $d10;
-        $this->hora_ini        = $hora_ini;
-        $this->hora_fin        = $hora_fin;
-        
-        $this->db->where('id_act', $this->id_act);
-        $this->db->update('actividades_test', $this);
+        $this->db->where('id_act', $id_act);
+        $this->db->update(ACTIVIDADES, $data);
     }
 
     function update_costo_secture($id_act,$total)
@@ -686,7 +700,7 @@ class Actividades_model extends CI_Model
         $data['costo_secture']    = $total;
         
         $this->db->where('id_act', $id_act);
-        $this->db->update('actividades_test', $data);
+        $this->db->update(ACTIVIDADES, $data);
     }
 
     
@@ -696,7 +710,7 @@ class Actividades_model extends CI_Model
         $this->db->select('sum(costo_secture) as total_cedulas');
         $this->db->where('e_mail', $e_mail);
         $this->db->where('id_fc', $edicion);
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         return $query->result();
     }
     
@@ -706,20 +720,20 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('id_fc', $edicion);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               case 'coordinador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('id_coord', $id_coord);
                 $this->db->where('id_fc', $edicion);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('count(*) as tot');
                 $this->db->where('e_mail', $e_mail);
                 $this->db->where('id_fc', $edicion);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             } 
         
@@ -734,7 +748,7 @@ class Actividades_model extends CI_Model
     }
     function delete($id_act)
     {
-        $this->db->delete('actividades', array('id_act' => $id_act)); 
+        $this->db->delete(ACTIVIDADES, array('id_act' => $id_act)); 
     }
     function get_master_plan()
     {                
@@ -799,11 +813,6 @@ class Actividades_model extends CI_Model
         $data = array('status_act' => $presupuestado);
         $this->db->where('id_act',$id_act);
         $this->db->update('actividades',$data );
-    }
-    function bloqueo($id_act,$bloq) {
-        $data = array('status_act' => $bloq);
-        $this->db->where('id_act',$id_act);
-        $this->db->update('actividades_test',$data );
     }
     function get_regs_pendientes($e_mail,$id_coord)
     {

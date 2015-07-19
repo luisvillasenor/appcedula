@@ -32,7 +32,7 @@
       <hr>
       <li class="active"><a><small>AYUDA Ext.4336</small></a></li>
       <li><a href="<?php echo base_url('actividades/tutorial');?>" ><span><small>Tutorial</small></span></a></li>
-      <li><a href="<?php echo base_url('actividades/padron_proveedores');?>"><span><small>Padrón Único de Proveedores</small></span></a></li>    
+      <li><a href="<?php echo base_url('actividades/padron_proveedores');?>"><span><small>Proveedores</small></span></a></li>    
     </ul>
 </div><!--Body content-->
 
