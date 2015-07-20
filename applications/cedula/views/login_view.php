@@ -10,6 +10,17 @@
   <link href="<?php echo base_url(); ?>bootstrap/css/appcedula.css" rel="stylesheet">
   <link rel="icon" href="<?php echo base_url(); ?>favicon.ico" type="image/gif">
   <style>
+  body {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-image: url('<?php echo base_url('footer-bg.jpg'); ?>') !important;
+    background-size: cover;
+    background-position: left top;
+    width: 100%;
+    height: 100%;
+    visibility: inherit;
+    opacity: 1;
+  }
      .form-signin {
       max-width: 300px;
       padding: 19px 29px 29px;
@@ -56,25 +67,15 @@
 <!--Body content container-fluid-->
     
     <div id="wrapper2" class="row-fluid">
-        <div class="span12">
+        <div class="span6">
           <!--Body content-->
           <div class="well">
             <a href="http://www.festivaldecalaveras.com.mx/" target="_blank">
             <img src="<?php echo base_url(); ?>posada/CabezalPrincipal.jpg" class="img-rounded">
             </a>
           </div>
-            
-        </div>        
-    </div>
-    
-    <div id="wrapper2" class="row-fluid">
-        <div class="span6">
-          <!--Body content-->
-                
-        </div>
-        <div class="span6">
-          <!--Body content-->
-          <?php echo validation_errors();?>
+
+
           <div class="">
             <?php echo form_open(base_url('admin/index'),'class="form-signin"'); ?>
                 <h2 class="form-signin-heading">Acceso</h2>
@@ -106,15 +107,24 @@
                       <?php echo form_submit('submit',  'Iniciar','class="btn btn-medium btn-primary"' ); ?>
                       
                   </p>
-          <?php echo form_close(); ?>            
-          </div>      
-        </div>    
-</div>        
+            <?php echo form_close(); ?>            
+          </div> 
+
+          <div class="alert alert-success">
+            <strong>Descarga!</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula.pdf'); ?>" target="_blank">Guía para Activar Cédulas del 2014 al 2015</a>
+          </div>
+
+
+            
+        </div>        
+    </div>
+    
+          
     
 </div><!— /container-fluid —>
         
 <footer>
-    &copy 2014 S7Mx Software | Sistema de Control de Cédulas Ver. 1.2.2 | Departamento de Informática | Secretaria de Turismo del Estado de Aguascalientes
+    &copy 2014 - 2015 Sistema de Control de Cédulas Ver. 2.0.0
 </footer>     
 
 <script src="<?php echo base_url(); ?>bootstrap/js/jquery-1.9.1.min.js"></script>

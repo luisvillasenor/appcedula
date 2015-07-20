@@ -1,18 +1,16 @@
 <?php 
 
-
 $edicion = $_SESSION['fc'];
 if ( $edicion != '5') { ?>
-
 
       <?php if($actividades->status_act == 5) { ?>
 
       <?php } else {?>
 
               <!-- Button to trigger modal -->
-              <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal"><i class="icon-white icon-share-alt"></i><strong> Activar </strong></button>
+              <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $actividades->id_act; ?>"><i class="icon-white icon-share-alt"></i><strong> Activar </strong></button>
               <!-- Modal -->
-              <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div id="myModal_<?php echo $actividades->id_act; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h3 id="myModalLabel">Considere lo siguiente</h3>
@@ -31,7 +29,7 @@ if ( $edicion != '5') { ?>
                 </div>
                 <div class="modal-footer">
                   <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                  <a href="<?php echo base_url('actividades/copiar');?>/<?php echo $actividades->id_act; ?>" class="btn btn-success">Activar Cédula para FC EDICION 201<?php echo $edicion+1;?></a>
+                  <a href="<?php echo base_url('actividades/copiar');?>/<?php echo $actividades->id_act; ?>" class="btn btn-success">Activar Cédula (<?php echo $actividades->id_act; ?>) para FC EDICION 201<?php echo $edicion+1;?></a>
                 </div>
               </div>
               <!-- End Modal -->
@@ -42,7 +40,7 @@ if ( $edicion != '5') { ?>
       <?php if($actividades->status_act == 5) { ?>
       <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
       <?php } else {?>
-      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
+      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
       <?php } ?><!-- Fin del IF -->
 
       </td>
@@ -59,7 +57,7 @@ if ( $edicion != '5') { ?>
       <a class="btn btn-mini disabled" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
       <a class="btn btn-mini disabled" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
       <?php } else {?>
-      <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
+      <a class="btn btn-mini disabled" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
       <?php } ?><!-- Fin del IF -->
 
       <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>

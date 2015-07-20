@@ -126,97 +126,98 @@ color:white;
                 
                 <label>FRECUENCIA</label>
                 
+                <label class="checkbox inline">30 OCT</label>
+                <?php switch ($act->d1) {
+                            case '2015-10-30' :
+                                echo form_checkbox('d1', '2015-10-30', TRUE);
+                                break;                            
+                            default:
+                                echo form_checkbox('d1', '2015-10-30', FALSE);
+                                break;
+                } ?>
                 <label class="checkbox inline">31 OCT</label>
                 <?php switch ($act->d1) {
-                            case '2014-10-31' :
-                                echo form_checkbox('d1', '2014-10-31', TRUE);
+                            case '2015-10-31' :
+                                echo form_checkbox('d2', '2015-10-31', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d1', '2014-10-31', FALSE);
+                                echo form_checkbox('d2', '2015-10-31', FALSE);
                                 break;
-                } ?>                
+                } ?> 
                 <label class="checkbox inline">1° NOV</label>
                 <?php switch ($act->d2) {
-                            case '2014-11-01' :
-                                echo form_checkbox('d2', '2014-11-01', TRUE);
+                            case '2015-11-01' :
+                                echo form_checkbox('d3', '2015-11-01', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d2', '2014-11-01', FALSE);
+                                echo form_checkbox('d3', '2015-11-01', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">2 NOV</label>
                 <?php switch ($act->d3) {
-                            case '2014-11-02' :
-                                echo form_checkbox('d3', '2014-11-02', TRUE);
+                            case '2015-11-02' :
+                                echo form_checkbox('d4', '2015-11-02', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d3', '2014-11-02', FALSE);
+                                echo form_checkbox('d4', '2015-11-02', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">3 NOV</label>
                 <?php switch ($act->d4) {
-                            case '2014-11-03' :
-                                echo form_checkbox('d4', '2014-11-03', TRUE);
+                            case '2015-11-03' :
+                                echo form_checkbox('d5', '2015-11-03', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d4', '2014-11-03', FALSE);
+                                echo form_checkbox('d5', '2015-11-03', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">4 NOV</label>
                 <?php switch ($act->d5) {
-                            case '2014-11-04' :
-                                echo form_checkbox('d5', '2014-11-04', TRUE);
+                            case '2015-11-04' :
+                                echo form_checkbox('d6', '2015-11-04', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d5', '2014-11-04', FALSE);
+                                echo form_checkbox('d6', '2015-11-04', FALSE);
                                 break;
                 } ?>                
                 <p></p>
                 <label class="checkbox inline">5 NOV</label>
                 <?php switch ($act->d6) {
-                            case '2014-11-05' :
-                                echo form_checkbox('d6', '2014-11-05', TRUE);
+                            case '2015-11-05' :
+                                echo form_checkbox('d7', '2015-11-05', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d6', '2014-11-05', FALSE);
+                                echo form_checkbox('d7', '2015-11-05', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">6 NOV</label>
                 <?php switch ($act->d7) {
-                            case '2014-11-06' :
-                                echo form_checkbox('d7', '2014-11-06', TRUE);
+                            case '2015-11-06' :
+                                echo form_checkbox('d8', '2015-11-06', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d7', '2014-11-06', FALSE);
+                                echo form_checkbox('d8', '2015-11-06', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">7 NOV</label>
                 <?php switch ($act->d8) {
-                            case '2014-11-07' :
-                                echo form_checkbox('d8', '2014-11-07', TRUE);
+                            case '2015-11-07' :
+                                echo form_checkbox('d9', '2015-11-07', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d8', '2014-11-07', FALSE);
+                                echo form_checkbox('d9', '2015-11-07', FALSE);
                                 break;
                 } ?>                
                 <label class="checkbox inline">8 NOV</label>
                 <?php switch ($act->d9) {
-                            case '2014-11-08' :
-                                echo form_checkbox('d9', '2014-11-08', TRUE);
+                            case '2015-11-08' :
+                                echo form_checkbox('d10', '2015-11-08', TRUE);
                                 break;                            
                             default:
-                                echo form_checkbox('d9', '2014-11-08', FALSE);
+                                echo form_checkbox('d10', '2015-11-08', FALSE);
                                 break;
                 } ?>                
-                <label class="checkbox inline">9 NOV</label>
-                <?php switch ($act->d10) {
-                            case '2014-11-09' :
-                                echo form_checkbox('d10', '2014-11-09', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d10', '2014-11-09', FALSE);
-                                break;
-                } ?>                
+                                
                                 
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">Hora inicial</label>

@@ -86,19 +86,18 @@ color:white;
               <tr>                
                 <th>CÉDULA DE ACTIVIDAD</th>
                 <th>RESPONSABLE</th>
+                <th>30 OCT</th>
                 <th>31 OCT</th>
                 <th>1 NOV</th>
                 <th>2 NOV</th>
                 <th>3 NOV</th>
                 <th>4 NOV</th>
-                  <th>5 NOV</th>
-                  <th>6 NOV</th>
-                  <th>7 NOV</th>
-                  <th>8 NOV</th>
-                  <th>9 NOV</th>
-                  <th>HORA INICIO</th>
-                  <th>HORA FIN</th>
-                
+                <th>5 NOV</th>
+                <th>6 NOV</th>
+                <th>7 NOV</th>
+                <th>8 NOV</th>
+                <th>HORA INICIO</th>
+                <th>HORA FIN</th>                
               </tr>
             <?php foreach ($get_cal_act as $actividades ) : ?>
               <tr>

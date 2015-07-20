@@ -18,13 +18,13 @@ class Necesidades_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         //$this->load->database();
-        define("NECESIDADES", "necesidades_test");
+        define("NECESIDADES", "necesidades");
     }
             
     function get_all()
     {
         // Llama a la tabla de la base de datos y se trae como respuesta TODOS los registro. 
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     function get_one_nec($txt)
@@ -33,7 +33,7 @@ class Necesidades_model extends CI_Model
         //$res = $this->descripcion = $_POST['id_nec'];
         $this->db->select('*');
         $this->db->like('descripcionec', $res);
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     
@@ -70,7 +70,7 @@ class Necesidades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
         $this->db->order_by('encargado','asc');
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     function get_all_nec_act_by_encargado_desc($id_act)
@@ -78,7 +78,7 @@ class Necesidades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
         $this->db->order_by('encargado','desc');
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
     
@@ -89,14 +89,14 @@ class Necesidades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('id_nec', $res);
         $this->db->order_by('descripcionec','asc');
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();            
 
     }
 
     function get_all_necesidades()
     {
-        $query = $this->db->get('necesidades');
+        $query = $this->db->get(NECESIDADES);
         return $query->result();
     }
 
@@ -159,7 +159,7 @@ class Necesidades_model extends CI_Model
     function get_registros()
     {
         $this->db->select('id_act as id_act,count(*) as regs');
-        $this->db->from('necesidades');
+        $this->db->from(NECESIDADES);
         $this->db->group_by('id_act');         
         return $query = $this->db->get();
     }
