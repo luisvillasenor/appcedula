@@ -427,7 +427,7 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
-		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord);
+		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_resp_view',$data);
@@ -465,7 +465,7 @@ class Actividades extends CI_Controller {
 		$id_act = $this->input->post('id_act');
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 		$data['get_filtro_por_ced'] = $this->actividades_model->get_filtro_por_ced($id_act,$grupo,$id_coord,$edicion);
         
         $this->load->view('header_view',$data);
@@ -505,8 +505,8 @@ class Actividades extends CI_Controller {
         $coord = $this->input->post('id_coord');
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
-        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord);
-        $data['get_filtro_por_coord'] = $this->actividades_model->get_filtro_por_coord($grupo,$coord);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+        $data['get_filtro_por_coord'] = $this->actividades_model->get_filtro_por_coord($grupo,$coord,$edicion);
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_coords_view',$data);
@@ -597,8 +597,8 @@ class Actividades extends CI_Controller {
         }
         		
 		$id_coord = $this->input->post('id_coord');
-        $data['get_master_plan_coord'] = $this->actividades_model->get_master_plan_coord($id_coord);
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan();
+        $data['get_master_plan_coord'] = $this->actividades_model->get_master_plan_coord($id_coord,$edicion);
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
         $data['get_all'] = $this->necesidades_model->get_all();
 		
         
@@ -633,8 +633,8 @@ class Actividades extends CI_Controller {
         }
         		
 		$id_categoria = $this->input->post('id_categoria');
-        $data['get_master_plan_categoria'] = $this->actividades_model->get_master_plan_categoria($id_categoria);
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan();
+        $data['get_master_plan_categoria'] = $this->actividades_model->get_master_plan_categoria($id_categoria,$edicion);
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
         $data['get_all'] = $this->necesidades_model->get_all();
 		
         
@@ -669,8 +669,8 @@ class Actividades extends CI_Controller {
         }
         		
 		$id_act = $this->input->post('id_act');
-        $data['get_master_plan_cedula'] = $this->actividades_model->get_master_plan_cedula($id_act);
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan();
+        $data['get_master_plan_cedula'] = $this->actividades_model->get_master_plan_cedula($id_act,$edicion);
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
         $data['get_all'] = $this->necesidades_model->get_all();
 		
         
@@ -791,10 +791,10 @@ class Actividades extends CI_Controller {
         }
 		$is_ok = $this->actividades_model->update_tot_act();
 		if($is_ok){
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
             $this->load->view('is_Nok_view',$data);
         }else{
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
             $this->load->view('is_ok_view',$data);
         }
         redirect('actividades/');
@@ -836,7 +836,7 @@ class Actividades extends CI_Controller {
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('coordinadores_model');
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
@@ -866,7 +866,7 @@ class Actividades extends CI_Controller {
         $this->load->model('comentarios_model');
         $this->load->model('coordinadores_model');
         
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_com_act'] = $this->comentarios_model->get_all_com_act($id_act,$e_mail,$grupo,$id_coord);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
@@ -891,7 +891,7 @@ class Actividades extends CI_Controller {
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('coordinadores_model');
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
@@ -940,7 +940,7 @@ class Actividades extends CI_Controller {
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('coordinadores_model');
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
@@ -1043,7 +1043,7 @@ class Actividades extends CI_Controller {
         }
         /////////////////////////////////////////////////////////////////////////////
         
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan();
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all'] = $this->necesidades_model->get_all();
@@ -1067,7 +1067,7 @@ class Actividades extends CI_Controller {
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');  
         $this->load->model('coordinadores_model');
-        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+        $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
     
@@ -1162,11 +1162,11 @@ class Actividades extends CI_Controller {
 	{
 
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'autodiscover.aguascalientes.gob.mx';
+    $config['smtp_port']    = '25';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'sectureags@gmail.com';
-    $config['smtp_pass']    = 'sECTUREd1';
+    $config['smtp_user']    = 'GOBAGS/luis.villasenor';
+    $config['smtp_pass']    = 'lgvA6773';
     $config['charset']    = 'utf-8';
     $config['newline']    = "\r\n";
     $config['mailtype'] = 'text'; // or html
@@ -1175,7 +1175,7 @@ class Actividades extends CI_Controller {
     $this->email->initialize($config);
 
 
-    $this->email->from('appadmin@app.com', 'SECTURE');
+    $this->email->from('AdminWebApp@app.com', 'SECTURE');
     $this->email->to('luis.villasenor@aguascalientes.gob.mx'); 
 
     $this->email->subject('Email Test');
@@ -1443,11 +1443,11 @@ class Actividades extends CI_Controller {
 	{
         
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'autodiscover.aguascalientes.gob.mx';
+    $config['smtp_port']    = '25';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'sectureags@gmail.com';
-    $config['smtp_pass']    = 'sECTUREd1';
+    $config['smtp_user']    = 'GOBAGS/luis.villasenor';
+    $config['smtp_pass']    = 'lgvA6773';
     $config['charset']    = 'utf-8';
     $config['newline']    = "\r\n";
     $config['mailtype'] = 'html'; // or html
@@ -1506,7 +1506,7 @@ class Actividades extends CI_Controller {
             </tr>            
             </table>
             
-            <p>Para ver su Cédula debe accesar al <a href="http://10.1.17.10/appcedula/admin/logout">Sistema de Control de Cedulas</a></p>
+            <p>Para ver su Cédula debe accesar a link http://10.1.17.10/appcedula</p>
             
             <p><small>No responda a este mail, se envía desde un buzón no-supervisado y con copia para los Coordinadores Generales del Festival de Calaveras</small></p>
             
@@ -1525,11 +1525,11 @@ class Actividades extends CI_Controller {
 	{
         
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'autodiscover.aguascalientes.gob.mx';
+    $config['smtp_port']    = '25';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'sectureags@gmail.com';
-    $config['smtp_pass']    = 'sECTUREd1';
+    $config['smtp_user']    = 'GOBAGS/luis.villasenor';
+    $config['smtp_pass']    = 'lgvA6773';
     $config['charset']    = 'utf-8';
     $config['newline']    = "\r\n";
     $config['mailtype'] = 'html'; // or html
@@ -1588,7 +1588,7 @@ class Actividades extends CI_Controller {
             </tr>            
             </table>
             
-            <p>Para ver su Cédula debe accesar al <a href="http://10.1.17.10/appcedula/admin/logout">Sistema de Control de Cedulas</a></p>
+            <p>Para ver su Cédula debe accesar a link http://10.1.17.10/appcedula</p>
             
             <p><small>No responda a este mail, se envía desde un buzón no-supervisado y con copia para los Coordinadores Generales del Festival de Calaveras</small></p>
             
@@ -1607,11 +1607,11 @@ class Actividades extends CI_Controller {
 	{
         
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'autodiscover.aguascalientes.gob.mx';
+    $config['smtp_port']    = '25';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'sectureags@gmail.com';
-    $config['smtp_pass']    = 'sECTUREd1';
+    $config['smtp_user']    = 'GOBAGS/luis.villasenor';
+    $config['smtp_pass']    = 'lgvA6773';
     $config['charset']    = 'utf-8';
     $config['newline']    = "\r\n";
     $config['mailtype'] = 'html'; // or html
@@ -1670,7 +1670,7 @@ class Actividades extends CI_Controller {
             </tr>            
             </table>
             
-            <p>Para ver su Cédula debe accesar al <a href="http://10.1.17.10/appcedula/admin/logout">Sistema de Control de Cedulas</a></p>
+            <p>Para ver su Cédula debe accesar a link http://10.1.17.10/appcedula</p>
             
             <p><small>No responda a este mail, se envía desde un buzón no-supervisado y con copia para los Coordinadores Generales del Festival de Calaveras</small></p>
             
@@ -1710,10 +1710,10 @@ class Actividades extends CI_Controller {
         
         $is_ok = $this->actividades_model->act_pres_ant($id_act,$pres_ant,$pres_soli,$pres_aut,$pres_eje);
         if($is_ok){
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);            
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);            
 		    $this->load->view('is_Nok_view',$data);
         }else{
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);            
+            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);            
             $this->load->view('is_ok_view',$data);
         }
         

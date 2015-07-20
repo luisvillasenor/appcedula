@@ -1,6 +1,6 @@
 <table class="table table-bordered">
                 <?php foreach ($get_one_act_edit as $actividades ) : ?>
-                <thead>RUBRO PRESUPUESTAL.- XXI FESTIVAL DE CALAVERAS 2015 (PARTIDA ########-<?php echo $actividades->id_act;?>)</thead>
+                <thead>RUBRO PRESUPUESTAL.- (PARTIDA ##### - <?php echo $actividades->id_act;?>)</thead>
               <tr>                
                 <th>Presupuesto Año Anterior</th>
                 <th>Presupuesto Solicitado</th>

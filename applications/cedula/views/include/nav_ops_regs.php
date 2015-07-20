@@ -1,11 +1,12 @@
 <?php 
 
 $edicion = $_SESSION['fc'];
+$username   = $_SESSION['username'];
 if ( $edicion != '5') { ?>
 
       <?php if($actividades->status_act == 5) { ?>
 
-      <?php } else {?>
+      <?php } elseif( $actividades->e_mail ==  $username) {?>
 
               <!-- Button to trigger modal -->
               <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $actividades->id_act; ?>"><i class="icon-white icon-share-alt"></i><strong> Activar </strong></button>
@@ -37,11 +38,6 @@ if ( $edicion != '5') { ?>
       <?php } ?><!-- Fin del IF -->
 
 
-      <?php if($actividades->status_act == 5) { ?>
-      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-      <?php } else {?>
-      <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-      <?php } ?><!-- Fin del IF -->
 
       </td>
       <td>

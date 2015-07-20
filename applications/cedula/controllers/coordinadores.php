@@ -9,12 +9,20 @@ class Coordinadores extends CI_Controller {
 	}
     
 	public function index(){
+		$grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('coordinadores_model');
+		$this->load->model('fc_model');
         $this->load->model('responsables_model');
 		$data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all_resps'] = $this->responsables_model->get_all_resps();
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('coordinadores_view',$data);
 	}
 	public function agregar_co(){

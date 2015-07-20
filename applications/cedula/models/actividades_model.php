@@ -458,13 +458,14 @@ class Actividades_model extends CI_Model
 
 ///////////////////////////////////////////////////
 
-    function get_filtro_por_resp($txt,$grupo,$id_coord)
+    function get_filtro_por_resp($txt,$grupo,$id_coord,$edicion)
     {
         
         switch ($grupo) {
               case 'administrador':
                 $this->db->select('*');
                 $this->db->where('e_mail', $txt);
+                $this->db->where('id_fc', $edicion);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
@@ -515,7 +516,7 @@ class Actividades_model extends CI_Model
         return $query->result();
     }
 
-    function get_filtro_por_coord($grupo,$coord)
+    function get_filtro_por_coord($grupo,$coord,$edicion)
     {
         
         $this->db->select('*');
@@ -767,11 +768,11 @@ class Actividades_model extends CI_Model
     {
         $this->db->delete(ACTIVIDADES, array('id_act' => $id_act)); 
     }
-    function get_master_plan()
+    function get_master_plan($edicion)
     {                
         $this->db->select('*');
         $this->db->from(ACTIVIDADES);
-        //$this->db->where('id_coord', '1');
+        $this->db->where('id_fc', $edicion);
         //$this->db->join('coordinadores','actividades.id_coord = coordinadores.id_coord');
         $this->db->order_by('id_coord','ASC');
         
@@ -779,27 +780,30 @@ class Actividades_model extends CI_Model
         
         return $query->result();
     }
-    function get_master_plan_coord($id_coord)
+    function get_master_plan_coord($id_coord,$edicion)
     {                
         $this->db->where('id_coord', $id_coord);
+        $this->db->where('id_fc', $edicion);
         //$this->db->order_by('id_coord','ASC');
         
         $query = $this->db->get(ACTIVIDADES);
         
         return $query->result();
     }
-    function get_master_plan_categoria($id_categoria)
+    function get_master_plan_categoria($id_categoria,$edicion)
     {                
         $this->db->where('id_categoria', $id_categoria);
+        $this->db->where('id_fc', $edicion);
         //$this->db->order_by('id_coord','ASC');
         
         $query = $this->db->get(ACTIVIDADES);
         
         return $query->result();
     }
-    function get_master_plan_cedula($id_act)
+    function get_master_plan_cedula($id_act,$edicion)
     {                
         $this->db->where('id_act', $id_act);
+        $this->db->where('id_fc', $edicion);
         //$this->db->order_by('id_coord','ASC');
         
         $query = $this->db->get(ACTIVIDADES);

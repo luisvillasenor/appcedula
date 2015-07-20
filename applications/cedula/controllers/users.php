@@ -35,25 +35,50 @@ class Users extends CI_Controller {
 		//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
 	}
     public function index(){
+    	
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+		
+
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('users_model');
+		$this->load->model('fc_model');
         $this->load->model('coordinadores_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
 		$data['get_all_users'] = $this->users_model->get_all_users();
+		$data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('responsables_view',$data);
 	}
     public function edit_resp($id){
+    	$grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+		
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('users_model');
+        $this->load->model('fc_model');
         $this->load->model('coordinadores_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_one_usr_edit'] = $this->users_model->get_one_usr_edit($id);        
+        $data['get_fc'] = $this->fc_model->get_fc();
         $this->load->view('responsables_editar_view',$data);
 	}
     public function actualizar_resp(){
-		$e_mail = $_SESSION['username'];
+		
+		$grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+
+        $e_mail = $_SESSION['username'];
         $data['onlyusername'] = strstr($e_mail,'@',true);        
         
         $id = $this->input->post('id');
@@ -67,6 +92,7 @@ class Users extends CI_Controller {
         $id_coord = $this->input->post('id_coord');
         
 		$this->load->model('users_model');
+		$this->load->model('fc_model');
         $this->load->model('coordinadores_model');
         
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -78,24 +104,41 @@ class Users extends CI_Controller {
 
 	public function agregar(){
 
-		$e_mail = $_SESSION['username'];
+		$grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+
+        $e_mail = $_SESSION['username'];
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->helper(array('form','url'));
 		
 		$this->load->model('users_model');
+		$this->load->model('fc_model');
         $this->load->model('coordinadores_model');
         
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->users_model->insert_entry();
         
         redirect('users/index');	
 		
 	}
     public function agregar_usr(){
+		
+		$grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+
 		$e_mail = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('coordinadores_model');
+        $this->load->model('fc_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('responsables_agregar_view',$data);
     }
 

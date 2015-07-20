@@ -78,7 +78,7 @@ class Comentarios extends CI_Controller {
         $id_act = $this->input->post('id_act');
         
         
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('comentarios_agregar_view',$data);
 	}
     public function add_com(){
@@ -118,7 +118,7 @@ class Comentarios extends CI_Controller {
         }
         $this->notificar_msg($id_act,$comentarios,$e_mail,$autor,$actividad);
                 
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_com_act'] = $this->comentarios_model->get_all_com_act($id_act,$e_mail,$grupo,$id_coord);
         
         $this->load->view('comentarios_view',$data);
@@ -247,11 +247,11 @@ class Comentarios extends CI_Controller {
 	{
         
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'autodiscover.aguascalientes.gob.mx';
+    $config['smtp_port']    = '25';
     $config['smtp_timeout'] = '7';
-    $config['smtp_user']    = 'sectureags@gmail.com';
-    $config['smtp_pass']    = 'sECTUREd1';
+    $config['smtp_user']    = 'GOBAGS/luis.villasenor';
+    $config['smtp_pass']    = 'lgvA6773';
     $config['charset']    = 'utf-8';
     $config['newline']    = "\r\n";
     $config['mailtype'] = 'html'; // or html
@@ -309,7 +309,7 @@ class Comentarios extends CI_Controller {
             </tr>
             </table>
             
-            <p>Para agregar un nuevo comentario debe accesar al <a href="http://10.1.17.10/appcedula/admin/logout">Sistema de Control de Cedulas</a></p>
+            <p>Para agregar un nuevo comentario debe accesar al <strong>http://10.1.17.10/appcedula</strong></p>
             
             <p><small>No responda a este mail, se envia desde un buzon no-supervisado. Este mail se envia con copia para los Coordinadores Generales</small></p>
             

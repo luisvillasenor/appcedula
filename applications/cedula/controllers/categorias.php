@@ -10,15 +10,21 @@ class Categorias extends CI_Controller {
     
     public function index()
     {
-        $e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+
+        $e_mail = $_SESSION['username'];
+        
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
+        $this->load->model('fc_model');
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('categorias_view',$data);    
     }
 	public function listar_categorias(){
