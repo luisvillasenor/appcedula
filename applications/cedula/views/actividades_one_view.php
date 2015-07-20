@@ -49,20 +49,16 @@
                           <?php
                               switch ($_SESSION['grupo']) {
                                           case 'coordinador':
-                                            if($actividades->e_mail != $_SESSION['username']) {
-                                                include 'include/nav_ops_regs_coords.php';
-                                                break;
-                                            }
                                             include 'include/nav_ops_regs.php';  
                                             break;
                                           case 'gestor':
                                             include 'include/nav_ops_regs.php';  
                                             break;
                                           case 'administrador':
-                                            if($actividades->e_mail != $_SESSION['username']) {
+                                            /*if($actividades->e_mail != $_SESSION['username']) {
                                                 include 'include/nav_ops_regs_coords.php';  
                                                 break;
-                                            }
+                                            }*/
                                             include 'include/nav_ops_regs.php'; 
                                             break;
                                           default:
@@ -73,7 +69,7 @@
                                             echo 'Por favor solicite ayuda al administrador del sitio';
                                             echo '</p>';
                                             echo '<p>';
-                                            echo '<a class="btn btn-danger" href="'.base_url('admin/logout').'">Cerrar</a>';
+                                            echo '<a class="btn btn-danger" href="'.base_url('/admin/logout').'">Cerrar</a>';
                                             echo '</p>';
                                             echo '</div>';
                                             break;

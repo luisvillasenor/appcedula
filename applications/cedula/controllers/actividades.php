@@ -1158,7 +1158,7 @@ class Actividades extends CI_Controller {
     ////////////////////////////////////////////////////
     //////////////// NOTIFICAR POR EMAIL ///////////////
     
-    function notificar_msg()
+    function notificar_msg($last_id = '')
 	{
 
     $config['protocol']    = 'smtp';
@@ -1174,16 +1174,15 @@ class Actividades extends CI_Controller {
 
     $this->email->initialize($config);
 
-
     $this->email->from('AdminWebApp@app.com', 'SECTURE');
     $this->email->to('luis.villasenor@aguascalientes.gob.mx'); 
 
-    $this->email->subject('Email Test');
-    $this->email->message('Testing the email class.');  
+    $this->email->subject('AVISO.- Nueva Cédula Activa 2015');
+    $this->email->message('Se Activó la cédula No. '.$last_id.' para la Edición 2015.');  
 
     $this->email->send();
 
-    echo $this->email->print_debugger();
+    //echo $this->email->print_debugger();
 
 	}
     
@@ -1768,7 +1767,7 @@ class Actividades extends CI_Controller {
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $total = '';
-        $bloq = '5';
+        $bloq = '5';// Una vez copiado el registro, este se bloquea.
 
         // Arreglo que contiene el registro completo a copiar.
         $reg = $this->actividades_model->get_one_to_copi($id_act);
@@ -1789,7 +1788,8 @@ class Actividades extends CI_Controller {
             foreach ($data['get_total_act'] as $tot ) : 
                 $total += $tot->total_act; 
             endforeach;        
-            $this->actividades_model->update_costo_secture($id_act,$total);             
+            $this->actividades_model->update_costo_secture($id_act,$total);
+            $this->notificar_msg($last_id);
         }else{echo "NO ES UN ARRAY";}
 
         redirect(base_url('actividades/index'));

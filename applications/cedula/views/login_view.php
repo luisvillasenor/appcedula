@@ -114,9 +114,12 @@
             <strong>Descarga!</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula.pdf'); ?>" target="_blank">Guía para Activar Cédulas del 2014 al 2015</a>
           </div>
 
+          
+
 
             
-        </div>        
+        </div> 
+             
     </div>
     
           
@@ -124,7 +127,43 @@
 </div><!— /container-fluid —>
         
 <footer>
-    &copy 2014 - 2015 Sistema de Control de Cédulas Ver. 2.0.0
+<h4>Conteo Regresivo</h4>
+
+                <ul class="countdown">
+
+                  <button type="button" class="btn btn-warning">
+                    <span class="days badge">00</span>
+                    <p class="">días</p>
+                  </button>                  
+
+                  <button type="button" class="btn btn-warning">
+                    <span class="hours badge">00</span>
+                    <p class="">horas</p>
+                  </button>                  
+
+                  <button type="button" class="btn btn-warning">
+                    <span class="minutes badge">00</span>
+                    <p class="">minutos</p>
+                  </button>                  
+
+
+                  <button type="button" class="btn btn-warning">
+                    <span class="seconds badge">00</span>
+                  <p class="">segundos</p>
+                  </button>                  
+
+              </ul>                                                
+                <script src="<?php echo base_url('bootstrap/js/jquery-1.9.1.min.js'); ?>"></script>
+                <script type="text/javascript" src="jquery.downCount.js"></script> 
+                <script class="source" type="text/javascript">
+                        $('.countdown').downCount({
+                            date: '10/29/2015 23:59:59',
+                            offset: +10
+                        }, function () {
+                            alert('LISTO!');
+                        });
+                </script>               
+    
 </footer>     
 
 <script src="<?php echo base_url(); ?>bootstrap/js/jquery-1.9.1.min.js"></script>
