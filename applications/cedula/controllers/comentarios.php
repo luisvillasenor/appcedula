@@ -144,7 +144,7 @@ class Comentarios extends CI_Controller {
         }
         $id_act = $this->input->post('id_act');
         
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('comentarios_agregar_preview',$data);
 	}
     public function add_com_preview(){
@@ -184,7 +184,7 @@ class Comentarios extends CI_Controller {
         }
         $this->notificar_msg($id_act,$comentarios,$e_mail,$autor,$actividad);
                 
-		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord);
+		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_com_act'] = $this->comentarios_model->get_all_com_act($id_act,$e_mail,$grupo,$id_coord);
         
         //$this->load->view('comentarios_view',$data);
@@ -247,7 +247,7 @@ class Comentarios extends CI_Controller {
 	{
         
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
+    $config['smtp_host']    = 'smtp.gmail.com';
     $config['smtp_port']    = '465';
     $config['smtp_timeout'] = '7';
     $config['smtp_user']    = 'sectureags@gmail.com';

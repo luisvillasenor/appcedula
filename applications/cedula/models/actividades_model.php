@@ -62,7 +62,7 @@ class Actividades_model extends CI_Model
     {
         switch ($_SESSION['grupo']) {
               case 'administrador':
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               default:
                 $this->db->select('*');
@@ -81,7 +81,7 @@ class Actividades_model extends CI_Model
         $this->db->select('pres_ant');
         $this->db->where('id_act', $id_act);
         $this->db->limit(1);
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
           
         return $query->result();        
     }
@@ -99,7 +99,7 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'gestor':
                 $this->db->where('id_fc', $edicion);
@@ -121,25 +121,25 @@ class Actividades_model extends CI_Model
         switch ($grupo) {
               case 'administrador':
                 $this->db->group_by('e_mail');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('e_mail');
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
                 $this->db->group_by('e_mail');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'gestor':
                 $this->db->select('e_mail');
                 $this->db->where('e_mail', $e_mail);
                 $this->db->group_by('e_mail');
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->group_by('e_mail');
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }         
         
@@ -336,7 +336,7 @@ class Actividades_model extends CI_Model
         $this->db->select('actividad,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
         $this->db->where('id_act', $id_act);
         
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         return $query->result();
     }
     function get_one_act($txt,$e_mail,$edicion)
@@ -345,6 +345,21 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('*');
                 $this->db->where('id_fc', $edicion);
+                $this->db->like('actividad', $txt);
+                $query = $this->db->get(ACTIVIDADES);
+                break;
+              case 'coordinador':
+                $this->db->select('*');
+                $this->db->where('id_fc', $edicion);
+//                $this->db->where('id_coord', $id_coord);
+                $this->db->where('e_mail', $e_mail);
+                $this->db->like('actividad', $txt);
+                $query = $this->db->get(ACTIVIDADES);
+                break;
+              case 'gestor':
+                $this->db->select('*');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
                 $this->db->like('actividad', $txt);
                 $query = $this->db->get(ACTIVIDADES);
                 break;
@@ -450,48 +465,50 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('*');
                 $this->db->where('e_mail', $txt);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $txt);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 //$this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $txt);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }                
         
         return $query->result();
     }
-    function get_filtro_por_ced($id_act,$grupo,$id_coord)
+    function get_filtro_por_ced($id_act,$grupo,$id_coord,$edicion)
     {
         
         switch ($grupo) {
               case 'administrador':
                 $this->db->select('*');
                 $this->db->where('id_act', $id_act);
-                $query = $this->db->get('actividades');        
+                $this->db->where('id_fc', $edicion);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
+                $this->db->where('id_fc', $edicion);
                 $this->db->or_where('id_act', $id_act);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 //$this->db->where('id_coord', $id_coord);
                 $this->db->or_where('id_act', $id_act);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }                
         
@@ -504,7 +521,7 @@ class Actividades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('status_act', 4);
         $this->db->where('id_coord', $coord);
-        $query = $this->db->get('actividades');              
+        $query = $this->db->get(ACTIVIDADES);              
                
         return $query->result();
     }
@@ -516,21 +533,21 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('*');
                 $this->db->where('id_act', $id_act);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('id_act', $id_act);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('*');
                 //$this->db->where('id_act', $id_act);
                 //$this->db->where('id_coord', $id_coord);
                 $this->db->or_where('id_act', $id_act);
-                $query = $this->db->get('actividades');              
+                $query = $this->db->get(ACTIVIDADES);              
                 break;
             }                
         
@@ -540,7 +557,7 @@ class Actividades_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('id_act', $id_act);
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
                 
         return $query->result();
     }
@@ -551,7 +568,7 @@ class Actividades_model extends CI_Model
         $this->db->select('*');
         $this->db->where('id_act', $res);
         $this->db->order_by('actividad','asc');
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         return $query->result();            
 
     }    
@@ -744,7 +761,7 @@ class Actividades_model extends CI_Model
         
         $data = array('fecha_ult_modificacion' => date('Y-m-d H:i:s'));
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function delete($id_act)
     {
@@ -753,7 +770,7 @@ class Actividades_model extends CI_Model
     function get_master_plan()
     {                
         $this->db->select('*');
-        $this->db->from('actividades');
+        $this->db->from(ACTIVIDADES);
         //$this->db->where('id_coord', '1');
         //$this->db->join('coordinadores','actividades.id_coord = coordinadores.id_coord');
         $this->db->order_by('id_coord','ASC');
@@ -767,7 +784,7 @@ class Actividades_model extends CI_Model
         $this->db->where('id_coord', $id_coord);
         //$this->db->order_by('id_coord','ASC');
         
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         
         return $query->result();
     }
@@ -776,7 +793,7 @@ class Actividades_model extends CI_Model
         $this->db->where('id_categoria', $id_categoria);
         //$this->db->order_by('id_coord','ASC');
         
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         
         return $query->result();
     }
@@ -785,34 +802,34 @@ class Actividades_model extends CI_Model
         $this->db->where('id_act', $id_act);
         //$this->db->order_by('id_coord','ASC');
         
-        $query = $this->db->get('actividades');
+        $query = $this->db->get(ACTIVIDADES);
         
         return $query->result();
     }
     function si_autorizar($id_act,$succes) {
         $data = array('status_act' => $succes);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function no_autorizar($id_act,$fail) {
         $data = array('status_act' => $fail);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function pendiente($id_act,$pend) {
         $data = array('status_act' => $pend);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function integrado($id_act,$integrado) {
         $data = array('status_act' => $integrado);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function presupuestado($id_act,$presupuestado) {
         $data = array('status_act' => $presupuestado);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     function get_regs_pendientes($e_mail,$id_coord)
     {
@@ -820,20 +837,20 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '0');
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               case 'coordinador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '0');
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '0');
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             } 
         
@@ -845,20 +862,20 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '2');
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               case 'coordinador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '2');
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '2');
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             } 
         
@@ -870,20 +887,20 @@ class Actividades_model extends CI_Model
               case 'administrador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '1');
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
               case 'coordinador':
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '1');
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');        
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
                 $this->db->select('count(*) as tot');
                 $this->db->where('status_act', '1');
                 $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get('actividades');
+                $query = $this->db->get(ACTIVIDADES);
                 break;
             } 
         
@@ -895,7 +912,7 @@ class Actividades_model extends CI_Model
                       'pres_aut' => $pres_aut,
                       'pres_eje' => $pres_eje);
         $this->db->where('id_act',$id_act);
-        $this->db->update('actividades',$data );
+        $this->db->update(ACTIVIDADES,$data );
     }
     
     
