@@ -1158,7 +1158,7 @@ class Actividades extends CI_Controller {
     ////////////////////////////////////////////////////
     //////////////// NOTIFICAR POR EMAIL ///////////////
     
-    function notificar_msg($last_id = '')
+    function notificar_msg($last_id = '',$e_mail = '')
 	{
 
     $config['protocol']    = 'smtp';
@@ -1175,10 +1175,10 @@ class Actividades extends CI_Controller {
     $this->email->initialize($config);
 
     $this->email->from('AdminWebApp@app.com', 'SECTURE');
-    $this->email->to('luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->to('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
 
     $this->email->subject('AVISO.- Nueva Cédula Activa 2015');
-    $this->email->message('Se Activó la cédula No. '.$last_id.' para la Edición 2015.');  
+    $this->email->message('El usuario '.$e_mail.' Activó la cédula No. '.$last_id.' para la Edición 2015.');  
 
     $this->email->send();
 
@@ -1789,7 +1789,7 @@ class Actividades extends CI_Controller {
                 $total += $tot->total_act; 
             endforeach;        
             $this->actividades_model->update_costo_secture($id_act,$total);
-            $this->notificar_msg($last_id);
+            $this->notificar_msg($last_id,$e_mail);
         }else{echo "NO ES UN ARRAY";}
 
         redirect(base_url('actividades/index'));
