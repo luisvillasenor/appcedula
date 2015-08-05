@@ -44,15 +44,15 @@
                 <div class="alert alert-info">
                   <h4>PRESUPUESTO AUTORIZADO</h4>
                   <h1>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h1>
-                  Sumatoria del presupuesto autorizado de cada cédula
+                  Sumatoria del presupuesto neto autorizado de cada cédula
                 </div>
               </div>
 
               <div class="span4">
                 <div class="alert alert-info">
                   <h4>PRESUPUESTO SOLICITADO</h4>
-                  <h1>$<?php echo number_format($suma_costo_secture,2,".",","); ?></h1>
-                  Sumatoria del COSTO SECTURE de cada cédula <strong>SIN IVA</strong>
+                  <h1>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h1>
+                  Sumatoria del COSTO NETO SECTURE de cada cédula
                 </div>
               </div>
 
@@ -81,7 +81,11 @@
 
             <div class="row"></div>
             
-            <span class="alert alert-success help-block"><STRONG>Actualizar Calculos</STRONG><br>En la Vista Previa de cada cédula asegurese de actualizar calculos para tener un resultado correcto.</span>
+            <span class="alert alert-success help-block">
+              <STRONG>Actualizar Calculos</STRONG>
+              <br>En la Vista Previa de cada cédula asegurese de actualizar calculos para tener un resultado correcto.
+              <br><STRONG><small>Los calculos son c/IVA</small></STRONG>
+            </span>
             
           
           
