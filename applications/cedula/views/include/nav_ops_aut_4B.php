@@ -46,7 +46,7 @@
                   <td>
 
                     <?php
-                    if ( $onlyusername !== 'appcedula' ) { ?>
+                    if ( $onlyusername == 'appcedula' ) { ?>
                         <!-- Menu solo para appcedula -->
                                 <?php
                                       $atributos = array('class' => 'form-inline'); 

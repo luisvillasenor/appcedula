@@ -36,6 +36,61 @@
           <div id="subheader3"><h2><strong><?php printf($edicion); ?></strong></h2></div>
         <?php }else{ ?>
           <div id="subheader2"><h2><strong>EDICIÓN DE TRABAJO 201<?php echo $edicion; ?></strong></h2></div>
+
+          <hr>
+                    
+              <div class="span4">
+                <div class="alert alert-info">
+                  <h4>PRESUPUESTO AUTORIZADO</h4>
+                  <h1>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h1>
+                  Sumatoria del presupuesto neto autorizado de cada cédula
+                </div>
+              </div>
+
+              <div class="span4">
+                <div class="alert alert-info">
+                  <h4>PRESUPUESTO SOLICITADO</h4>
+                  <h1>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h1>
+                  Sumatoria del COSTO NETO SECTURE de cada cédula
+                </div>
+              </div>
+
+              <?php if ($suma_pres_eje <= 0 ) { ?>
+
+              <div class="span3">
+                <div class="alert alert-danger">
+                  <h4>RESULTADO</h4>
+                  <h1>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h1>
+                  Diferencia entre lo <small>AUTORIZADO</small> y los <small>SOLICITADO</small>
+                </div>
+              </div>
+                
+              <?php }else{ ?>
+
+              <div class="span3">
+                <div class="alert alert-success">
+                  <h4>RESULTADO</h4>
+                  <h1>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h1>
+                  Diferencia entre lo <small>AUTORIZADO</small> y lo <small>SOLICITADO</small>
+                </div>
+              </div>
+
+              <?php } ?>
+
+
+            <div class="row"></div>
+            
+            <span class="alert alert-success help-block">
+              <STRONG>Actualizar Calculos</STRONG>
+              <br>En la Vista Previa de cada cédula asegurese de actualizar calculos para tener un resultado correcto.
+              <br><STRONG><small>Los calculos son c/IVA</small></STRONG>
+            </span>
+            
+          
+          
+          <hr>
+
+          
         <?php } ?>
             
             <!-- Encabezados de la tabla de cédulas-->

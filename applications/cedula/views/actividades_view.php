@@ -8,15 +8,16 @@
         <!--Body content-->
         <?php
             switch ($_SESSION['grupo']) {
+              case 'administrador':
+                          include 'include/menu_filtros_coord.php'; 
+                          break;
                         case 'coordinador':
                           include 'include/menu_filtros_coord.php';  
                           break;
                         case 'gestor':
                           include 'include/menu_filtros_gestor.php';  
                           break;
-                        case 'administrador':
-                          include 'include/menu_filtros_coord.php'; 
-                          break;
+                        
                         default:
                           echo '<div class="alert alert-block alert-error">';
                           echo '<button type="button" class="close" data-dismiss="alert">x</button>';
@@ -141,17 +142,15 @@
                       
                             <td><?php echo $categos->categoria;?></td>
                         
-                        <?php }?>
+                        <?php } ?>
                                           
                       <?php endforeach; ?>
                       
-                      <!--<td><?php echo substr($actividades->descripcion,0,30);?><strong> ...</strong></td>  -->
                       
                       <td><?php echo $actividades->quienpropone;?>(<?php echo $actividades->e_mail;?>)</td>   
                       <td>$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
                                             
-                      <?php include 'include/nav_status_act.php';  ?>
-                                            
+                      <?php include 'include/nav_status_act.php';  ?>                                            
                   </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -45,19 +45,21 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
-        $get_all_actividades = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
 
-        $pres_aut = '';
-        $costo_secture = '';
-        $pres_eje = '';
-        foreach ($get_all_actividades as $key => $value) {            
-            $pres_aut = $pres_aut + $value->pres_aut;
-            $costo_secture = $costo_secture + $value->costo_secture;
-            $pres_eje = $pres_eje + $value->pres_eje;            
+        if ( ! empty($data['get_all_actividades']) ) {
+            foreach ($data['get_all_actividades'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
         }
-            $data['suma_pres_aut']      = $pres_aut;
-            $data['suma_costo_secture'] = $costo_secture;
-            $data['suma_pres_eje']      = $pres_eje;
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
                 
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_view',$data);
@@ -148,6 +150,22 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_all_orderbyID_asc']) ) {
+            foreach ($data['get_all_orderbyID_asc'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_id_asc_view',$data);        
@@ -185,6 +203,22 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_all_orderbyID_desc']) ) {
+            foreach ($data['get_all_orderbyID_desc'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_id_desc_view',$data);        
@@ -222,6 +256,22 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_all_orderbyACT_asc']) ) {
+            foreach ($data['get_all_orderbyACT_asc'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_order_act_asc_view',$data);        
@@ -259,6 +309,22 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_all_orderbyACT_desc']) ) {
+            foreach ($data['get_all_orderbyACT_desc'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
 		$this->load->view('header_view',$data);
         $this->load->view('actividades_order_act_desc_view',$data);        
@@ -297,6 +363,24 @@ class Actividades extends CI_Controller {
                 $data['miCoordinacion']= $coords->coordinacion;
             }
         }
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_all_status']) ) {
+            foreach ($data['get_all_status'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
+
+
         /* Cargar Vistas para el Usuario */        
 		$this->load->view('header_view',$data); 
         $this->load->view('filtrar_status_view',$data);        
@@ -371,6 +455,7 @@ class Actividades extends CI_Controller {
         redirect('actividades/');
 	}
 	public function buscar_act(){
+
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
@@ -379,6 +464,7 @@ class Actividades extends CI_Controller {
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
+
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
@@ -399,10 +485,26 @@ class Actividades extends CI_Controller {
         }
         		
 		$txt = $this->input->post('txt');
-		$data['get_one_act'] = $this->actividades_model->get_one_act($txt,$e_mail,$edicion);
+		$data['get_one_act'] = $this->actividades_model->get_one_act($txt,$e_mail,$id_coord,$edicion);
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_one_act']) ) {
+            foreach ($data['get_one_act'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
         $this->load->view('header_view',$data);
         $this->load->view('actividades_one_view',$data);
@@ -410,14 +512,16 @@ class Actividades extends CI_Controller {
 		
 	}
     public function filtrar_resp(){
-		$e_mail   = $_SESSION['username'];
+
+        $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
-        $data['edicion']  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
+
 		$this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
@@ -442,6 +546,22 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_filtro_por_resp']) ) {
+            foreach ($data['get_filtro_por_resp'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_resp_view',$data);
@@ -481,6 +601,22 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 		$data['get_filtro_por_ced'] = $this->actividades_model->get_filtro_por_ced($id_act,$grupo,$id_coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_filtro_por_ced']) ) {
+            foreach ($data['get_filtro_por_ced'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_cedula_view',$data);
@@ -521,6 +657,22 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
         $data['get_filtro_por_coord'] = $this->actividades_model->get_filtro_por_coord($grupo,$coord,$edicion);
+
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+
+        if ( ! empty($data['get_filtro_por_coord']) ) {
+            foreach ($data['get_filtro_por_coord'] as $key => $value) {            
+                $pres_aut = $pres_aut + $value->pres_aut;
+                $costo_secture = $costo_secture + $value->costo_secture;
+                $pres_eje = $pres_eje + $value->pres_eje;            
+            }
+        }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_coords_view',$data);
