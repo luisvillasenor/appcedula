@@ -29,20 +29,27 @@
       <ul class="nav pull-right">
         <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
           <!--<li><a data-toggle="modal" href="<?php echo base_url();?>/actividades/resumen"><i class="icon-comment"></i> RESUMEN &raquo;</a></li>-->
-        <li class="dropdown">  
-          <a class="dropdown-toggle" data-toggle="dropdown">  
-            <small><strong><?php echo $onlyusername; ?></strong> (<?php echo $_SESSION['grupo'];?>)</small>
-                    
-                    <span class="caret"></span>                
-          </a>  
-          <ul class="dropdown-menu"> 
-            <!-- dropdown menu links -->                                              
-            <li><a data-toggle="modal" href="<?php echo base_url('users/index');?>"><i class="icon-user"></i> Administrador de Responsables &raquo;</a></li>
-              <li><a data-toggle="modal" href="<?php echo base_url('coordinadores/index');?>"><i class="icon-bookmark"></i> Administrador de Coordinaciones &raquo;</a></li>
-              <li><a data-toggle="modal" href="<?php echo base_url('categorias/index');?>"><i class="icon-briefcase"></i> Administrador de Categorías &raquo;</a></li>
-              <li><a data-toggle="modal" href="<?php echo base_url('comentarios/index');?>"><i class="icon-comment"></i> Cronología de Comentarios &raquo;</a></li>
-          </ul>
-        </li>
+        
+        <?php
+        if ( $onlyusername == 'appcedula' ) { ?>
+            <!-- Menu solo para appcedula -->
+            <li class="dropdown">  
+              <a class="dropdown-toggle" data-toggle="dropdown">  
+                <small><strong><?php echo $onlyusername; ?></strong> (<?php echo $_SESSION['grupo'];?>)</small>
+                        
+                        <span class="caret"></span>                
+              </a>  
+              <ul class="dropdown-menu"> 
+                <!-- dropdown menu links -->                                              
+                <li><a data-toggle="modal" href="<?php echo base_url('users/index');?>"><i class="icon-user"></i> Administrador de Responsables &raquo;</a></li>
+                  <li><a data-toggle="modal" href="<?php echo base_url('coordinadores/index');?>"><i class="icon-bookmark"></i> Administrador de Coordinaciones &raquo;</a></li>
+                  <li><a data-toggle="modal" href="<?php echo base_url('categorias/index');?>"><i class="icon-briefcase"></i> Administrador de Categorías &raquo;</a></li>
+                  <li><a data-toggle="modal" href="<?php echo base_url('comentarios/index');?>"><i class="icon-comment"></i> Cronología de Comentarios &raquo;</a></li>
+              </ul>
+            </li>
+            <!-- Menu solo para appcedula -->          
+        <?php } ?>
+        
           
         <li>
             <a data-toggle="modal" href="<?php echo base_url('admin/logout');?>"><i class="icon-off icon-white"></i><small>Salir</small></a>

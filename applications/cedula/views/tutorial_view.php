@@ -52,6 +52,7 @@
                     <div class="container">
                         <div class="span8">
                         <h4>Una cédula puede eliminarse permanentemente siempre y cuando la cédula este en <STRONG>CEROS</STRONG>.</h4>
+                        <p><span class="alert alert-danger">En caso de que la cédula <STRONG>NO</STRONG> esté en ceros, debe eliminar cada una de las <STRONG>"NECESIDADES"</STRONG>.</span></p>
                         </div>                    
                     </div>
                 </div>

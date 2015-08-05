@@ -9,7 +9,7 @@
                 <th colspan="2"></th>
               </tr>
               <tr>                  
-                  <?php $atributos = array('class' => 'navbar-form pull-left','onsubmit' => 'return validacion()'); 
+                  <?php $atributos = array('class' => 'navbar-form pull-left','id'=>'loginFormActualizarPres','onsubmit' => 'return validacion()'); 
                   echo form_open(base_url().'actividades/actualizar_pres', $atributos); ?>                  
                   <input type="hidden" name="id_act" id="id_act" value="<?php echo $actividades->id_act;?>">
                   <input type="hidden" name="pres_soli" id="pres_soli" value="<?php echo $actividades->pres_soli;?>">
@@ -31,14 +31,7 @@
                     <?php echo form_close(); ?>
                       <!-- <a href="#myModal" role="button" class="btn" data-toggle="modal">Movimientos</a>  -->
                   </td>
-                  <td><?php $atributos = array('class' => 'form-inline'); 
-    echo form_open(base_url().'actividades/si_presupuestado', $atributos); ?>                    
-    <input type="hidden" name="presupuestado" id="presupuestado" class="input-small" value="4">
-    <input type="hidden" name="id_act" id="id_act" value="<?php echo $actividades->id_act;?>">
-    <input type="hidden" name="actividad" id="actividad" value="<?php echo $actividades->actividad;?>">
-    <input type="hidden" name="usuario" id="usuario" value="<?php echo $actividades->e_mail;?>">
-    <button type="submit" class="btn btn-inverse " data-toggle="tooltip" title="Notificar Autorización Presupuestal al Responsable de la Cédula No. <?php echo $actividades->id_act; ?>"><i class="icon-envelope icon-white"></i> Notificar</button>
-<?php echo form_close(); ?></td>
+                  <td></td>
               </tr>
                 <?php endforeach; ?>
             </table>

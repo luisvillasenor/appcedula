@@ -191,7 +191,7 @@ color:white;
             </td>
             </tr>
             <tr>
-                <th rowspan="1">ENCARGADO DE ESTA NECESIDAD</th>
+                <th rowspan="1">PROVEEDOR Ó ENCARGADO DE ESTE RUBRO</th>
                 <td>                
                     <label></label>
                     <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí el encargado de esta necesidad"> </i>

@@ -158,7 +158,7 @@ color:white;
             </td>
             </tr>
             <tr>
-                <th rowspan="1">ENCARGADO DE ESTA NECESIDAD</th>
+                <th rowspan="1">PROVEEDOR Ó ENCARGADO DE ESTE RUBRO</th>
                 <td>                
                     <label></label>
                     <input class="input-xxlarge" name="encargado" id="encargado" type="text" value="<?php echo $necesidades->encargado;?>">

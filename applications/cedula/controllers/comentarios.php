@@ -261,7 +261,7 @@ class Comentarios extends CI_Controller {
 
     $this->email->from($e_mail, $e_mail);
     $this->email->to($autor); 
-    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
     
 
     $this->email->subject('NUEVO COMENTARIO EN CEDULA NO. '.$id_act.' - '.$actividad);

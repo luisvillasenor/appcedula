@@ -6,6 +6,7 @@ class Categorias extends CI_Controller {
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url()); // Redirecciona la controlador "admin/indrex"
 		}//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
+        $this->load->model('fc_model');
 	}
     
     public function index()
@@ -21,7 +22,7 @@ class Categorias extends CI_Controller {
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
-        $this->load->model('fc_model');
+        
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_fc'] = $this->fc_model->get_fc();
@@ -31,34 +32,47 @@ class Categorias extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('categorias_model');
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('actividades_agregar_view',$data);
 	}
     public function categorias_agregar_view()
     {
         $e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $edicion  = $_SESSION['fc'];
         $id_coord = $_SESSION['id_coord'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('categorias_agregar_view',$data);
     }
     public function add_cat(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
         $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['get_fc'] = $this->fc_model->get_fc();
         
         $categoria = $this->input->post('categoria');
         $id_coord = $this->input->post('id_coord');
         
         $this->load->model('categorias_model');
         $this->categorias_model->insert_entry($categoria,$id_coord);
+
         
         redirect('categorias/index');
 	}
@@ -66,18 +80,26 @@ class Categorias extends CI_Controller {
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
         $data['get_one_cat_edit'] = $this->categorias_model->get_one_cat_edit($id_categoria);
         $data['get_all'] = $this->coordinadores_model->get_all();
+        $data['get_fc'] = $this->fc_model->get_fc();
         $this->load->view('categorias_editar_view',$data);
 	}
     public function actualizar_cat(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
         $data['onlyusername'] = strstr($e_mail,'@',true);        
+        $data['get_fc'] = $this->fc_model->get_fc();
         $id_categoria = $this->input->post('id_categoria');
         $id_coord = $this->input->post('id_coord');
         $categoria = $this->input->post('categoria');             

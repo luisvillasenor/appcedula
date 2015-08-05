@@ -74,12 +74,12 @@ color:white;
           alert('[ERROR] El campo PRESUPUESTO AÑO ANTERIOR debe tener un valor NUMËRICO');
           return false;
         }
-          else if ( pres_aut2 == null || pres_aut2.length == 0 || /^\s+$/.test(pres_aut2)) {
+          else if ( pres_aut2 == null || pres_aut2.length === 0 || /^\s+$/.test(pres_aut2)) {
             // Si no se cumple la condicion...
             alert('[ERROR] El campo AUTORIZADO debe tener un valor NUMËRICO');
             return false;
           }
-            else if ( pres_eje2 == null || pres_eje2.length == 0 || /^\s+$/.test(pres_eje2)) {
+            else if ( pres_eje2 == null || pres_eje2.length === 0 || /^\s+$/.test(pres_eje2)) {
             // Si no se cumple la condicion...
             alert('[ERROR] El campo EJERCIDO debe tener un valor NUMËRICO');
             return false;
@@ -91,11 +91,6 @@ color:white;
               else if ( isNaN(pres_aut2) ) {
                 // Si no se cumple la condicion...
                 alert('[ERROR] El campo AUTORIZADO debe tener un valor NUMËRICO');
-                return false;
-              }
-                else if ( isNaN(pres_eje2) ) {
-                // Si no se cumple la condicion...
-                alert('[ERROR] El campo EJERCIDO debe tener un valor NUMËRICO');
                 return false;
               }
      
@@ -242,60 +237,45 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   </td>            
               </tr>
             </table>
-                <hr>
+            <hr>
             <!-- *********************************************************************** -->
                   
             <?php /* APROBACION PRESUPUESTAL.- VISTA SOLO POR EL COORDINADOR GENERAL y APPCEDULA */
             $app = $_SESSION['username']; /** Cacha la sesion del usuario **/
               switch ($app) {
                   case 'appcedula@app.com':      
-                        include 'include/nav_ops_aut_4.php';
+                        include 'include/nav_ops_aut_4B.php';
                     break;
                   case 'jorgeandrade@app.com':      
-                        include 'include/nav_ops_aut_4.php';
+                        include 'include/nav_ops_aut_4B.php';
                     break;
                   case 'blancamartinez@app.com':      
-                        include 'include/nav_ops_aut_4.php';
+                        include 'include/nav_ops_aut_4B.php';
                     break;
                   case 'oscarmorales@app.com':      
-                        include 'include/nav_ops_aut_4.php';
+                        include 'include/nav_ops_aut_4B.php';
                     break;
                   default:
-                        include 'include/nav_ops_aut_5.php';
+                        include 'include/nav_ops_aut_4B.php';
                     break;
                 } 
             ?>
             
             <hr>
-            <table class="table table-bordered">
-            
-              <tr>                
-                <th>Comité de Adquisiciones</th>
-                <th>Coordinador General</th>
-                <th>Secretario de Turismo</th>
-              </tr>              <p></p>
-              <tr>                      
-                  <td></td>
-                  <td></td>
-                  <td></td>        
-              </tr>              
-            </table>
-                
-            <hr>
             <table class="table table-bordered">            
-            <tbody>
+            <tbody class="text-center">
               <tr>                
                 <th>Frecuencia de la actividad</th>
+                <th>30 OCT</th>
                 <th>31 OCT</th>
                 <th>1 NOV</th>
                 <th>2 NOV</th>
                 <th>3 NOV</th>
-                <th>4 NOV</th>
+                  <th>4 NOV</th>
                   <th>5 NOV</th>
                   <th>6 NOV</th>
                   <th>7 NOV</th>
                   <th>8 NOV</th>
-                  <th>9 NOV</th>
                   <th>HORA INICIO</th>
                   <th>HORA FIN</th>
                 

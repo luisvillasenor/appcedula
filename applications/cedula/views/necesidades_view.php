@@ -105,7 +105,7 @@ color:white;
                 <th>Cantidad</th>
                 <th>Precio Unitario sin IVA</th>
                 <th>Precio Total sin IVA</th>
-                <th>Encargado</th>
+                <th>Proveedor ó Encargado</th>
                 
               </tr>
               <?php 

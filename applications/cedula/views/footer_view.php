@@ -13,6 +13,8 @@
 <script src="js/bootstrap-tooltip.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
+<script src="js/validator.js"></script>
 
 
 </body>

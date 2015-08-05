@@ -44,6 +44,20 @@ class Actividades extends CI_Controller {
 		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        $get_all_actividades = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+
+        $pres_aut = '';
+        $costo_secture = '';
+        $pres_eje = '';
+        foreach ($get_all_actividades as $key => $value) {            
+            $pres_aut = $pres_aut + $value->pres_aut;
+            $costo_secture = $costo_secture + $value->costo_secture;
+            $pres_eje = $pres_eje + $value->pres_eje;            
+        }
+            $data['suma_pres_aut']      = $pres_aut;
+            $data['suma_costo_secture'] = $costo_secture;
+            $data['suma_pres_eje']      = $pres_eje/1.16;
                 
 		$this->load->view('header_view',$data); 
         $this->load->view('actividades_view',$data);
@@ -1175,7 +1189,7 @@ class Actividades extends CI_Controller {
     $this->email->initialize($config);
 
     $this->email->from('AdminWebApp@app.com', 'SECTURE');
-    $this->email->to('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->to('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
 
     $this->email->subject('AVISO.- Nueva Cédula Activa 2015');
     $this->email->message('El usuario '.$e_mail.' Activó la cédula No. '.$last_id.' para la Edición 2015.');  
@@ -1456,7 +1470,7 @@ class Actividades extends CI_Controller {
 
     $this->email->from($e_mail, 'APROBACIÓN CONCEPTUAL');
     $this->email->to($autor); 
-    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
     
 
     $this->email->subject('APROBACIÓN CONCEPTUAL DE LA CEDULA NO. '.$id_act.' - '.$acti);
@@ -1538,7 +1552,7 @@ class Actividades extends CI_Controller {
 
     $this->email->from($e_mail, 'INTEGRACION AL PROGRAMA GENERAL DEL FESTIVAL DE CALAVERAS');
     $this->email->to($autor); 
-    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
     
 
     $this->email->subject('INTEGRADO AL PROGRAMA GENERAL LA CEDULA NO. '.$id_act.' - '.$acti);
@@ -1600,7 +1614,7 @@ class Actividades extends CI_Controller {
     $this->email->send();
     //echo $this->email->print_debugger();
 	}
-    
+     
     /* NOTIFICA POR MAIL LA AUTORIZACION DEL PRESUPUESTO DE LA CEDULA  */
     function notificar_presupuestado($id_act,$e_mail,$autor,$acti)
 	{
@@ -1620,7 +1634,7 @@ class Actividades extends CI_Controller {
 
     $this->email->from($e_mail, 'PRESUPUESTO AUTORIZADO DE SU CEDULA');
     $this->email->to($autor); 
-    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, jorge.andrade@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx,blanca.martinez@aguascalientes.gob.mx,oscar.morales@aguascalientes.gob.mx'); 
+    $this->email->cc('luis.villasenor@aguascalientes.gob.mx,blanca.martinez@aguascalientes.gob.mx,oscar.morales@aguascalientes.gob.mx'); 
     
 
     $this->email->subject('PRESUPUESTO AUTORIZADO CEDULA NO. '.$id_act.' - '.$acti);
@@ -1693,7 +1707,10 @@ class Actividades extends CI_Controller {
         $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
-        $this->load->model('coordinadores_model');        
+        $this->load->model('coordinadores_model');
+        $this->load->model('necesidades_model');
+
+        
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
             if($id_coord == $coords->id_coord) {                
@@ -1702,12 +1719,21 @@ class Actividades extends CI_Controller {
         }
         
         $id_act = $this->input->post('id_act');
-        $pres_ant = $this->input->post('pres_ant');
+        $pres_ant =  $this->input->post('pres_ant');
         $pres_soli = $this->input->post('pres_soli');
-        $pres_aut = $this->input->post('pres_aut');
-        $pres_eje = $this->input->post('pres_eje');
+        $pres_aut =  $this->input->post('pres_aut');
+        $pres_eje =  $this->input->post('pres_eje');
+
+        $get_total_act = $this->necesidades_model->get_total_act($id_act);
+        foreach ($get_total_act as $tot ) : 
+            $pres_soli = $tot->tot_tot;
+        endforeach;        
+
+        $pres_eje = ( $pres_aut - $pres_soli );
+
         
         $is_ok = $this->actividades_model->act_pres_ant($id_act,$pres_ant,$pres_soli,$pres_aut,$pres_eje);
+
         if($is_ok){
             $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);            
 		    $this->load->view('is_Nok_view',$data);

@@ -145,13 +145,12 @@ class Admin extends CI_Controller {
             	$_SESSION['id_coord']
             );
 			session_destroy();
+		
 		}
-
 		//CARGA LOGIN VIEW
 		$this->load->model('fc_model');
 		$data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('login_view',$data);
-		
 	}
 
 	
