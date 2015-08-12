@@ -372,25 +372,29 @@ class Actividades_model extends CI_Model
         
         switch ($grupo) {
               case 'administrador':
-                $this->db->select('*');
+                
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
-                $this->db->select('*');
+                
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
                 $this->db->where('id_coord', $id_coord);
-                //$this->db->or_where('e_mail', $e_mail);
+                $this->db->where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
-              default:
-                $this->db->select('*');
+                case 'gestor':                
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
-                //$this->db->where('id_coord', $id_coord);
-                //$this->db->or_where('e_mail', $e_mail);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              default:                
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('id_act', $id_act);
+                $this->db->where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);              
                 break;
             } 

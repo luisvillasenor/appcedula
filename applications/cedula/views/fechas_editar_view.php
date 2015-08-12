@@ -136,7 +136,7 @@ color:white;
                                 break;
                 } ?>
                 <label class="checkbox inline">31 OCT</label>
-                <?php switch ($act->d1) {
+                <?php switch ($act->d2) {
                             case '2015-10-31' :
                                 echo form_checkbox('d2', '2015-10-31', TRUE);
                                 break;                            
@@ -144,8 +144,8 @@ color:white;
                                 echo form_checkbox('d2', '2015-10-31', FALSE);
                                 break;
                 } ?> 
-                <label class="checkbox inline">1° NOV</label>
-                <?php switch ($act->d2) {
+                <label class="checkbox inline">1 NOV</label>
+                <?php switch ($act->d3) {
                             case '2015-11-01' :
                                 echo form_checkbox('d3', '2015-11-01', TRUE);
                                 break;                            
@@ -154,7 +154,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">2 NOV</label>
-                <?php switch ($act->d3) {
+                <?php switch ($act->d4) {
                             case '2015-11-02' :
                                 echo form_checkbox('d4', '2015-11-02', TRUE);
                                 break;                            
@@ -163,7 +163,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">3 NOV</label>
-                <?php switch ($act->d4) {
+                <?php switch ($act->d5) {
                             case '2015-11-03' :
                                 echo form_checkbox('d5', '2015-11-03', TRUE);
                                 break;                            
@@ -172,7 +172,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">4 NOV</label>
-                <?php switch ($act->d5) {
+                <?php switch ($act->d6) {
                             case '2015-11-04' :
                                 echo form_checkbox('d6', '2015-11-04', TRUE);
                                 break;                            
@@ -182,7 +182,7 @@ color:white;
                 } ?>                
                 <p></p>
                 <label class="checkbox inline">5 NOV</label>
-                <?php switch ($act->d6) {
+                <?php switch ($act->d7) {
                             case '2015-11-05' :
                                 echo form_checkbox('d7', '2015-11-05', TRUE);
                                 break;                            
@@ -191,7 +191,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">6 NOV</label>
-                <?php switch ($act->d7) {
+                <?php switch ($act->d8) {
                             case '2015-11-06' :
                                 echo form_checkbox('d8', '2015-11-06', TRUE);
                                 break;                            
@@ -200,7 +200,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">7 NOV</label>
-                <?php switch ($act->d8) {
+                <?php switch ($act->d9) {
                             case '2015-11-07' :
                                 echo form_checkbox('d9', '2015-11-07', TRUE);
                                 break;                            
@@ -209,7 +209,7 @@ color:white;
                                 break;
                 } ?>                
                 <label class="checkbox inline">8 NOV</label>
-                <?php switch ($act->d9) {
+                <?php switch ($act->d10) {
                             case '2015-11-08' :
                                 echo form_checkbox('d10', '2015-11-08', TRUE);
                                 break;                            

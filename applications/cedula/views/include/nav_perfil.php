@@ -1,4 +1,4 @@
-<div>
+
 <?php
   switch ($_SESSION['grupo']) {
               case 'coordinador':
@@ -6,6 +6,9 @@
                 break;
               case 'gestor':
                 include 'menu_gestor.php';  
+                break;
+              case 'presupuesto':
+                include 'menu_presupuesto.php';  
                 break;
               case 'administrador':
                 include 'menu_admin.php'; 
@@ -24,4 +27,4 @@
                 break;
             } 
 ?>
-</div>
+

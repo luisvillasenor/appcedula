@@ -9,14 +9,28 @@
                 <th colspan="2"></th>
               </tr>
               <tr>                  
-                  <?php $atributos = array('class' => 'navbar-form pull-left','onsubmit' => 'return validacion()'); 
+                  <?php $atributos = array('class' => 'navbar-form pull-left', 'name'=>'FormActualizaPres','id'=>'FormActualizaPres','onsubmit' => 'return validacion()'); 
                   echo form_open(base_url().'actividades/actualizar_pres', $atributos); ?>
+                  <!-- AUTO ENVIO DEL FORMULARIO DESPUES DE 5 SEGUNDOS  
+                  <script type="text/javascript">
+                    var wait=setTimeout("document.FormActualizaPres.submit();",5000);
+                  </script>
+                  <script type="text/javascript">
+                    $('#FormActualizaPres').submit(function(e){
+                        e.preventDefault();
+                    });
+                  </script>
+                  -->
+                  
+                  
+                  
 
                   <input type="hidden" name="id_act" id="id_act" value="<?php echo $actividades->id_act;?>">                  
                   <input type="hidden" name="pres_soli" id="pres_soli" value="<?php echo $actividades->pres_soli;?>">
                   <td><!-- PRESUPUESTO AÑO ANTERIOR -->
                       <input type="text" name="pres_ant" id="pres_ant2" value="<?php echo $actividades->pres_ant;?>">
-                      <span class="help-block">Captura numeros SIN coma <br><small>Por ej. 10000.00 son $10,000.00</small></span>
+                      <span class="help-block">Introduzca la cantidad sin signos de '$' ó comas <br><small>Por ej. 10000.00 son $10,000.00</small></span>
+
                   </td>
                   <td><!-- COSTO TOTAL = SOLICITADO -->
                     <p style="padding: 10px; font-size:30px;" class="text-center">
@@ -27,7 +41,7 @@
                   </td>                  
                   <td><!-- PRESUPUESTO AUTORIZADO -->
                       <input type="text" name="pres_aut" id="pres_aut2" value="<?php echo $actividades->pres_aut;?>">
-                      <span class="help-block">Captura numeros SIN coma <br><small>Por ej. 10000.00 son $10,000.00</small></span>
+                      <span class="help-block">Introduzca la cantidad sin signos de '$' ó comas <br><small>Por ej. 10000.00 son $10,000.00</small></span>
                   </td>
                   <td><!-- PRESUPUESTO EJERCIDO SE AUTOCALCULA-->
                     <?php if ( $actividades->pres_eje < 0 ) { ?>

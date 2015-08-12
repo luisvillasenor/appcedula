@@ -261,10 +261,10 @@ class Comentarios extends CI_Controller {
 
     $this->email->from($e_mail, $e_mail);
     $this->email->to($autor); 
-    $this->email->cc('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->cc('luis.villasenor@aguascalientes.gob.mx'); 
     
 
-    $this->email->subject('NUEVO COMENTARIO EN CEDULA NO. '.$id_act.' - '.$actividad);
+    $this->email->subject('NUEVO COMENTARIO EN SU CEDULA: '.$actividad);
     $this->email->message('
     
             <!DOCTYPE html>
@@ -288,7 +288,7 @@ class Comentarios extends CI_Controller {
             
             <table>
             <tr>
-              <th>CEDULA No.</th>
+              <th>ID</th>
               <td>'.$id_act.'</td>
             </tr>
             <tr>
@@ -309,11 +309,9 @@ class Comentarios extends CI_Controller {
             </tr>
             </table>
             
-            <p>Para agregar un nuevo comentario debe accesar al <strong>http://10.1.17.10/appcedula</strong></p>
+            <p><small>No responda a este mail, se envia desde un buzon no-supervisado</small></p>
             
-            <p><small>No responda a este mail, se envia desde un buzon no-supervisado. Este mail se envia con copia para los Coordinadores Generales</small></p>
-            
-            <p><small>Para mayor informacion sobre este mail solicite ayuda tecnica a la extension 4336</small></p>
+            <p><small>Para mayor informacion sobre este mail solicite ayuda al administrador del sistema</small></p>
             
             </body>
             </html>
