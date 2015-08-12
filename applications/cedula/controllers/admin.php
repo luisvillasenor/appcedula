@@ -158,6 +158,7 @@ class Admin extends CI_Controller {
 		$this->load->model('fc_model');
 		$data['get_fc'] = $this->fc_model->get_fc();
 		$this->load->view('login_view',$data);
+
 	}
 
 	
