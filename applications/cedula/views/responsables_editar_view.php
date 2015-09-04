@@ -96,7 +96,7 @@ color:white;
             </tr>
               <tr><th>Grupo</th>
                   <td>
-                  <?php $grupo = array('gestor','administrador','coordinador');   ?>
+                  <?php $grupo = array('gestor','administrador','coordinador','presupuesto');   ?>
                 <select class="inline" id="grupo" name="grupo" onchange="getCoord()">  
                   <?php foreach ($grupo as $value ) : 
                     if($value == $resps->grupo) {?>

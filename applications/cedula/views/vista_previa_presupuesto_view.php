@@ -138,64 +138,94 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
              
             <table class="table table-bordered">
                 <?php foreach ($get_one_act_edit as $actividades ) : ?>
-                <thead>CÉDULA No. 
-                    <span class="badge badge-inverse"><?php echo $actividades->id_act;?>
+                <thead>
+                    
                     
                         <?php switch ($actividades->status_act) {
                               case '1':?>
-                                <th><span name="flag" id="flag" class="label label-important"><h3>No Autorizado</h3></span></th>
+                                <span name="flag" id="flag" class="label label-important"><h4>CÉDULA NO AUTORIZADA</h4></span>
                         <?php break;
                               case '2':?>
-                                <th><span name="flag" id="flag" class="label label-success"><h3>Autorizado Conceptual</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-success"><h4>Autorizado Conceptual</h4></span></th>
                         <?php break;
                               case '3':?>
-                                <th><span name="flag" id="flag" class="label label-info"><h3>Integrado al Programa General</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-info"><h4>Integrado al Programa General</h4></span></th>
                         <?php break;
                               case '4':?>
-                                <th><span name="flag" id="flag" class="label label-inverse"><h3>Presupuesto Autorizado</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-inverse"><h4>Presupuesto Autorizado</h4></span></th>
                         <?php break;
                               default: ?>
-                                <th><span name="flag" id="flag" class="label label-warning"><h3>Pendiente Aprobación</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-warning"><h4>Pendiente Aprobación</h4></span></th>
                         <?php break;
                               } ?>
-                    </span>
-                    <span>EDICION 201<?php echo $actividades->id_fc;?></span>
+                    
+                    
                 </thead>
                 <tr>
-                    <th>ACTIVIDAD</th>
-                    <td><?php echo $actividades->actividad;?></td>
+                    <th>ACTIVIDAD: <?php echo $actividades->actividad;?></th>
                 </tr>
-                <tr>
-                    <th>CATEGORIA</th>
-                        <td>
-                            <?php 
-                                foreach ($get_categorias as $categos ) :
-                                    if($actividades->id_categoria == $categos->id_categoria) 
-                                        { echo $categos->categoria; } 
-                                endforeach;
-                            ?>                        
-                        </td>
-                        
-                </tr>
-                <tr><th>DESCRIPCIÓN</th><td><?php echo $actividades->descripcion;?></td></tr>
-                <tr><th>JUSTIFICACIÓN</th><td><?php echo $actividades->justificacion;?></td></tr>
-                <tr><th>RESPONSABLE</th><td><?php echo $actividades->quienpropone;?></td></tr>
+                <tr><th>RESPONSABLE: <?php echo $actividades->quienpropone;?></th></tr>
                 <?php endforeach; ?>
             </table>
-                <hr>            
+            <hr>            
             <table class="table table-bordered">
-            <thead>DESGLOSE DE NECESIDADES</thead>
-              <tr>                
+            <thead><h2>DETALLE DE LA CEDULA</h2></thead>
+              <tr>
+                <th></th>
                 <th>Necesidades, Descripción</th>
                 <th>Necesidades, Observaciones</th>
+                <th>Proveedor</th>
                 <th>Cantidad</th>
                 <th>Precio Unitario SIN IVA</th>
                 <th>Precio Total</th>                               
               </tr>
               <?php $tot = 0; foreach ($get_all_nec_act as $necesidades ) : ?>
                   <tr>                      
+                      <td>
+                        <!-- Button to trigger modal -->
+                          <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $necesidades->id_nec;?>">CONSOLIDAR</button>
+                          <!-- Modal -->
+                          <div id="myModal_<?php echo $necesidades->id_nec;?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                              <h3 id="myModalLabel">Consolidacion por Concepto del Gasto</h3>
+                            </div>
+                            <div class="modal-body">
+                             <form role="form" class="form-horizontal">
+                                <div class="radio">
+                                  <label><input type="radio"> Producto</label>
+                                  <label><input type="radio"> Servicio</label>
+                                </div>                                
+                                <div class="form-group">
+                                  <label for="clasificacion">Clasificacion:</label>
+                                  <input type="email" class="form-control" id="clasificacion">
+                                </div>
+                                <div class="form-group">
+                                  <label for="concepto">Concepto:</label>
+                                  <textarea type="email" class="form-control" id="concepto"><?php echo $necesidades->descripcionec;?></textarea>
+                                  <textarea type="email" class="form-control" id="concepto"><?php echo $necesidades->observaciones;?></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="cantidad">Cantidad:</label>
+                                  <input type="email" class="form-control" id="cantidad" value="<?php echo $necesidades->cantidad;?>">
+                                </div>
+                                <div class="form-group">
+                                  <label for="preciounitario">Precio Unitario:</label>
+                                  <input type="email" class="form-control" id="preciounitario" value="<?php echo number_format($necesidades->precio_unitario,2,".",",");?>">
+                                </div>
+                                
+                                <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              
+                            </div>
+                          </div>
+                          <!-- End Modal --> 
+                      </td>
                       <td><?php echo $necesidades->descripcionec;?></td>
                       <td><?php echo $necesidades->observaciones;?></td>
+                      <td><?php echo $necesidades->encargado;?></td>
                       <td><?php echo $necesidades->cantidad;?></td>
                       <td>$<?php echo number_format($necesidades->precio_unitario,2,".",",");?></td>
                       <td>$<?php echo number_format($necesidades->precio_total,2,".",",");?></td>
@@ -204,7 +234,8 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
               <?php $tot += $necesidades->precio_total;?>              
               <?php endforeach; ?>
                 <tr>
-                  <td colspan="3"></td>
+                
+                  <td colspan="5"></td>
                   <td colspan="1">SUBTOTAL:</td>
                   <td align="center" valign="middle"><span class="badge badge-inverse">$
                      <?php
@@ -215,7 +246,8 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   </td>            
               </tr>
                 <tr>
-                  <td colspan="3"></td>
+                
+                  <td colspan="5"></td>
                   <td colspan="1">IVA:</td>
                   <td align="center" valign="middle"><span class="badge badge-inverse">$
                      <?php
@@ -226,7 +258,8 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   </td>            
               </tr>
               <tr>
-                  <td colspan="3"></td>
+
+                  <td colspan="5"></td>
                   <td colspan="1">GRAN TOTAL:</td>
                   <td align="center" valign="middle"><span class="badge badge-inverse">$
                      <?php 
@@ -241,97 +274,115 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
             <!-- *********************************************************************** -->
                   
             <?php /* APROBACION PRESUPUESTAL.- VISTA SOLO POR EL COORDINADOR GENERAL y APPCEDULA */
-            $app = $_SESSION['username']; /** Cacha la sesion del usuario **/
+            $app = $_SESSION['username']; /** Cacha la sesion del usuario 
               switch ($app) {
                   case 'appcedula@app.com':      
-                        include 'include/nav_ops_aut_4B.php';
-                    break;
-                  case 'jorgeandrade@app.com':      
-                        include 'include/nav_ops_aut_4B.php';
+                        include 'include/nav_ops_aut_4BP.php';
                     break;
                   case 'blancamartinez@app.com':      
-                        include 'include/nav_ops_aut_4B.php';
+                        include 'include/nav_ops_aut_4BP.php';
                     break;
                   case 'oscarmorales@app.com':      
-                        include 'include/nav_ops_aut_4B.php';
-                    break;
-                  default:
-                        include 'include/nav_ops_aut_5.php';
-                    break;
-                } 
+                        include 'include/nav_ops_aut_4BP.php';
+                    break;                  
+                } **/
             ?>
-            
-            <hr>
-            <table class="table table-bordered">            
-            <tbody class="text-center">
-              <tr>                
-                <th>Frecuencia de la actividad</th>
-                <th>30 OCT</th>
-                <th>31 OCT</th>
-                <th>1 NOV</th>
-                <th>2 NOV</th>
-                <th>3 NOV</th>
-                  <th>4 NOV</th>
-                  <th>5 NOV</th>
-                  <th>6 NOV</th>
-                  <th>7 NOV</th>
-                  <th>8 NOV</th>
-                  <th>HORA INICIO</th>
-                  <th>HORA FIN</th>
-                
-              </tr>
-            <?php foreach ($get_cal_id_act as $get_cal ) : ?>
-              <tr>
-                  <td><?php echo $get_cal->actividad;?></td>                  
-                  <td><?php if ($get_cal->d1 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d2 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>
-                  <td><?php if ($get_cal->d3 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d4 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d5 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d6 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d7 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d8 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d9 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($get_cal->d10 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php echo $get_cal->hora_ini;?></td> 
-                  <td><?php echo $get_cal->hora_fin;?></td>                  
-              </tr>
-                <?php endforeach; ?>
-            </tbody>
-          </table>
-                <hr>
-            <table class="table table-bordered">
-            <thead>                
-                <div >
-                    <?php foreach ($get_one_act_edit as $actividad ) : ?>                                        
-                        <?php 
-                            echo form_open('comentarios/agregar_com_preview'); 
-                            echo form_hidden('id_act', $actividad->id_act);
-                            
-                        ?>
-                        <button type="submit" class="btn">Agregar Comentario</button>
-                        <?php echo form_close();?>
-                    
-                    <?php endforeach; ?>                     
+
+
+            <table id="tabla_presupuesto" class="table table-bordered">
+            <thead><h2>CONSOLIDADO</h2></thead>
+              <!-- Button to trigger modal -->
+              <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_GASTO"><i class="icon-white icon-plus"></i><strong> Agregar Concepto </strong></button>
+              <!-- Modal -->
+              <div id="myModal_GASTO" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="myModalLabel">Nuevo Concepto para Consolidacion</h3>
                 </div>
-            </thead>
-            <tbody>
+                <div class="modal-body">
+                 <form role="form" class="form-horizontal">
+                    <div class="radio">
+                      <label><input type="radio"> Producto</label>
+                      <label><input type="radio"> Servicio</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="clasificacion">Clasificacion:</label>
+                      <input type="email" class="form-control" id="clasificacion">
+                    </div>
+                    <div class="form-group">
+                      <label for="concepto">Concepto:</label>
+                      <input type="email" class="form-control" id="concepto">
+                    </div>
+                    <div class="form-group">
+                      <label for="cantidad">Cantidad:</label>
+                      <input type="email" class="form-control" id="cantidad">
+                    </div>
+                    <div class="form-group">
+                      <label for="preciounitario">Precio Unitario:</label>
+                      <input type="email" class="form-control" id="preciounitario">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  
+                  
+                </div>
+              </div>
+              <!-- End Modal -->            
               <tr>                
-                <th>Fecha</th>
-                <th>Publicado por</th>                
-                <th>Comentarios</th>
+                <th>Tipo</th>
+                <th>Clasificacion</th>
+                <th>Proveedor</th>
+                <th>Documento</th>
+                <th>Concepto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario SIN IVA</th>
+                <th>Precio Total</th>                               
               </tr>
-            <?php foreach ($get_all_com_act as $comentarios ) : ?>
-              <tr>
-                  <td><?php echo $comentarios->fecha_ult_com;?></td>
-                      <td><?php echo $comentarios->usuario;?></td>
+              <?php /* $tot = 0; foreach ($get_all_nec_act as $necesidades ) : */?>
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>$0</td>
+                      <td>$0</td>
                       
-                      <td><?php echo $comentarios->comentarios;?></td>  
-                
+                  </tr>                    
+              <?php /*$tot += $necesidades->precio_total;*/?>              
+              <?php /*endforeach; */?>
+                <tr>
+                  <td colspan="6"></td>
+                  <td colspan="1">SUBTOTAL:</td>
+                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                     <?php /*
+                        foreach ($get_total_act as $tot2 ) : 
+                            echo number_format(0,2,".",",");
+                        endforeach;*/
+                      ?></span>
+                  </td>            
               </tr>
-                <?php endforeach; ?>
-            </tbody>
-          </table>
+                <tr>
+                  <td colspan="6"></td>
+                  <td colspan="1">IVA:</td>
+                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                     </span>
+                  </td>            
+              </tr>
+              <tr>
+                  <td colspan="6"></td>
+                  <td colspan="1">GRAN TOTAL:</td>
+                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                     </span>
+                  </td>            
+              </tr>
+            </table>
+            
+            
                 
            
                 
@@ -348,17 +399,5 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
 
 
 
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-alert.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-button.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-carousel.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-collapse.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-dropdown.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-modal.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-popover.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-scrollspy.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-tab.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-tooltip.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-transition.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-typeahead.js"></script>
 </body>
 </html>

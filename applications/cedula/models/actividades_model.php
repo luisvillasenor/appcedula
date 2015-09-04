@@ -109,10 +109,9 @@ class Actividades_model extends CI_Model
             $this->db->where('e_mail', $e_mail);
             $query = $this->db->get(ACTIVIDADES);        
             break;
-          default:
+          case 'presupuesto':
             $this->db->where('id_fc', $edicion);
-            $this->db->where('e_mail', $e_mail);
-            $query = $this->db->get(ACTIVIDADES);              
+            $query = $this->db->get(ACTIVIDADES);        
             break;
         }         
         
@@ -139,10 +138,9 @@ class Actividades_model extends CI_Model
                 $this->db->group_by('e_mail');
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
-              default:
+              case 'presupuesto':
                 $this->db->group_by('e_mail');
-                $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get(ACTIVIDADES);              
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
             }         
         
@@ -371,8 +369,7 @@ class Actividades_model extends CI_Model
     {
         
         switch ($grupo) {
-              case 'administrador':
-                
+              case 'administrador':                
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
                 $query = $this->db->get(ACTIVIDADES);        
@@ -391,11 +388,10 @@ class Actividades_model extends CI_Model
                 $this->db->where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
-              default:                
+              case 'presupuesto':                
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_act', $id_act);
-                $this->db->where('e_mail', $e_mail);
-                $query = $this->db->get(ACTIVIDADES);              
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
             } 
                 
@@ -474,6 +470,11 @@ class Actividades_model extends CI_Model
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $txt);
                 $query = $this->db->get(ACTIVIDADES);              
+                break;
+            case 'presupuesto':
+                $this->db->where('e_mail', $txt);
+                $this->db->where('id_fc', $edicion);
+                $query = $this->db->get(ACTIVIDADES);        
                 break;
             }                
         
@@ -735,10 +736,40 @@ class Actividades_model extends CI_Model
                 $this->db->or_where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
-              default:
+                case 'gestor':
                 $this->db->select('count(*) as tot');
-                $this->db->where('e_mail', $e_mail);
                 $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              case 'presupuesto':
+                $this->db->select('count(*) as tot');
+                $this->db->where('id_fc', $edicion);
+                $query = $this->db->get(ACTIVIDADES);
+                break;
+            } 
+        
+        return $query->result();
+    }
+    function get_reg_filtro($txt,$e_mail,$id_coord,$edicion)
+    {
+        switch ($_SESSION['grupo']) {
+              case 'administrador':
+                $this->db->select('count(*) as tot');
+                $this->db->where('id_fc', $edicion);
+                $query = $this->db->get(ACTIVIDADES);
+                break;
+              case 'coordinador':
+                $this->db->select('count(*) as tot');
+                $this->db->where('id_coord', $id_coord);
+                $this->db->where('id_fc', $edicion);
+                $this->db->or_where('e_mail', $e_mail);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
+              case 'presupuesto':
+                $this->db->select('count(*) as tot');
+                $this->db->where('id_fc', $edicion);
+                $this->db->where('e_mail', $txt);
                 $query = $this->db->get(ACTIVIDADES);
                 break;
             } 

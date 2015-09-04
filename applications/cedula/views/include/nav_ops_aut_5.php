@@ -1,11 +1,11 @@
 <table class="table table-bordered">
         <?php foreach ($get_one_act_edit as $actividades ) : ?>
-        <thead>RUBRO PRESUPUESTAL.- (PARTIDA ######## - <?php echo $actividades->id_act;?>)</thead>
+        <thead>RUBRO PRESUPUESTAL.- (Cédula - <?php echo $actividades->id_act;?>)</thead>
       <tr>                
         <th>Presupuesto año anterior</th>
-        <th>Presupuesto Solicitado</th>
-        <th>Presupuesto Autorizado</th>
-        <th>Presupuesto Ejercido</th>
+        <th>Presupuesto SOLICITADO</th>
+        <th>Presupuesto AUTORIZADO</th>
+        <th>Presupuesto RESULTADO</th>
         
       </tr>
       <tr>        

@@ -5,7 +5,7 @@
             <div class="">
               <li>                
                 <?php $atributos = array('class' => 'navbar-form pull-left'); 
-                    echo form_open(base_url('actividades/filtrar_resp'), $atributos); ?>                    
+                    echo form_open(base_url('actividades/filtrar_resp_pres'), $atributos); ?>                    
                     <select class="span12" name="email" id="email" onchange="this.form.submit()">
                       <option>RESPONSABLES DE CEDULAS</option>
                       <?php foreach ($get_resp as $resp ) :?>                      

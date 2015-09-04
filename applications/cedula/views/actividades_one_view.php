@@ -37,56 +37,58 @@
         <?php }else{ ?>
           <div id="subheader2"><h2><strong>EDICIÓN DE TRABAJO 201<?php echo $edicion; ?></strong></h2></div>
 
-          <hr>
+              <hr>
+
+          <div class="container">
                     
-              <div class="span4">
+              <div class="span3 text-center">
                 <div class="alert alert-info">
-                  <h4>PRESUPUESTO AUTORIZADO</h4>
-                  <h1>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h1>
-                  Sumatoria del presupuesto neto autorizado de cada cédula
+                  <h5>PRESUPUESTO AUTORIZADO</h5>
+                  <h3>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h3>
+                  <small>Total autorizado</small>
                 </div>
               </div>
 
-              <div class="span4">
+              <div class="span3 text-center">
                 <div class="alert alert-info">
-                  <h4>PRESUPUESTO SOLICITADO</h4>
-                  <h1>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h1>
-                  Sumatoria del COSTO NETO SECTURE de cada cédula
+                  <h5>PRESUPUESTO SOLICITADO</h5>
+                  <h3>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h3>
+                  <small>Total costo neto de SECTURE</small>
                 </div>
               </div>
 
               <?php if ($suma_pres_eje <= 0 ) { ?>
 
-              <div class="span3">
+              <div class="span3 text-center">
                 <div class="alert alert-danger">
-                  <h4>RESULTADO</h4>
-                  <h1>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h1>
-                  Diferencia entre lo <small>AUTORIZADO</small> y los <small>SOLICITADO</small>
+                  <h5>RESULTADO</h5>
+                  <h3>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h3>
+                  <small>AUTORIZADO menos SOLICITADO</small>
                 </div>
               </div>
                 
               <?php }else{ ?>
 
-              <div class="span3">
+              <div class="span3 text-center">
                 <div class="alert alert-success">
-                  <h4>RESULTADO</h4>
-                  <h1>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h1>
-                  Diferencia entre lo <small>AUTORIZADO</small> y lo <small>SOLICITADO</small>
+                  <h5>RESULTADO</h5>
+                  <h3>$<?php echo number_format($suma_pres_eje,2,".",","); ?></h3>
+                  <small>AUTORIZADO menos SOLICITADO</small>
                 </div>
               </div>
 
               <?php } ?>
 
-
-            <div class="row"></div>
+              <div class="span3 text-center">
+                <div class="alert alert-default">
+                  <h5>FUERA DE PRESUPUESTO</h5>
+                  <h3>$<?php echo number_format(0.00,2,".",","); ?></h3>
+                  <small>No es de SECTURE</small>
+                </div>
+              </div>            
             
-            <span class="alert alert-success help-block">
-              <STRONG>Actualizar Calculos</STRONG>
-              <br>En la Vista Previa de cada cédula asegurese de actualizar calculos para tener un resultado correcto.
-              <br><STRONG><small>Los calculos son c/IVA</small></STRONG>
-            </span>
             
-          
+          </div>
           
           <hr>
         <?php } ?>
