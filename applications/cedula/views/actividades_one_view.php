@@ -82,7 +82,7 @@
               <div class="span3 text-center">
                 <div class="alert alert-default">
                   <h5>FUERA DE PRESUPUESTO</h5>
-                  <h3>$<?php echo number_format(0.00,2,".",","); ?></h3>
+                  <h3>$<?php echo number_format($suma_fuera_pres*1.16,2,".",","); ?></h3>
                   <small>No es de SECTURE</small>
                 </div>
               </div>            

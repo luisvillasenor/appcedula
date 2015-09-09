@@ -154,6 +154,9 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                               case '4':?>
                                 <th><span name="flag" id="flag" class="label label-inverse"><h3>Presupuesto Autorizado</h3></span></th>
                         <?php break;
+                              case '6':?>
+                                <th><span name="flag" id="flag" class="label label-default"><h3>Fuera de Presupuesto</h3></span></th>
+                        <?php break;
                               default: ?>
                                 <th><span name="flag" id="flag" class="label label-warning"><h3>Pendiente Aprobación</h3></span></th>
                         <?php break;
@@ -237,7 +240,7 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   </td>            
               </tr>
             </table>
-            <hr>
+            <hr> 
             <!-- *********************************************************************** -->
                   
             <?php /* APROBACION PRESUPUESTAL.- VISTA SOLO POR EL COORDINADOR GENERAL y APPCEDULA */

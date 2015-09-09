@@ -261,7 +261,7 @@ class Comentarios extends CI_Controller {
 
     $this->email->from($e_mail, $e_mail);
     $this->email->to($autor); 
-    $this->email->cc('luis.villasenor@aguascalientes.gob.mx'); 
+    $this->email->cc('luis.villasenor@aguascalientes.gob.mx',$e_mail); 
     
 
     $this->email->subject('NUEVO COMENTARIO EN SU CEDULA: '.$actividad);
@@ -309,9 +309,9 @@ class Comentarios extends CI_Controller {
             </tr>
             </table>
             
-            <p><small>No responda a este mail, se envia desde un buzon no-supervisado</small></p>
+            <p>No responda a este mail, se envia desde un buzon no-supervisado</p>
             
-            <p><small>Para mayor informacion sobre este mail solicite ayuda al administrador del sistema</small></p>
+            <p>Para mayor informacion sobre este mail solicite ayuda al administrador del sistema</p>
             
             </body>
             </html>

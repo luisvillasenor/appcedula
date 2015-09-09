@@ -844,6 +844,11 @@ class Actividades_model extends CI_Model
         $this->db->where('id_act',$id_act);
         $this->db->update(ACTIVIDADES,$data );
     }
+    function fuera_presupuesto($id_act,$out) {
+        $data = array('status_act' => $out);
+        $this->db->where('id_act',$id_act);
+        $this->db->update(ACTIVIDADES,$data );
+    }
     function integrado($id_act,$integrado) {
         $data = array('status_act' => $integrado);
         $this->db->where('id_act',$id_act);

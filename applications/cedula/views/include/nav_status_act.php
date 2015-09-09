@@ -9,10 +9,21 @@
         <td><span name="flag" id="flag" class="label label-info"><small>Integrado al Programa General</small></span></td>
 <?php break;
     case '4':?>
-        <td><span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span></td>
+        <td>
+          <?php if ( $actividades->pres_eje < 0 ) { ?>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span><br>
+          <span id="flag" class="label label-important">Resultado: $ <?php echo number_format($actividades->pres_eje,2,".",",");?></span>
+          <?php }else{ ?>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span><br>
+          <span id="flag" class="label label-success">Resultado: $ <?php echo number_format($actividades->pres_eje,2,".",",");?></span>
+          <?php } ?>
+        </td>
 <?php break;
     case '5':?>
         <td><span name="flag" id="flag" class="label"><i class="icon-lock"></i></span></td>
+<?php break;
+    case '6':?>
+        <td><span name="flag" id="flag" class="label label-default"><small>Fuera de Presupuesto</small></span></td>
 <?php break;
       default: ?>
         <td><span name="flag" id="flag" class="label label-warning"><small>Pendiente</small></span></td>

@@ -53,24 +53,37 @@
                     <?php }?>
                       
                   </td>
-                  <td>
-                    <button class="btn btn-large btn-success btn-block" type="submit">Actualizar Calculo</button>
-                    <?php echo form_close(); ?>
-                  </td>
+                  
+                    
                   <td>
 
+                    
+
                     <?php
-                    if ( $onlyusername == 'appcedula' ) { ?>
+                    if ( $onlyusername == 'appcedula' OR $onlyusername == 'blancamartinez' OR $onlyusername == 'oscarmorales' OR $onlyusername == 'rabingarcia' OR $onlyusername == 'jorgeandrade' ) { ?>
                         <!-- Menu solo para appcedula -->
+                        <button class="btn btn-success btn-block" type="submit">Actualizar Calculo</button>
+                       <?php echo form_close(); ?>
+
+                       <br>
+                
                                 <?php
                                       $atributos = array('class' => 'form-inline'); 
-                                      echo form_open(base_url().'actividades/si_presupuestado', $atributos); ?>                    
+                                      echo form_open(base_url('actividades/fuera_presupuesto'), $atributos); ?>                    
+                                      <input type="hidden" name="out" id="out" class="input-small" value="6">
+                                      <input type="hidden" name="id_act" id="id_act" value="<?php echo $actividades->id_act;?>">
+                                      <button type="submit" class="btn btn-default btn-block" data-toggle="tooltip" title="Notificar Autorización Presupuestal por Administrativo"><i class="icon-minus"></i> Fuera de Presupuesto</button>
+                                  <?php echo form_close(); ?>            
+
+                                  <?php
+                                      $atributos = array('class' => 'form-inline'); 
+                                      echo form_open(base_url('actividades/si_presupuestado'), $atributos); ?>                    
                                       <input type="hidden" name="presupuestado" id="presupuestado" class="input-small" value="4">
                                       <input type="hidden" name="id_act" id="id_act" value="<?php echo $actividades->id_act;?>">
                                       <input type="hidden" name="actividad" id="actividad" value="<?php echo $actividades->actividad;?>">
                                       <input type="hidden" name="usuario" id="usuario" value="<?php echo $actividades->e_mail;?>">
-                                      <button type="submit" class="btn btn-inverse btn-lg" data-toggle="tooltip" title="Notificar Autorización Presupuestal a Administrativo"><i class="icon-envelope icon-white"></i> Notificar Autorización <br>Presupuestal a Administrativo</button>
-                                  <?php echo form_close(); ?>            
+                                      <button type="submit" class="btn btn-inverse btn-block" data-toggle="tooltip" title="Notificar Autorización Presupuestal por Administrativo"><i class="icon-envelope icon-white"></i> Notificar Autorización <br>Presupuestal por Administrativo</button>
+                                  <?php echo form_close(); ?>   
                         <!-- Menu solo para appcedula -->          
                     <?php } ?>
                   </td>
