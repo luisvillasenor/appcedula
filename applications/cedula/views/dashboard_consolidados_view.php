@@ -39,9 +39,9 @@
 
               <div class="span4">
                 <div class="alert alert-info">
-                  <h4>PRESUPUESTO SOLICITADO</h4>
+                  <h4>PRESUPUESTO CONSOLIDADO</h4>
                   <h1>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h1>
-                  Sumatoria del COSTO NETO SECTURE de cada cédula
+                  Sumatoria del CONSOLIDADO de cada cédula
                 </div>
               </div>
 

@@ -655,21 +655,30 @@ class Actividades extends CI_Controller {
         $data['get_reg'] = $this->actividades_model->get_reg_filtro($txt,$e_mail,$id_coord,$edicion);
         $data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
 
+        
+        /*******************************************************/
         $pres_aut = 0;
         $costo_secture = 0;
         $pres_eje = 0;
+        $fuera_pres = 0;
 
-        if ( ! empty($data['get_filtro_por_resp']) ) {
-            foreach ($data['get_filtro_por_resp'] as $key => $value) {            
-                $pres_aut = $pres_aut + $value->pres_aut;
-                $costo_secture = $costo_secture + $value->costo_secture;
-                $pres_eje = $pres_eje + $value->pres_eje;            
+            if ( ! empty($data['get_filtro_por_resp']) ) {
+                foreach ($data['get_filtro_por_resp'] as $key => $value) {
+                    if ($value->status_act != 6) {
+                        $pres_aut = $pres_aut + $value->pres_aut;
+                        $costo_secture = $costo_secture + $value->costo_secture;
+                        $pres_eje = $pres_eje + $value->pres_eje;               
+                    }else{                        
+                        $fuera_pres = $fuera_pres + $value->costo_secture;
+                    }
+                }
             }
-        }
         
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_fuera_pres']    = $fuera_pres;
+        /**********************************************************/
         
         $this->load->view('header_view',$data);
         $this->load->view('filtrar_resp_pres_view',$data);
@@ -1315,6 +1324,7 @@ class Actividades extends CI_Controller {
         $this->load->model('comentarios_model');
         $this->load->model('coordinadores_model');
         $this->load->model('movimientos_model');
+        $this->load->model('consolidados_model');
         $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_all_movs'] = $this->movimientos_model->get_all_movs($id_act);
@@ -1332,10 +1342,20 @@ class Actividades extends CI_Controller {
                         }
         }
 
+        $cons = $this->consolidados_model->get_all_cons_act($id_act);
+        if (is_array($cons) === TRUE) {
+            $data['get_all_cons_act'] = $this->consolidados_model->get_all_cons_act($id_act);
+            foreach ($data['get_all_cons_act'] as $tot ) : 
+                $total += $tot->total_act; 
+            endforeach;        
+            //$this->actividades_model->update_costo_secture($id_act,$total);
+            
+        }else{echo "NO ES UN ARRAY";}
+
+
         $this->load->view('header_view',$data); 
         $this->load->view('vista_previa_presupuesto_view',$data);   
-        $this->load->view('footer_view',$data); 
-        
+        $this->load->view('footer_view',$data);        
     }
 
     public function master_plan(){
@@ -1987,8 +2007,7 @@ class Actividades extends CI_Controller {
 
     $this->email->from($e_mail, 'PRESUPUESTO AUTORIZADO DE SU CEDULA');
     $this->email->to($autor); 
-    $this->email->cc('luis.villasenor@aguascalientes.gob.mx','blanca.martinez@aguascalientes.gob.mx','oscar.morales@aguascalientes.gob.mx'); 
-    
+    $this->email->cc('luis.villasenor@aguascalientes.gob.mx,blanca.martinez@aguascalientes.gob.mx,oscar.morales@aguascalientes.gob.mx'); 
 
     $this->email->subject('PRESUPUESTO AUTORIZADO CEDULA NO. '.$id_act.' - '.$acti);
     $this->email->message('
@@ -2214,21 +2233,29 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
+        /*******************************************************/
         $pres_aut = 0;
         $costo_secture = 0;
         $pres_eje = 0;
+        $fuera_pres = 0;
 
-        if ( ! empty($data['get_all_actividades']) ) {
-            foreach ($data['get_all_actividades'] as $key => $value) {            
-                $pres_aut = $pres_aut + $value->pres_aut;
-                $costo_secture = $costo_secture + $value->costo_secture;
-                $pres_eje = $pres_eje + $value->pres_eje;            
+            if ( ! empty($data['get_all_actividades']) ) {
+                foreach ($data['get_all_actividades'] as $key => $value) {
+                    if ($value->status_act != 6) {
+                        $pres_aut = $pres_aut + $value->pres_aut;
+                        $costo_secture = $costo_secture + $value->costo_secture;
+                        $pres_eje = $pres_eje + $value->pres_eje;               
+                    }else{                        
+                        $fuera_pres = $fuera_pres + $value->costo_secture;
+                    }
+                }
             }
-        }
         
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_fuera_pres']    = $fuera_pres;
+        /**********************************************************/
                 
         $this->load->view('header_view',$data); 
         $this->load->view('dashboard_view',$data);
@@ -2270,24 +2297,98 @@ class Actividades extends CI_Controller {
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
+        
+        /*******************************************************/
         $pres_aut = 0;
         $costo_secture = 0;
         $pres_eje = 0;
+        $fuera_pres = 0;
 
-        if ( ! empty($data['get_all_actividades']) ) {
-            foreach ($data['get_all_actividades'] as $key => $value) {            
-                $pres_aut = $pres_aut + $value->pres_aut;
-                $costo_secture = $costo_secture + $value->costo_secture;
-                $pres_eje = $pres_eje + $value->pres_eje;            
+            if ( ! empty($data['get_all_actividades']) ) {
+                foreach ($data['get_all_actividades'] as $key => $value) {
+                    if ($value->status_act != 6) {
+                        $pres_aut = $pres_aut + $value->pres_aut;
+                        $costo_secture = $costo_secture + $value->costo_secture;
+                        $pres_eje = $pres_eje + $value->pres_eje;               
+                    }else{                        
+                        $fuera_pres = $fuera_pres + $value->costo_secture;
+                    }
+                }
             }
-        }
         
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_fuera_pres']    = $fuera_pres;
+        /**********************************************************/
                 
         $this->load->view('header_view',$data); 
         $this->load->view('dashboard_actividades_view',$data);
+        $this->load->view('footer_view',$data); 
+    }
+
+    public function dashboard_consolidados(){
+        
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Dashboard';
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        
+        $this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $this->load->model('categorias_model');
+        $this->load->model('coordinadores_model');
+        $this->load->model('comentarios_model');
+        
+        
+        $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
+        $data['get_registros'] = $this->necesidades_model->get_registros();
+        $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+    
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+                
+        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
+
+        
+        /*******************************************************/
+        $pres_aut = 0;
+        $costo_secture = 0;
+        $pres_eje = 0;
+        $fuera_pres = 0;
+
+            if ( ! empty($data['get_all_actividades']) ) {
+                foreach ($data['get_all_actividades'] as $key => $value) {
+                    if ($value->status_act != 6) {
+                        $pres_aut = $pres_aut + $value->pres_aut;
+                        $costo_secture = $costo_secture + $value->costo_secture;
+                        $pres_eje = $pres_eje + $value->pres_eje;               
+                    }else{                        
+                        $fuera_pres = $fuera_pres + $value->costo_secture;
+                    }
+                }
+            }
+        
+        $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_costo_secture'] = $costo_secture;
+        $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_fuera_pres']    = $fuera_pres;
+        /**********************************************************/
+                
+        $this->load->view('header_view',$data); 
+        $this->load->view('dashboard_consolidados_view',$data);
         $this->load->view('footer_view',$data); 
     }
 
@@ -2468,7 +2569,62 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data); 
     }
 
+///////////// COPIAR Y PEGAR UN REGISTRO //////////
+    public function consolidar()
+    {
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('actividades_model');
+        $this->load->model('consolidados_model');
+        $total = '';
+        $bloq = '5';// Una vez copiado el registro, quita el boton de Clasificar.
 
+        $id_act = $this->input->post('id_act');
+        $tipo = $this->input->post('tipo');
+        $clasificacion = $this->input->post('clasificacion');
+        $proveedor = $this->input->post('proveedor');
+        $concepto = $this->input->post('concepto');
+        $cantidad = $this->input->post('cantidad');
+        $precio_unitario = $this->input->post('precio_unitario');
+        $quien_modifica = $this->input->post('quien_modifica');
+        $status_cons = $this->input->post('status_cons');
+
+        $last_id = $this->consolidados_model->insert_entry($id_act,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons);
+
+        
+        
+        //$reg = $this->actividades_model->get_one_to_copi($id_act);
+/*
+        if ($edicion != 5) { 
+            if (is_array($reg) === TRUE) {
+                $last_id = $this->actividades_model->paste($reg,$ed = 5);
+                echo $last_id;
+                echo "<br>";
+                $this->actividades_model->bloqueo($id_act,$bloq);
+            }else{echo "NO ES UN ARRAY";}            
+        }else{echo "EDICION NO VALIDA";}
+
+        $nec = $this->necesidades_model->get_all_nec_act($id_act);
+        if (is_array($nec) === TRUE) {
+            $this->necesidades_model->paste($nec,$last_id);
+            $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act = $last_id);
+            foreach ($data['get_total_act'] as $tot ) : 
+                $total += $tot->total_act; 
+            endforeach;        
+            $this->actividades_model->update_costo_secture($id_act,$total);
+            $this->notificar_msg($last_id,$e_mail);
+        }else{echo "NO ES UN ARRAY";}
+*/
+        //redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
+        $this->vista_previa_presupuesto($id_act);
+        
+    }
+///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////

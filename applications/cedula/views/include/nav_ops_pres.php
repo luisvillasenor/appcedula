@@ -56,7 +56,7 @@ if ( $edicion != '5') { ?>
 
 
 
-      <a class="btn btn-success btn-block" href="<?php echo base_url('actividades/vista_previa_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Ver Detalle de la Cédula No. <?php echo $actividades->id_act;?>">Ver Detalle</a>
+      <a class="btn btn-success btn-block" href="<?php echo base_url('actividades/vista_previa_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Ver Detalle de la Cédula No. <?php echo $actividades->id_act;?>">Ver Consolidado</a>
 
 
 <?php } ?>

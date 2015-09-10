@@ -11,10 +11,10 @@
     case '4':?>
         <td>
           <?php if ( $actividades->pres_eje < 0 ) { ?>
-          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span><br>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small><br>$ <?php echo number_format($actividades->pres_aut,2,".",",");?></span><br>
           <span id="flag" class="label label-important">Resultado: $ <?php echo number_format($actividades->pres_eje,2,".",",");?></span>
           <?php }else{ ?>
-          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small></span><br>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto Autorizado</small><br>$ <?php echo number_format($actividades->pres_aut,2,".",",");?></span><br>
           <span id="flag" class="label label-success">Resultado: $ <?php echo number_format($actividades->pres_eje,2,".",",");?></span>
           <?php } ?>
         </td>

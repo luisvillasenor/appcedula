@@ -13,7 +13,7 @@
               <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
                 <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas</a></li>
-                <li><a href="#">Reportes</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado de Consolidados</a></li>
               </ul>
             </div>
       </div><!--Sidebar content-->
@@ -59,15 +59,15 @@
           <?php } ?>
           <div class="row"></div>
           <div style="text-align:center; margin:0 auto;">
-            <a href="#">
+            <!--<a href="#">
               <img src="<?php echo base_url();?>bootstrap/img/Dashboard1.png" width="100%">
-            </a>
+            </a>-->
           </div>
           <div class="row"></div>
           <div style="text-align:center; margin:0 auto;">
-            <a href="#">
+            <!--<a href="#">
               <img src="<?php echo base_url();?>bootstrap/img/Dashboard1.png" width="100%">
-            </a>
+            </a>-->
           </div>
 
       </div><!— /span10 —>
