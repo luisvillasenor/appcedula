@@ -12,9 +12,10 @@
         <!--Body content-->
             <div class="col-md-3">
               <ul class="nav nav-pills nav-stacked">
+                
                 <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado de Consolidados</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado Clasificados</a></li>
                 
               </ul>
             </div>
@@ -98,7 +99,7 @@
                       
                       
                       <td><?php echo $actividades->quienpropone;?>(<?php echo $actividades->e_mail;?>)</td>   
-                      <td>$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
+                      <td id="pesos">$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
                                             
                       <?php include 'include/nav_status_act.php';  ?>                                            
                   </tr>

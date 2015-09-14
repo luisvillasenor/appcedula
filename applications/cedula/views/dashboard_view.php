@@ -12,8 +12,8 @@
             <div class="col-md-3">
               <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado de Consolidados</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado Clasificados</a></li>
               </ul>
             </div>
       </div><!--Sidebar content-->

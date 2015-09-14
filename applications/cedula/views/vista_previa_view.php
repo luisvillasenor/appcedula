@@ -32,6 +32,9 @@
       padding-right: 10px;
       
     }
+    #pesos{text-align: right}
+    #cantidad{text-align: center}
+    #pesos_total{text-align: right; background-color: black; color: white; font-size: 16px;}
 th
 {
 background-color:#000;
@@ -199,44 +202,44 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   <tr>                      
                       <td><?php echo $necesidades->descripcionec;?></td>
                       <td><?php echo $necesidades->observaciones;?></td>
-                      <td><?php echo $necesidades->cantidad;?></td>
-                      <td>$<?php echo number_format($necesidades->precio_unitario,2,".",",");?></td>
-                      <td>$<?php echo number_format($necesidades->precio_total,2,".",",");?></td>
+                      <td id="cantidad"><?php echo $necesidades->cantidad;?></td>
+                      <td id="pesos">$<?php echo number_format($necesidades->precio_unitario,2,".",",");?></td>
+                      <td id="pesos">$<?php echo number_format($necesidades->precio_total,2,".",",");?></td>
                       
                   </tr>                    
               <?php $tot += $necesidades->precio_total;?>              
               <?php endforeach; ?>
                 <tr>
                   <td colspan="3"></td>
-                  <td colspan="1">SUBTOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">SUBTOTAL:</td>
+                  <td id="pesos">$
                      <?php
                         foreach ($get_total_act as $tot2 ) : 
                             echo number_format($tot2->total_act,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
                 <tr>
                   <td colspan="3"></td>
-                  <td colspan="1">IVA:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">IVA:</td>
+                  <td id="pesos">$
                      <?php
                         foreach ($get_total_act as $tot2 ) : 
                             echo number_format($tot2->tot_iva,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
               <tr>
                   <td colspan="3"></td>
-                  <td colspan="1">GRAN TOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">GRAN TOTAL:</td>
+                  <td id="pesos_total">$
                      <?php 
                         foreach ($get_total_act as $tot ) : 
                             echo number_format($tot->tot_tot,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
             </table>

@@ -270,6 +270,7 @@ class Comentarios extends CI_Controller {
             <!DOCTYPE html>
             <html>
             <head>
+            <meta charset="utf-8">
             <style>
             table, th, td
             {

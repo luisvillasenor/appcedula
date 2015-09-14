@@ -582,12 +582,12 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-        		
+        $status = '4'; 		
 		$txt = $this->input->post('email');
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
-		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
+		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status);
 
         
         /*******************************************************/
@@ -648,12 +648,12 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-                
+        $status = '4';       
         $txt = $this->input->post('email');
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg_filtro($txt,$e_mail,$id_coord,$edicion);
-        $data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
+        $data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status);
 
         
         /*******************************************************/
@@ -1329,27 +1329,35 @@ class Actividades extends CI_Controller {
         $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
         $data['get_all_movs'] = $this->movimientos_model->get_all_movs($id_act);
         $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act);
+        $data['get_total_act_cons'] = $this->consolidados_model->get_total_act_cons($id_act);
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_cal_id_act'] = $this->actividades_model->get_cal_id_act($id_act);
         $data['get_all_com_act'] = $this->comentarios_model->get_all_com_act($id_act,$e_mail,$grupo,$id_coord);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
-        foreach ($data['get_all_coords'] as $coords ) {
-    
-                        if($id_coord == $coords->id_coord) {
-                            
-                            $data['miCoordinacion']= $coords->coordinacion;
-                        }
+        foreach ($data['get_all_coords'] as $coords ) {    
+            if($id_coord == $coords->id_coord) {                            
+                $data['miCoordinacion']= $coords->coordinacion;
+            }
         }
-
+        // NECESIDADES DE LA CEDULA /////////////////////////////////////////////////////////////////////////////////
+        $res = $this->necesidades_model->get_all_nec_act($id_act);
+        $total = '';
+        if (is_array($res) === TRUE) {
+            $data['get_all_nec_act'] = $this->necesidades_model->get_all_nec_act($id_act);
+            foreach ($data['get_total_act'] as $tot ) : 
+                $total += $tot->total_act; 
+            endforeach;        
+            //$this->actividades_model->update_costo_secture($id_act,$total);            
+        }else{echo "NO ES UN ARRAY";}
+        // CONSOLIDADO /////////////////////////////////////////////////////////////////////////////////////////////
         $cons = $this->consolidados_model->get_all_cons_act($id_act);
         if (is_array($cons) === TRUE) {
             $data['get_all_cons_act'] = $this->consolidados_model->get_all_cons_act($id_act);
-            foreach ($data['get_all_cons_act'] as $tot ) : 
+            foreach ($data['get_total_act_cons'] as $tot ) : 
                 $total += $tot->total_act; 
             endforeach;        
-            //$this->actividades_model->update_costo_secture($id_act,$total);
-            
+            //$this->actividades_model->update_costo_secture($id_act,$total);            
         }else{echo "NO ES UN ARRAY";}
 
 
@@ -2292,8 +2300,8 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-                
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+        $status = '4';
+        $data['get_all_actividades'] = $this->actividades_model->get_all_status($e_mail,$grupo,$id_coord,$status,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
@@ -2327,7 +2335,7 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data); 
     }
 
-    public function dashboard_consolidados(){
+    public function dashboard_consolidados($tipo = '',$clasificacion = ''){
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
@@ -2338,27 +2346,24 @@ class Actividades extends CI_Controller {
         $data['onlyusername'] = strstr($e_mail,'@',true);
         
         $this->load->model('actividades_model');
-        $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
-        $this->load->model('comentarios_model');
+        $this->load->model('consolidados_model');
         
         
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
-        $data['get_registros'] = $this->necesidades_model->get_registros();
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
-        foreach ($data['get_all_coords'] as $coords ) {
-    
-                        if($id_coord == $coords->id_coord) {
-                            
-                            $data['miCoordinacion']= $coords->coordinacion;
-                        }
+        foreach ($data['get_all_coords'] as $coords ) {    
+            if($id_coord == $coords->id_coord) {                            
+                $data['miCoordinacion']= $coords->coordinacion;
+            }
         }
                 
-        $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+        $data['get_groupby_clasificacion'] = $this->consolidados_model->get_groupby_clasificacion();
+        $data['get_all_cons_act'] = $this->consolidados_model->get_all_cons_tipo($tipo,$clasificacion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
@@ -2570,8 +2575,8 @@ class Actividades extends CI_Controller {
     }
 
 ///////////// COPIAR Y PEGAR UN REGISTRO //////////
-    public function consolidar()
-    {
+    public function consolidar() {
+
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
@@ -2581,20 +2586,26 @@ class Actividades extends CI_Controller {
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $this->load->model('actividades_model');
         $this->load->model('consolidados_model');
+        $this->load->model('necesidades_model');
         $total = '';
         $bloq = '5';// Una vez copiado el registro, quita el boton de Clasificar.
 
         $id_act = $this->input->post('id_act');
+        $id_nec = $this->input->post('id_nec');
+        //$status_necs = $this->input->post('status_necs');
         $tipo = $this->input->post('tipo');
-        $clasificacion = $this->input->post('clasificacion');
+        $clasificacion = strtoupper(url_title($this->input->post('clasificacion'),'dash',TRUE));
         $proveedor = $this->input->post('proveedor');
         $concepto = $this->input->post('concepto');
         $cantidad = $this->input->post('cantidad');
         $precio_unitario = $this->input->post('precio_unitario');
-        $quien_modifica = $this->input->post('quien_modifica');
-        $status_cons = $this->input->post('status_cons');
+        $quien_modifica = $e_mail;
+        $status_cons = 0;
+        $status_necs = 1 ;
 
-        $last_id = $this->consolidados_model->insert_entry($id_act,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons);
+        $last_id = $this->consolidados_model->insert_entry($id_act,$id_nec,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons);
+
+        $this->necesidades_model->update_consolidado($id_nec,$status_necs,$e_mail);
 
         
         
@@ -2621,9 +2632,66 @@ class Actividades extends CI_Controller {
         }else{echo "NO ES UN ARRAY";}
 */
         //redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
-        $this->vista_previa_presupuesto($id_act);
+        redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
+        //$this->vista_previa_presupuesto($id_act);
         
     }
+
+    public function actualizar_cons() {
+
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('consolidados_model');
+        
+        $id_con = $this->input->post('id_con');
+        $id_nec = $this->input->post('id_nec');
+        $id_act = $this->input->post('id_act');
+        $tipo = $this->input->post('tipo');
+        $clasificacion = $this->input->post('clasificacion');
+        $proveedor = $this->input->post('proveedor');
+        $concepto = $this->input->post('concepto');
+        $cantidad = $this->input->post('cantidad');
+        $precio_unitario = $this->input->post('precio_unitario');
+        $quien_modifica = $e_mail;
+        $status_cons = 0;
+        $fecha = $this->input->post('fecha');
+
+        $last_id = $this->consolidados_model->update_entry($id_con,$id_nec,$id_act,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons,$fecha);
+        redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
+        //$this->vista_previa_presupuesto($id_act);
+        
+    }    
+
+    public function eliminar_cons($id_con,$id_act) {
+
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $status_necs = 0 ;
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('consolidados_model');
+        $this->load->model('necesidades_model');
+
+        $get_one_nec_edit = $this->consolidados_model->get_one_nec_edit($id_con);
+        foreach ($get_one_nec_edit as $item) {
+            $id_nec = $item->id_nec;
+        }
+
+        $this->necesidades_model->update_consolidado($id_nec,$status_necs,$e_mail);
+
+        $last_id = $this->consolidados_model->delete($id_con);
+        redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
+        //print_r($id_nec);
+        
+    }    
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////

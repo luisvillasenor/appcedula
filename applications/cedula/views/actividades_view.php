@@ -150,7 +150,7 @@
                       
                       
                       <td><?php echo $actividades->quienpropone;?>(<?php echo $actividades->e_mail;?>)</td>   
-                      <td>$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
+                      <td id="pesos">$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
                                             
                       <?php include 'include/nav_status_act.php';  ?>                                            
                   </tr>

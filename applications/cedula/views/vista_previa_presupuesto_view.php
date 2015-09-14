@@ -12,32 +12,15 @@
   <script src="<?php echo base_url(); ?>jquery-ui/js/jquery-1.9.1.js"></script>
   <script src="<?php echo base_url(); ?>jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
   <style type="text/css">
-    #subheader {
-      background-color: #CCC;
-      margin: auto;
-      height: 20px;
-      width: 100%;
-      text-align: center;
-      word-spacing: normal;
-      letter-spacing: normal;
-      vertical-align: middle;
-      white-space: normal;
-      display: inline-block;      
+    th{
+    background-color:#000;
+    color:white;
     }
-    #wrapper {
-      background-color: transparent;
-      margin-top: 70px;
-      padding-top: 10px;
-      padding-left: 10px;
-      padding-right: 10px;
-      
-    }
-th
-{
-background-color:#000;
-color:white;
-}
-      h3{text-align:center;}
+    #pesos{text-align: right}
+    #cantidad{text-align: center}
+    #pesos_total{text-align: right; background-color: black; color: white; font-size: 16px;}
+
+    h3{text-align:center;}
 
   </style>
 
@@ -63,42 +46,7 @@ color:white;
     });      
   </script>
     
-<script>
-  function validacion() {
-      
-      pres_ant2 = document.getElementById("pres_ant2").value;
-      pres_aut2 = document.getElementById("pres_aut2").value;
-      pres_eje2 = document.getElementById("pres_eje2").value;
-      
-        if( pres_ant2 == null || pres_ant2.length == 0 || /^\s+$/.test(pres_ant2)) {
-          alert('[ERROR] El campo PRESUPUESTO AÑO ANTERIOR debe tener un valor NUMËRICO');
-          return false;
-        }
-          else if ( pres_aut2 == null || pres_aut2.length === 0 || /^\s+$/.test(pres_aut2)) {
-            // Si no se cumple la condicion...
-            alert('[ERROR] El campo AUTORIZADO debe tener un valor NUMËRICO');
-            return false;
-          }
-            else if ( pres_eje2 == null || pres_eje2.length === 0 || /^\s+$/.test(pres_eje2)) {
-            // Si no se cumple la condicion...
-            alert('[ERROR] El campo EJERCIDO debe tener un valor NUMËRICO');
-            return false;
-          }
-            else if( isNaN(pres_ant2) ) {
-                alert('[ERROR] El campo PRESUPUESTO AÑO ANTERIOR debe tener un valor NUMËRICO');
-                return false;
-            }
-              else if ( isNaN(pres_aut2) ) {
-                // Si no se cumple la condicion...
-                alert('[ERROR] El campo AUTORIZADO debe tener un valor NUMËRICO');
-                return false;
-              }
-     
-      // Si el script ha llegado a este punto, todas las condiciones
-      // se han cumplido, por lo que se devuelve el valor true
-      return true;
-    }
-</script>
+
     
 </head>
 
@@ -187,47 +135,49 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
               <?php $tot = 0; foreach ($get_all_nec_act as $necesidades ) : ?>
                   <tr>                      
                       <td>
-                        <!-- Button to trigger modal -->
-                          <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModal_<?php echo $necesidades->id_nec;?>">Clasificar</button>
-                          <!-- Modal -->
-                          <div id="myModal_<?php echo $necesidades->id_nec;?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                          <form role="form" class="form-horizontal" action="<?php echo base_url('actividades/consolidar');?>" method="post">  
+                        <?php if ($necesidades->status_necs == 0) { ?>
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal_<?php echo $necesidades->id_nec;?>">Clasificar</button>
+                            <!-- Modal -->
+                            <div id="myModal_<?php echo $necesidades->id_nec;?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                                        <?php 
+                          $attributes = array('class' => 'form-horizontal', 'role' => 'form');
+                          echo form_open('actividades/consolidar',$attributes);?>
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                              <h3 id="myModalLabel">Clasificación por Concepto del Gasto</h3>
+                              <h3 id="myModalLabel">Clasificación de Necesidades</h3>
                               <small>Cédula ID: <?php echo $necesidades->id_act; ?></small>
                             </div>
                             <div class="modal-body">
                                 <input name="id_act" id="id_act" type="hidden" value="<?php echo $necesidades->id_act; ?>">
-                                
+                                <input name="id_nec" id="id_nec" type="hidden" value="<?php echo $necesidades->id_nec; ?>">
                                 <div class="control-group">
                                   <div class="controls">
                                     <label class="radio">
-                                      <input name="tipo" id="tipo" type="radio" value="F"> Factura
+                                      <input name="tipo" id="tipo" type="radio" value="F" checked> Factura
                                     </label>
                                     <label class="radio">
                                       <input name="tipo" id="tipo" type="radio" value="R"> Requisición
                                     </label>
                                   </div>
-                                </div>
-
-                                
+                                </div>                                
                                 <div class="control-group">
                                   <label class="control-label" for="clasificacion">Clasificacion del Gasto</label>
                                   <div class="controls">
-                                    <input type="text" name="clasificacion" id="clasificacion">
+                                    <input type="text" name="clasificacion" id="clasificacion" value="">
                                   </div>
                                 </div>
                                 <div class="control-group">
                                   <label class="control-label" for="proveedor">Proveedor</label>
                                   <div class="controls">
-                                    <input type="text" name="proveedor" id="proveedor">
+                                    <input type="text" name="proveedor" id="proveedor" value="">
                                   </div>
                                 </div>
                                 <div class="control-group">
                                   <label class="control-label" for="concepto">Descripcion / Observaciones</label>
                                   <div class="controls">
-                                    <textarea cols="5" name="concepto" id="concepto" type="text">
+                                    <textarea cols="5" name="concepto" id="concepto">
                                       <?php echo $necesidades->descripcionec;?>
                                       <?php echo $necesidades->observaciones;?>
                                     </textarea>
@@ -236,31 +186,34 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                                 <div class="control-group">
                                   <label class="control-label" for="cantidad">Cantidad <small>Numero entero</small></label>
                                   <div class="controls">
-                                    <input type="text" name="cantidad" id="cantidad" value="<?php echo $necesidades->cantidad;?>">
+                                    <input type="text" name="cantidad" id="cantidad" value="<?php echo $necesidades->cantidad;?>" readonly>
                                   </div>
                                 </div>
                                 <div class="control-group">
                                   <label class="control-label" for="preciounitario">Precio Unitario:</label>
                                   <div class="controls">
-                                    <input type="text" name="precio_unitario" id="precio_unitario" value="<?php echo number_format($necesidades->precio_unitario,2,".",",");?>">
+                                    <input type="text" name="precio_unitario" id="precio_unitario" value="<?php echo $necesidades->precio_unitario;?>" readonly>
                                   </div>
-                                </div>
-                                
+                                </div>                                
                             </div>
                             <div class="modal-footer">
-                              <button type="submit" class="btn btn-success btn-block">ENVIAR A CONSOLIDADO</button>                              
+                              <button type="submit" class="btn btn-success btn-block">ENVIAR A CLASIFICADOS</button>                              
                             </div>
                           </form>  
 
                           </div>
                           <!-- End Modal --> 
+                        <?php } else { ?>
+                        <?php echo "<i class='icon-ok'></i> Clasificado";} ?>                          
+                        
+
                       </td>
                       <td><?php echo $necesidades->descripcionec;?></td>
                       <td><?php echo $necesidades->observaciones;?></td>
                       <td><?php echo $necesidades->encargado;?></td>
-                      <td><?php echo $necesidades->cantidad;?></td>
-                      <td>$<?php echo number_format($necesidades->precio_unitario,2,".",",");?></td>
-                      <td>$<?php echo number_format($necesidades->precio_total,2,".",",");?></td>
+                      <td id="cantidad"><?php echo $necesidades->cantidad;?></td>
+                      <td id="pesos">$<?php echo number_format($necesidades->precio_unitario,2,".",",");?></td>
+                      <td id="pesos">$<?php echo number_format($necesidades->precio_total,2,".",",");?></td>
                       
                   </tr>                    
               <?php $tot += $necesidades->precio_total;?>              
@@ -268,37 +221,37 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                 <tr>
                 
                   <td colspan="5"></td>
-                  <td colspan="1">SUBTOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">SUBTOTAL:</td>
+                  <td id="pesos">$
                      <?php
                         foreach ($get_total_act as $tot2 ) : 
                             echo number_format($tot2->total_act,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
                 <tr>
                 
                   <td colspan="5"></td>
-                  <td colspan="1">IVA:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">IVA:</td>
+                  <td id="pesos">$
                      <?php
                         foreach ($get_total_act as $tot2 ) : 
                             echo number_format($tot2->tot_iva,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
               <tr>
 
                   <td colspan="5"></td>
-                  <td colspan="1">GRAN TOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
+                  <td id="pesos" colspan="1">GRAN TOTAL:</td>
+                  <td id="pesos_total">$
                      <?php 
                         foreach ($get_total_act as $tot ) : 
                             echo number_format($tot->tot_tot,2,".",",");
                         endforeach;
-                      ?></span>
+                      ?>
                   </td>            
               </tr>
             </table>
@@ -322,51 +275,9 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
 
 
             <table id="tabla_presupuesto" class="table table-bordered">
-            <thead><h2>CONSOLIDADO</h2></thead>
-              <!-- Button to trigger modal -->
-              <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_GASTO"><i class="icon-white icon-plus"></i><strong> Agregar Concepto </strong></button>
-              <!-- Modal -->
-                          <div id="myModal_GASTO" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                          <form role="form" class="form-horizontal">  
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                              <h3 id="myModalLabel">Clasificación por Concepto del Gasto</h3>
-                            </div>
-                            <div class="modal-body">                             
-                                <div class="radio">
-                                  <label><input name="" id="" type="radio" value="F"> Factura</label>
-                                  <label><input name="" id="" type="radio" value="R"> Requisición</label>
-                                </div>                                
-                                <div class="form-group">
-                                  <label for="clasificacion">Clasificacion del Gasto</label>
-                                  <input type="text" class="form-control" id="clasificacion">
-                                </div>
-                                <div class="form-group">
-                                  <label for="clasificacion">Proveedor</label>
-                                  <input type="text" class="form-control" id="clasificacion">
-                                </div>
-                                <div class="form-group">
-                                  <label for="concepto">Descripcion</label>
-                                  <textarea type="text" class="form-control" id="concepto"></textarea>                                  
-                                </div>
-                                <div class="form-group">
-                                  <label for="cantidad">Cantidad</label>
-                                  <input type="text" class="form-control" id="cantidad" value="">
-                                </div>
-                                <div class="form-group">
-                                  <label for="preciounitario">Precio Unitario:</label>
-                                  <input type="text" class="form-control" id="preciounitario" value="">
-                                </div>
-                                
-                            </div>
-                            <div class="modal-footer">
-                              <button type="submit" class="btn btn-success btn-block">ENVIAR A CONSOLIDADO</button>                              
-                            </div>
-                          </form>  
-
-                          </div>
-                          <!-- End Modal -->            
-              <tr>                
+            <thead><h2>LISTADO DE REGISTROS CLASIFICADOS</h2></thead>   
+              <tr>
+                <th></th>
                 <th>Tipo</th>
                 <th>Clasificacion</th>
                 <th>Proveedor</th>
@@ -377,33 +288,125 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
               </tr>
               <?php $tot = 0; foreach ($get_all_cons_act as $cons_item ) : ?>
                   <tr>
-                      <td><?php echo $cons_item->tipo;?></td>                                           
+                    <td>
+                      <!-- Button to trigger modal -->
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal_cons_<?php echo $cons_item->id_con;?>">Editar[<small><?php echo $cons_item->id_con;?></small>]</button>
+                      <!-- Modal -->
+                          <div id="myModal_cons_<?php echo $cons_item->id_con;?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <?php 
+                          $attributes = array('class' => 'form-horizontal', 'role' => 'form');
+                          echo form_open('actividades/actualizar_cons',$attributes);?>
+                          <input type="hidden" name="id_con" id="id_con" value="<?php echo $cons_item->id_con;?>">
+                          <input type="hidden" name="id_nec" id="id_nec" value="<?php echo $cons_item->id_nec;?>">
+                          <input type="hidden" name="id_act" id="id_act" value="<?php echo $cons_item->id_act;?>">
+                          <input type="hidden" name="fecha" id="fecha" value="<?php echo $cons_item->fecha;?>">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                              <h3 id="myModalLabel">Clasificación por Concepto del Gasto</h3>
+                            </div>
+                            <div class="modal-body">                             
+                                <div class="control-group">
+                                  <div class="controls">
+                                    <?php if ($cons_item->tipo == 'F') { ?>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="F" checked> Factura
+                                      </label>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="R"> Requisición
+                                      </label>                                      
+                                    <?php } ?>
+                                    <?php if ($cons_item->tipo == 'R') { ?>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="F"> Factura
+                                      </label>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="R" checked> Requisición
+                                      </label>                                      
+                                    <?php } ?>                                    
+                                  </div>
+                                </div>                                 
+                                <div class="control-group">
+                                  <label class="control-label" for="clasificacion">Clasificacion del Gasto</label>
+                                  <div class="controls">
+                                    <input type="text" name="clasificacion" id="clasificacion" value="<?php echo $cons_item->clasificacion;?>">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="proveedor">Proveedor</label>
+                                  <div class="controls">
+                                    <input type="text" name="proveedor" id="proveedor" value="<?php echo $cons_item->proveedor;?>">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="concepto">Concepto</label>
+                                  <div class="controls">
+                                    <input type="text" name="concepto" id="concepto" value="<?php echo $cons_item->concepto;?>">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="cantidad">Cantidad</label>
+                                  <div class="controls">
+                                    <input type="text" name="cantidad" id="cantidad" value="<?php echo $cons_item->cantidad;?>">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="precio_unitario">Precio Unitario</label>
+                                  <div class="controls">
+                                    <input type="text" name="precio_unitario" id="precio_unitario" value="<?php echo $cons_item->precio_unitario;?>">
+                                  </div>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-block">ACTUALIZAR</button>
+                              <a href="<?php echo base_url();?>actividades/eliminar_cons/<?php echo $cons_item->id_con;?>/<?php echo $cons_item->id_act;?>" class="btn btn-danger btn-block">ELIMINAR</a>
+                            </div>
+                          </form>  
+
+                          </div>
+                          <!-- End Modal --> 
+                    </td>
+                      <td><?php echo $cons_item->tipo;?></td>
+                      <td><?php echo $cons_item->clasificacion;?></td>
+                      <td><?php echo $cons_item->proveedor;?></td>
+                      <td><?php echo $cons_item->concepto;?></td>
+                      <td id="cantidad"><?php echo $cons_item->cantidad;?></td>
+                      <td id="pesos">$<?php echo number_format($cons_item->precio_unitario,2,".",",");?></td>
+                      <td id="pesos">$<?php echo number_format($cons_item->precio_total,2,".",",");?></td>
                   </tr>                    
               <?php $tot += $cons_item->precio_total;?>              
               <?php endforeach; ?>
                 <tr>
-                  <td colspan="5"></td>
-                  <td colspan="1">SUBTOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
-                     <?php /*
-                        foreach ($get_all_cons_act as $tot2 ) : 
-                            echo number_format(0,2,".",",");
-                        endforeach;*/
-                      ?></span>
+                  <td colspan="6"></td>
+                  <td id="pesos" colspan="1">SUBTOTAL:</td>
+                  <td id="pesos" valign="middle">$
+                     <?php 
+                        foreach ($get_total_act_cons as $tot2 ) : 
+                            echo number_format($tot2->total_act,2,".",",");
+                        endforeach;
+                      ?>
                   </td>            
               </tr>
                 <tr>
-                  <td colspan="5"></td>
-                  <td colspan="1">IVA:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
-                     </span>
+                  <td colspan="6"></td>
+                  <td id="pesos" colspan="1">IVA:</td>
+                  <td id="pesos" valign="middle">$
+                    <?php
+                        foreach ($get_total_act_cons as $tot2 ) : 
+                            echo number_format($tot2->tot_iva,2,".",",");
+                        endforeach;
+                      ?>
                   </td>            
               </tr>
               <tr>
-                  <td colspan="5"></td>
-                  <td colspan="1">GRAN TOTAL:</td>
-                  <td align="center" valign="middle"><span class="badge badge-inverse">$
-                     </span>
+                  <td colspan="6"></td>
+                  <td id="pesos" colspan="1">GRAN TOTAL:</td>
+                  <td id="pesos_total" valign="middle">$
+                    <?php 
+                        foreach ($get_total_act_cons as $tot ) : 
+                            echo number_format($tot->tot_tot,2,".",",");
+                        endforeach;
+                      ?>
                   </td>            
               </tr>
             </table>

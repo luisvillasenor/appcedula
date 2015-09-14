@@ -74,6 +74,10 @@
       display: inline-block;      
       }
 
+      #pesos{text-align: right}
+    #cantidad{text-align: center}
+    #pesos_total{text-align: right; background-color: black; color: white; font-size: 16px;}
+
     </style>
 
   <script>

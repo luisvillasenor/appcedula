@@ -150,6 +150,16 @@ class Necesidades_model extends CI_Model
         $this->db->where('id_nec', $this->id_nec);
         $this->db->update(NECESIDADES, $this);
     }
+
+    function update_consolidado($id_nec,$status_necs,$e_mail)
+    {
+        $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s');
+        $data['quien_modifica']  = $e_mail;
+        $data['status_necs'] = $status_necs ; //
+        
+        $this->db->where('id_nec', $id_nec);
+        $this->db->update(NECESIDADES, $data);
+    }
     
     function delete($id_nec)
     {

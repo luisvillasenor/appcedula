@@ -294,6 +294,12 @@ class Actividades_model extends CI_Model
                 $this->db->where('e_mail', $e_mail);                
                 $query = $this->db->get(ACTIVIDADES);                
                 break;
+            case 'presupuesto':
+                $this->db->where('id_fc', $edicion);
+                $this->db->order_by('id_act','ASC');
+                $this->db->where('status_act', $status);
+                $query = $this->db->get(ACTIVIDADES);        
+                break;
               default:
                 $this->db->order_by('id_act','ASC');
                 $this->db->where('id_fc', $edicion);
@@ -451,13 +457,14 @@ class Actividades_model extends CI_Model
 
 ///////////////////////////////////////////////////
 
-    function get_filtro_por_resp($txt,$grupo,$id_coord,$edicion)
+    function get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status)
     {
         
         switch ($grupo) {
               case 'administrador':
                 $this->db->where('e_mail', $txt);
                 $this->db->where('id_fc', $edicion);
+                $this->db->where('status_act', $status);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
@@ -474,6 +481,7 @@ class Actividades_model extends CI_Model
             case 'presupuesto':
                 $this->db->where('e_mail', $txt);
                 $this->db->where('id_fc', $edicion);
+                $this->db->where('status_act', $status);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
             }                
