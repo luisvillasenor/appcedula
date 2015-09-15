@@ -52,11 +52,11 @@ if ( $edicion != '5') { ?>
 <?php }else{ ?>
        
       <td>
-
-
-
-
+      <?php if ( $actividades->status_cedula == 0 ) { ?>
+        <a class="btn btn-mini" href="<?php echo base_url('actividades/cerrar_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Cerrar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-lock"></i></a>     
+      <?php }else{ ?>
+        <a class="btn btn-mini disabled" data-toggle="tooltip" title="Cerrar Cédula"><i class="icon-lock"></i></a>
+      <?php } ?>
       <a class="btn btn-success btn-block" href="<?php echo base_url('actividades/vista_previa_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Ver Detalle de la Cédula No. <?php echo $actividades->id_act;?>">Ver Detalle Cédula para Clasificar</a>
-
-
+    </td>
 <?php } ?>

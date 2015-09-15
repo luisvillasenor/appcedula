@@ -587,7 +587,7 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
-		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status);
+		$data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
 
         
         /*******************************************************/
@@ -653,7 +653,7 @@ class Actividades extends CI_Controller {
         $data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord);
         $data['get_reg'] = $this->actividades_model->get_reg_filtro($txt,$e_mail,$id_coord,$edicion);
-        $data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status);
+        $data['get_filtro_por_resp'] = $this->actividades_model->get_filtro_por_resp($txt,$grupo,$id_coord,$edicion);
 
         
         /*******************************************************/
@@ -1829,7 +1829,16 @@ class Actividades extends CI_Controller {
                 
         redirect('actividades/vista_previa/'.$id_act);
     }
-    
+
+    public function cerrar_presupuesto($id_act){
+        
+        $this->load->model('actividades_model');
+                
+        $this->actividades_model->cerrar_presupuesto($id_act);
+                
+        redirect('actividades/dashboard_actividades/');
+    }
+
     /* NOTIFICA POR MAIL LA APROBACION CONCEPTUAL DE LA CEDULA */
     function notificar_aprobacion($id_act,$e_mail,$autor,$acti)
 	{
@@ -2126,6 +2135,53 @@ class Actividades extends CI_Controller {
         $this->vista_previa($id_act);        
         
 	}
+
+    public function actualizar_pres_aut(){
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $this->load->model('actividades_model');
+        $this->load->model('coordinadores_model');
+        $this->load->model('necesidades_model');
+        
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+            if($id_coord == $coords->id_coord) {                
+                $data['miCoordinacion']= $coords->coordinacion;
+            }
+        }
+        $status = 4; // Presupuesto Autorizado        
+        $get_all_status = $this->actividades_model->get_all_status($e_mail,$grupo,$id_coord,$status,$edicion);
+        foreach ($get_all_status as $key => $value) {
+            
+            echo "id_act => ";
+            echo $value->id_act;
+            
+            $get_total_act = $this->necesidades_model->get_total_act($value->id_act);
+                foreach ($get_total_act as $tot ) : 
+                    $pres_soli = $tot->tot_tot;
+                endforeach;        
+                $pres_eje = ( $value->pres_aut - $pres_soli );
+
+            echo "pres_soli => ";
+            echo $pres_soli;
+            echo "pres_aut => ";
+            echo $value->pres_aut;
+            echo "pres_eje => ";
+            echo $pres_eje;
+            echo "<br>";
+        }
+
+        
+        
+  /*      $is_ok = $this->actividades_model->act_pres_ant($id_act,$pres_ant,$pres_soli,$pres_aut,$pres_eje);
+        $this->vista_previa($id_act);        
+  */      
+    }
     
     public function actualizar_movs(){
 		$e_mail   = $_SESSION['username'];

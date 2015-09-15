@@ -62,7 +62,7 @@
                     <?php
                     if ( $onlyusername == 'appcedula' OR $onlyusername == 'blancamartinez' OR $onlyusername == 'oscarmorales' OR $onlyusername == 'rabingarcia' OR $onlyusername == 'jorgeandrade' ) { ?>
                         <!-- Menu solo para appcedula -->
-                        <button class="btn btn-success btn-block" type="submit">Actualizar Calculo</button>
+                        <button id="actualizar_calculo" class="btn btn-success btn-block" type="submit">Actualizar Calculo</button>
                        <?php echo form_close(); ?>
 
                        <br>

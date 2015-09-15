@@ -32,6 +32,12 @@
                           break;
                       } 
           ?> 
+
+
+<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 1;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Imprimir y PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/button-print-grnw20.png" alt="Imprimir y PDF"/></a>
+
+
+          
           <?php if ( isset($edicion) == TRUE && ( ! is_numeric($edicion)) ) { ?>
           <div id="subheader3"><h2><strong><?php printf($edicion); ?></strong></h2></div>
         <?php }else{ ?>
@@ -147,7 +153,7 @@
                       
                       
                       <td><?php echo $actividades->quienpropone;?>(<?php echo $actividades->e_mail;?>)</td>   
-                      <td>$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
+                      <td id="pesos">$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>
                       
                       <?php include 'include/nav_status_act.php';  ?>          
                   </tr>

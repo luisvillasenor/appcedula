@@ -3,6 +3,7 @@ class Actividades_model extends CI_Model
 {
     // Definicion de variables iguales a los votos de los campos de la tabla 
     var $id_act = '';
+    var $status_cedula = '';
     var $e_mail = '';
     var $actividad = '';
     var $descripcion = '';
@@ -457,14 +458,13 @@ class Actividades_model extends CI_Model
 
 ///////////////////////////////////////////////////
 
-    function get_filtro_por_resp($txt,$grupo,$id_coord,$edicion,$status)
-    {
-        
+    function get_filtro_por_resp($txt,$grupo,$id_coord,$edicion)
+    {        
         switch ($grupo) {
               case 'administrador':
                 $this->db->where('e_mail', $txt);
                 $this->db->where('id_fc', $edicion);
-                $this->db->where('status_act', $status);
+                //$this->db->where('status_act', $status);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
@@ -481,13 +481,13 @@ class Actividades_model extends CI_Model
             case 'presupuesto':
                 $this->db->where('e_mail', $txt);
                 $this->db->where('id_fc', $edicion);
-                $this->db->where('status_act', $status);
+                //$this->db->where('status_act', $status);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
-            }                
-        
+            }        
         return $query->result();
     }
+
     function get_filtro_por_ced($id_act,$grupo,$id_coord,$edicion)
     {
         
@@ -854,6 +854,11 @@ class Actividades_model extends CI_Model
     }
     function fuera_presupuesto($id_act,$out) {
         $data = array('status_act' => $out);
+        $this->db->where('id_act',$id_act);
+        $this->db->update(ACTIVIDADES,$data );
+    }
+    function cerrar_presupuesto($id_act) {
+        $data = array('status_cedula' => 1);
         $this->db->where('id_act',$id_act);
         $this->db->update(ACTIVIDADES,$data );
     }

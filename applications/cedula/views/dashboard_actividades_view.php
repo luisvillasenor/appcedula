@@ -24,11 +24,13 @@
         <div class="span10">
         <!--Body content-->
         <?php include 'include/menu_filtros_pres.php';?> 
-           
+          
         
         <?php if ( isset($edicion) == TRUE && ( ! is_numeric($edicion)) ) { ?>
           <div id="subheader3"><h2><strong><?php printf($edicion); ?></strong></h2></div>
         <?php }else{ ?>
+
+
                     
               <div class="span4">
                 <div class="alert alert-info">
@@ -70,14 +72,16 @@
 
           
           <hr>
-          
+  
           
         <?php } ?>
 
                     
             <!-- Encabezados de la tabla de cédulas-->
             <?php include 'include/header_cedulas_presupuesto.php';  ?>        
-              
+             <br>
+<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 1;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Imprimir y PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/button-print-grnw20.png" alt="Imprimir y PDF"/></a>
+<br>
                 <?php foreach ($get_all_actividades as $actividades ) : ?>
                   <!-- Código dentro del FOREACH de todas las actividades -->
                   <tr>                      
