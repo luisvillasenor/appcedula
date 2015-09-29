@@ -1,6 +1,40 @@
 <div class="container-fluid">
     <div id="wrapper" class="row-fluid">
-      <?php include 'include/nav_presupuesto.php';  ?>
+      <?php // include 'include/nav_presupuesto.php';  ?>
+      <div class="span2 sidebar-nav">
+        <div style="text-align:center; margin:0 auto;">
+          
+            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/logofc.png" width="100%">
+          
+        </div>
+        <hr>
+        <!--Body content-->
+            <div class="col-md-3">
+              <ul class="nav nav-pills nav-stacked">
+                <?php /* APROBACION PRESUPUESTAL.- VISTA SOLO POR EL COORDINADOR GENERAL y APPCEDULA */
+            $app = $_SESSION['username']; /** Cacha la sesion del usuario **/
+              switch ($app) {
+                  case 'appcedula@app.com':?>
+                        <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>/R/ ">Listado Clasificados</a></li>
+                  <?php  break;
+                  case 'blancamartinez@app.com':?>
+                        <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>/R/ ">Listado Clasificados</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_gastos');?>">Listado Gastos</a></li>
+                  <?php break;
+                  case 'oscarmorales@app.com':?>
+                        <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
+                        <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>/R/ ">Listado Clasificados</a></li>
+                  <?php break;                  
+                } 
+            ?>
+              </ul>
+            </div>
+      </div><!--Sidebar content-->
       <div class="span10">
       <!--Body content-->
       <?php include 'include/menu_filtros_pres.php';  ?>

@@ -33,6 +33,6 @@
         </li>
       </ul>
   </div>  
-  <div id="subheader">EDICIÓN 201<?php echo $edicion;?></div>
+  <div id="subheader">FESTIVAL DE CALAVERAS 201<?php echo $edicion;?></div>
 </div>
 </header>

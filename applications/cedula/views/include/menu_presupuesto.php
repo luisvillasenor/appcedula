@@ -20,6 +20,6 @@
         <li><a class="active" href="<?php echo base_url('admin/logout');?>"><i class="icon-off"></i> Salir</a></li>
       </ul>
   </div>  
-  <div id="subheader">DASHBOARD 201<?php echo $edicion;?></div>
+  <div id="subheader">Esta como <STRONG>administrador de presupuesto</STRONG>, por favor sea cuidadoso.</div>
 </div>
 </header>

@@ -3,17 +3,21 @@
 
       <div class="span2 sidebar-nav">
         <div style="text-align:center; margin:0 auto;">
-          <a href="<?php echo base_url('actividades/dashboard');?>">
-            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/sectureags.png" width="50%">
-          </a>
+          
+            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/logofc.png" width="100%">
+          
         </div>
-        <hr>
+        
+        <div class="text-center">
+            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
+          </div>
+
         <!--Body content-->
             <div class="col-md-3">
               <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> DASHBOARD</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas Autorizadas</a></li>
-                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>">Listado Clasificados</a></li>
+                <li class="active"><a><i class="icon-home"></i> CONTROL DEL PRESUPUESTO Y GASTO</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_actividades');?>">Cedulas con Presupuesto Autorizado</a></li>
+                <li><a href="<?php echo base_url('actividades/dashboard_consolidados');?>/R/ ">Desglose del Gasto por Tipo de Documento</a></li>
               </ul>
             </div>
       </div><!--Sidebar content-->
@@ -72,4 +76,9 @@
 
       </div><!— /span10 —>
     </div><!— /row —>
+
+    <div class="text-center">
+            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+          </div>
+          
 </div><!— /container —>

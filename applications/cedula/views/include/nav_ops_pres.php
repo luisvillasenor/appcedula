@@ -53,10 +53,10 @@ if ( $edicion != '5') { ?>
        
       <td>
       <?php if ( $actividades->status_cedula == 0 ) { ?>
-        <a class="btn btn-mini" href="<?php echo base_url('actividades/cerrar_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Cerrar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-lock"></i></a>     
+        <a class="btn btn-mini" href="<?php echo base_url('actividades/cerrar_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Al Cerrar la Cédula No. <?php echo $actividades->id_act;?> ya no se podran hacer cambios a la misma por parte del dueño. En caso de cerrar la cédula por error debe avisar a Informática a la ext. 4336"><i class="icon-lock"></i>Bloquear Cédula</a>     
       <?php }else{ ?>
         <a class="btn btn-mini disabled" data-toggle="tooltip" title="Cerrar Cédula"><i class="icon-lock"></i></a>
       <?php } ?>
-      <a class="btn btn-success btn-block" href="<?php echo base_url('actividades/vista_previa_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Ver Detalle de la Cédula No. <?php echo $actividades->id_act;?>">Ver Detalle Cédula para Clasificar</a>
+      <a class="btn btn-success btn-block" href="<?php echo base_url('actividades/vista_previa_presupuesto/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Ver Detalle de la Cédula No. <?php echo $actividades->id_act;?>">Ver Desglose del Gasto Ejecutado</a>
     </td>
 <?php } ?>

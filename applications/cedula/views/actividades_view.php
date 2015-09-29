@@ -37,9 +37,8 @@
         <?php if ( isset($edicion) == TRUE && ( ! is_numeric($edicion)) ) { ?>
           <div id="subheader3"><h2><strong><?php printf($edicion); ?></strong></h2></div>
         <?php }else{ ?>
-          <div id="subheader2"><h2><strong>EDICIÓN DE TRABAJO 201<?php echo $edicion; ?></strong></h2></div>
-
-          <hr>
+          
+          
 
           <div class="container">
                     
@@ -92,7 +91,10 @@
             
           </div>
           
-          <hr>
+          <div class="text-center">
+            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+          </div>
+          
           
           
         <?php } ?>

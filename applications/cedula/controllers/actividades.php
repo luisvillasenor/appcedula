@@ -1318,6 +1318,7 @@ class Actividades extends CI_Controller {
         $data['edicion']  = $_SESSION['fc'];
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['id_act']  = $id_act;
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
@@ -2133,6 +2134,7 @@ class Actividades extends CI_Controller {
         }
         
         $this->vista_previa($id_act);        
+        //redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
         
 	}
 
@@ -2391,7 +2393,7 @@ class Actividades extends CI_Controller {
         $this->load->view('footer_view',$data); 
     }
 
-    public function dashboard_consolidados($tipo = '',$clasificacion = ''){
+    public function dashboard_consolidados($tipo = '',$clasificacion = 'todo'){
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
@@ -2519,7 +2521,7 @@ class Actividades extends CI_Controller {
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
-        $data['title']= 'Dashboard';
+        $data['title']= 'Dashboard Gastos';
         $data['onlyusername'] = strstr($e_mail,'@',true);
         
         $this->load->model('actividades_model');
@@ -2748,8 +2750,68 @@ class Actividades extends CI_Controller {
         //print_r($id_nec);
         
     }    
+
+    public function agregar_con() {
+
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        
+        $this->load->model('actividades_model');
+        $this->load->model('consolidados_model');
+        
+        $id_act = $this->input->post('id_act');
+        $id_nec = 0;
+        $tipo = $this->input->post('tipo');
+        $clasificacion = strtoupper(url_title($this->input->post('clasificacion'),'dash',TRUE));
+        $proveedor = $this->input->post('proveedor');
+        $concepto = $this->input->post('concepto');
+        $cantidad = $this->input->post('cantidad');
+        $precio_unitario = $this->input->post('precio_unitario');
+        $quien_modifica = $e_mail;
+        $status_cons = 0;
+        
+        $last_id = $this->consolidados_model->insert_entry($id_act,$id_nec,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons);
+
+        redirect(base_url('actividades/vista_previa_presupuesto/'.$id_act));
+        
+    }
+
+
+
 ///////////////////////////////////////////////////
 
+
+function test_ajax(){
+    $this->load->model('consolidados_model');
+    $output_string = $this->consolidados_model->get_all();
+    echo json_encode($output_string);
+}
+
+    public function get_all_users(){
+ 
+        $query = $this->db->get('consolidados');
+        if($query->num_rows > 0){
+            $header = false;
+            $output_string = '';
+            $output_string .=  "<table border='1'>\n";
+            foreach ($query->result() as $row){
+                $output_string .= "<tr>\n";
+                $output_string .= "<th>{$row['clasificacion']}</th>\n"; 
+                $output_string .= "</tr>\n";
+            }                   
+            $output_string .= "</table>\n";
+        }
+        else{
+            $output_string = "No hay resultados";
+        }
+         
+        echo json_encode($output_string);
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,3 @@
-
 <?php
   switch ($_SESSION['grupo']) {
               case 'coordinador':

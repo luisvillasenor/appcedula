@@ -9,7 +9,9 @@
                 echo $fc->edicion ." (".$fc->anio.")";
               }
             } ?>
+            
           </a>
+
             
         </li>
               <li>                
@@ -22,7 +24,7 @@
             </li>
           <li class="divider-vertical"></li>
           <li>                
-            
+        
           </li>
                   
       </ul>      
@@ -56,8 +58,8 @@
         </li>
       </ul>
   </div>
-    
-  <div id="subheader"><a><mark><small>Sistema en Modo </small> <strong>ADMINISTRADOR</strong> </mark></a> </div>  
+  
+  <div id="subheader">Esta como <STRONG>administrador</STRONG>, por favor sea cuidadoso.</div>
 
 </div>
 </header>

@@ -21,6 +21,11 @@ class Users_model extends CI_Model
         $this->load->helper('date');
     }
 
+    public function username_exists($email_address){
+        $this->db->get_where('news', array('email_address' => $email_address));
+        return $query->result();
+    }
+
 
     function get_last_ten_users()
     {

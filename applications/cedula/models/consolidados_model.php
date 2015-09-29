@@ -17,7 +17,7 @@ class Consolidados_model extends CI_Model
     var $fecha_ult_modificacion = '';
     var $quien_modifica = '';
     var $status_cons = '';
-    
+
         
     function __construct()
     {
@@ -68,9 +68,9 @@ class Consolidados_model extends CI_Model
         return $query->result();
     }
 
-    function get_all_cons_tipo($tipo = '',$clasificacion = '')
+    function get_all_cons_tipo($tipo,$clasificacion)
     {
-        if ( $tipo === '' && $clasificacion === '') {
+        if ( $tipo === '' && $clasificacion === 'todo') {
             $this->db->order_by('clasificacion','asc');
             $query = $this->db->get(TABLA);
             return $query->result();
@@ -132,24 +132,24 @@ class Consolidados_model extends CI_Model
 
     function insert_entry($id_act,$id_nec,$tipo,$clasificacion,$proveedor,$concepto,$cantidad,$precio_unitario,$quien_modifica,$status_cons)
     {
-        $this->id_act          = $id_act;
-        $this->id_nec          = $id_nec;
-        $this->tipo            = $tipo;
-        $this->clasificacion   = $clasificacion;
-        $this->proveedor       = $proveedor;
-        $this->concepto        = $concepto;
-        $this->cantidad        = (int)$cantidad;
-        $this->precio_unitario = $precio_unitario;
-        $this->iva             = ($this->cantidad * $this->precio_unitario)*0.16 ;
-        $this->precio_total    = ($this->cantidad * $this->precio_unitario) ;
-        $this->fecha           = date('Y-m-d H:i:s'); 
-        $this->fecha_ult_modificacion = date('Y-m-d H:i:s'); 
-        $this->quien_modifica  = $quien_modifica;
-        $this->status_cons     = $status_cons;
+        $data['id_act']          = $id_act;
+        $data['id_nec']          = $id_nec;
+        $data['tipo']            = $tipo;
+        $data['clasificacion']   = $clasificacion;
+        $data['proveedor']       = $proveedor;
+        $data['concepto']        = trim($concepto);
+        $data['cantidad']        = (int)$cantidad;
+        $data['precio_unitario'] = $precio_unitario;
+        $data['iva']             = ( $data['cantidad'] * $data['precio_unitario'] ) * 0.16;
+        $data['precio_total']    = ( $data['cantidad'] * $data['precio_unitario'] );
+        $data['fecha']           = date('Y-m-d H:i:s'); 
+        $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s'); 
+        $data['quien_modifica']  = $quien_modifica;
+        $data['status_cons']     = $status_cons;
             
-        $this->db->insert(TABLA, $this);
+        $this->db->insert(TABLA, $data);
         return $this->db->insert_id();
-    }
+    }    
 
     function paste($nec,$last_id)
     {

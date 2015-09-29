@@ -15,9 +15,10 @@
     
   <style type="text/css">
     #subheader {
-      background-color: #CCC;
+      background-color: #000;
+      color: #CCC;
       margin: auto;
-      height: 20px;
+      height: 25px;
       width: 100%;
       text-align: center;
       word-spacing: normal;
@@ -74,9 +75,29 @@
       display: inline-block;      
       }
 
-      #pesos{text-align: right}
+    #pesos{text-align: right;}
     #cantidad{text-align: center}
     #pesos_total{text-align: right; background-color: black; color: white; font-size: 16px;}
+    #footer {
+
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+
+    
+      }
+      #footer {
+        background-color: #000;
+      }
+    /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
 
     </style>
 

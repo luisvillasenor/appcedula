@@ -27,7 +27,7 @@
   <script>
     $(document).ready(function(){
       $(function() {
-        $( "#fecha" ).datepicker({ 
+        $( "#fecha_doc" ).datepicker({ 
           dateFormat: 'yy-mm-dd', 
           showWeek: true, 
           firstDay:1
@@ -51,25 +51,23 @@
 </head>
 
 <body>
-<?php include 'include/nav_perfil.php';  ?>
+<?php include 'include/nav_perfil.php';?>
 
 <div class="container-fluid">
     <div id="wrapper" class="row-fluid">        
 
         <div class="span12">
         <!--Body content-->
-            <div class="text-center"><h2>CONSOLIDADO DE LA CÉDULA</h2></div>
+            <div class="text-center"><h2>PLANEADO vs EJECUTADO <br><small>CÉDULA [ <?php echo $id_act;?> ]</small></h2></div>
+            <br>
+<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 1;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Imprimir y PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/button-print-grnw20.png" alt="Imprimir y PDF"/></a>
+<br>
             
 
 
 <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS ADMINISTRADORES */
 $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
   switch ($app) {
-      case 'rabingarcia@app.com':      
-        foreach ($get_one_act_edit as $actividades2 ) : 
-            include 'include/nav_ops_aut_2.php';  
-        endforeach;        
-        break;      
       case 'appcedula@app.com':      
         foreach ($get_one_act_edit as $actividades2 ) : 
             include 'include/nav_ops_aut_2.php';  
@@ -122,7 +120,7 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
             </table>
             <hr>            
             <table class="table table-bordered">
-            <thead><h2>DETALLE DE LA CEDULA</h2></thead>
+            <thead><h2><small>DESGLOSE</small> PLANEADO <small>CÉDULA [ <?php echo $actividades->id_act;?> ]</small></h2></thead>
               <tr>
                 <th></th>
                 <th>Necesidades, Descripción</th>
@@ -248,8 +246,10 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   <td id="pesos" colspan="1">GRAN TOTAL:</td>
                   <td id="pesos_total">$
                      <?php 
+                        $gran_total_planeado = '';
                         foreach ($get_total_act as $tot ) : 
                             echo number_format($tot->tot_tot,2,".",",");
+                            $gran_total_planeado = $tot->tot_tot;
                         endforeach;
                       ?>
                   </td>            
@@ -275,11 +275,77 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
 
 
             <table id="tabla_presupuesto" class="table table-bordered">
-            <thead><h2>LISTADO DE REGISTROS CLASIFICADOS</h2></thead>   
+            <thead><h2><small>DESGLOSE</small> EJECUTADO <small>CÉDULA [ <?php echo $actividades->id_act;?> ]</small></h2></thead>
+            <div>
+              <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalGastoEjecutado">Nuevo Gasto Ejecutado</button>
+                            <!-- Modal -->
+                            <div id="myModalGastoEjecutado" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                          <?php 
+                          $attributes = array('class' => 'form-horizontal', 'role' => 'form');
+                          echo form_open('actividades/agregar_con',$attributes);?>
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                              <h3 id="myModalLabel">Nuevo Gasto Ejecutado</h3>
+                              <small>Cédula ID: <?php echo $necesidades->id_act; ?></small>
+                            </div>
+                            <div class="modal-body">
+                                <input name="id_act" id="id_act" type="hidden" value="<?php echo $necesidades->id_act; ?>">
+                                <div class="control-group">
+                                  <div class="controls">
+                                    <label class="radio">
+                                      <input name="tipo" id="tipo" type="radio" value="F" checked> Factura
+                                    </label>
+                                    <label class="radio">
+                                      <input name="tipo" id="tipo" type="radio" value="N"> Nota
+                                    </label>
+                                    <label class="radio">
+                                      <input name="tipo" id="tipo" type="radio" value="R"> Requisición
+                                    </label>
+                                  </div>
+                                </div>                                
+                                <div class="control-group">
+                                  <label class="control-label" for="clasificacion">Clasificacion del Documento</label>
+                                  <div class="controls">
+                                    <input type="text" name="clasificacion" id="clasificacion" value="">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="proveedor">Proveedor</label>
+                                  <div class="controls">
+                                    <input type="text" name="proveedor" id="proveedor" value="" size="100px">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="concepto">Concepto [Breve Descripcion]</label>
+                                    <textarea class="form-control" rows="3" name="concepto" id="concepto"></textarea>                                  
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="cantidad">Cantidad <small>Numero entero</small></label>
+                                  <div class="controls">
+                                    <input type="text" name="cantidad" id="cantidad" value="">
+                                  </div>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="preciounitario">Precio Unitario:</label>
+                                  <div class="controls">
+                                    <input type="text" name="precio_unitario" id="precio_unitario" value="">
+                                  </div>
+                                </div>                                
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-success btn-block">AGREGAR</button>                              
+                            </div>
+                          </form>  
+
+                          </div>
+                          <!-- End Modal -->
+            </div>
               <tr>
-                <th></th>
+                <th>No. [Interno]</th>
                 <th>Tipo</th>
-                <th>Clasificacion</th>
+                <th>Documento</th>
                 <th>Proveedor</th>
                 <th>Concepto</th>
                 <th>Cantidad</th>
@@ -302,7 +368,7 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                           <input type="hidden" name="fecha" id="fecha" value="<?php echo $cons_item->fecha;?>">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                              <h3 id="myModalLabel">Clasificación por Concepto del Gasto</h3>
+                              <h3 id="myModalLabel">Clasificación del Gasto</h3>
                             </div>
                             <div class="modal-body">                             
                                 <div class="control-group">
@@ -310,6 +376,20 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                                     <?php if ($cons_item->tipo == 'F') { ?>
                                       <label class="radio">
                                         <input name="tipo" id="tipo" type="radio" value="F" checked> Factura
+                                      </label>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="N"> Nota
+                                      </label>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="R"> Requisición
+                                      </label>                                      
+                                    <?php } ?>
+                                    <?php if ($cons_item->tipo == 'N') { ?>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="F"> Factura
+                                      </label>
+                                      <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="N" checked> Nota
                                       </label>
                                       <label class="radio">
                                         <input name="tipo" id="tipo" type="radio" value="R"> Requisición
@@ -320,13 +400,16 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                                         <input name="tipo" id="tipo" type="radio" value="F"> Factura
                                       </label>
                                       <label class="radio">
+                                        <input name="tipo" id="tipo" type="radio" value="N"> Nota
+                                      </label>
+                                      <label class="radio">
                                         <input name="tipo" id="tipo" type="radio" value="R" checked> Requisición
                                       </label>                                      
                                     <?php } ?>                                    
                                   </div>
                                 </div>                                 
                                 <div class="control-group">
-                                  <label class="control-label" for="clasificacion">Clasificacion del Gasto</label>
+                                  <label class="control-label" for="clasificacion">Clasificacion del Documento</label>
                                   <div class="controls">
                                     <input type="text" name="clasificacion" id="clasificacion" value="<?php echo $cons_item->clasificacion;?>">
                                   </div>
@@ -403,14 +486,84 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   <td id="pesos" colspan="1">GRAN TOTAL:</td>
                   <td id="pesos_total" valign="middle">$
                     <?php 
+                        $gran_total_ejecutado = '';
                         foreach ($get_total_act_cons as $tot ) : 
                             echo number_format($tot->tot_tot,2,".",",");
+                            $gran_total_ejecutado = $tot->tot_tot;
                         endforeach;
                       ?>
                   </td>            
               </tr>
             </table>
-            
+            <hr>
+
+
+
+            <table id="tabla_presupuesto" class="table table-bordered">
+            <thead><h2><small>COMPARATIVO</small> PLANEADO <small>VS</small> EJECUTADO <small>CÉDULA [ <?php echo $actividades->id_act;?> ]</small></h2></thead>
+              <tr>
+                <th>PLANEADO</th>
+                <th>EJECUTADO</th>
+                <th>RESULTADO</th>
+                <th>FORMULA</th>
+                
+              </tr>              
+              <tr>                    
+                  <td>
+                    <span class="label label-default">
+                        <h3>
+                          <?php echo "$" . number_format($gran_total_planeado,2,".",","); ?>
+                        </h3>
+                    </span>                    
+                  </td>
+                      <td>
+                        <?php
+                                if ( ( $gran_total_planeado < $gran_total_ejecutado ) ) { ?>
+                        
+                                  <span class="label label-important">
+                                    <h3>
+                                      <?php echo "$" . number_format($gran_total_ejecutado,2,".",","); ?>
+                                    </h3>
+                                  </span>
+                        
+                          <?php } else { ?>
+                          
+                        
+                                  <span class="label label-default">
+                                    <h3>
+                                      <?php echo "$" . number_format($gran_total_ejecutado,2,".",","); ?>
+                                    </h3>
+                                  </span>
+                        
+                          <?php } ?>               
+                        </td>
+                      <td>
+                        <?php
+                                if ( ( $gran_total_planeado - $gran_total_ejecutado ) >= 0 ) { ?>
+                      
+                                  <span class="label label-success">
+                                    <h3>
+                                      <?php echo "$" . number_format( ( $gran_total_planeado - $gran_total_ejecutado ) ,2,".",","); ?>
+                                    </h3>
+                                  </span>
+                      
+                          <?php } else { ?>
+                          
+                      
+                                  <span class="label label-important">
+                                    <h3>
+                                      <?php echo "$" . number_format( ( $gran_total_planeado - $gran_total_ejecutado ) ,2,".",","); ?>
+                                    </h3>
+                                  </span>
+                      
+                          <?php } ?>
+                        </td>
+                      <td><code>[ Resultado = Planeado - Ejecutado ]</code></td>
+                
+              </tr>              
+            </table>
+
+         
             
                 
            
