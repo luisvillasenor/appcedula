@@ -7,7 +7,7 @@
                         </span>
                     </span>                    
                 </thead>
-                <tbody>
+                <tbodyz>
                   <tr>
                     <th colspan="3">OPERACIONES</th>
                     <th>ID</th>

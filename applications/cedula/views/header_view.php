@@ -63,6 +63,7 @@
       padding-right: 10px;
       
     }
+
     th
     {
     background-color:#FE9042;

@@ -449,7 +449,19 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                           </div>
                           <!-- End Modal --> 
                     </td>
-                      <td><?php echo $cons_item->tipo;?></td>
+                      <td>
+                        <?php switch ($cons_item->tipo) {
+                                case 'R':
+                                  echo "Requisición";
+                                  break;
+                                case 'N':
+                                  echo "Nota";
+                                  break;
+                                case 'F':
+                                  echo "Factura";
+                                  break;
+                              } ?>
+                      </td>
                       <td><?php echo $cons_item->clasificacion;?></td>
                       <td><?php echo $cons_item->proveedor;?></td>
                       <td><?php echo $cons_item->concepto;?></td>

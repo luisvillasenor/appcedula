@@ -101,6 +101,9 @@
                                 case 'R':
                                   echo "Requisición";
                                   break;
+                                case 'N':
+                                  echo "Nota";
+                                  break;
                                 case 'F':
                                   echo "Factura";
                                   break;
