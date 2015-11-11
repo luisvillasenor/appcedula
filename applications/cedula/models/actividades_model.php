@@ -718,6 +718,15 @@ class Actividades_model extends CI_Model
         $this->db->update(ACTIVIDADES, $data);
     }
 
+    function update_pres_gas($id_act,$total_gas)
+    {
+        $data['id_act']           = $id_act;        
+        $data['pres_gas']    = $total_gas;
+        
+        $this->db->where('id_act', $id_act);
+        $this->db->update(ACTIVIDADES, $data);
+    }
+
     
     function get_total_cedulas($e_mail,$edicion)
     {

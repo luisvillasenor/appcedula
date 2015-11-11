@@ -658,9 +658,11 @@ class Actividades extends CI_Controller {
         
         /*******************************************************/
         $pres_aut = 0;
+        $pres_gas = 0;
         $costo_secture = 0;
         $pres_eje = 0;
         $fuera_pres = 0;
+        $resultadoPresupuesto = 0;
 
             if ( ! empty($data['get_filtro_por_resp']) ) {
                 foreach ($data['get_filtro_por_resp'] as $key => $value) {
@@ -668,16 +670,21 @@ class Actividades extends CI_Controller {
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
+                        $pres_gas = $pres_gas + $value->pres_gas; 
                     }else{                        
                         $fuera_pres = $fuera_pres + $value->costo_secture;
                     }
                 }
             }
+
+        $resultadoPresupuesto = $pres_aut - $pres_gas ;
         
         $data['suma_pres_aut']      = $pres_aut;
+        $data['suma_pres_gas']      = $pres_gas;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
         $data['suma_fuera_pres']    = $fuera_pres;
+        $data['suma_resultadoPresupuesto']    = $resultadoPresupuesto;
         /**********************************************************/
         
         $this->load->view('header_view',$data);
@@ -1341,6 +1348,7 @@ class Actividades extends CI_Controller {
                 $data['miCoordinacion']= $coords->coordinacion;
             }
         }
+        //
         // NECESIDADES DE LA CEDULA /////////////////////////////////////////////////////////////////////////////////
         $res = $this->necesidades_model->get_all_nec_act($id_act);
         $total = '';
@@ -1351,14 +1359,17 @@ class Actividades extends CI_Controller {
             endforeach;        
             //$this->actividades_model->update_costo_secture($id_act,$total);            
         }else{echo "NO ES UN ARRAY";}
+        //
         // CONSOLIDADO /////////////////////////////////////////////////////////////////////////////////////////////
         $cons = $this->consolidados_model->get_all_cons_act($id_act);
+        $total_gas = 0; // Total Gastado o Ejecutado
         if (is_array($cons) === TRUE) {
             $data['get_all_cons_act'] = $this->consolidados_model->get_all_cons_act($id_act);
             foreach ($data['get_total_act_cons'] as $tot ) : 
-                $total += $tot->total_act; 
-            endforeach;        
-            //$this->actividades_model->update_costo_secture($id_act,$total);            
+                $total_gas += $tot->tot_tot; 
+            endforeach;
+            $this->actividades_model->update_pres_gas($id_act,$total_gas);
+            // Actualiza el campo "pres_gas" de la cédula con base en el total de lo Gastado            
         }else{echo "NO ES UN ARRAY";}
 
 
@@ -2301,26 +2312,33 @@ class Actividades extends CI_Controller {
 
         /*******************************************************/
         $pres_aut = 0;
-        $costo_secture = 0;
+        $pres_gas = 0; // Presupuesto Gastado y Pagado a Proveedor
+        $costo_secture = 0; // Presupuesto Planeado por el Area Responsable
         $pres_eje = 0;
         $fuera_pres = 0;
+        $resultadoPresupuesto = 0; // Variable que almacena la diferencia entre Presupuesto Autorizado y Ejercido
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
                     if ($value->status_act != 6) {
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
-                        $pres_eje = $pres_eje + $value->pres_eje;               
+                        $pres_eje = $pres_eje + $value->pres_eje;
+                        $pres_gas = $pres_gas + $value->pres_gas;               
                     }else{                        
                         $fuera_pres = $fuera_pres + $value->costo_secture;
                     }
                 }
             }
+
+        $resultadoPresupuesto = ( $pres_aut - $pres_gas );
         
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_pres_gas']      = $pres_gas;
         $data['suma_fuera_pres']    = $fuera_pres;
+        $data['suma_resultadoPresupuesto']    = $resultadoPresupuesto;
         /**********************************************************/
                 
         $this->load->view('header_view',$data); 
@@ -2358,7 +2376,7 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-        $status = '4';
+        $status = '4'; // Status de Presupuesto Autorizado
         $data['get_all_actividades'] = $this->actividades_model->get_all_status($e_mail,$grupo,$id_coord,$status,$edicion);
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
@@ -2366,26 +2384,33 @@ class Actividades extends CI_Controller {
         
         /*******************************************************/
         $pres_aut = 0;
-        $costo_secture = 0;
+        $pres_gas = 0; // Presupuesto Gastado y Pagado a Proveedor
+        $costo_secture = 0; // Presupuesto Planeado por el Area Responsable
         $pres_eje = 0;
         $fuera_pres = 0;
+        $resultadoPresupuesto = 0; // Variable que almacena la diferencia entre Presupuesto Autorizado y Ejercido
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
                     if ($value->status_act != 6) {
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
-                        $pres_eje = $pres_eje + $value->pres_eje;               
+                        $pres_eje = $pres_eje + $value->pres_eje;
+                        $pres_gas = $pres_gas + $value->pres_gas;               
                     }else{                        
                         $fuera_pres = $fuera_pres + $value->costo_secture;
                     }
                 }
             }
+
+        $resultadoPresupuesto = ( $pres_aut - $pres_gas );
         
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
+        $data['suma_pres_gas']      = $pres_gas;
         $data['suma_fuera_pres']    = $fuera_pres;
+        $data['suma_resultadoPresupuesto']    = $resultadoPresupuesto;
         /**********************************************************/
                 
         $this->load->view('header_view',$data); 

@@ -68,6 +68,8 @@
     {
     background-color:#FE9042;
     color:white;
+    text-align: center;
+    margin: auto;
     }
     h3{text-align:center;}
     .well2{

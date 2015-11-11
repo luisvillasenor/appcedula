@@ -14,6 +14,6 @@
                     <th>CEDULA</th>
                     <th>CATEGORIA</th>
                     <th>RESPONSABLE</th>                
-                    <th>COSTO SECTURE CON IVA</th>                    
-                    <th>STATUS</th>                
+                    <th>PLANEADO SECTURE CON IVA</th>                    
+                    <th>SALDO</th>                
                   </tr>
