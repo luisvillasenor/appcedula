@@ -1,5 +1,5 @@
 <?php 
-
+// Edicion de trabajo de la Session y Usuario
 $edicion = $_SESSION['fc'];
 $username   = $_SESSION['username'];
 

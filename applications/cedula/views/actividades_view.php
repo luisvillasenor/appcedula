@@ -7,7 +7,7 @@
         <div class="span10">
         <!--Body content-->
         <?php
-            switch ($_SESSION['grupo']) {
+            switch ($grupo) {
               case 'administrador':
                           include 'include/menu_filtros_coord.php'; 
                           break;
@@ -34,7 +34,7 @@
           ?> 
            
         
-        <?php if ( isset($edicion) == TRUE && ( ! is_numeric($edicion)) ) { ?>
+        <?php if ( isset($edicion) && ( !is_numeric($edicion) ) ) { ?>
           <div id="subheader3"><h2><strong><?php printf($edicion); ?></strong></h2></div>
         <?php }else{ ?>
           
@@ -104,11 +104,11 @@
             <?php include 'include/header_cedulas.php';  ?>        
               
                 <?php foreach ($get_all_actividades as $actividades ) : ?>
-                  <!-- Código dentro del FOREACH de todas las actividades -->
+                  <!-- Código dentro del FOREACH de todas las actividades del Usuario, Grupo, Coordinación y Año -->
                   <tr>                      
                       <td><!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
                           <?php
-                              switch ($_SESSION['grupo']) {
+                              switch ($grupo) {
                                           case 'coordinador':
                                             include 'include/nav_ops_regs.php';  
                                             break;

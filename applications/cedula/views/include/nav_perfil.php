@@ -1,5 +1,5 @@
 <?php
-  switch ($_SESSION['grupo']) {
+  switch ($grupo) {
               case 'coordinador':
                 include 'menu_coord.php';  
                 break;

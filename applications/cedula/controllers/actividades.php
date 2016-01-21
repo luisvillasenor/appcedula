@@ -11,40 +11,56 @@ class Actividades extends CI_Controller {
 	}
 
     public function index(){
-        
+        // Defini variables de la session
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		
+        // Carga los modulos a utilizar en la vista inicial
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
         $this->load->model('comentarios_model');
         
-        
+        // Obtiene el Costo Secture Total de todas las cedulas del usuario y año de trabajo
         $data['get_total_cedulas'] = $this->actividades_model->get_total_cedulas($e_mail,$edicion);
+
+        // Cuenta el numero de registros de las necesidades del presupuesto por cada cedula
         $data['get_registros'] = $this->necesidades_model->get_registros();
+
+        // Carga listado de Categorias segun el Grupo y Id Coordinador del usuario
         $data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
+
+        // Carga listado de todas las categorias
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+
+        // Carga listado de todas las ediciones de trabajo
         $data['get_fc'] = $this->fc_model->get_fc();
+
+        // Carga listado de todos los coordinadores
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+
         foreach ($data['get_all_coords'] as $coords ) {
-    
-                        if($id_coord == $coords->id_coord) {
-                            
-                            $data['miCoordinacion']= $coords->coordinacion;
-                        }
+            if($id_coord == $coords->id_coord) {
+                // Define la Coordinacion que pertenece el usuario
+                $data['miCoordinacion']= $coords->coordinacion;
+            }
         }
-                
+        // Obtiene todas las actividades del usuario, de su grupo, de su coordinacion y año de trabajo        
 		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+
+        // ***********************
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
         $data['get_reg'] = $this->actividades_model->get_reg($e_mail,$id_coord,$edicion);
 
+        // Por cada cedula
+        // Calcula
         $pres_aut = 0;
         $costo_secture = 0;
         $pres_eje = 0;
@@ -52,7 +68,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -61,7 +77,7 @@ class Actividades extends CI_Controller {
                     }
                 }
             }
-        
+        // Se guardan los calculos para usarse en la Vista
         $data['suma_pres_aut']      = $pres_aut;
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
@@ -75,6 +91,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
@@ -129,6 +146,7 @@ class Actividades extends CI_Controller {
     public function ordenar_id_asc(){ 
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -180,6 +198,7 @@ class Actividades extends CI_Controller {
     public function ordenar_id_desc(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -233,6 +252,7 @@ class Actividades extends CI_Controller {
     public function ordenar_act_asc(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -286,6 +306,7 @@ class Actividades extends CI_Controller {
     public function ordenar_act_desc(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -340,6 +361,7 @@ class Actividades extends CI_Controller {
 		/* Variables de SESSION */
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -395,7 +417,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_all_status']) ) {
                 foreach ($data['get_all_status'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -426,6 +448,7 @@ class Actividades extends CI_Controller {
 		
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -467,6 +490,7 @@ class Actividades extends CI_Controller {
     public function insert_act(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -489,6 +513,7 @@ class Actividades extends CI_Controller {
 
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -531,7 +556,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_one_act']) ) {
                 foreach ($data['get_one_act'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -557,6 +582,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -598,7 +624,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_filtro_por_resp']) ) {
                 foreach ($data['get_filtro_por_resp'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -623,6 +649,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -666,7 +693,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_filtro_por_resp']) ) {
                 foreach ($data['get_filtro_por_resp'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -695,6 +722,7 @@ class Actividades extends CI_Controller {
     public function filtrar_cedula(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -736,7 +764,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_filtro_por_ced']) ) {
                 foreach ($data['get_filtro_por_ced'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -761,6 +789,7 @@ class Actividades extends CI_Controller {
     public function filtrar_coords(){
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -817,6 +846,7 @@ class Actividades extends CI_Controller {
     public function filtrar_resumen_cedula(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -874,6 +904,7 @@ class Actividades extends CI_Controller {
     public function filtrar_master_plan_coord(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -910,6 +941,7 @@ class Actividades extends CI_Controller {
     public function filtrar_master_plan_categoria(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -946,6 +978,7 @@ class Actividades extends CI_Controller {
     public function filtrar_master_plan_cedula(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -983,6 +1016,7 @@ class Actividades extends CI_Controller {
     public function editar_actividad($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -1009,6 +1043,7 @@ class Actividades extends CI_Controller {
     public function editar_fechas_act($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1037,6 +1072,7 @@ class Actividades extends CI_Controller {
 	public function actualizar_act(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -1072,6 +1108,7 @@ class Actividades extends CI_Controller {
     public function actualizar_tot_act($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1103,6 +1140,7 @@ class Actividades extends CI_Controller {
     public function necesidades_act($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -1128,6 +1166,7 @@ class Actividades extends CI_Controller {
     public function compras_act($id_act){
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1156,6 +1195,7 @@ class Actividades extends CI_Controller {
     public function comentarios_act($id_act){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1182,6 +1222,7 @@ class Actividades extends CI_Controller {
     public function order_by_encargado_asc(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1206,6 +1247,7 @@ class Actividades extends CI_Controller {
     public function mis_cotizaciones($year = null, $month = null){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1232,6 +1274,7 @@ class Actividades extends CI_Controller {
     public function cotizaciones_act($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1258,6 +1301,7 @@ class Actividades extends CI_Controller {
     {
     	$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1280,6 +1324,7 @@ class Actividades extends CI_Controller {
     {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->view('tree_file_view',$data);        
@@ -1287,6 +1332,7 @@ class Actividades extends CI_Controller {
     public function vista_previa($id_act){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1320,6 +1366,7 @@ class Actividades extends CI_Controller {
     public function vista_previa_presupuesto($id_act){
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1381,6 +1428,7 @@ class Actividades extends CI_Controller {
     public function master_plan(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1425,6 +1473,7 @@ class Actividades extends CI_Controller {
     {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');  
@@ -1450,6 +1499,7 @@ class Actividades extends CI_Controller {
     {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1471,6 +1521,7 @@ class Actividades extends CI_Controller {
     {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1494,6 +1545,7 @@ class Actividades extends CI_Controller {
     public function padron_proveedores(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1536,7 +1588,7 @@ class Actividades extends CI_Controller {
 
     $this->email->initialize($config);
 
-    $this->email->from('AdminWebApp@app.com', 'SECTURE');
+    $this->email->from('AdminWebApp@app.com', 'Sistema Control de Cédulas');
     $this->email->to('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
 
     $this->email->subject('AVISO.- Nueva Cédula Activa 2015');
@@ -1554,6 +1606,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1608,6 +1661,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1662,6 +1716,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1716,6 +1771,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1759,6 +1815,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1802,6 +1859,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2103,6 +2161,7 @@ class Actividades extends CI_Controller {
     public function actualizar_pres(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2152,6 +2211,7 @@ class Actividades extends CI_Controller {
     public function actualizar_pres_aut(){
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2199,6 +2259,7 @@ class Actividades extends CI_Controller {
     public function actualizar_movs(){
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2235,6 +2296,7 @@ class Actividades extends CI_Controller {
     {
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2279,6 +2341,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2320,7 +2383,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;
@@ -2350,6 +2413,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2392,7 +2456,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;
@@ -2422,6 +2486,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2459,7 +2524,7 @@ class Actividades extends CI_Controller {
 
             if ( ! empty($data['get_all_actividades']) ) {
                 foreach ($data['get_all_actividades'] as $key => $value) {
-                    if ($value->status_act != 6) {
+                    if ($value->status_act != 6) { // Fuera de Presupuesto
                         $pres_aut = $pres_aut + $value->pres_aut;
                         $costo_secture = $costo_secture + $value->costo_secture;
                         $pres_eje = $pres_eje + $value->pres_eje;               
@@ -2484,6 +2549,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2543,6 +2609,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2602,6 +2669,7 @@ class Actividades extends CI_Controller {
         
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -2662,6 +2730,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2724,6 +2793,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -2754,6 +2824,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $status_necs = 0 ;
@@ -2780,6 +2851,7 @@ class Actividades extends CI_Controller {
 
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
