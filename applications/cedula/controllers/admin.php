@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 	
 	public function index(){
 		
-		//echo sha1(appcedula); die();// Esta funcion te regresa el texto encriptado. Se usa tener un password encriptado*/
+		//echo sha1(joGS15pri); die();// Esta funcion te regresa el texto encriptado. Se usa tener un password encriptado*/
         //shal(appcedula) genera esta clave "61d9e6a73a4af25c650d07cd37609ff4bbb07c86"
 		//echo APPPATH;// applications/authentication/ */
 		//echo base_url();// http://10.1.17.10/appcedula/appcedula.php */
