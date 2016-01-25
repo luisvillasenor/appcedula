@@ -8,6 +8,9 @@ class Actividades extends CI_Controller {
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url('admin/logout')); // Redirecciona la controlador "admin/logout"
 		}
+        $date = new DateTime();
+        $anioActual = $date->format('Y'); // Calcula en año actual
+        define('anioActual', $anioActual);
 	}
 
     public function index(){
@@ -42,6 +45,27 @@ class Actividades extends CI_Controller {
 
         // Carga listado de todas las ediciones de trabajo
         $data['get_fc'] = $this->fc_model->get_fc();
+        // Obtiene los registros de los años de cada edicion
+        
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 
         // Carga listado de todos los coordinadores
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -1591,8 +1615,8 @@ class Actividades extends CI_Controller {
     $this->email->from('AdminWebApp@app.com', 'Sistema Control de Cédulas');
     $this->email->to('rabindranath.garcia@aguascalientes.gob.mx, luis.villasenor@aguascalientes.gob.mx'); 
 
-    $this->email->subject('AVISO.- Nueva Cédula Activa 2015');
-    $this->email->message('El usuario '.$e_mail.' Activó la cédula No. '.$last_id.' para la Edición 2015.');  
+    $this->email->subject('ACTIVACIÓN de Nueva Cédula');
+    $this->email->message('El usuario '.$e_mail.' Activó la cédula No. '.$last_id.' para la Edición '.anioActual);  
 
     $this->email->send();
 
@@ -2306,33 +2330,48 @@ class Actividades extends CI_Controller {
         $this->load->model('necesidades_model');
         $total = '';
         $bloq = '5';// Una vez copiado el registro, este se bloquea.
-
-        // Arreglo que contiene el registro completo a copiar.
-        $reg = $this->actividades_model->get_one_to_copi($id_act);
-
-        if ($edicion != 5) { 
+        
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+        //var_dump($anioTrabajo);
+        //var_dump($idfcTrabajo);
+        //die();
+        // Si anioActual existe dentro de las edicionesTrabajo, adelante sino bye.
+        if ( $anioTrabajo && $idfcTrabajo ) {
+            
+            // Arreglo que contiene el registro completo a copiar.
+            $reg = $this->actividades_model->get_one_to_copi($id_act);
             if (is_array($reg) === TRUE) {
-                $last_id = $this->actividades_model->paste($reg,$ed = 5);
+                $last_id = $this->actividades_model->paste($reg,$ed = $fcTrabajo);
                 echo $last_id;
                 echo "<br>";
                 $this->actividades_model->bloqueo($id_act,$bloq);
-            }else{echo "NO ES UN ARRAY";}            
-        }else{echo "EDICION NO VALIDA";}
-
-        $nec = $this->necesidades_model->get_all_nec_act($id_act);
-        if (is_array($nec) === TRUE) {
-            $this->necesidades_model->paste($nec,$last_id);
-            $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act = $last_id);
-            foreach ($data['get_total_act'] as $tot ) : 
-                $total += $tot->total_act; 
-            endforeach;        
-            $this->actividades_model->update_costo_secture($id_act,$total);
-            $this->notificar_msg($last_id,$e_mail);
-        }else{echo "NO ES UN ARRAY";}
-
+                // Copia Pega el detalle de necesidades de la cédula
+                $nec = $this->necesidades_model->get_all_nec_act($id_act);
+                if (is_array($nec) === TRUE) {
+                    $this->necesidades_model->paste($nec,$last_id);
+                    $data['get_total_act'] = $this->necesidades_model->get_total_act($id_act = $last_id);
+                    foreach ($data['get_total_act'] as $tot ) : 
+                        $total += $tot->total_act; 
+                    endforeach;        
+                    $this->actividades_model->update_costo_secture($id_act,$total);
+                    $this->notificar_msg($last_id,$e_mail);
+                }else{echo "NO ES UN ARRAY";die();}
+            }else{echo "NO ES UN ARRAY";die();}
+        }else{echo "LA EDICION ".anioActual." NO ES VALIDA o NO ESTA ACTIVA";die();}
         redirect(base_url('actividades/index'));
-        //$this->index();
-        
     }
 ///////////////////////////////////////////////////
 ///////////////// DASHBOARD ///////////////////////

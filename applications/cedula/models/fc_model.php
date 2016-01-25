@@ -9,7 +9,7 @@ class Fc_model extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-
+    // Obtiene los registros Activos, es decir status = 1
     function get_fc(){
         $this->db->where('status',1);
         $this->db->order_by('anio','desc');

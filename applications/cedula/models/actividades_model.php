@@ -440,7 +440,7 @@ class Actividades_model extends CI_Model
             $data['id_resp']          = $value->id_resp;
             $data['fecha_alta']       = date('Y-m-d H:i:s');
             $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s');
-            $data['status_act']       = 1;
+            $data['status_act']       = 0; // Pendiente
             $data['pres_ant']         = $value->pres_eje;
             $data['pres_aut']         = 0;
             $data['pres_eje']         = 0;

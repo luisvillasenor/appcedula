@@ -7,7 +7,7 @@
     </ul>
 </div><!--Body content-->
 
-<?php }elseif ($edicion != 5) { // 5 es la edición actual 2015 ?>
+<?php }elseif ( $fcTrabajo != $edicion ) { // 5 es la edición actual 2015 ?>
   
   <div class="span2 sidebar-nav">
   <!--Body content-->

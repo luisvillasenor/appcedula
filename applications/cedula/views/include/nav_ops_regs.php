@@ -1,9 +1,12 @@
 <?php 
+
+
+
 // Edicion de trabajo de la Session y Usuario
 $edicion = $_SESSION['fc'];
 $username   = $_SESSION['username'];
 
-if ( $edicion != '5') { ?>
+if ( !$anioTrabajo ) { ?>
 
       <?php if($actividades->status_act == 5) { ?>
 
@@ -22,7 +25,7 @@ if ( $edicion != '5') { ?>
                   <ul>
                     <li><p>Se creará una copia en la Edición 201<?php echo $edicion+1;?></p></li>
                     <li>La nueva cédula tendra un ID diferente, sin embargo el nombre y todo lo demás permanecerá igual</li>
-                    <li>La nueva cédula tendrá como Status <span class="label label-danger">No Aprobado</span></li>
+                    <li>La nueva cédula tendrá como Status <span class="label label-warning">Pendiente</span></li>
                     <li><p>Para ver y trabajar la nueva cédula, debe salir y volver a entrar al Sistema seleccionando
                    la Edición de Trabajo del 201<?php echo $edicion+1;?></p></li>
                    <li>La vieja cédula se guarda como histórico y verá un candadito en el campo "Status"</li>     
@@ -52,7 +55,7 @@ if ( $edicion != '5') { ?>
 
 <?php }else{ ?>
 
-      <?php if ( $actividades->status_cedula == 0 ) { ?>
+      <?php if ( ($fcTrabajo == $edicion) ) { ?>
         
         <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
             </td>
