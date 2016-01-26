@@ -13,19 +13,20 @@
   body {
     background-color: transparent;
     background-repeat: no-repeat;
-    background-image: url('<?php echo base_url('footer-bg.jpg'); ?>') !important;
+    background-image: url('<?php echo base_url('slide32015.jpg'); ?>') !important;
     background-size: cover;
     background-position: left top;
     width: 100%;
     height: 100%;
     visibility: inherit;
-    opacity: 0.9;
+    
   }
      .form-signin {
       max-width: 300px;
       padding: 19px 29px 29px;
       margin: 0 auto 20px;
       background-color: #fff;
+      opacity: 1.0;
       border: 1px solid #e5e5e5;
       -webkit-border-radius: 5px;
          -moz-border-radius: 5px;
@@ -106,7 +107,7 @@
                   </p>
                   <hr>
                   <div class="alert alert-success">
-                    <strong>Descarga!</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula.pdf'); ?>" target="_blank">Guía para Activar Cédulas del 2014 al 2015</a>
+                    <strong>Descarga !</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula2016.pdf'); ?>" target="_blank">La Guía para Activar Cédulas</a>
                   </div>
             <?php echo form_close(); ?> 
 
