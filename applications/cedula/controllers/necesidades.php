@@ -7,10 +7,14 @@ class Necesidades extends CI_Controller {
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url()); // Redirecciona la controlador "admin/index"
 		}//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
+        $date = new DateTime();
+        $anioActual = $date->format('Y'); // Calcula en año actual
+        define('anioActual', $anioActual);
 	}
 	public function index(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -27,11 +31,32 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 		$this->load->view('actividades_view',$data);
 	}
 	public function agregar_nec(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -47,6 +72,27 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
+
         $id_act = $this->input->post('id_act');
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('necesidades_agregar_view',$data);
@@ -54,6 +100,7 @@ class Necesidades extends CI_Controller {
     public function add_nec(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -71,6 +118,25 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
         $id_act = $this->input->post('id_act');
         $e_mail = $this->input->post('e_mail');
         $actividad = $this->input->post('actividad');
@@ -125,6 +191,7 @@ class Necesidades extends CI_Controller {
     public function edit_nec($id_act,$id_nec){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -141,6 +208,27 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
+
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
         $data['get_one_nec_edit'] = $this->necesidades_model->get_one_nec_edit($id_nec);
         $this->load->view('necesidades_editar_view',$data);
@@ -148,6 +236,7 @@ class Necesidades extends CI_Controller {
 	public function buscar_nec(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -170,6 +259,7 @@ class Necesidades extends CI_Controller {
     public function editar_nec(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -185,6 +275,27 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
+
         $id_nec = $this->input->post('id_nec');
 		$data['get_one_nec_edit'] = $this->necesidades_model->get_one_nec_edit($id_nec);
 		$this->load->view('necesidades_editar_view',$data);
@@ -192,6 +303,7 @@ class Necesidades extends CI_Controller {
 	public function actualizar_nec(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -207,6 +319,26 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
         
         $id_act = $this->input->post('id_act');
         $e_mail = $this->input->post('e_mail');
@@ -264,6 +396,7 @@ class Necesidades extends CI_Controller {
     public function necesidades_act(){
 		$e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -287,6 +420,7 @@ class Necesidades extends CI_Controller {
     {
         $e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -304,6 +438,25 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 		$this->necesidades_model->delete($id_nec);
         
         $id_act = $this->input->post('id_act');
@@ -358,7 +511,8 @@ class Necesidades extends CI_Controller {
      public function is_borrar_nec($id_act,$id_nec)
     {
         $e_mail = $_SESSION['username'];
-         $grupo    = $_SESSION['grupo'];
+        $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -375,6 +529,27 @@ class Necesidades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
+
         $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$data['get_one_nec_edit'] = $this->necesidades_model->get_one_nec_edit($id_nec);
         $this->load->view('is_necesidad_view',$data);

@@ -29,12 +29,13 @@
                   
       </ul>      
       <ul class="nav pull-right">
-        <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
-          <!--<li><a data-toggle="modal" href="<?php echo base_url();?>/actividades/resumen"><i class="icon-comment"></i> RESUMEN &raquo;</a></li>-->
         
         <?php
         if ( $onlyusername == 'appcedula' ) { ?>
             <!-- Menu solo para appcedula -->
+            <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
+            <!--<li><a data-toggle="modal" href="<?php echo base_url();?>/actividades/resumen"><i class="icon-comment"></i> RESUMEN &raquo;</a></li>-->
+        
             <li class="dropdown">  
               <a class="dropdown-toggle" data-toggle="dropdown">  
                 <small><strong><?php echo $onlyusername; ?></strong> (<?php echo $_SESSION['grupo'];?>)</small>

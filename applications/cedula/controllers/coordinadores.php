@@ -6,10 +6,14 @@ class Coordinadores extends CI_Controller {
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url()); // Redirecciona la controlador "admin/indrex"
 		}//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
+		$date = new DateTime();
+        $anioActual = $date->format('Y'); // Calcula en año actual
+        define('anioActual', $anioActual);
 	}
     
 	public function index(){
 		$grupo    = $_SESSION['grupo'];
+		$data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -23,6 +27,26 @@ class Coordinadores extends CI_Controller {
 		$data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all_resps'] = $this->responsables_model->get_all_resps();
         $data['get_fc'] = $this->fc_model->get_fc();
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 		$this->load->view('coordinadores_view',$data);
 	}
 	public function agregar_co(){

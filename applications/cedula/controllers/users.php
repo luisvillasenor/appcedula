@@ -33,10 +33,14 @@ class Users extends CI_Controller {
 		}
 
 		//var_dump(session_get_cookie_params()); //Muestra el valor de la variable
+		$date = new DateTime();
+        $anioActual = $date->format('Y'); // Calcula en año actual
+        define('anioActual', $anioActual);
 	}
     public function index(){
     	
         $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $edicion;
@@ -51,6 +55,26 @@ class Users extends CI_Controller {
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
 		$data['get_all_users'] = $this->users_model->get_all_users();
 		$data['get_fc'] = $this->fc_model->get_fc();
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 		$this->load->view('responsables_view',$data);
 	}
     public function edit_resp($id){
@@ -68,6 +92,26 @@ class Users extends CI_Controller {
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_one_usr_edit'] = $this->users_model->get_one_usr_edit($id);        
         $data['get_fc'] = $this->fc_model->get_fc();
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
         $this->load->view('responsables_editar_view',$data);
 	}
     public function actualizar_resp(){
@@ -139,6 +183,26 @@ class Users extends CI_Controller {
         $this->load->model('fc_model');
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_fc'] = $this->fc_model->get_fc();
+        
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        $data['anioTrabajo'] = $anioTrabajo;
+        $data['idfcTrabajo'] = $idfcTrabajo;
+        $data['fcTrabajo']   = $fcTrabajo;
+
 		$this->load->view('responsables_agregar_view',$data);
     }
 
