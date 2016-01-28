@@ -141,6 +141,7 @@
                 <label></label>
                 <input class="input-xxlarge" id="quienpropone" name="quienpropone" type="text" value="<?php echo $act->quienpropone;?>">
                 <label></label>
+            <!-- Se deshabilita para 2016
                 <input class="input-xxlarge" id="empresa" name="empresa" type="text" value="<?php echo $act->empresa;?>">
                 <label></label>
                 <input class="input-xxlarge" id="puesto" name="puesto" type="text" value="<?php echo $act->puesto;?>">
@@ -152,20 +153,22 @@
                 <input class="input-xxlarge" id="email" name="email" type="text" value="<?php echo $act->email;?>">
                 <label></label>
                 <input class="input-xxlarge" id="web" name="web" type="text" value="<?php echo $act->web;?>">
+            -->
             </td>
             </tr>
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>                
-                <label></label>
-                <input class="input-xxlarge" id="fecha_act" name="fecha_act" type="text" value="<?php echo $act->fecha_act;?>">
-                <label></label>
-                <input class="input-xxlarge" id="fecha_aut" name="fecha_aut" type="text" value="<?php echo $act->fecha_aut;?>">
+                <label>Fecha de Inicio Oficial</label>
+                <input class="input-large" id="fecha_act" name="fecha_act" type="text" value="<?php echo $act->fecha_act;?>">
+                <label>Fecha de Termino Oficia</label>
+                <input class="input-large" id="fecha_aut" name="fecha_aut" type="text" value="<?php echo $act->fecha_aut;?>">
             </td>
             </tr>
             <tr>
             <th rowspan="1">CUANTO</th>
-            <td>                
+            <td> 
+            <!-- Se deshabilita para 2016               
                 <label>Costo para SECTURE</label>
                 <small><span class="help-block">Este costo es Calulado por el Sistema y refleja la Sumatoria de las necesidades de la Cédula. Para modificar la cantidad, debe hacerlo en la sección de necesidades. <a href="<?php echo base_url();?>/actividades/necesidades_act/<?php echo $act->id_act;?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $act->id_act;?>"><i class="icon-list"></i></a></span></small>
                 
@@ -189,7 +192,8 @@
                 <label>Costo para el PÚBLICO</label>
                 <span class="add-on">$</span>
                 <input id="costo_publico" name="costo_publico" type="text" value="<?php echo $act->costo_publico;?>">
-                
+            -->    
+                <label class="checkbox inline">Costo para el PÚBLICO</label>
                 <?php switch($act->is_costo_publico) {
                     case '1':?>
                         <label class="checkbox inline">
@@ -207,7 +211,9 @@
             </tr>
             <th rowspan="1">DONDE</th>
             <td>                
-                <label></label>
+                <label>Sede</label>
+                <input class="input-xxlarge" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>">
+                <label>Ubicación</label>
                 <textarea class="input-xxlarge" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"><?php echo $act->ubicacion;?></textarea>
             </td>
             
