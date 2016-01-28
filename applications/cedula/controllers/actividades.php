@@ -658,7 +658,12 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
-        $this->actividades_model->insert_entry($e_mail);
+            try {
+                $this->actividades_model->insert_entry($e_mail);
+            } catch (Exception $e) { die();
+            
+        }
+        
         redirect('actividades/');
 	}
 	public function buscar_act(){

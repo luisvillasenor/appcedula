@@ -130,7 +130,7 @@ color:white;
                 <i class="icon-info-sign" data-toggle="tooltip" title="Seleccione aquí la Categoria de la Actividad"> </i>
                 <label>Categoría de la Actividad</label>
                 <select class="inline" id="id_categoria" name="id_categoria" onchange="myFunction()">  
-                    <option></option>
+                    <option>Seleccione Categoría</option>
                   <?php foreach ($get_categorias as $categos ) : ?>
                     <option value="<?php echo $categos->id_categoria;?>"><?php echo $categos->categoria;?></option>
                   <?php endforeach; ?>
@@ -141,14 +141,21 @@ color:white;
                         <tr>
             <th rowspan="1">RESPONSABLE</th>
             <td>                
-                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí el Nombre del Lider ó Responsable de la Cédula"> </i>
+                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí el Nombre Completo del Lider ó Responsable de la Cédula"> </i>
                 <p>
                   <?php 
                       echo form_label('Responsable de la Cédula',  'quienpropone' ) ; 
-                      echo form_input('quienpropone', '', 'id="quienpropone" class="input-block-level" placeholder="Escriba aquí el Nombre del Lider ó Responsable de la Cédula"');
+                      echo form_input('quienpropone', '', 'id="quienpropone" class="input-block-level" placeholder="Escriba aquí el Nombre Completo del Lider ó Responsable de la Cédula"');
                   ?>
                 </p>
-                
+                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí el Email"> </i>
+                <p>
+                  <?php 
+                      echo form_label('Email para notificaciones',  'email' ) ; 
+                      echo form_input('email', '', 'id="email" class="input-block-level" placeholder="Escriba aquí el Email"');
+                  ?>
+                </p>
+                <!-- Se desactiva para 2016
                 <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Empresa ú Organización"> </i>
                 <p>
                   <?php 
@@ -196,25 +203,25 @@ color:white;
                       echo form_input('web', '', 'id="web" class="input-block-level" placeholder="Escriba aquí la Página Web"');
                   ?>
                 </p>
-                
+                -->
             </td>
             </tr>
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>                
-                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Fecha de Realización de la Actividad"> </i>
+                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Inicio Oficial de la Actividad"> </i>
                 <p>
                   <?php 
-                      echo form_label('Fecha de Inicio de la Actividad',  'fecha_act' ) ; 
-                      echo form_input('fecha_act', '', 'id="fecha_act" class="input-block-level" placeholder="Escriba aquí la Fecha de Inicio de la Actividad"');
+                      echo form_label('Fecha de Inicio Oficial de la Actividad',  'fecha_act' ) ; 
+                      echo form_input('fecha_act', '', 'id="fecha_act" class="input-large" placeholder="Seleccione Fecha"');
                   ?>
                 </p>
                 
-                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Fecha Límite de Decisión de Aceptación"> </i>
+                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Termino Oficial de Aceptación"> </i>
                 <p>
                   <?php 
-                      echo form_label('Fecha de Límite de Aceptación',  'fecha_aut' ) ; 
-                      echo form_input('fecha_aut', '', 'id="fecha_aut" class="input-block-level" placeholder="Escriba aquí la Fecha de Límite de Aceptación"');
+                      echo form_label('Fecha de Termino Oficial de Aceptación',  'fecha_aut' ) ; 
+                      echo form_input('fecha_aut', '', 'id="fecha_aut" class="input-large" placeholder="Seleccione Fecha"');
                   ?>
                 </p>
                 
@@ -222,7 +229,9 @@ color:white;
             </tr>
             <tr>
             <th rowspan="1">CUANTO</th>
-            <td>                
+
+            <td>
+            <!-- Desactivado por 2016                
                 <label>Costo para SECTURE</label>                
                 <label class="checkbox inline">
                 <input id="is_costo_secture" name="is_costo_secture" type="radio" value="1" checked="checked"> Sí
@@ -230,7 +239,8 @@ color:white;
                 <label class="checkbox inline">
                 <input id="is_costo_secture" name="is_costo_secture" type="radio" value="0"> No
                 </label>
-                <label>Costo para el PÚBLICO</label>
+            -->
+                <label class="checkbox inline">Costo para el PÚBLICO</label>
                 
                 <label class="checkbox inline">
                 <input id="is_costo_publico" name="is_costo_publico" type="radio" value="1"> Sí
@@ -238,17 +248,28 @@ color:white;
                 <label class="checkbox inline">
                 <input id="is_costo_publico" name="is_costo_publico" type="radio" value="0" checked="checked"> No
                 </label>
+            <!-- Desactivado por 2016
                 <span class="add-on">$</span>
                 <input id="costo_publico" name="costo_publico" type="text">
+            -->
             </td>
             </tr>
             <th rowspan="1">DONDE</th>
             <td>                
+                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Sede de la Actividad..."> </i>
+                <p>
+                      <?php 
+                          echo form_label('Sede:',  'sede' ) ; 
+                          echo form_input('sede', '', 'id="sede" class="input-xxlarge" placeholder="Isla San Marcos"');
+                      ?>
+                  </p>
+                
+
                 <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Ubicación de la Actividad..."> </i>
                 <p>
                       <?php 
                           echo form_label('Ubicacion:',  'ubicacion' ) ; 
-                          echo form_textarea('ubicacion', '', 'id="ubicacion" class="input-block-level" placeholder="Escriba aquí la Ubicacion de la Actividad..."');
+                          echo form_input('ubicacion', '', 'id="ubicacion" class="input-xxlarge" placeholder="Escriba aquí la Ubicacion de la Actividad, Por ej. Velaria Zona Gastronómica"');
                       ?>
                   </p>
                 

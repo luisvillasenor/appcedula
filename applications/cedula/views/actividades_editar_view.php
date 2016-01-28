@@ -141,6 +141,8 @@
                 <label></label>
                 <input class="input-xxlarge" id="quienpropone" name="quienpropone" type="text" value="<?php echo $act->quienpropone;?>">
                 <label></label>
+                <label></label>
+                <input class="input-xxlarge" id="email" name="email" type="text" value="<?php echo $act->email;?>">
             <!-- Se deshabilita para 2016
                 <input class="input-xxlarge" id="empresa" name="empresa" type="text" value="<?php echo $act->empresa;?>">
                 <label></label>

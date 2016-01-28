@@ -598,22 +598,26 @@ class Actividades_model extends CI_Model
         $this->justificacion    = strtoupper($_POST['justificacion']);
         $this->id_categoria     = strtoupper($_POST['id_categoria']);
         $this->quienpropone     = strtoupper($_POST['quienpropone']);
-        $this->empresa          = strtoupper($_POST['empresa']);
-        $this->puesto           = strtoupper($_POST['puesto']);
-        $this->domicilio        = strtoupper($_POST['domicilio']);
-        $this->telefono         = strtoupper($_POST['telefono']);
+        //$this->empresa          = strtoupper($_POST['empresa']);
+        //$this->puesto           = strtoupper($_POST['puesto']);
+        //$this->domicilio        = strtoupper($_POST['domicilio']);
+        //$this->telefono         = strtoupper($_POST['telefono']);
         $this->email            = $_POST['email'];
-        $this->web              = $_POST['web'];
+        //$this->web              = $_POST['web'];
         $this->fecha_act        = $_POST['fecha_act'];
         $this->fecha_aut        = $_POST['fecha_aut'];
         //$this->costo_secture    = $_POST['costo_secture'];
-        $this->costo_publico    = $_POST['costo_publico'];
-        $this->is_costo_secture = $_POST['is_costo_secture'];
+        //$this->costo_publico    = $_POST['costo_publico'];
+        //$this->is_costo_secture = $_POST['is_costo_secture'];
         $this->is_costo_publico = $_POST['is_costo_publico'];
+        $this->sede             = strtoupper($_POST['sede']);
         $this->ubicacion        = strtoupper($_POST['ubicacion']);
         $this->id_coord         = $_POST['id_coord'];
         $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = 0;
+        $this->fecha_alta       = date('Y-m-d H:i:s');
+        $this->fecha_ult_modificacion = date('Y-m-d H:i:s');
+
 
         $this->db->insert(ACTIVIDADES, $this);
     }
