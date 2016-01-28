@@ -126,6 +126,8 @@ class Necesidades_model extends CI_Model
             $data['iva']             = ($value->cantidad * $value->precio_unitario)*0.16;
             $data['precio_total']    = ($value->cantidad * $value->precio_unitario);
             $data['encargado']       = $value->encargado;
+            $data['quien_modifica']  = $value->quien_modifica;
+            $data['status_necs']     = $value->status_necs;
             $this->db->insert(NECESIDADES, $data);            
         }
         

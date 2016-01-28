@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Editar Cédula de Actividad</title>   
+	<title>Editar Cédula</title>   
 	<meta name="description" content="Sistema sobre Bootstrap 2.0">
   <meta name="author" content="Luis G. Villaseñor">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    

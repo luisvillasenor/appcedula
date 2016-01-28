@@ -418,6 +418,7 @@ class Actividades_model extends CI_Model
     function paste($reg,$ed)
     {
         foreach ($reg as $value) {
+            $data['status_cedula']    = $value->status_cedula;
             $data['e_mail']           = $value->e_mail;
             $data['actividad']        = $value->actividad;
             $data['descripcion']      = $value->descripcion;
@@ -430,21 +431,37 @@ class Actividades_model extends CI_Model
             $data['telefono']         = $value->telefono;
             $data['email']            = $value->email;
             $data['web']              = $value->web;
+            $data['fecha_act']        = '0000-00-00';
+            $data['fecha_aut']        = '0000-00-00';
             $data['costo_secture']    = $value->costo_secture;
             $data['costo_publico']    = $value->costo_publico;
             $data['is_costo_secture'] = $value->is_costo_secture;
             $data['is_costo_publico'] = $value->is_costo_publico;
             $data['ubicacion']        = $value->ubicacion;
+            $data['sede']             = $value->sede;
+            $data['d1']               = $value->d1;
+            $data['d2']               = $value->d2;
+            $data['d3']               = $value->d3;
+            $data['d4']               = $value->d4;
+            $data['d5']               = $value->d5;
+            $data['d6']               = $value->d6;
+            $data['d7']               = $value->d7;
+            $data['d8']               = $value->d8;
+            $data['d9']               = $value->d9;
+            $data['d10']              = $value->d10;
+            $data['hora_ini']         = $value->hora_ini;
+            $data['hora_fin']         = $value->hora_fin;
             $data['id_coord']         = $value->id_coord;
             $data['id_fc']            = $ed;
             $data['id_resp']          = $value->id_resp;
             $data['fecha_alta']       = date('Y-m-d H:i:s');
             $data['fecha_ult_modificacion'] = date('Y-m-d H:i:s');
             $data['status_act']       = 0; // Pendiente
-            $data['pres_ant']         = $value->pres_eje;
+            $data['pres_ant']         = 0;
             $data['pres_aut']         = 0;
             $data['pres_eje']         = 0;
             $data['pres_soli']        = 0;
+            $data['pres_gas']         = 0;
         }
         $this->db->insert(ACTIVIDADES, $data);
         return $this->db->insert_id();
