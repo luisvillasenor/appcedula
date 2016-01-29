@@ -209,7 +209,7 @@ color:white;
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>                
-                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Inicio Oficial de la Actividad"> </i>
+                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Inicio Oficial"> </i>
                 <p>
                   <?php 
                       echo form_label('Fecha de Inicio Oficial de la Actividad',  'fecha_act' ) ; 
@@ -217,7 +217,7 @@ color:white;
                   ?>
                 </p>
                 
-                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Termino Oficial de Aceptación"> </i>
+                <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Termino Oficial"> </i>
                 <p>
                   <?php 
                       echo form_label('Fecha de Termino Oficial de Aceptación',  'fecha_aut' ) ; 
