@@ -82,7 +82,7 @@ color:white;
     <div class="row-fluid span8 control-group warning">              
     <!--Body content-->
         
-        <div class="well"><h3>Actualizar Frecuencia de la Cédula</h3></div> 
+        <div class="well"><h3>Abierto al Público</h3></div> 
 
         
 <?php foreach ($get_one_act_edit as $act ) : ?>                 
@@ -101,12 +101,16 @@ color:white;
                 <input id="justificacion" name="justificacion" type="hidden" value="<?php echo $act->justificacion;?>">
                 <input id="id_categoria" name="id_categoria" type="hidden" value="<?php echo $act->id_categoria;?>">
                 <input id="quienpropone" name="quienpropone" type="hidden" value="<?php echo $act->quienpropone;?>">
+                <!--
                 <input id="empresa" name="empresa" type="hidden" value="<?php echo $act->empresa;?>">
                 <input id="puesto" name="puesto" type="hidden" value="<?php echo $act->puesto;?>">
                 <input id="domicilio" name="domicilio" type="hidden" value="<?php echo $act->domicilio;?>">
                 <input id="telefono" name="telefono" type="hidden" value="<?php echo $act->telefono;?>">
+              -->
                 <input id="email" name="email" type="hidden" value="<?php echo $act->email;?>">
+              <!--
                 <input id="web" name="web" type="hidden" value="<?php echo $act->web;?>">
+              -->
                 <input id="fecha_act" name="fecha_act" type="hidden" value="<?php echo $act->fecha_act;?>">
                 <input id="fecha_aut" name="fecha_aut" type="hidden" value="<?php echo $act->fecha_aut;?>">
                 <input id="costo_secture" name="costo_secture" type="hidden" value="<?php echo $act->costo_secture;?>">
@@ -117,110 +121,69 @@ color:white;
                 <input id="status_act" name="status_act" type="hidden" value="<?php echo $act->status_act;?>">
                 <input id="id_fc" name="id_fc" type="hidden" value="<?php echo $act->id_fc;?>">
                 <input id="id_resp" name="id_resp" type="hidden" value="<?php echo $act->id_resp;?>">
+                <input id="fecha_alta" name="fecha_alta" type="hidden" value="<?php echo $act->fecha_alta;?>">
+
                 
             </td>
             </tr>                
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>      
+                <div class="control-group">
+                <label>DÍAS DE OPERACIÓN PARA EL PÚBLICO EN GENERAL</label>
+
+                <?php
+                $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
                 
-                <label>FRECUENCIA</label>
-                
-                <label class="checkbox inline">30 OCT</label>
-                <?php switch ($act->d1) {
-                            case '2015-10-30' :
-                                echo form_checkbox('d1', '2015-10-30', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d1', '2015-10-30', FALSE);
-                                break;
-                } ?>
-                <label class="checkbox inline">31 OCT</label>
-                <?php switch ($act->d2) {
-                            case '2015-10-31' :
-                                echo form_checkbox('d2', '2015-10-31', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d2', '2015-10-31', FALSE);
-                                break;
-                } ?> 
-                <label class="checkbox inline">1 NOV</label>
-                <?php switch ($act->d3) {
-                            case '2015-11-01' :
-                                echo form_checkbox('d3', '2015-11-01', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d3', '2015-11-01', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">2 NOV</label>
-                <?php switch ($act->d4) {
-                            case '2015-11-02' :
-                                echo form_checkbox('d4', '2015-11-02', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d4', '2015-11-02', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">3 NOV</label>
-                <?php switch ($act->d5) {
-                            case '2015-11-03' :
-                                echo form_checkbox('d5', '2015-11-03', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d5', '2015-11-03', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">4 NOV</label>
-                <?php switch ($act->d6) {
-                            case '2015-11-04' :
-                                echo form_checkbox('d6', '2015-11-04', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d6', '2015-11-04', FALSE);
-                                break;
-                } ?>                
-                <p></p>
-                <label class="checkbox inline">5 NOV</label>
-                <?php switch ($act->d7) {
-                            case '2015-11-05' :
-                                echo form_checkbox('d7', '2015-11-05', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d7', '2015-11-05', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">6 NOV</label>
-                <?php switch ($act->d8) {
-                            case '2015-11-06' :
-                                echo form_checkbox('d8', '2015-11-06', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d8', '2015-11-06', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">7 NOV</label>
-                <?php switch ($act->d9) {
-                            case '2015-11-07' :
-                                echo form_checkbox('d9', '2015-11-07', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d9', '2015-11-07', FALSE);
-                                break;
-                } ?>                
-                <label class="checkbox inline">8 NOV</label>
-                <?php switch ($act->d10) {
-                            case '2015-11-08' :
-                                echo form_checkbox('d10', '2015-11-08', TRUE);
-                                break;                            
-                            default:
-                                echo form_checkbox('d10', '2015-11-08', FALSE);
-                                break;
-                } ?>                
+                ?>
+
+                  <?php $retVal1 = (in_array($act->d1, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[0]));?></label>
+                    <?php echo form_checkbox('d1', $fechas[0], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d2, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[1]));?></label>
+                    <?php echo form_checkbox('d2', $fechas[1], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d3, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[2]));?></label>
+                    <?php echo form_checkbox('d3', $fechas[2], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d4, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[3]));?></label>
+                    <?php echo form_checkbox('d4', $fechas[3], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d5, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[4]));?></label>
+                    <?php echo form_checkbox('d5', $fechas[4], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d6, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[5]));?></label>
+                    <?php echo form_checkbox('d6', $fechas[5], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d7, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[6]));?></label>
+                    <?php echo form_checkbox('d7', $fechas[6], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d8, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[7]));?></label>
+                    <?php echo form_checkbox('d8', $fechas[7], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d9, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[8]));?></label>
+                    <?php echo form_checkbox('d9', $fechas[8], $retVal1) ; 
+                  ?>
+                  <?php $retVal1 = (in_array($act->d10, $fechas)) ? true : false ; ?>
+                    <label class="checkbox inline"><?php echo date("d M",strtotime($fechas[9]));?></label>
+                    <?php echo form_checkbox('d10', $fechas[9], $retVal1) ; 
+                  ?>
+
+
+              </div>
                                 
                                 
                 <div class="control-group">
-                    <label class="control-label" for="inputEmail">Hora inicial</label>
+                    <label class="control-label" for="inputEmail">Se ABRE a las </label>
                     <div class="controls">
                       <select class="span4" id="hora_ini" name="hora_ini">
                           <?php foreach ($get_horarios as $hora ) : 
@@ -232,7 +195,7 @@ color:white;
                           <?php endforeach; ?>   
                         </select>                
                     </div><p>
-                    <label class="control-label" for="inputEmail">Hora Final</label>
+                    <label class="control-label" for="inputEmail">Se CIERRA a las </label>
                     <div class="controls">
                       <select class="span4" id="hora_fin" name="hora_fin">
                           <?php foreach ($get_horarios as $hora ) : 
@@ -251,7 +214,9 @@ color:white;
             </tr>
             <th rowspan="1">DONDE</th>
             <td>                
-                <label></label>
+                <label>Sede</label>
+                <input class="input-xxlarge" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>">
+                <label>Ubicación</label>
                 <input class="input-xxlarge" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>">
             </td>
             

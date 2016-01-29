@@ -45,7 +45,7 @@ class Actividades_model extends CI_Model
     var $pres_aut = '';
     var $pres_eje = '';
     var $pres_soli = '';
-
+    var $pres_gas = '';
     
     
     
@@ -636,20 +636,21 @@ class Actividades_model extends CI_Model
         $this->id_categoria     = $_POST['id_categoria'];
         $this->id_coord         = $_POST['id_coord'];
         $this->quienpropone     = strtoupper($_POST['quienpropone']);
-        $this->empresa          = strtoupper($_POST['empresa']);
-        $this->puesto           = strtoupper($_POST['puesto']);
-        $this->domicilio        = strtoupper($_POST['domicilio']);
-        $this->telefono         = strtoupper($_POST['telefono']);
+        //$this->empresa          = strtoupper($_POST['empresa']);
+        //$this->puesto           = strtoupper($_POST['puesto']);
+        //$this->domicilio        = strtoupper($_POST['domicilio']);
+        //$this->telefono         = strtoupper($_POST['telefono']);
         $this->email            = $_POST['email'];
-        $this->web              = $_POST['web'];
+        //$this->web              = $_POST['web'];
         $this->fecha_act        = $_POST['fecha_act'];
         $this->fecha_aut        = $_POST['fecha_aut'];
         $this->costo_secture    = $_POST['costo_secture'];
         $this->costo_publico    = $_POST['costo_publico'];
         $this->is_costo_secture = $_POST['is_costo_secture'];
         $this->is_costo_publico = $_POST['is_costo_publico'];
+        $this->sede             = strtoupper($_POST['sede']);
         $this->ubicacion        = strtoupper($_POST['ubicacion']);
-        
+        $this->fecha_alta       = $_POST['fecha_alta'];        
         $this->fecha_ult_modificacion = date('Y-m-d H:i:s');
         
         if (!isset($_POST['d1']))
@@ -717,6 +718,8 @@ class Actividades_model extends CI_Model
         $this->hora_fin         = $_POST['hora_fin'];
         $this->id_fc            = $edicion;
         $this->id_resp          = $_POST['id_resp'];
+        
+
         
         $this->db->where('id_act', $this->id_act);
         $this->db->update(ACTIVIDADES, $this);

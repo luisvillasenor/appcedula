@@ -358,6 +358,17 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*
+|--------------------------------------------------------------------------
+| Fechas Oficiales del Festival de Calaveras del Año Actual
+|--------------------------------------------------------------------------
+| Estas fechas se deberán cambiar cada año o en su caso definir una por cada 
+| edicion.
+*/
+$config['fechas_oficiales_2014'] = array('2014-10-31','2014-11-01','2014-11-02','2014-11-03','2014-11-04','2014-11-05','2014-11-06','2014-11-07','2014-11-08','2014-11-09');
+$config['fechas_oficiales_2015'] = array('2015-10-30','2015-10-31','2015-11-01','2015-11-02','2015-11-03','2015-11-04','2015-11-05','2015-11-06','2015-11-07','2015-11-08');
+$config['fechas_oficiales_2016'] = array('2016-10-28','2016-10-29','2016-10-30','2016-10-31','2016-11-01','2016-11-02','2016-11-03','2016-11-04','2016-11-05','2016-11-06');
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

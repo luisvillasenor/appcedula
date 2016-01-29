@@ -119,7 +119,7 @@ color:white;
             
             <hr>
 
-<?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS ADMINISTRADORES */
+<?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
 $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
   switch ($app) {
       case 'rabingarcia@app.com':      
@@ -272,16 +272,12 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
             <tbody class="text-center">
               <tr>                
                 <th>Frecuencia de la actividad</th>
-                <th>30 OCT</th>
-                <th>31 OCT</th>
-                <th>1 NOV</th>
-                <th>2 NOV</th>
-                <th>3 NOV</th>
-                  <th>4 NOV</th>
-                  <th>5 NOV</th>
-                  <th>6 NOV</th>
-                  <th>7 NOV</th>
-                  <th>8 NOV</th>
+                <?php
+                  $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
+                  foreach ($fechas as $value) {?>
+                    <th><?php echo date("d M",strtotime($value));?></th>
+                <?php }?>
+                
                   <th>HORA INICIO</th>
                   <th>HORA FIN</th>
                 

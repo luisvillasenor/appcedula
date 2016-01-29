@@ -1435,8 +1435,9 @@ class Actividades extends CI_Controller {
                 $fcTrabajo = $anio->id_fc ;
             }
         }
-        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
-        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, false sino existe dentro.
+        //$anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $anioTrabajo = (in_array(anioActual, $edicionesTrabajo)) ? anioActual : false ;
         $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
 
         $data['anioTrabajo'] = $anioTrabajo;
@@ -1738,10 +1739,7 @@ class Actividades extends CI_Controller {
                             
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
-        }
-
-        
-        // Obtiene los años de cada edicion
+        }// Obtiene los años de cada edicion
         $edicionesTrabajo = array();
         $idsfcTrabajo = array();
         $fcTrabajo = false;
@@ -1752,8 +1750,9 @@ class Actividades extends CI_Controller {
                 $fcTrabajo = $anio->id_fc ;
             }
         }
-        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
-        $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, false sino existe dentro.
+        //$anioTrabajo = in_array(anioActual, $edicionesTrabajo);
+        $anioTrabajo = (in_array(anioActual, $edicionesTrabajo)) ? anioActual : false ;
         $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
 
         $data['anioTrabajo'] = $anioTrabajo;
@@ -1803,6 +1802,18 @@ class Actividades extends CI_Controller {
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
         }
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+
         $this->load->view('vista_previa_view',$data);	
 	}
 
@@ -1893,6 +1904,18 @@ class Actividades extends CI_Controller {
                             
                             $data['miCoordinacion']= $coords->coordinacion;
                         }
+        }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
         }
         /////////////////////////////////////////////////////////////////////////////
         

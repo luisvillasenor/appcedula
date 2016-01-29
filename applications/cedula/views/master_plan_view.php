@@ -2,7 +2,7 @@
     <div id="wrapper" class="row-fluid">
         <div class="span12">
         <!--Body content-->
-            <div class=""><h3>MASTER PLAN FESTIVAL DE CALAVERAS XX EDICIÓN 2014</h3></div>            
+            <div class=""><h3>MASTER PLAN FESTIVAL DE CALAVERAS EDICIÓN 201<?php echo $edicion;?></h3></div>            
             
             <?php include 'include/menu_filtros_master_plan.php';  ?>
             
@@ -33,16 +33,11 @@
                         <th>Personal Secture de Apoyo</th>
                         <th>Dependencia de Apoyo</th>
                         <th>#SS</th>                        
-                        <th>24 OCT</th>
-                        <th>25 OCT</th>
-                        <th>26 OCT</th>
-                        <th>27 OCT</th>
-                        <th>28 OCT</th>
-                        <th>29 OCT</th>
-                        <th>30 OCT</th>
-                        <th>31 OCT</th>
-                        <th>1 NOV</th>
-                        <th>2 NOV</th>
+                        <?php
+                          $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
+                          foreach ($fechas as $value) {?>
+                            <th><?php echo date("d M",strtotime($value));?></th>
+                        <?php }?>
                         <th>HORA INICIO</th>
                         <th>HORA FIN</th>
                     </tr>
