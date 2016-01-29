@@ -212,7 +212,7 @@ color:white;
                 <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Inicio Oficial"> </i>
                 <p>
                   <?php 
-                      echo form_label('Fecha de Inicio Oficial de la Actividad',  'fecha_act' ) ; 
+                      echo form_label('Fecha de Inicio Oficial',  'fecha_act' ) ; 
                       echo form_input('fecha_act', '', 'id="fecha_act" class="input-large" placeholder="Seleccione Fecha"');
                   ?>
                 </p>
@@ -220,7 +220,7 @@ color:white;
                 <i class="icon-info-sign" data-toggle="tooltip" title="Fecha de Termino Oficial"> </i>
                 <p>
                   <?php 
-                      echo form_label('Fecha de Termino Oficial de Aceptación',  'fecha_aut' ) ; 
+                      echo form_label('Fecha de Termino Oficial',  'fecha_aut' ) ; 
                       echo form_input('fecha_aut', '', 'id="fecha_aut" class="input-large" placeholder="Seleccione Fecha"');
                   ?>
                 </p>
