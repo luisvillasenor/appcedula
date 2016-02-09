@@ -77,39 +77,43 @@ color:white;
         <div class="span10">
           <!--Body content-->      
             
-            <div class="well"><h3>TABLA-CALENDARIO DE CÉDULAS</h3></div>           
+            <div class="well"><h3>PROGRAMACION GENERAL</h3></div>           
           
                    
           <table class="table table-bordered">
             <thead></thead>
             <tbody>
-              <tr>                
-                <th>CÉDULA DE ACTIVIDAD</th>
-                <th>RESPONSABLE</th>
+              <tr>
                 <?php
                   $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
                   foreach ($fechas as $value) {?>
                     <th><?php echo date("d M",strtotime($value));?></th>
                 <?php }?>
-                <th>HORA INICIO</th>
-                <th>HORA FIN</th>                
+                
+                
               </tr>
             <?php foreach ($get_cal_act as $actividades ) : ?>
               <tr>
-                  <td><?php echo $actividades->actividad;?></td>                  
-                  <td><?php echo $actividades->quienpropone;?></td>                  
-                  <td><?php if ($actividades->d1 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d2 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>
-                  <td><?php if ($actividades->d3 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d4 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d5 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d6 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d7 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d8 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d9 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php if ($actividades->d10 != 0) { echo ('<i class="icon-ok"></i>');} ?></td>   
-                  <td><?php echo $actividades->hora_ini;?></td> 
-                  <td><?php echo $actividades->hora_fin;?></td> 
+                  <td><?php if ($actividades->d1 != 0) 
+                      { echo 
+                          "<b>".$actividades->actividad .
+                          "</b><br><span>".$actividades->sede.
+                          "<br><small>".$actividades->descripcion.
+                          "<br><small>Inicio: ".$actividades->hora_ini.
+                          "Hrs.</small><br><small>".( ( $actividades->is_costo_publico == false ) ? "<small>ENTRADA GRATIS</small>" : " " ). "</small>";
+                      } ?>
+                  </td>
+                  <td><?php if ($actividades->d2 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
+                  <td><?php if ($actividades->d3 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
+                  <td><?php if ($actividades->d4 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>   
+                  <td><?php if ($actividades->d5 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
+                  <td><?php if ($actividades->d6 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
+                  <td><?php if ($actividades->d7 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td> 
+                  <td><?php if ($actividades->d8 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td> 
+                  <td><?php if ($actividades->d9 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
+                  <td><?php if ($actividades->d10 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
+                  
+                
                   
                   
               </tr>
