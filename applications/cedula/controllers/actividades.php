@@ -4,7 +4,11 @@ class Actividades extends CI_Controller {
 		session_start();
 		parent::__construct();
         $this->load->library('email');
+        $this->load->model('ubicaciones_model');
+        $this->load->model('municipios_model');
+        $this->load->model('sedes_model');
         $this->load->model('fc_model');
+        $this->load->model('subactividades_model');
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url('admin/logout')); // Redirecciona la controlador "admin/logout"
 		}
@@ -1402,6 +1406,7 @@ class Actividades extends CI_Controller {
 		$e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $data['grupo'] = $grupo;
+        $data['id_act'] = $id_act;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
         $data['edicion']  = $_SESSION['fc'];
@@ -1411,6 +1416,11 @@ class Actividades extends CI_Controller {
         $this->load->model('categorias_model');
         $this->load->model('horarios_model');
         $this->load->model('coordinadores_model');
+
+        $data['show_municipios'] = $this->municipios_model->show();
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
+        $data['show_subactividades'] = $this->subactividades_model->show($id_act);
         
         // LISTADO DE CATEGORIAS PARA QUE EL USUARIO SELECCIONE UNA OPCION
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
@@ -1443,8 +1453,6 @@ class Actividades extends CI_Controller {
         $data['anioTrabajo'] = $anioTrabajo;
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
-
-
         
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('fechas_editar_view',$data);

@@ -53,7 +53,7 @@ color:white;
   <script>
     $(document).ready(function(){
       $(function() {
-        $( "#fecha_act" ).datepicker({ 
+        $( "#fecha_taller" ).datepicker({ 
           dateFormat: 'yy-mm-dd', 
           showWeek: true, 
           firstDay:1
@@ -79,22 +79,25 @@ color:white;
         
         
     
-    <div class="row-fluid span8 control-group warning">              
+    <div class="row-fluid span9 control-group warning">              
     <!--Body content-->
         
-        <div class="well"><h3>Abierto al Público</h3></div> 
+        
 
         
-<?php foreach ($get_one_act_edit as $act ) : ?>                 
+<?php foreach ($get_one_act_edit as $act ) : ?>       
+<div class="well">
       <?php echo form_open(base_url('actividades/actualizar_act'),'class="form-horizontal"'); ?>
         <fieldset>
           
           <table>
             <tr>
-            <th rowspan="1">CÉDULA</th>
-            <td>                
-                <label>ID: <?php echo $act->id_act;?></label>
-                <label><?php echo $act->actividad;?></label>
+            <th >
+                <h2>DÍAS DE ACCESO AL PUBLICO EN GENERAL</h2>
+                <h4><?php echo $act->actividad;?></h4>
+            </th>
+            
+                
                 <input id="id_act" name="id_act" type="hidden" value="<?php echo $act->id_act;?>">
                 <input id="actividad" name="actividad" type="hidden" value="<?php echo $act->actividad;?>">
                 <input id="descripcion" name="descripcion" type="hidden" value="<?php echo $act->descripcion;?>">
@@ -124,13 +127,13 @@ color:white;
                 <input id="fecha_alta" name="fecha_alta" type="hidden" value="<?php echo $act->fecha_alta;?>">
 
                 
-            </td>
+            
             </tr>                
             <tr>
-            <th rowspan="1">CUANDO</th>
+            
             <td>      
                 <div class="control-group">
-                <label>DÍAS DE OPERACIÓN PARA EL PÚBLICO EN GENERAL</label>
+                
 
                 <?php
                 $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
@@ -181,7 +184,7 @@ color:white;
 
               </div>
                                 
-                                
+                <!--                
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">Se ABRE a las </label>
                     <div class="controls">
@@ -193,7 +196,7 @@ color:white;
                                 <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
                             <?php } ?>
                           <?php endforeach; ?>   
-                        </select>                
+                      </select>                
                     </div><p>
                     <label class="control-label" for="inputEmail">Se CIERRA a las </label>
                     <div class="controls">
@@ -208,28 +211,142 @@ color:white;
                         </select>                
                     </div>
                 </div>
-                
+                -->
                 
             </td>
             </tr>
-            <th rowspan="1">DONDE</th>
-            <td>                
-                <label>Sede</label>
-                <input class="input-xxlarge" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>">
-                <label>Ubicación</label>
-                <input class="input-xxlarge" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>">
-            </td>
             
+            <td>                
+                <label>Sede / Ubicación <input class="input-large" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>"> / <input class="input-large" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"> <button type="submit" class="btn btn-primary">Actualizar Días de Acceso</button>  </label>
+            </td>
            </table>
-          <p><br>
-          <button type="submit" class="btn btn-primary">Actualizar Cédula</button>
         </fieldset>
       <?php echo form_close(); ?>
-    
-<?php endforeach; ?>        
-        
+ </div>   
+<?php endforeach; ?>
+  
+    <div class="well">
+      <div class="text-center">
+        <?php echo form_open(base_url('subactividades/add'),'class=""'); ?>
+              <input type="hidden" name="id_act" id="id_act" value="<?php echo $id_act;?>">
+              <input class="input-xxlarge" id="subactividad" name="subactividad" type="text" placeholder="Nombre de la actividad ó taller"><br>
+              <input type="text" name="fecha_taller" id="fecha_taller" placeholder="Fecha">
+              
+              <select class="input-small" id="hora_ini" name="hora_ini">
+                  <option>Inicia</option>
+                  <?php foreach ($get_horarios as $hora ) : ?>
+                    <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <select class="input-small" id="hora_fin" name="hora_fin">
+                  <option>Termina</option>
+                  <?php foreach ($get_horarios as $hora ) : ?>
+                    <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                    <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <select class="input-md" id="sede" name="sede">
+                  <option>Sede</option>
+                  <?php foreach ($show_sedes as $sede ) : ?>
+                    <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <select class="input-small" id="status_subact" name="status_subact">
+                  <option>Status</option>
+                  <?php 
+                  $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');
+                  foreach ($status_subact as $key => $value ) : ?>
+                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <button type="submit" class="btn btn-success">Agregar Nueva Actividad/Taller al Programa Detallado</button>
+        <?php echo form_close(); ?>
+
+        <div class="well"><h3 class="text-center">Programa Detallado de Actividades/Talleres</h3>
+          <table class="table table-condensed">
+            <tr>
+              <th>Actividad/Taller</th>
+              <th>Fecha</th>
+              <th>Horario</th>
+              <th>Ubicacion / Sede</th>
+              <th></th>
+            </tr>
+            <?php foreach ($show_subactividades as $subact) { ?>
+                <tr>
+                  <td><?php echo $subact->subactividad; ?></td>
+                  <td><?php echo $subact->fecha_taller; ?></td>
+                  <td>De las <?php echo $subact->hora_ini; ?> Hrs. a las <?php echo $subact->hora_fin; ?> Hrs.</td>
+                  <td><?php echo $subact->ubicacion; ?> / <?php echo $subact->sede; ?> (</small><?php echo $subact->status_subact; ?></small>)</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Opciones
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><!-- Button to trigger modal -->
+                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Editar</a>
+                        </li>
+                        <li><!-- Button to trigger modal -->
+                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                  </td>
+                </tr>              
+                              <!-- Modal Editar -->
+                              <div id="Editar<?php echo $subact->id_subact; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                  <h3 id="myModalLabel">Actualiza Actividad/Taller</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <p>One fine body…</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                  <button class="btn btn-primary">Guardar cambios</button>
+                                </div>
+                              </div>
+                              <!-- Modal Eliminar-->
+                              <div id="Eliminar<?php echo $subact->id_subact; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                  <h3 id="myModalLabel">Eliminar Actividad/Taller del Programa</h3>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="well">
+                                    
+                                    <?php echo $subact->subactividad; ?><br>
+                                    <?php echo $subact->fecha_taller; ?><br>
+                                    De las <?php echo $subact->hora_ini; ?> Hrs. a las <?php echo $subact->hora_fin; ?> Hrs.<br>
+                                    <?php echo $subact->ubicacion; ?> / <?php echo $subact->sede; ?> (</small><?php echo $subact->status_subact; ?></small>)
+                                  </div>
+                                  
+                                  <p>Se eliminara permanentemente el registro.</p>
+                                  <p>¿Está seguro de eliminarlo permanentemente?</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal" aria-hidden="true">Canelar</button>
+                                  <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>" class="btn btn-danger">Sí, estoy seguro</a>
+                                </div>
+                              </div>
+            <?php } ?>
+            
+          </table>            
+        </div><!— /row span12 —>
+
+
+      </div>
     </div><!— /row span12 —>
-    </div>   
+  
+  </div>   
 </div><!— /container —>
 
 

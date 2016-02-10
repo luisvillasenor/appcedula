@@ -49,6 +49,8 @@
                 <li><a data-toggle="modal" href="<?php echo base_url('categorias/index');?>"><i class="icon-briefcase"></i> Administrador de Categorías &raquo;</a></li>
                 <li><a data-toggle="modal" href="<?php echo base_url('comentarios/index');?>"><i class="icon-comment"></i> Cronología de Comentarios &raquo;</a></li>
                 <li><a data-toggle="modal" href="<?php echo base_url('sedes/index');?>"><i class="icon-comment"></i> Administración de Sedes &raquo;</a></li>
+                <li><a data-toggle="modal" href="<?php echo base_url('ubicaciones/index');?>"><i class="icon-comment"></i> Administración de Ubicaciones &raquo;</a></li>
+                <li><a data-toggle="modal" href="<?php echo base_url('subactividades/index');?>"><i class="icon-comment"></i> Administración de Subactividades &raquo;</a></li>
               </ul>
             </li>
             <!-- Menu solo para appcedula -->          
