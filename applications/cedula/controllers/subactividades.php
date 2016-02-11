@@ -19,6 +19,7 @@ class Subactividades extends CI_Controller {
         $this->load->model('ubicaciones_model');
         $this->load->model('municipios_model');
         $this->load->model('sedes_model');
+        $this->load->model('horarios_model');
         $this->load->model('fc_model');
 
         /**
@@ -105,6 +106,7 @@ class Subactividades extends CI_Controller {
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();
         $data['show_municipios'] = $this->municipios_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_fc'] = $this->fc_model->get_fc();
         # Obtiene los años de cada edicion
@@ -131,13 +133,35 @@ class Subactividades extends CI_Controller {
         $data['anioTrabajo'] = $anioTrabajo;
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
-        $id_mun = $this->input->post('id_mun');
+        
+        $id_act        = ($this->input->post('id_act')) ? $this->input->post('id_act') : null ;
+        $subactividad  = ($this->input->post('subactividad')) ? $this->input->post('subactividad') : null ;
+        $fecha_taller  = ($this->input->post('fecha_taller')) ? $this->input->post('fecha_taller') : null ;
+        $sede          = ($this->input->post('sede')) ? $this->input->post('sede') : null ;
+        $ubicacion     = ($this->input->post('ubicacion')) ? $this->input->post('ubicacion') : null ;
+        $hora_ini      = ($this->input->post('hora_ini')) ? $this->input->post('hora_ini') : null ;
+        $hora_fin      = ($this->input->post('hora_fin')) ? $this->input->post('hora_fin') : null ;
+        $status_subact = ($this->input->post('status_subact')) ? $this->input->post('status_subact') : null ;
+        
+
+        # Parametro que llega por Formulario
+        $filtros = array(
+            'id_act' => $id_act,
+            'subactividad' => $subactividad,
+            'fecha_taller' => $fecha_taller,
+            'hora_ini' => $hora_ini,
+            'hora_fin' => $hora_fin,
+            'status_subact' => $status_subact,
+            'sede' => $sede,
+            'ubicacion' => $ubicacion
+        );
+        
 
         /**
         * LOGICA 
         *
         */
-        if ( isset($id_subact) AND isset($id_act) ) {
+        if ( isset($id_subact) && isset($id_act) ) {
             // Get only one row con parametro
             $data['show_subactividades'] = $this->subactividades_model->show($id_subact,$id_act);
             $data['numero_registros'] = count($data['show_subactividades']);
@@ -151,12 +175,12 @@ class Subactividades extends CI_Controller {
         * Carga las Vistas para el Usuario
         */
         $this->load->view('header_view',$data);
-        $this->load->view('ubicaciones_list',$data);
+        $this->load->view('subactividades_list',$data);
         $this->load->view('footer_view',$data);
     }
 
     // Vista: Formulario para Agregar nueva ubicacion
-    public function new_ubic() {
+    public function new_subact() {
         /** 
         * INICIALIZA VARIABLES LOCALES Y DE SESSION
         *
@@ -170,9 +194,9 @@ class Subactividades extends CI_Controller {
         $e_mail          = $_SESSION['username'];
         $data['onlyusername'] = strstr($e_mail,'@',true);
         
-        $data['show_municipios'] = $this->ubicaciones_model->show();
-        $data['show_ubicaciones'] = $this->municipios_model->show();
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_fc'] = $this->fc_model->get_fc();
         # Obtiene los años de cada edicion
@@ -204,7 +228,7 @@ class Subactividades extends CI_Controller {
         * Carga las Vistas para el Usuario
         */
         $this->load->view('header_view',$data);
-        $this->load->view('ubicaciones_new_view',$data);
+        $this->load->view('subactividades_new_view',$data);
         $this->load->view('footer_view',$data);    
     }
 
@@ -222,6 +246,7 @@ class Subactividades extends CI_Controller {
         $data['show_municipios'] = $this->ubicaciones_model->show();
         $data['show_ubicaciones'] = $this->municipios_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_fc'] = $this->fc_model->get_fc();
         # Obtiene los años de cada edicion
@@ -260,13 +285,27 @@ class Subactividades extends CI_Controller {
             'status_subact' => $this->input->post('status_subact')            
         );
 
-        $id_act = $this->subactividades_model->insert($subactividad);
-        redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
-        
+        // Controller que solcitó
+        $objeto = $this->input->post('objeto');
+
+        $agregado = $this->subactividades_model->insert($subactividad);
+
+        if ( isset($agregado) || !empty($agregado) || $agregado == true ) {
+            if ( isset($objeto) || !empty($objeto) ) {
+                switch ($objeto) {
+                    case 'actividades':
+                        redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
+                        break;
+                    case 'subactividades':
+                        $this->show();
+                        break;
+                }
+            }
+        }
 	}
 
     // Vista: Formulario para Editar una ubicacion, por URL
-    public function edit_ubic($id_ubic = null) {
+    public function edit($id_subact = null) {
         /** 
         * INICIALIZA VARIABLES LOCALES Y DE SESSION
         *
@@ -283,6 +322,7 @@ class Subactividades extends CI_Controller {
         $data['show_municipios'] = $this->ubicaciones_model->show();
         $data['show_ubicaciones'] = $this->municipios_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_fc'] = $this->fc_model->get_fc();
         # Obtiene los años de cada edicion
@@ -310,26 +350,27 @@ class Subactividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-        if ( isset($id_ubic) ) {
+        if ( isset($id_subact) ) {
             // Get only one row con parametro
-            $show_ubicaciones = $this->ubicaciones_model->show($id_ubic);
-            foreach ($show_ubicaciones as $ubicacion) {
-                $data['id_ubic'] = $ubicacion->id_ubic;
-                $data['ubicacion'] = $ubicacion->ubicacion;
-                $data['id_mun'] = $ubicacion->id_mun;
-                $data['id_sede'] = $ubicacion->id_sede;
+            $show_subactividades = $this->subactividades_model->show($id_subact);
+            foreach ($show_subactividades as $subact) {
+                $data['id_subact'] = $subact->id_subact;
+                $data['subactividad'] = $subact->subactividad;
+                $data['id_act'] = $subact->id_act;
+                $data['sede'] = $subact->sede;
+                $data['ubicacion'] = $subact->ubicacion;
+                $data['fecha_taller'] = $subact->fecha_taller;
+                $data['hora_ini'] = $subact->hora_ini;
+                $data['hora_fin'] = $subact->hora_fin;
+                $data['status_subact'] = $subact->status_subact;
             }
         }
-            else {
-                // Gel all rows sin parametro
-                echo "error";
-            }
 
         /**
         * Carga las Vistas para el Usuario
         */
         $this->load->view('header_view',$data);
-        $this->load->view('ubicaciones_edit_view',$data);
+        $this->load->view('subactividades_edit_view',$data);
         $this->load->view('footer_view',$data);    
     }
 
@@ -347,6 +388,7 @@ class Subactividades extends CI_Controller {
         $data['show_municipios'] = $this->ubicaciones_model->show();
         $data['show_ubicaciones'] = $this->municipios_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_fc'] = $this->fc_model->get_fc();
         # Obtiene los años de cada edicion
@@ -374,30 +416,39 @@ class Subactividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-        $ubicacion = array(
-            'id_ubic' => $this->input->post('id_ubic'),
-            'ubicacion' => $this->input->post('ubicacion'),
-            'id_mun' => $this->input->post('id_mun'),
-            'id_sede' => $this->input->post('id_sede')
+        $subactividad = array(
+            'id_subact'     => $this->input->post('id_subact'),
+            'id_act'        => $this->input->post('id_act'),
+            'subactividad'  => $this->input->post('subactividad'),
+            'fecha_taller'  => $this->input->post('fecha_taller'),
+            'sede'          => $this->input->post('sede'),
+            'ubicacion'     => $this->input->post('ubicacion'),
+            'hora_ini'      => $this->input->post('hora_ini'),
+            'hora_fin'      => $this->input->post('hora_fin'),
+            'status_subact' => $this->input->post('status_subact')
         );
 
-        $id_ubic = $this->ubicaciones_model->update($ubicacion);
-        if ( isset($id_ubic) ) {
-            /**
-            * Carga las Vistas para el Usuario
-            */
-            $this->show($id_ubic);            
-        }
-            else {
-                /**
-                * Carga las Vistas para el Usuario
-                */
-                $this->show();                
+        // Controller que solcitó
+        $objeto = $this->input->post('objeto');
+
+        $updated = $this->subactividades_model->update($subactividad);
+
+        if ( isset($updated) || !empty($updated) || $updated == true ) {
+            if ( isset($objeto) || !empty($objeto) ) {
+                switch ($objeto) {
+                    case 'actividades':
+                        redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
+                        break;
+                    case 'subactividades':
+                        $this->show();
+                        break;
+                }
             }
+        }
     }
 
     // Actualizar datos de una ubicacion, por POST
-    public function delete($id_subact = null, $id_act = null) {
+    public function delete($id_subact = null, $id_act = null, $objeto = null) {
         $e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $id_coord = $_SESSION['id_coord'];
@@ -438,8 +489,24 @@ class Subactividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-        $id_ubic = $this->subactividades_model->delete($id_subact);
-        redirect(base_url('actividades/editar_fechas_act')."/".$id_act);
+        // Get only one row con parametro
+        $subactividad = $this->subactividades_model->show($id_subact);
+
+        $deleted = $this->subactividades_model->delete($id_subact);
+
+        if ( isset($deleted) || !empty($deleted) || $deleted == true ) {
+            if ( isset($objeto) || !empty($objeto) ) {
+                switch ($objeto) {
+                    case 'actividades':
+                        redirect(base_url('actividades/editar_fechas_act')."/".$id_act);
+                        break;
+                    case 'subactividades':
+                        $this->show();
+                        break;
+                }
+            }
+        }
+        
         
     }
     

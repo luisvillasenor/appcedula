@@ -18,24 +18,35 @@ class Subactividades_model extends CI_Model
         }
 
         // SELECT
-        function show($id_act = null) {   
-            if ( isset($id_act) ) {
-                // Si el parametro no es null, get id_subact
-                $this->db->where('id_act',$id_act);
-                $query = $this->db->get('subactividades');     
-                return $query->result();
+        function show($id_subact = null,$id_act = null) {   
+            if ( isset($id_subact) || isset($id_act) ) {
+
+                if ( isset($id_subact) ) {
+                    // Si el parametro no es null, get id_subact
+                    $this->db->limit(1);
+                    $this->db->where('id_subact',$id_subact);
+                    $query = $this->db->get('subactividades');     
+                    return $query->result();
+                }
+
+                if( isset($id_act) ) {
+                    // Si el parametro no es null, get id_subact
+                    $this->db->where('id_act',$id_act);
+                    $query = $this->db->get('subactividades');     
+                    return $query->result();
+                }
             }
-             
-            $query = $this->db->get('subactividades');     
-            return $query->result();                    
-             
+                else{
+                    $query = $this->db->get('subactividades');     
+                    return $query->result();
+                }
         }
 
         // INSERT
         function insert($subactividad = null) {
             if ( isset($subactividad) ) {
                 $this->db->insert('subactividades', $subactividad);
-                return $this->db->insert_id();
+                return true;
             }
                 else {
                     return null;
@@ -43,11 +54,11 @@ class Subactividades_model extends CI_Model
         }
         
         // UPDATE
-        function update() {
+        function update($subactividad) {
             if ( isset($subactividad) ) {
                 $this->db->where('id_subact', $subactividad['id_subact']);
                 $this->db->update('subactividades', $subactividad);
-                return $subactividad['id_subact'];
+                return true;
             }
                 else {
                     return null;
@@ -71,7 +82,7 @@ class Subactividades_model extends CI_Model
             if ( isset($id_subact) ) {
                 $this->db->where('id_subact', $id_subact);
                 $this->db->delete('subactividades', $subactividad);
-                return $id_subact;
+                return true;
             }
                 else {
                     return null;

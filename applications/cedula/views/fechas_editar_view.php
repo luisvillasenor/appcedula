@@ -228,6 +228,7 @@ color:white;
     <div class="well">
       <div class="text-center">
         <?php echo form_open(base_url('subactividades/add'),'class=""'); ?>
+              <input type="hidden" name="objeto" id="objeto" value="actividades">
               <input type="hidden" name="id_act" id="id_act" value="<?php echo $id_act;?>">
               <input class="input-xxlarge" id="subactividad" name="subactividad" type="text" placeholder="Nombre de la actividad ó taller"><br>
               <input type="text" name="fecha_taller" id="fecha_taller" placeholder="Fecha">
@@ -235,13 +236,13 @@ color:white;
               <select class="input-small" id="hora_ini" name="hora_ini">
                   <option>Inicia</option>
                   <?php foreach ($get_horarios as $hora ) : ?>
-                    <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                    <option value="<?php echo $hora->horario; ?>"><?php echo date("H:s",strtotime($hora->horario)); ?></option>
                   <?php endforeach; ?>   
               </select>
               <select class="input-small" id="hora_fin" name="hora_fin">
                   <option>Termina</option>
                   <?php foreach ($get_horarios as $hora ) : ?>
-                    <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                    <option value="<?php echo $hora->horario; ?>"><?php echo date("H:s",strtotime($hora->horario)); ?></option>
                   <?php endforeach; ?>   
               </select>
               <select class="input-md" id="ubicacion" name="ubicacion">
@@ -270,18 +271,22 @@ color:white;
         <div class="well"><h3 class="text-center">Programa Detallado de Actividades/Talleres</h3>
           <table class="table table-condensed">
             <tr>
-              <th>Actividad/Taller</th>
               <th>Fecha</th>
-              <th>Horario</th>
-              <th>Ubicacion / Sede</th>
+              <th>Inicia</th>
+              <th>Termina</th>
+              <th>Actividad/Taller</th>
+              <th>Ubicacion</th>
+              <th>Sede</th>
               <th></th>
             </tr>
             <?php foreach ($show_subactividades as $subact) { ?>
                 <tr>
-                  <td><?php echo $subact->subactividad; ?></td>
                   <td><?php echo $subact->fecha_taller; ?></td>
-                  <td>De las <?php echo $subact->hora_ini; ?> Hrs. a las <?php echo $subact->hora_fin; ?> Hrs.</td>
-                  <td><?php echo $subact->ubicacion; ?> / <?php echo $subact->sede; ?> (</small><?php echo $subact->status_subact; ?></small>)</td>
+                  <td><?php echo date("H:s",strtotime($subact->hora_ini));?> hrs</td>
+                  <td><?php echo date("H:s",strtotime($subact->hora_fin));?> hrs</td>
+                  <td><?php echo $subact->subactividad; ?></td>
+                  <td><?php echo $subact->ubicacion; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
+                  <td><?php echo $subact->sede; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
                   <td>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -306,13 +311,26 @@ color:white;
                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                   <h3 id="myModalLabel">Actualiza Actividad/Taller</h3>
                                 </div>
-                                <div class="modal-body">
-                                  <p>One fine body…</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                  <button class="btn btn-primary">Guardar cambios</button>
-                                </div>
+                                <?php echo form_open(base_url('subactividades/update'),'class=""'); ?>
+                                    <div class="modal-body">
+                                      <div class="well">
+                                        <input type="hidden" name="objeto" id="objeto" value="actividades">
+                                        <input type="text" name="id_subact" id="id_subact" value="<?php echo $subact->id_subact; ?>">
+                                        <input type="text" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>">
+                                        <input type="text" name="subactividad" id="subactividad" value="<?php echo $subact->subactividad; ?>">
+                                        <input type="text" name="fecha_taller" id="fecha_taller" value="<?php echo $subact->fecha_taller; ?>">
+                                        <input type="text" name="sede" id="sede" value="<?php echo $subact->sede; ?>">
+                                        <input type="text" name="ubicacion" id="ubicacion" value="<?php echo $subact->ubicacion; ?>">
+                                        <input type="text" name="hora_ini" id="hora_ini" value="<?php echo $subact->hora_ini; ?>">
+                                        <input type="text" name="hora_fin" id="hora_fin" value="<?php echo $subact->hora_fin; ?>">
+                                        <input type="text" name="status_subact" id="status_subact" value="<?php echo $subact->status_subact; ?>">                                        
+                                      </div>                                  
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    </div>
+                                <?php echo form_close(); ?>
                               </div>
                               <!-- Modal Eliminar-->
                               <div id="Eliminar<?php echo $subact->id_subact; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -321,8 +339,7 @@ color:white;
                                   <h3 id="myModalLabel">Eliminar Actividad/Taller del Programa</h3>
                                 </div>
                                 <div class="modal-body">
-                                  <div class="well">
-                                    
+                                  <div class="well">                                    
                                     <?php echo $subact->subactividad; ?><br>
                                     <?php echo $subact->fecha_taller; ?><br>
                                     De las <?php echo $subact->hora_ini; ?> Hrs. a las <?php echo $subact->hora_fin; ?> Hrs.<br>
@@ -334,7 +351,7 @@ color:white;
                                 </div>
                                 <div class="modal-footer">
                                   <button class="btn" data-dismiss="modal" aria-hidden="true">Canelar</button>
-                                  <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>" class="btn btn-danger">Sí, estoy seguro</a>
+                                  <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>/actividades" class="btn btn-danger">Sí, estoy seguro</a>
                                 </div>
                               </div>
             <?php } ?>

@@ -1420,7 +1420,7 @@ class Actividades extends CI_Controller {
         $data['show_municipios'] = $this->municipios_model->show();
         $data['show_sedes'] = $this->sedes_model->show();
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();
-        $data['show_subactividades'] = $this->subactividades_model->show($id_act);
+        $data['show_subactividades'] = $this->subactividades_model->show($id_subact = null,$id_act);
         
         // LISTADO DE CATEGORIAS PARA QUE EL USUARIO SELECCIONE UNA OPCION
 		$data['get_categorias'] = $this->categorias_model->get_categorias($id_coord,$grupo);
