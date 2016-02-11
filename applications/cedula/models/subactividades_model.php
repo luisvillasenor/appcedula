@@ -69,7 +69,7 @@ class Subactividades_model extends CI_Model
         function delete($id_subact = null) {
             if ( isset($id_subact) ) {
                 $this->db->where('id_subact', $id_subact);
-                $this->db->delete('subactividades', $subactividad);
+                $this->db->delete('subactividades');
                 return true;
             }
                 else {

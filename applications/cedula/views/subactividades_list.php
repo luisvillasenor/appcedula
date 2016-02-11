@@ -65,6 +65,9 @@
                         <li><!-- Button to trigger modal -->
                             <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
                         </li>
+                        <li><!-- Button to trigger modal -->
+                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/subactividades">Repetir</a>
+                        </li>
                         
                       </ul>
                     </div>
@@ -121,6 +124,7 @@
                                   <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>/subactividades" class="btn btn-danger">Sí, estoy seguro</a>
                                 </div>
                               </div>
+
             <?php } ?>
             
           </table>

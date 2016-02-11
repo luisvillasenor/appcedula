@@ -297,7 +297,7 @@ class Subactividades extends CI_Controller {
                         redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
                         break;
                     case 'subactividades':
-                        $this->show();
+                        redirect(base_url('subactividades/show'));
                         break;
                 }
             }
@@ -440,7 +440,7 @@ class Subactividades extends CI_Controller {
                         redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
                         break;
                     case 'subactividades':
-                        $this->show();
+                        redirect(base_url('subactividades/show'));
                         break;
                 }
             }
@@ -489,9 +489,6 @@ class Subactividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-        // Get only one row con parametro
-        $subactividad = $this->subactividades_model->show($id_subact);
-
         $deleted = $this->subactividades_model->delete($id_subact);
 
         if ( isset($deleted) || !empty($deleted) || $deleted == true ) {
@@ -501,13 +498,50 @@ class Subactividades extends CI_Controller {
                         redirect(base_url('actividades/editar_fechas_act')."/".$id_act);
                         break;
                     case 'subactividades':
-                        $this->show();
+                        redirect(base_url('subactividades/show'));
                         break;
                 }
             }
-        }
-        
-        
+        }        
+    }
+
+    function repetir($id_subact = null, $objeto = null){
+
+        if ( isset($id_subact) AND isset($objeto) ) {
+
+            // Get only one row con parametro
+            $subacti = $this->subactividades_model->show($id_subact);
+            foreach ($subacti as $key => $value) {
+                
+                $subactividad = array(
+                    'id_act'        => $value->id_act,
+                    'subactividad'  => $value->subactividad,
+                    'fecha_taller'  => $value->fecha_taller,
+                    'sede'          => $value->sede,
+                    'ubicacion'     => $value->ubicacion,
+                    'hora_ini'      => $value->hora_ini,
+                    'hora_fin'      => $value->hora_fin,
+                    'status_subact' => $value->status_subact
+                );
+            }
+            
+            $agregado = $this->subactividades_model->insert($subactividad);
+
+            if ( isset($agregado) AND !empty($agregado) AND $agregado == true ) {
+                if ( isset($objeto) AND !empty($objeto) ) {
+                    switch ($objeto) {
+                        case 'actividades':
+                            redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
+                            break;
+                        case 'subactividades':
+                            redirect(base_url('subactividades/show'));
+                            break;
+                    }
+                }
+            }
+                #var_dump($subactividad['subactividad']);
+                #redirect('ups.html');            
+        }         
     }
     
 
