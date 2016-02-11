@@ -65,18 +65,6 @@ class Subactividades_model extends CI_Model
                 }
         }
 
-        // COPY
-        function cpy() {
-            if ( isset($subactividad) ) {
-                $this->db->where('id_subact', $subactividad['id_subact']);
-                $this->db->update('subactividades', $subactividad);
-                return $subactividad['id_subact'];
-            }
-                else {
-                    return null;
-                }
-        }
-
         // DELETE
         function delete($id_subact = null) {
             if ( isset($id_subact) ) {
