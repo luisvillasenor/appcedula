@@ -102,6 +102,25 @@ color:white;
                           "<br><small>Inicio: ".$actividades->hora_ini.
                           "Hrs.</small><br><small>".( ( $actividades->is_costo_publico == false ) ? "<small>ENTRADA GRATIS</small>" : " " ). "</small>";
                       } ?>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d1 == $necs->fecha_taller){ ?>
+                                    
+                                       <hr>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                    
+                                    
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+
+
+
+
                   </td>
                   <td><?php if ($actividades->d2 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
                   <td><?php if ($actividades->d3 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
@@ -123,9 +142,7 @@ color:white;
           
           
         </div><!— /span8 —>
-
-        
-            
+             
             
             
         </div>

@@ -316,19 +316,19 @@ class Actividades_model extends CI_Model
     {
         switch ($grupo) {
               case 'administrador':
-                $this->db->select('actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
+                $this->db->select('id_act,actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
                 $this->db->where('id_fc', $edicion);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               case 'coordinador':
-                $this->db->select('actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
+                $this->db->select('id_act,actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('id_coord', $id_coord);
                 $this->db->or_where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);        
                 break;
               default:
-                $this->db->select('actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
+                $this->db->select('id_act,actividad,descripcion,is_costo_publico,sede,ubicacion,quienpropone,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,hora_ini,hora_fin');
                 $this->db->where('id_fc', $edicion);
                 $this->db->where('e_mail', $e_mail);
                 $query = $this->db->get(ACTIVIDADES);              

@@ -33,6 +33,7 @@
         <?php
         if ( $onlyusername == 'appcedula' ) { ?>
             <!-- Menu solo para appcedula -->
+            <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_contenidos');?>"><i class="icon-book"></i> MASTER CONTENIDOS &raquo;</a></li>
             <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_plan');?>"><i class="icon-book"></i> MASTER PLAN &raquo;</a></li>
             <!--<li><a data-toggle="modal" href="<?php echo base_url();?>/actividades/resumen"><i class="icon-comment"></i> RESUMEN &raquo;</a></li>-->
         

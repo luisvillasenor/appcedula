@@ -1738,8 +1738,10 @@ class Actividades extends CI_Controller {
         $data['get_fc'] = $this->fc_model->get_fc();
 		$data['onlyusername'] = strstr($e_mail,'@',true);
 		$this->load->model('actividades_model');
+        $this->load->model('subactividades_model');
         $this->load->model('coordinadores_model');
         $data['get_cal_act'] = $this->actividades_model->get_cal_act($e_mail,$grupo,$id_coord,$edicion);
+        $data['show_subacts'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         foreach ($data['get_all_coords'] as $coords ) {
     
@@ -1936,6 +1938,57 @@ class Actividades extends CI_Controller {
         $this->load->view('master_plan_view',$data);
         $this->load->view('footer_view',$data);
 	}
+
+    public function master_contenidos(){
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $_SESSION['fc'];
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['title']= 'Master Plan del Festival de Calaveras';
+        
+        $this->load->model('actividades_model');
+        $this->load->model('necesidades_model');
+        $this->load->model('categorias_model');
+        $this->load->model('coordinadores_model');
+        $this->load->model('subactividades_model');
+        
+        // Código que pone en el encabezado de la página la Coordinación del Usuario.
+        /////////////////////////////////////////////////////////////////////////////
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
+    
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+
+        // Obtiene los años de cada edicion
+        $edicionesTrabajo = array();
+        $idsfcTrabajo = array();
+        $fcTrabajo = false;
+        foreach ($data['get_fc'] as $anio) {
+            array_push($edicionesTrabajo, $anio->anio);
+            array_push($idsfcTrabajo, $anio->id_fc);
+            if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                $fcTrabajo = $anio->id_fc ;
+            }
+        }
+        /////////////////////////////////////////////////////////////////////////////
+        
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
+                
+        $this->load->view('header_view',$data);
+        $this->load->view('master_contenidos_view',$data);
+        $this->load->view('footer_view',$data);
+    }
     
     
     
