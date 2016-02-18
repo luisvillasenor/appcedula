@@ -44,7 +44,7 @@
                              
                                         
                                         <td><?php echo $cats->categoria;?></td>
-                                        <td><?php echo $act->actividad;?><hr><?php echo $act->descripcion;?></td>
+                                        <td><?php echo $act->actividad;?></td>
                                         
                                         <td>
                                             <table>

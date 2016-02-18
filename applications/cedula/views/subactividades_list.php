@@ -3,21 +3,21 @@
 
     <div id="wrapper" class="row-fluid">
         
-      <?php include 'include/nav_actividades.php';   ?>      
+      <?php include 'include/nav_subactividades.php';   ?>      
         
     
     <div class="row-fluid span8 control-group warning">              
     <!--Body content-->
       
         
-        <div class="well text-center">
-        <h2>Subactividades del Festival de Calaveras <?php echo $anioTrabajo;?></h2>
-
+        <div class="well well-small text-center">
+          <h2>Subactividades del Festival de Calaveras <?php echo $anioTrabajo;?></h2>
         </div>
+        <!--
         <div class="offset8">
             
             <a class="btn btn-success" href="<?php echo base_url('subactividades/new_subact');?>">Agregar subactividad</a>
-            <!--
+            
             <a>
               <?php $atributos = array('class' => 'navbar-form pull-left','name' => 'agregasubactform'); 
                   echo form_open(base_url('subactividades/show'), $atributos); ?>                    
@@ -30,11 +30,13 @@
                   </select>                
               <?php echo form_close(); ?>
             </a>
-            -->
+            
         </div>
+        -->
 
 
-          <table class="table table-condensed">
+          <table class="table table-striped table-bordered table-hover table-condensed">
+            <thead class="text-center">
             <tr>
               <th>Fecha</th>
               <th>Inicia</th>
@@ -44,6 +46,8 @@
               <th>Sede</th>
               <th></th>
             </tr>
+            </thead>
+            <tbody>
             <?php foreach ($show_subactividades as $subact) { ?>
                 <tr>
                   <td><?php echo $subact->fecha_taller; ?></td>
@@ -60,13 +64,13 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Editar</a>
+                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> Editar</a>
                         </li>
                         <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
+                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>"><i class="icon-remove"></i> Eliminar</a>
                         </li>
                         <li><!-- Button to trigger modal -->
-                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/subactividades">Repetir</a>
+                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/subactividades"><i class="icon-repeat"></i> Repetir</a>
                         </li>
                         
                       </ul>
@@ -95,8 +99,8 @@
                                       </div>                                  
                                     </div>
                                     <div class="modal-footer">
-                                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                      <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i> Cancelar</button>
+                                      <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar cambios</button>
                                     </div>
                                 <?php echo form_close(); ?>
                               </div>
@@ -120,13 +124,13 @@
                                   <p>¿Está seguro de eliminarlo permanentemente?</p>
                                 </div>
                                 <div class="modal-footer">
-                                  <button class="btn" data-dismiss="modal" aria-hidden="true">Canelar</button>
-                                  <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>/subactividades" class="btn btn-danger">Sí, estoy seguro</a>
+                                  <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i> Canelar</button>
+                                  <a href="<?php echo base_url('subactividades/delete');?>/<?php echo $subact->id_subact; ?>/<?php echo $subact->id_act; ?>/subactividades" class="btn btn-danger"><i class="icon-trash icon-white"></i> Sí, estoy seguro</a>
                                 </div>
                               </div>
 
             <?php } ?>
-            
+            </tbody>
           </table>
 
                         

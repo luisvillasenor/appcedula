@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div id="wrapper" class="row-fluid">
-      <?php include 'include/nav_actividades.php';  ?>      
+      <?php include 'include/nav_subactividades.php';  ?>      
         <div class="row-fluid span8 control-group info">              
         <!--Body content-->
             <div class="well text-center">

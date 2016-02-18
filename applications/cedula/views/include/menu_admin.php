@@ -55,7 +55,25 @@
               </ul>
             </li>
             <!-- Menu solo para appcedula -->          
-        <?php } ?>
+        <?php } 
+                  elseif ($onlyusername == 'rabingarcia') { ?>
+                      <!-- Menu solo para Rabin -->
+                      <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_contenidos');?>"><i class="icon-book"></i> MASTER CONTENIDOS &raquo;</a></li>
+                      <li class="dropdown">  
+                        <a class="dropdown-toggle" data-toggle="dropdown">  
+                          <small><strong><?php echo $onlyusername; ?></strong> (<?php echo $_SESSION['grupo'];?>)</small>
+                                  
+                                  <span class="caret"></span>                
+                        </a>  
+                        <ul class="dropdown-menu"> 
+                          <!-- dropdown menu links -->                                              
+                          <li><a data-toggle="modal" href="<?php echo base_url('sedes/index');?>"><i class="icon-comment"></i> Administración de Sedes &raquo;</a></li>
+                          <li><a data-toggle="modal" href="<?php echo base_url('ubicaciones/index');?>"><i class="icon-comment"></i> Administración de Ubicaciones &raquo;</a></li>
+                          <li><a data-toggle="modal" href="<?php echo base_url('subactividades/index');?>"><i class="icon-comment"></i> Administración de Subactividades &raquo;</a></li>
+                        </ul>
+                      </li>
+                      <!-- Menu solo para Rabin -->          
+            <?php } ?>
         
           
         <li>

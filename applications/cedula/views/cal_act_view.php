@@ -94,46 +94,247 @@ color:white;
               </tr>
             <?php foreach ($get_cal_act as $actividades ) : ?>
               <tr>
-                  <td><?php if ($actividades->d1 != 0) 
-                      { echo 
-                          "<b>".$actividades->actividad .
-                          "</b><br><span>".$actividades->sede.
-                          "<br><small>".$actividades->descripcion.
-                          "<br><small>Inicio: ".$actividades->hora_ini.
-                          "Hrs.</small><br><small>".( ( $actividades->is_costo_publico == false ) ? "<small>ENTRADA GRATIS</small>" : " " ). "</small>";
-                      } ?>
+                  <td>
+                      <?php if ($actividades->d1 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
 
                             <?php foreach ($show_subacts as $necs ) : 
                                 if ($actividades->id_act == $necs->id_act AND $actividades->d1 == $necs->fecha_taller){ ?>
-                                    
-                                       <hr>
+                                <li>
                                         <small><?php echo $necs->subactividad;?></small><br>
                                         <small><?php echo $necs->status_subact;?></small></br>
                                         <small><?php echo $necs->fecha_taller;?></small></br>
                                         <small><?php echo $necs->ubicacion;?></small></br>
                                         <small><?php echo $necs->hora_ini;?></small></br>
                                         <small><?php echo $necs->hora_fin;?></small></br>
-                                    
-                                    
+                                </li>        
                                 <?php } ?>                                                    
                             <?php endforeach; ?>
-
-
-
-
+                      </ul>
                   </td>
-                  <td><?php if ($actividades->d2 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
-                  <td><?php if ($actividades->d3 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>
-                  <td><?php if ($actividades->d4 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>   
-                  <td><?php if ($actividades->d5 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
-                  <td><?php if ($actividades->d6 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
-                  <td><?php if ($actividades->d7 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td> 
-                  <td><?php if ($actividades->d8 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td> 
-                  <td><?php if ($actividades->d9 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
-                  <td><?php if ($actividades->d10 != 0) { echo "<b>".$actividades->actividad ."</b><br><span>".$actividades->descripcion."</span>";} ?></td>  
-                  
-                
-                  
+                  <td>
+                      <?php if ($actividades->d2 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d2 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d3 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d3 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>                  
+                  <td>
+                      <?php if ($actividades->d4 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d4 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>                
+                  <td>
+                      <?php if ($actividades->d5 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d5 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d6 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d6 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d7 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d7 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d8 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d8 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d9 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d9 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>
+                  <td>
+                      <?php if ($actividades->d10 != 0) 
+                          { echo 
+                              "<b>".$actividades->actividad .
+                              "</b><br>".$actividades->sede.
+                              "<hr>";
+                          } ?>
+
+                      <ul>
+
+                            <?php foreach ($show_subacts as $necs ) : 
+                                if ($actividades->id_act == $necs->id_act AND $actividades->d10 == $necs->fecha_taller){ ?>
+                                <li>
+                                        <small><?php echo $necs->subactividad;?></small><br>
+                                        <small><?php echo $necs->status_subact;?></small></br>
+                                        <small><?php echo $necs->fecha_taller;?></small></br>
+                                        <small><?php echo $necs->ubicacion;?></small></br>
+                                        <small><?php echo $necs->hora_ini;?></small></br>
+                                        <small><?php echo $necs->hora_fin;?></small></br>
+                                </li>        
+                                <?php } ?>                                                    
+                            <?php endforeach; ?>
+                      </ul>
+                  </td>                  
+
                   
               </tr>
                 <?php endforeach; ?>

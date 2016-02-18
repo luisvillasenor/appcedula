@@ -1,28 +1,28 @@
 <div class="container-fluid">
     <div id="wrapper" class="row-fluid">
-      <?php include 'include/nav_actividades.php';  ?>      
+      <?php include 'include/nav_subactividades.php';  ?>      
         <div class="row-fluid span8 control-group info">              
         <!--Body content-->
-            <div class="well text-center">
+            <div class="well well-small text-center">
               <h2>Agrega Nueva Subactividad/Taller</h2>
             </div>
             
             <div class="">
               <?php echo form_open(base_url('subactividades/add'),'class=""'); ?>
-                  <input type="text" name="objeto" id="objeto" value="subactividades">
+                  <input type="hidden" name="objeto" id="objeto" value="subactividades">
                   <input type="text" name="id_act" id="id_act">
                   <input class="input-xxlarge" id="subactividad" name="subactividad" type="text" placeholder="Nombre de la actividad ó taller"><br>
                   <input type="text" name="fecha_taller" id="fecha_taller" placeholder="Fecha">              
                   <select class="input-small" id="hora_ini" name="hora_ini">
                       <option>Inicia</option>
-                      <?php foreach ($get_horarios as $hora ) : ?>
-                        <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                      <?php foreach ($get_horarios as $hora1 ) : ?>
+                        <option value="<?php echo $hora1->horario; ?>"><?php echo date("H:s",strtotime($hora1->horario)); ?></option>
                       <?php endforeach; ?>   
                   </select>
                   <select class="input-small" id="hora_fin" name="hora_fin">
                       <option>Termina</option>
-                      <?php foreach ($get_horarios as $hora ) : ?>
-                        <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
+                      <?php foreach ($get_horarios as $hora2 ) : ?>
+                        <option value="<?php echo $hora2->horario; ?>"><?php echo date("H:s",strtotime($hora2->horario)); ?></option>
                       <?php endforeach; ?>   
                   </select>
                   <select class="input-md" id="ubicacion" name="ubicacion">

@@ -56,10 +56,11 @@ $(document).ready(function() {
 });
 </script>
 
-
+<!--
 <div id="footer" class="text-center">
       <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/header_festival_2015_fondo_negro.png" width="24%">
 </div>
+-->
 
 </body>
 </html>
