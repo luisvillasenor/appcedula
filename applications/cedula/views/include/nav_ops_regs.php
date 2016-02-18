@@ -41,11 +41,32 @@ if ( $fcTrabajo != $edicion && $actividades->status_act != 5 ) { ?>
       <?php if ( ($fcTrabajo == $edicion) && $actividades->status_act != 5 ) { ?>
       <!-- Si accesas al Año de Trabajo Actual y la cédula NO esta bloqueada -->
       <td>
-          <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-          <a class="btn btn-mini" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>        
+            <div class="btn-group btn-mini">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                Menu Opciones
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- dropdown menu links -->
+                <li>
+                  <a href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i> Editar</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Presupuesto de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-shopping-cart"></i> Presupuesto</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i> Calendario</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i> Vista Previa</a>
+                </li>
+              </ul>
+            </div>
+          
+                  
           <!-- <a class="btn btn-mini" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a> -->
-          <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-          <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
+          
+          
       </td>  
       <?php }else{ ?>
           <!-- Si accesas al Año de Trabajo Actual y la cédula SI esta bloqueada -->
