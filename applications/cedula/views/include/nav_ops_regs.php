@@ -4,9 +4,11 @@ $edicion = $_SESSION['fc'];
 $username   = $_SESSION['username'];
 
 if ( $fcTrabajo != $edicion && $actividades->status_act != 5 ) { ?>
+    <!-- Si NO accesas al Año de Trabajo Actual y la cédula SI esta bloqueada -->
       <td>
               <!-- Button to trigger modal -->
               <button style="margin:7px 15px 17px 0;" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $actividades->id_act; ?>"><i class="icon-white icon-share-alt"></i><strong> Activar </strong></button>
+              <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
               <!-- Modal -->
               <div id="myModal_<?php echo $actividades->id_act; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
@@ -32,39 +34,27 @@ if ( $fcTrabajo != $edicion && $actividades->status_act != 5 ) { ?>
               </div>
               <!-- End Modal -->
       </td>
-      <td>
-        <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
+        
       
 <?php }else{ ?>
 
       <?php if ( ($fcTrabajo == $edicion) && $actividades->status_act != 5 ) { ?>
-      
+      <!-- Si accesas al Año de Trabajo Actual y la cédula NO esta bloqueada -->
+      <td>
           <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_actividad/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-pencil"></i></a>
-      </td>
-      <td>
           <a class="btn btn-mini" href="<?php echo base_url('actividades/necesidades_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-list"></i></a>        
-          <a class="btn btn-mini" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a>                  
-      </td>
-
-      <td>        
+          <!-- <a class="btn btn-mini" href="<?php echo base_url('actividades/comentarios_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-comment"></i></a> -->
           <a class="btn btn-mini" href="<?php echo base_url('actividades/editar_fechas_act/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-calendar"></i></a>
-        
+          <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
+      </td>  
       <?php }else{ ?>
-
-          
-          <a class="btn btn-mini disabled" data-toggle="tooltip" title="Editar Cédula No. <?php echo $actividades->id_act;?>" readonly><i class="icon-pencil"></i></a>
-      </td>
+          <!-- Si accesas al Año de Trabajo Actual y la cédula SI esta bloqueada -->
       <td>
-          <a class="btn btn-mini disabled" data-toggle="tooltip" title="Listar Necesidades de la Cédula No. <?php echo $actividades->id_act;?>" readonly><i class="icon-list"></i></a>
-          <a class="btn btn-mini disabled" data-toggle="tooltip" title="Comentarios de la Cédula No. <?php echo $actividades->id_act;?>" readonly><i class="icon-comment"></i></a>                  
+        <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
       </td>
-
-      <td>
-        <a class="btn btn-mini disabled" data-toggle="tooltip" title="Calendario de la Cédula No. <?php echo $actividades->id_act;?>" readonly><i class="icon-calendar"></i></a>
 
       <?php } ?>
 
-        <a class="btn btn-mini" href="<?php echo base_url('actividades/vista_previa/'.$actividades->id_act.'');?>" data-toggle="tooltip" title="Vista Previa de la Cédula No. <?php echo $actividades->id_act;?>"><i class="icon-eye-open"></i></a>
-      </td>
+        
 
 <?php } ?>

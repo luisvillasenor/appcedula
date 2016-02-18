@@ -53,7 +53,7 @@
         </td>
 <?php break;
     case '5':?>
-        <td><span name="flag" id="flag" class="label"><i class="icon-lock"></i></span></td>
+        <td><span name="flag" id="flag" class="label"><i class="icon-lock"></i><small> Bloqueada</small></span></td>
 <?php break;
     case '6':?>
         <td><span name="flag" id="flag" class="label label-default"><small>Fuera de Presupuesto</small></span></td>

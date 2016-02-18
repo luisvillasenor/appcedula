@@ -1,6 +1,6 @@
 <table class="table table-bordered table-responsive">
                 <?php foreach ($get_one_act_edit as $actividades ) : ?>
-                <thead>RUBRO PRESUPUESTO INDIVIDUAL ( CÉDULA #-<?php echo $actividades->id_act;?>)</thead>
+                      <h2>BALANCE FINANCIERO <small>(Cédula - <?php echo $actividades->id_act;?>)</small></h2>
               <tr>                
                 <th>Año Anterior</th>
                 <th>Solicitado Año Actual</th>

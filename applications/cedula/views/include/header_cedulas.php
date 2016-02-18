@@ -9,7 +9,7 @@
                 </thead>
                 <tbodyz>
                   <tr>
-                    <th colspan="3">OPERACIONES</th>
+                    <th colspan="1">OPERACIONES</th>
                     <th>ID</th>
                     <th>CEDULA</th>
                     <th>CATEGORIA</th>

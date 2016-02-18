@@ -70,7 +70,7 @@ color:white;
     <div class="row-fluid span8 control-group warning">              
     <!--Body content-->
       
-        <div class="well"><h3>LISTADO DE NECESIDADES DE LA CÉDULA DE ACTIVIDAD</h3></div>           
+        <div class="well well-small"><h3>DETALLE PRESUPUESTAL DE LA CÉDULA</h3></div>           
                   
             <table class="table table-bordered">
                 <?php foreach ($get_one_act_edit as $actividades ) : ?>
@@ -90,7 +90,7 @@ color:white;
                             echo form_open('necesidades/agregar_nec'); 
                             echo form_hidden('id_act', $actividades->id_act);
                         ?>
-                        <button type="submit" class="btn">Agregar Necesidad</button>
+                        <button type="submit" class="btn btn-primary"><i class="icon-shopping-cart icon-white"></i> Agregar Concepto</button>
                         <?php echo form_close();?>
                     <?php endforeach; ?>                    
                     
@@ -161,11 +161,11 @@ color:white;
                       <?php endforeach; ?>(IVA)
                   </a>                  
               </li>
-                <li class="active"><a>TOTAL<br>$
+                <li><span class="label label-success"><h5>PRESUPUESTO<br>$
                     <?php foreach ($get_total_act as $tot3 ) : ?>
                         <?php echo number_format($tot3->tot_tot,2,".",","); ?>
                       <?php endforeach; ?>
-                    </a></li>
+                    </h5></span></li>
             </ul>
             
           </div>        

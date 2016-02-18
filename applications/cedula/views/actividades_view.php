@@ -44,17 +44,17 @@
                     
               <div class="span3 text-center">
                 <div class="alert alert-info">
-                  <h5>PRESUPUESTO AUTORIZADO</h5>
-                  <h3>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h3>
-                  <small>Total autorizado</small>
+                  <h5>PRESUPUESTO SOLICITADO</h5>
+                  <h3>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h3>
+                  <small>Total costo neto de SECTURE</small>
                 </div>
               </div>
 
               <div class="span3 text-center">
                 <div class="alert alert-info">
-                  <h5>PRESUPUESTO SOLICITADO</h5>
-                  <h3>$<?php echo number_format($suma_costo_secture*1.16,2,".",","); ?></h3>
-                  <small>Total costo neto de SECTURE</small>
+                  <h5>PRESUPUESTO AUTORIZADO</h5>
+                  <h3>$<?php echo number_format($suma_pres_aut,2,".",","); ?></h3>
+                  <small>Total autorizado</small>
                 </div>
               </div>
 
@@ -106,7 +106,7 @@
                 <?php foreach ($get_all_actividades as $actividades ) : ?>
                   <!-- Código dentro del FOREACH de todas las actividades del Usuario, Grupo, Coordinación y Año -->
                   <tr>                      
-                      <td><!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
+                      <!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
                           <?php
                               switch ($grupo) {
                                           case 'coordinador':
@@ -136,7 +136,7 @@
                                             break;
                                         } 
                             ?>                          
-                      </td>
+                      
                       <td><?php echo $actividades->id_act;?></td>
                       <td><?php echo $actividades->actividad;?></td>
                       

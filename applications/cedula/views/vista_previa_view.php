@@ -114,9 +114,9 @@ color:white;
         <div class="span12">
         <!--Body content-->
             <div class="text-center"><h5>VISTA PREVIA DE LA CÉDULA</h5></div>
-            
+<!--            
             <script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 1;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Imprimir y PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/button-print-grnw20.png" alt="Imprimir y PDF"/></a>
-            
+-->        
             <hr>
 
 <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
@@ -141,31 +141,31 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
              
             <table class="table table-bordered">
                 <?php foreach ($get_one_act_edit as $actividades ) : ?>
-                <thead>CÉDULA No. 
-                    <span class="badge badge-inverse"><?php echo $actividades->id_act;?>
+
+                <thead>EDICION 201<?php echo $actividades->id_fc;?>
                     
                         <?php switch ($actividades->status_act) {
                               case '1':?>
-                                <th><span name="flag" id="flag" class="label label-important"><h3>No Autorizado</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-important"><h3>Cédula No.<?php echo $actividades->id_act;?><br>No Autorizado</h3></span></th>
                         <?php break;
                               case '2':?>
-                                <th><span name="flag" id="flag" class="label label-success"><h3>Autorizado Conceptual</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-success"><h3>Cédula No.<?php echo $actividades->id_act;?><br>Autorizado Conceptual</h3></span></th>
                         <?php break;
                               case '3':?>
-                                <th><span name="flag" id="flag" class="label label-info"><h3>Integrado al Programa General</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-info"><h3>Cédula No.<?php echo $actividades->id_act;?><br>Integrado al Programa General</h3></span></th>
                         <?php break;
                               case '4':?>
-                                <th><span name="flag" id="flag" class="label label-inverse"><h3>Presupuesto Autorizado</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-inverse"><h3>Cédula No.<?php echo $actividades->id_act;?><br>Presupuesto Autorizado</h3></span></th>
                         <?php break;
                               case '6':?>
-                                <th><span name="flag" id="flag" class="label label-default"><h3>Fuera de Presupuesto</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-default"><h3>Cédula No.<?php echo $actividades->id_act;?><br>Fuera de Presupuesto</h3></span></th>
                         <?php break;
                               default: ?>
-                                <th><span name="flag" id="flag" class="label label-warning"><h3>Pendiente Aprobación</h3></span></th>
+                                <th><span name="flag" id="flag" class="label label-warning"><h3>Cédula No.<?php echo $actividades->id_act;?><br>Pendiente de Aprobación</h3></span></th>
                         <?php break;
                               } ?>
                     </span>
-                    <span>EDICION 201<?php echo $actividades->id_fc;?></span>
+                    
                 </thead>
                 <tr>
                     <th>ACTIVIDAD</th>
@@ -190,7 +190,9 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
             </table>
                 <hr>            
             <table class="table table-bordered">
-            <thead>DESGLOSE DE NECESIDADES</thead>
+              <span class="label label-success">
+                <h2>DETALLE DEL PRESUPUESTO <small>(Precios unitarios SIN IVA)</small></h2>
+              </span>
               <tr>                
                 <th>Necesidades, Descripción</th>
                 <th>Necesidades, Observaciones</th>
@@ -271,7 +273,7 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
             <table class="table table-bordered">            
             <tbody class="text-center">
               <tr>                
-                <th>Frecuencia de la actividad</th>
+                <th>FRECUENCIA DE ACCESO AL PÚBLICO GENERAL</th>
                 <?php
                   $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
                   foreach ($fechas as $value) {?>
