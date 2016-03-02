@@ -92,9 +92,9 @@ color:white;
           
           <table>
             <tr>
-            <th >
-                <h2>DÍAS DE ACCESO AL PUBLICO EN GENERAL</h2>
-                <h4><?php echo $act->actividad;?></h4>
+            <th>
+                <h2><?php echo $act->actividad;?></h2>
+                <h4>DÍAS DE ACCESO AL PUBLICO EN GENERAL</h4>                
             </th>
             
                 
@@ -216,8 +216,14 @@ color:white;
             </td>
             </tr>
             
-            <td>                
-                <label>Sede / Ubicación <input class="input-large" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>"> / <input class="input-large" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"> <button type="submit" class="btn btn-primary">Actualizar Días de Acceso</button>  </label>
+            <td>
+                <!--                
+                <label>Sede / Ubicación 
+                  <input class="input-large" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>"> / 
+                  <input class="input-large" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"> 
+                </label>
+              -->
+                <button type="submit" class="btn btn-success">Actualizar Días de Acceso</button>  
             </td>
            </table>
         </fieldset>
@@ -235,20 +241,14 @@ color:white;
               
               <select class="input-small" id="hora_ini" name="hora_ini">
                   <option>Inicia</option>
-                  <?php foreach ($get_horarios as $hora ) : ?>
-                    <option value="<?php echo $hora->horario; ?>"><?php echo date("H:s",strtotime($hora->horario)); ?></option>
+                  <?php foreach ($get_horarios as $horaini ) : ?>
+                    <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
                   <?php endforeach; ?>   
               </select>
               <select class="input-small" id="hora_fin" name="hora_fin">
                   <option>Termina</option>
-                  <?php foreach ($get_horarios as $hora ) : ?>
-                    <option value="<?php echo $hora->horario; ?>"><?php echo date("H:s",strtotime($hora->horario)); ?></option>
-                  <?php endforeach; ?>   
-              </select>
-              <select class="input-md" id="ubicacion" name="ubicacion">
-                  <option>Ubicacion</option>
-                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
-                    <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                  <?php foreach ($get_horarios as $horafin ) : ?>
+                    <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
                   <?php endforeach; ?>   
               </select>
               <select class="input-md" id="sede" name="sede">
@@ -257,6 +257,13 @@ color:white;
                     <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
                   <?php endforeach; ?>   
               </select>
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                    <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              
               <select class="input-small" id="status_subact" name="status_subact">
                   <option>Status</option>
                   <?php 
@@ -275,8 +282,8 @@ color:white;
               <th>Inicia</th>
               <th>Termina</th>
               <th>Actividad/Taller</th>
-              <th>Ubicacion</th>
               <th>Sede</th>
+              <th>Ubicacion</th>              
               <th></th>
             </tr>
             <?php foreach ($show_subactividades as $subact) { ?>
@@ -284,9 +291,9 @@ color:white;
                   <td><?php echo $subact->fecha_taller; ?></td>
                   <td><?php echo date("H:s",strtotime($subact->hora_ini));?> hrs</td>
                   <td><?php echo date("H:s",strtotime($subact->hora_fin));?> hrs</td>
-                  <td><?php echo $subact->subactividad; ?></td>
-                  <td><?php echo $subact->ubicacion; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
-                  <td><?php echo $subact->sede; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
+                  <td><?php echo $subact->subactividad; ?><br>(</small><?php echo $subact->status_subact; ?></small>)</td>
+                  <td><?php echo $subact->sede; ?></td>
+                  <td><?php echo $subact->ubicacion; ?></td>                  
                   <td>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -318,15 +325,72 @@ color:white;
                                     <div class="modal-body">
                                       <div class="well">
                                         <input type="hidden" name="objeto" id="objeto" value="actividades">
-                                        <input type="text" name="id_subact" id="id_subact" value="<?php echo $subact->id_subact; ?>">
-                                        <input type="text" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>">
+                                        <input type="hidden" name="id_subact" id="id_subact" value="<?php echo $subact->id_subact; ?>">
+                                        <input type="hidden" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>">
                                         <input type="text" name="subactividad" id="subactividad" value="<?php echo $subact->subactividad; ?>">
-                                        <input type="text" name="fecha_taller" id="fecha_taller" value="<?php echo $subact->fecha_taller; ?>">
-                                        <input type="text" name="sede" id="sede" value="<?php echo $subact->sede; ?>">
-                                        <input type="text" name="ubicacion" id="ubicacion" value="<?php echo $subact->ubicacion; ?>">
-                                        <input type="text" name="hora_ini" id="hora_ini" value="<?php echo $subact->hora_ini; ?>">
-                                        <input type="text" name="hora_fin" id="hora_fin" value="<?php echo $subact->hora_fin; ?>">
-                                        <input type="text" name="status_subact" id="status_subact" value="<?php echo $subact->status_subact; ?>">                                        
+                                        <input type="text" name="fecha_taller" id="fecha" value="<?php echo $subact->fecha_taller; ?>">
+              
+              <select class="input-md" id="sede" name="sede">
+                  <option>Sede</option>
+                  <?php foreach ($show_sedes as $sede ) : ?>
+                    <?php if ( $subact->sede == $sede->sede ) { ?>
+                        <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                    <?php } ?>
+                  <?php endforeach; ?>   
+              </select>
+              
+              
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                    <?php if ( $subact->ubicacion == $ubic->ubicacion ) { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                    <?php } ?>                    
+                  <?php endforeach; ?>   
+              </select> 
+
+              <select class="input-small" id="hora_ini" name="hora_ini">
+                  <option>Inicia</option>
+                  <?php foreach ($get_horarios as $horaini ) : ?>
+                      <?php if ( $subact->hora_ini == $horaini->horario ) { ?>
+                          <option value="<?php echo $horaini->horario; ?>" selected><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                      <?php } else { ?>
+                          <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                      <?php } ?>
+                  <?php endforeach; ?>
+              </select>
+              <select class="input-small" id="hora_fin" name="hora_fin">
+                  <option>Termina</option>
+                  <?php foreach ($get_horarios as $horafin ) : ?>
+
+                      <?php if ( $subact->hora_fin == $horafin->horario ) { ?>
+                          <option value="<?php echo $horafin->horario; ?>" selected><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                      <?php } else { ?>
+                          <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                      <?php } ?>
+                  <?php endforeach; ?>   
+              </select>
+
+                                        
+                                        <select class="input-small" id="status_subact" name="status_subact">
+                                            <option>Status</option>
+                                            <?php 
+                                            $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');
+                                            foreach ($status_subact as $key => $value ) : ?>
+                                              <?php if ( $subact->status_subact == $value ) { ?>
+                                                <option value="<?php echo $value; ?>" selected><?php echo $value; ?></option>
+                                              <?php } else { ?>
+                                                <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                              <?php } ?>                                              
+                                            <?php endforeach; ?>   
+                                        </select>
+
+
+                                        
                                       </div>                                  
                                     </div>
                                     <div class="modal-footer">
@@ -371,19 +435,5 @@ color:white;
 
 
 <script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.min.js"></script>
-
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-alert.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-button.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-carousel.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-collapse.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-dropdown.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-modal.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-popover.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-scrollspy.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-tab.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-tooltip.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-transition.js"></script>
-<script src="<?php echo base_url(); ?>bootstrap/js/bootstrap-typeahead.js"></script>
 </body>
 </html>

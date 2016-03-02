@@ -87,12 +87,7 @@
     <!--Body content-->
         
         <div class="well"><h3>Editar Cédula de Actividad</h3></div>
-        <div class="alert alert-error">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <h4>Evite perdida de información!</h4>
-          Actualice inmediatamente sus cambios, el sistema no actualizará si detecta que no hay actividad despues de 15 minutos aproximadamente. Evite perdida de información.
-        </div>
-
+        
         
 <?php foreach ($get_one_act_edit as $act ) : ?>                 
       <?php echo form_open(base_url('actividades/actualizar_act')); ?>
@@ -212,11 +207,36 @@
             </td>
             </tr>
             <th rowspan="1">DONDE</th>
-            <td>                
-                <label>Sede</label>
-                <input class="input-xxlarge" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>">
-                <label>Ubicación</label>
-                <textarea class="input-xxlarge" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"><?php echo $act->ubicacion;?></textarea>
+            <td>
+              
+              <label>Sede</label>
+              <select class="input-md" id="sede" name="sede">
+                  <option>Sede</option>
+                  <?php foreach ($show_sedes as $sede ) : ?>
+                    <?php if ( $act->sede == $sede->sede ) { ?>
+                        <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                    <?php } ?>
+                  <?php endforeach; ?>   
+              </select>
+              
+              <label>Ubicación</label>
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+
+                    <?php if ( $act->ubicacion == $ubic->ubicacion ) { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                    <?php } ?>
+
+
+                    
+                  <?php endforeach; ?>   
+              </select>               
+               
             </td>
             
            </table>

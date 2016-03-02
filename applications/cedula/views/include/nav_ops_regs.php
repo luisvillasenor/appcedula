@@ -42,7 +42,7 @@ if ( $fcTrabajo != $edicion && $actividades->status_act != 5 ) { ?>
       <!-- Si accesas al Año de Trabajo Actual y la cédula NO esta bloqueada -->
       <td>
             <div class="btn-group btn-mini">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
                 Menu Opciones
                 <span class="caret"></span>
               </a>

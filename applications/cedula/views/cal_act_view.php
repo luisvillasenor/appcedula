@@ -88,9 +88,7 @@ color:white;
                   $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
                   foreach ($fechas as $value) {?>
                     <th><?php echo date("d M",strtotime($value));?></th>
-                <?php }?>
-                
-                
+                <?php }?>                
               </tr>
             <?php foreach ($get_cal_act as $actividades ) : ?>
               <tr>

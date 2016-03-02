@@ -622,6 +622,9 @@ class Actividades extends CI_Controller {
         $data['fcTrabajo']   = $fcTrabajo;
 
 
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
+
         
         // VALIDACION DEL FORMULARIO Y REGLAS
         $this->form_validation->set_rules('actividad', 'Actividad', 'required');
@@ -1397,7 +1400,8 @@ class Actividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
         
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('actividades_editar_view',$data);

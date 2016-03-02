@@ -255,23 +255,24 @@ color:white;
             </td>
             </tr>
             <th rowspan="1">DONDE</th>
-            <td>                
-                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Sede de la Actividad..."> </i>
-                <p>
-                      <?php 
-                          echo form_label('Sede:',  'sede' ) ; 
-                          echo form_input('sede', '', 'id="sede" class="input-xxlarge" placeholder="Isla San Marcos"');
-                      ?>
-                  </p>
-                
+            <td>
+              <br>
 
-                <i class="icon-info-sign" data-toggle="tooltip" title="Escriba aquí la Ubicación de la Actividad..."> </i>
-                <p>
-                      <?php 
-                          echo form_label('Ubicacion:',  'ubicacion' ) ; 
-                          echo form_input('ubicacion', '', 'id="ubicacion" class="input-xxlarge" placeholder="Escriba aquí la Ubicacion de la Actividad, Por ej. Velaria Zona Gastronómica"');
-                      ?>
-                  </p>
+           <label>Sede</label>
+                        <select class="input-md" id="sede" name="sede">
+                  <option>Sede</option>
+                  <?php foreach ($show_sedes as $sede ) : ?>
+                    <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+              <label>Ubicación</label>
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                    <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                  <?php endforeach; ?>   
+              </select>
+
                 
             </td>
             
@@ -288,22 +289,6 @@ color:white;
 
 
 
-
-
 <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js'); ?>"></script>
-
-<script src="<?php echo base_url('bootstrap/js/bootstrap.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-alert.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-button.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-carousel.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-collapse.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-dropdown.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-modal.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-popover.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-scrollspy.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-tab.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-tooltip.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-transition.js'); ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap-typeahead.js'); ?>"></script>
 </body>
 </html>

@@ -610,8 +610,8 @@ class Actividades_model extends CI_Model
         //$this->costo_publico    = $_POST['costo_publico'];
         //$this->is_costo_secture = $_POST['is_costo_secture'];
         $this->is_costo_publico = $_POST['is_costo_publico'];
-        $this->sede             = strtoupper($_POST['sede']);
-        $this->ubicacion        = strtoupper($_POST['ubicacion']);
+        $this->sede             = $_POST['sede'];
+        $this->ubicacion        = $_POST['ubicacion'];
         $this->id_coord         = $_POST['id_coord'];
         $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = 0;
@@ -648,8 +648,8 @@ class Actividades_model extends CI_Model
         $this->costo_publico    = $_POST['costo_publico'];
         $this->is_costo_secture = $_POST['is_costo_secture'];
         $this->is_costo_publico = $_POST['is_costo_publico'];
-        $this->sede             = strtoupper($_POST['sede']);
-        $this->ubicacion        = strtoupper($_POST['ubicacion']);
+        $this->sede             = $_POST['sede'];
+        $this->ubicacion        = $_POST['ubicacion'];
         $this->fecha_alta       = $_POST['fecha_alta'];        
         $this->fecha_ult_modificacion = date('Y-m-d H:i:s');
         
