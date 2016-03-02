@@ -10,8 +10,6 @@
   <link href="<?php echo base_url('bootstrap/css/bootstrap-responsive.min.css'); ?>" rel="stylesheet">    
   <link rel="stylesheet" href="<?php echo base_url('jquery-ui/css/ui-lightness/jquery-ui-1.10.2.custom.min.css'); ?>" />
   
-  <script src="<?php echo base_url('jquery-ui/js/jquery-1.9.1.js'); ?>"></script>
-  <script src="<?php echo base_url('jquery-ui/js/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
     
   <style type="text/css">
     #subheader {

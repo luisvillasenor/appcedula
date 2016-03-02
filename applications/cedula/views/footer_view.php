@@ -1,21 +1,22 @@
+<script src="<?php echo base_url('jquery-ui/js/jquery-1.9.1.js'); ?>"></script>
+<script src="<?php echo base_url('jquery-ui/js/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
 
 <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js'); ?>"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrap-alert.js"></script>
-<script src="js/bootstrap-button.js"></script>
-<script src="js/bootstrap-carousel.js"></script>
-<script src="js/bootstrap-collapse.js"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-alert.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-button.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-collapse.js');?>"></script>
 <script src="<?php echo base_url('bootstrap/js/bootstrap-dropdown.js');?>"></script>
 <script src="<?php echo base_url('bootstrap/js/bootstrap-modal.js');?>"></script>
 <script src="<?php echo base_url('bootstrap/js/bootstrap-popover.js');?>"></script>
 
-<script src="js/bootstrap-scrollspy.js"></script>
-<script src="js/bootstrap-tab.js"></script>
-<script src="js/bootstrap-tooltip.js"></script>
-<script src="js/bootstrap-transition.js"></script>
-<script src="js/bootstrap-typeahead.js"></script>
-<script src="js/bootstrapValidator.min.js"></script>
-<script src="js/validator.js"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-scrollspy.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-tab.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-tooltip.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-transition.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap-typeahead.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrapValidator.min.js');?>"></script>
+<script src="<?php echo base_url('bootstrap/js/validator.js');?>"></script>
 
 
 
