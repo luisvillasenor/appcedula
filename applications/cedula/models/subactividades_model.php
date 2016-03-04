@@ -31,6 +31,8 @@ class Subactividades_model extends CI_Model
 
                 if( isset($id_act) ) {
                     // Si el parametro no es null, get id_subact
+                    $this->db->order_by('fecha_taller','desc');
+                    $this->db->order_by('hora_ini','asc');
                     $this->db->where('id_act',$id_act);
                     $query = $this->db->get('subactividades');     
                     return $query->result();

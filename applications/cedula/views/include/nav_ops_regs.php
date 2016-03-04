@@ -41,9 +41,9 @@ if ( $fcTrabajo != $edicion && $actividades->status_act != 5 ) { ?>
       <?php if ( ($fcTrabajo == $edicion) && $actividades->status_act != 5 ) { ?>
       <!-- Si accesas al Año de Trabajo Actual y la cédula NO esta bloqueada -->
       <td>
-            <div class="btn-group btn-mini">
+            <div class="btn-group btn-mini dropup">
               <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-                Menu Opciones
+                Opciones
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">

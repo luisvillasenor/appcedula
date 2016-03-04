@@ -277,7 +277,7 @@ class Subactividades extends CI_Controller {
         $subactividad = array(
             'id_act' => $this->input->post('id_act'),
             'subactividad' => $this->input->post('subactividad'),
-            'fecha_taller' => $this->input->post('fecha_taller'),
+            'fecha_taller' => $this->input->post('fecha_taller'),            
             'sede' => $this->input->post('sede'),
             'ubicacion' => $this->input->post('ubicacion'),
             'hora_ini' => $this->input->post('hora_ini'),
@@ -287,7 +287,7 @@ class Subactividades extends CI_Controller {
 
         // Controller que solcitó
         $objeto = $this->input->post('objeto');
-
+        
         $agregado = $this->subactividades_model->insert($subactividad);
 
         if ( isset($agregado) || !empty($agregado) || $agregado == true ) {
@@ -302,6 +302,7 @@ class Subactividades extends CI_Controller {
                 }
             }
         }
+        
 	}
 
     // Vista: Formulario para Editar una ubicacion, por URL

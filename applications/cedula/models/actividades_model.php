@@ -604,14 +604,14 @@ class Actividades_model extends CI_Model
         //$this->telefono         = strtoupper($_POST['telefono']);
         $this->email            = $_POST['email'];
         //$this->web              = $_POST['web'];
-        $this->fecha_act        = $_POST['fecha_act'];
-        $this->fecha_aut        = $_POST['fecha_aut'];
+        #$this->fecha_act        = $_POST['fecha_act'];
+        #$this->fecha_aut        = $_POST['fecha_aut'];
         //$this->costo_secture    = $_POST['costo_secture'];
         //$this->costo_publico    = $_POST['costo_publico'];
         //$this->is_costo_secture = $_POST['is_costo_secture'];
         $this->is_costo_publico = $_POST['is_costo_publico'];
-        $this->sede             = $_POST['sede'];
-        $this->ubicacion        = $_POST['ubicacion'];
+        #$this->sede             = $_POST['sede'];
+        #$this->ubicacion        = $_POST['ubicacion'];
         $this->id_coord         = $_POST['id_coord'];
         $this->id_fc            = $_POST['edicion'];
         $this->id_resp          = 0;
@@ -624,105 +624,111 @@ class Actividades_model extends CI_Model
 
 
 
-    function update_entry($e_mail,$edicion)
+    function update_entry($e_mail = null,$edicion = null)
     {
-        $this->e_mail           = $e_mail;
-        $this->id_act           = $_POST['id_act'];
-        $this->status_act       = $_POST['status_act'];
-        
-        $this->actividad        = strtoupper($_POST['actividad']);
-        $this->descripcion      = strtoupper($_POST['descripcion']);
-        $this->justificacion    = strtoupper($_POST['justificacion']);
-        $this->id_categoria     = $_POST['id_categoria'];
-        $this->id_coord         = $_POST['id_coord'];
-        $this->quienpropone     = strtoupper($_POST['quienpropone']);
-        //$this->empresa          = strtoupper($_POST['empresa']);
-        //$this->puesto           = strtoupper($_POST['puesto']);
-        //$this->domicilio        = strtoupper($_POST['domicilio']);
-        //$this->telefono         = strtoupper($_POST['telefono']);
-        $this->email            = $_POST['email'];
-        //$this->web              = $_POST['web'];
-        $this->fecha_act        = $_POST['fecha_act'];
-        $this->fecha_aut        = $_POST['fecha_aut'];
-        $this->costo_secture    = $_POST['costo_secture'];
-        $this->costo_publico    = $_POST['costo_publico'];
-        $this->is_costo_secture = $_POST['is_costo_secture'];
-        $this->is_costo_publico = $_POST['is_costo_publico'];
-        $this->sede             = $_POST['sede'];
-        $this->ubicacion        = $_POST['ubicacion'];
-        $this->fecha_alta       = $_POST['fecha_alta'];        
-        $this->fecha_ult_modificacion = date('Y-m-d H:i:s');
-        
-        if (!isset($_POST['d1']))
-        {
-            $this->d1 = '0000-00-00';
+        if (isset($e_mail) AND isset($edicion)) {
+
+                $this->e_mail           = $e_mail;
+                $this->id_act           = $_POST['id_act'];
+                $this->status_act       = $_POST['status_act'];
+                
+                $this->actividad        = strtoupper($_POST['actividad']);
+                $this->descripcion      = strtoupper($_POST['descripcion']);
+                $this->justificacion    = strtoupper($_POST['justificacion']);
+                $this->id_categoria     = $_POST['id_categoria'];
+                $this->id_coord         = $_POST['id_coord'];
+                $this->quienpropone     = strtoupper($_POST['quienpropone']);
+                //$this->empresa          = strtoupper($_POST['empresa']);
+                //$this->puesto           = strtoupper($_POST['puesto']);
+                //$this->domicilio        = strtoupper($_POST['domicilio']);
+                //$this->telefono         = strtoupper($_POST['telefono']);
+                $this->email            = $_POST['email'];
+                //$this->web              = $_POST['web'];
+                $this->fecha_act        = $_POST['fecha_act'];
+                $this->fecha_aut        = $_POST['fecha_aut'];
+                $this->costo_secture    = $_POST['costo_secture'];
+                $this->costo_publico    = $_POST['costo_publico'];
+                $this->is_costo_secture = $_POST['is_costo_secture'];
+                $this->is_costo_publico = $_POST['is_costo_publico'];
+                $this->sede             = $_POST['sede'];
+                $this->ubicacion        = $_POST['ubicacion'];
+                $this->fecha_alta       = $_POST['fecha_alta'];        
+                $this->fecha_ult_modificacion = date('Y-m-d H:i:s');
+                
+                if (!isset($_POST['d1']))
+                {
+                    $this->d1 = '0000-00-00';
+                } else {
+                    $this->d1 = $_POST['d1'];
+                }
+                if (!isset($_POST['d2']))
+                {
+                    $this->d2 = '0000-00-00';
+                } else {
+                    $this->d2 = $_POST['d2'];
+                }
+                if (!isset($_POST['d3']))
+                {
+                    $this->d3 = '0000-00-00';
+                } else {
+                    $this->d3 = $_POST['d3'];
+                }
+                if (!isset($_POST['d4']))
+                {
+                    $this->d4 = '0000-00-00';
+                } else {
+                    $this->d4 = $_POST['d4'];
+                }
+                if (!isset($_POST['d5']))
+                {
+                    $this->d5 = '0000-00-00';
+                } else {
+                    $this->d5 = $_POST['d5'];
+                }
+                if (!isset($_POST['d6']))
+                {
+                    $this->d6 = '0000-00-00';
+                } else {
+                    $this->d6 = $_POST['d6'];
+                }
+                if (!isset($_POST['d7']))
+                {
+                    $this->d7 = '0000-00-00';
+                } else {
+                    $this->d7 = $_POST['d7'];
+                }
+                if (!isset($_POST['d8']))
+                {
+                    $this->d8 = '0000-00-00';
+                } else {
+                    $this->d8 = $_POST['d8'];
+                }
+                if (!isset($_POST['d9']))
+                {
+                    $this->d9 = '0000-00-00';
+                } else {
+                    $this->d9 = $_POST['d9'];
+                }
+                if (!isset($_POST['d10']))
+                {
+                    $this->d10 = '0000-00-00';
+                } else {
+                    $this->d10 = $_POST['d10'];
+                }
+                
+                $this->hora_ini         = $_POST['hora_ini'];
+                $this->hora_fin         = $_POST['hora_fin'];
+                $this->id_fc            = $edicion;
+                $this->id_resp          = $_POST['id_resp'];
+                
+                $this->db->where('id_act', $this->id_act);
+                $this->db->update(ACTIVIDADES, $this);
+                return TRUE;            
         } else {
-            $this->d1 = $_POST['d1'];
+            return FALSE;            
         }
-        if (!isset($_POST['d2']))
-        {
-            $this->d2 = '0000-00-00';
-        } else {
-            $this->d2 = $_POST['d2'];
-        }
-        if (!isset($_POST['d3']))
-        {
-            $this->d3 = '0000-00-00';
-        } else {
-            $this->d3 = $_POST['d3'];
-        }
-        if (!isset($_POST['d4']))
-        {
-            $this->d4 = '0000-00-00';
-        } else {
-            $this->d4 = $_POST['d4'];
-        }
-        if (!isset($_POST['d5']))
-        {
-            $this->d5 = '0000-00-00';
-        } else {
-            $this->d5 = $_POST['d5'];
-        }
-        if (!isset($_POST['d6']))
-        {
-            $this->d6 = '0000-00-00';
-        } else {
-            $this->d6 = $_POST['d6'];
-        }
-        if (!isset($_POST['d7']))
-        {
-            $this->d7 = '0000-00-00';
-        } else {
-            $this->d7 = $_POST['d7'];
-        }
-        if (!isset($_POST['d8']))
-        {
-            $this->d8 = '0000-00-00';
-        } else {
-            $this->d8 = $_POST['d8'];
-        }
-        if (!isset($_POST['d9']))
-        {
-            $this->d9 = '0000-00-00';
-        } else {
-            $this->d9 = $_POST['d9'];
-        }
-        if (!isset($_POST['d10']))
-        {
-            $this->d10 = '0000-00-00';
-        } else {
-            $this->d10 = $_POST['d10'];
-        }
-        
-        $this->hora_ini         = $_POST['hora_ini'];
-        $this->hora_fin         = $_POST['hora_fin'];
-        $this->id_fc            = $edicion;
-        $this->id_resp          = $_POST['id_resp'];
         
 
-        
-        $this->db->where('id_act', $this->id_act);
-        $this->db->update(ACTIVIDADES, $this);
     }
  
     function update_tot_act($id_act,$total)
@@ -992,7 +998,48 @@ class Actividades_model extends CI_Model
     
     
     
-    
+    function get_edicion_actual($e_mail,$grupo,$id_coord,$edicion)
+    {
+        switch ($grupo) {
+          case 'administrador':
+            $this->db->limit(1);
+            $this->db->where('id_fc', $edicion);
+            $query = $this->db->get(ACTIVIDADES);
+            if ( $query->num_rows > 0 ){
+              return $query->result();  
+            }
+            break;
+          case 'coordinador':
+            $this->db->limit(1);          
+            $this->db->where('id_fc', $edicion);
+            $this->db->where('id_coord', $id_coord);
+            $this->db->or_where('e_mail', $e_mail);
+            $query = $this->db->get(ACTIVIDADES);        
+            if ( $query->num_rows > 0 ){
+              return $query->result();  
+            }
+            break;
+          case 'gestor':
+            $this->db->limit(1);          
+            $this->db->where('id_fc', $edicion);
+            $this->db->where('e_mail', $e_mail);
+            $query = $this->db->get(ACTIVIDADES);        
+            if ( $query->num_rows > 0 ){
+              return $query->result();  
+            }
+            break;
+          case 'presupuesto':
+            $this->db->limit(1);          
+            $this->db->where('id_fc', $edicion);
+            $query = $this->db->get(ACTIVIDADES);        
+            if ( $query->num_rows > 0 ){
+              return $query->result();  
+            }
+            break;
+        }
+        
+        return false;
+    }    
 
     
 

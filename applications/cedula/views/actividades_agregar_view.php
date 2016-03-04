@@ -206,6 +206,7 @@ color:white;
                 -->
             </td>
             </tr>
+            <!--
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>                
@@ -227,6 +228,7 @@ color:white;
                 
             </td>
             </tr>
+            -->
             <tr>
             <th rowspan="1">CUANTO</th>
 
@@ -254,6 +256,7 @@ color:white;
             -->
             </td>
             </tr>
+            <!--
             <th rowspan="1">DONDE</th>
             <td>
               <br>
@@ -275,11 +278,12 @@ color:white;
 
                 
             </td>
+            -->
             
            </table>
           <p><br>
-          <?php echo form_submit('submit',  'Agregar Cédula','class="btn btn-medium btn-primary"' ); ?>    
           
+          <button type="submit" class="btn btn-primary">Agregar Cédula</button>
         </fieldset>
       <?php echo form_close(); ?>
     </div><!— /row span12 —>

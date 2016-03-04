@@ -24,6 +24,7 @@ class Actividades extends CI_Controller {
         $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
         $edicion  = $_SESSION['fc'];
+
         $data['edicion']  = $edicion;
         $data['title']= 'Mis Cédulas';
 		$data['onlyusername'] = strstr($e_mail,'@',true);
@@ -62,9 +63,11 @@ class Actividades extends CI_Controller {
                 $fcTrabajo = $anio->id_fc ;
             }
         }
-        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve false sino existe dentro.
+        // Busca el anioActual dentro del arrey $edicionesTrabajo, devuelve boleano FALSE o TRUE.
         $anioTrabajo = in_array(anioActual, $edicionesTrabajo);
         $idfcTrabajo = in_array($fcTrabajo, $idsfcTrabajo);
+
+        #var_dump($fcTrabajo); die();
 
         $data['anioTrabajo'] = $anioTrabajo;
         $data['idfcTrabajo'] = $idfcTrabajo;
@@ -82,6 +85,13 @@ class Actividades extends CI_Controller {
         }
         // Obtiene todas las actividades del usuario, de su grupo, de su coordinacion y año de trabajo        
 		$data['get_all_actividades'] = $this->actividades_model->get_all_actividades($e_mail,$grupo,$id_coord,$edicion);
+
+        // Obtiene el id_fc de la edicion actual
+        #$data['get_edicion_actual'] = $this->actividades_model->get_edicion_actual($e_mail,$grupo,$id_coord,$edicion);
+        #foreach ($data['get_edicion_actual'] as $ed_act ) {
+            // Define la Coordinacion que pertenece el usuario
+        #    $data['edicion_actual']= $ed_act->id_fc;            
+        #}
 
         // ***********************
         $data['get_resp'] = $this->actividades_model->get_resp($e_mail,$grupo,$id_coord,$edicion);
@@ -1474,6 +1484,7 @@ class Actividades extends CI_Controller {
         
         $id_act = $this->input->post('id_act');
         $id_fc = $this->input->post('id_fc');
+        $origen = $this->input->post('origen');
 
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -1486,15 +1497,23 @@ class Actividades extends CI_Controller {
         }
 		
         $is_ok = $this->actividades_model->update_entry($e_mail,$edicion = $id_fc);
-        if($is_ok){
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
-            $this->load->view('is_Nok_view',$data);
-        }else{
-            $data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
-            $this->load->view('is_ok_view',$data);
+
+        if ( isset($is_ok) AND $is_ok == TRUE ) {
+            switch ($origen) {
+                case 'editaractividad':
+                    redirect('actividades/index');
+                    break;
+                case 'editarcalendario':
+                    redirect('actividades/calendario_act');
+                    break;
+            }
+        } else {
+            echo "ERROR, Reporte con el Administrador";
         }
         
-        redirect('actividades/');
+
+        
+        
 		
 	}
     public function actualizar_tot_act($id_act){

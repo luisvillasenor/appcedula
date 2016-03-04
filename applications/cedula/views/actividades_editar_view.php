@@ -93,11 +93,12 @@
       <?php echo form_open(base_url('actividades/actualizar_act')); ?>
         <fieldset>
                  
-          <table>
+          <table class="table">
             <tr>
             <th rowspan="1">QUE</th>
             <td>                
                 <label>ID: <?php echo $act->id_act;?></label>
+                <input id="origen" name="origen" type="hidden" value="editaractividad">
                 <input id="id_act" name="id_act" type="hidden" value="<?php echo $act->id_act;?>">
                 <input id="status_act" name="status_act" type="hidden" value="<?php echo $act->status_act;?>">
                 <input id="edicion" name="edicion" type="hidden" value="<?php echo $act->id_fc;?>">
@@ -153,15 +154,17 @@
             -->
             </td>
             </tr>
+            <!--
             <tr>
             <th rowspan="1">CUANDO</th>
             <td>                
                 <label>Fecha de Inicio Oficial</label>
                 <input class="input-large" id="fecha_act" name="fecha_act" type="text" value="<?php echo $act->fecha_act;?>">
-                <label>Fecha de Termino Oficia</label>
+                <label>Fecha de Termino Oficial</label>
                 <input class="input-large" id="fecha_aut" name="fecha_aut" type="text" value="<?php echo $act->fecha_aut;?>">
             </td>
             </tr>
+            -->
             <tr>
             <th rowspan="1">CUANTO</th>
             <td> 
@@ -206,6 +209,7 @@
                 <?php break; }?>
             </td>
             </tr>
+            <!--
             <th rowspan="1">DONDE</th>
             <td>
               
@@ -235,9 +239,9 @@
 
                     
                   <?php endforeach; ?>   
-              </select>               
-               
+              </select>                              
             </td>
+          -->
             
            </table>
             <input id="d1" name="d1" type="hidden" value="<?php echo $act->d1;?>">
@@ -250,10 +254,14 @@
             <input id="d8" name="d8" type="hidden" value="<?php echo $act->d8;?>">
             <input id="d9" name="d9" type="hidden" value="<?php echo $act->d9;?>">
             <input id="d10" name="d10" type="hidden" value="<?php echo $act->d10;?>">
+            <input id="fecha_act" name="fecha_act" type="hidden" value="<?php echo $act->fecha_act;?>">
+            <input id="fecha_aut" name="fecha_aut" type="hidden" value="<?php echo $act->fecha_aut;?>">
             <input id="hora_ini" name="hora_ini" type="hidden" value="<?php echo $act->hora_ini;?>">
             <input id="hora_fin" name="hora_fin" type="hidden" value="<?php echo $act->hora_fin;?>">
             <input id="id_fc" name="id_fc" type="hidden" value="<?php echo $act->id_fc;?>">
             <input id="idresp" name="id_resp" type="hidden" value="<?php echo $act->id_resp;?>">
+            <input id="sede" name="sede" type="hidden" value="<?php echo $act->sede;?>">
+            <input id="ubicacion" name="ubicacion" type="hidden" value="<?php echo $act->ubicacion;?>">
             <!-- <input type="hidden" name="id_coord" id="id_coord">Ver funcion JavaScript -->
             
           <p><br>

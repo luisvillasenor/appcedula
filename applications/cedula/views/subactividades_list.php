@@ -6,7 +6,7 @@
       <?php include 'include/nav_subactividades.php';   ?>      
         
     
-    <div class="row-fluid span8 control-group warning">              
+    <div class="row-fluid span10 control-group warning">              
     <!--Body content-->
       
         
@@ -36,41 +36,45 @@
 
 
           <table class="table table-striped table-bordered table-hover table-condensed">
-            <thead class="text-center">
+            <thead>
             <tr>
+              <th>Id_Sub</th>
+              <th>Id_Act</th>
               <th>Fecha</th>
               <th>Inicia</th>
               <th>Termina</th>
               <th>Actividad/Taller</th>
-              <th>Ubicacion</th>
               <th>Sede</th>
+              <th>Ubicacion</th>              
               <th></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($show_subactividades as $subact) { ?>
                 <tr>
+                  <td><?php echo $subact->id_subact; ?></td>
+                  <td><?php echo $subact->id_act; ?></td>
                   <td><?php echo $subact->fecha_taller; ?></td>
                   <td><?php echo date("H:s",strtotime($subact->hora_ini));?> hrs</td>
                   <td><?php echo date("H:s",strtotime($subact->hora_fin));?> hrs</td>
                   <td><?php echo $subact->subactividad; ?></td>
+                  <td><?php echo $subact->sede; ?></td>
                   <td><?php echo $subact->ubicacion; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
-                  <td><?php echo $subact->sede; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
                   <td>
                     <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <button class="btn btn-default btn-mini dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Opciones
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> Editar</a>
+                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> <small>Editar</small></a>
                         </li>
                         <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>"><i class="icon-remove"></i> Eliminar</a>
+                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>"><i class="icon-remove"></i> <small>Eliminar</small></a>
                         </li>
                         <li><!-- Button to trigger modal -->
-                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/subactividades"><i class="icon-repeat"></i> Repetir</a>
+                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/subactividades"><i class="icon-repeat"></i> <small>Repetir</small></a>
                         </li>
                         
                       </ul>

@@ -50,22 +50,7 @@ color:white;
 }
 </style>
 
-  <script>
-    $(document).ready(function(){
-      $(function() {
-        $( "#fecha_taller" ).datepicker({ 
-          dateFormat: 'yy-mm-dd', 
-          showWeek: true, 
-          firstDay:1
-        });
-        $( "#fecha_aut" ).datepicker({ 
-          dateFormat: 'yy-mm-dd', 
-          showWeek: true, 
-          firstDay:1
-        });
-      });
-    });      
-  </script>
+  
 </head>
 
 <body>
@@ -97,7 +82,7 @@ color:white;
                 <h4>DÍAS DE ACCESO AL PUBLICO EN GENERAL</h4>                
             </th>
             
-                
+                <input id="origen" name="origen" type="hidden" value="editarcalendario">
                 <input id="id_act" name="id_act" type="hidden" value="<?php echo $act->id_act;?>">
                 <input id="actividad" name="actividad" type="hidden" value="<?php echo $act->actividad;?>">
                 <input id="descripcion" name="descripcion" type="hidden" value="<?php echo $act->descripcion;?>">
@@ -217,6 +202,29 @@ color:white;
             </tr>
             
             <td>
+
+              <select class="input-md" id="sede" name="sede">
+                  <option>Sede</option>
+                  <?php foreach ($show_sedes as $sede ) : ?>
+                    <?php if ( $act->sede == $sede->sede ) { ?>
+                        <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                    <?php } ?>
+                  <?php endforeach; ?>   
+              </select>
+              
+              <select class="input-md" id="ubicacion" name="ubicacion">
+                  <option>Ubicacion</option>
+                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
+
+                    <?php if ( $act->ubicacion == $ubic->ubicacion ) { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                    <?php } ?>
+                  <?php endforeach; ?>   
+              </select>   
                 <!--                
                 <label>Sede / Ubicación 
                   <input class="input-large" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>"> / 
@@ -232,48 +240,129 @@ color:white;
 <?php endforeach; ?>
   
     <div class="well">
-      <div class="text-center">
+
+      <div class="">
+
+              <button type="button" class="btn btn-inverse" data-toggle="collapse" data-target="#demo">
+                <i class="icon-plus icon-white"></i> Formato Agregar Nueva Actividad
+              </button>
+               
+              <div id="demo" class="collapse out">
+
+
+
         <?php echo form_open(base_url('subactividades/add'),'class=""'); ?>
-              <input type="hidden" name="objeto" id="objeto" value="actividades">
-              <input type="hidden" name="id_act" id="id_act" value="<?php echo $id_act;?>">
-              <input class="input-xxlarge" id="subactividad" name="subactividad" type="text" placeholder="Nombre de la actividad ó taller"><br>
-              <input type="text" name="fecha_taller" id="fecha_taller" placeholder="Fecha">
+
+        <fieldset>
+          <div class="text-center"><legend>Formato para Agregar una Nueva Actividad ó Taller</legend></div>
+        
+
+          <script>
+  $(function() {
+    $( "#fecha_taller" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#to" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+  </script>
+
+
+            <div class="span6">
+              <div class="span3">
+                <input type="hidden" name="objeto" id="objeto" value="actividades">
+                  <input type="hidden" name="id_act" id="id_act" value="<?php echo $id_act;?>">
+                  <label>Actividad</label>
+                  <textarea rows="4" id="subactividad" name="subactividad"></textarea>
+                  <span class="help-block"></span>            
+                  
+              </div>
+              <div class="span3 offset4">
+                  <label>Fecha Actividad</label>
+                  <input class="input-small" type="text" name="fecha_taller" id="fecha_taller" placeholder="">
+                  <span class="help-block"></span>
+                  <label>Horario</label>
+                  <select class="input-small" id="hora_ini" name="hora_ini">
+                      <option>Inicia</option>
+                      <?php foreach ($get_horarios as $horaini ) : ?>
+                        <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                      <?php endforeach; ?>   
+                  </select>
+                  <select class="input-small" id="hora_fin" name="hora_fin">
+                      <option>Termina</option>
+                      <?php foreach ($get_horarios as $horafin ) : ?>
+                        <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                      <?php endforeach; ?>   
+                  </select>
+                  <span class="help-block"></span>
+              </div>
+                              
+            </div>
+            <div class="span4">
+                  <label>Sede y Ubicación</label>
+                  <?php foreach ($get_one_act_edit as $act ) : ?>
+                      <select class="input-sm" id="sede" name="sede">
+                          <option>Sede</option>
+                          <?php foreach ($show_sedes as $sede ) : ?>
+                            <?php if ( $act->sede == $sede->sede ) { ?>
+                                <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                            <?php } else { ?>
+                                <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                            <?php } ?>
+                          <?php endforeach; ?>   
+                      </select>                      
+                      <select class="input-sm" id="ubicacion" name="ubicacion">
+                          <option>Ubicacion</option>
+                          <?php foreach ($show_ubicaciones as $ubic ) : ?>
+
+                            <?php if ( $act->ubicacion == $ubic->ubicacion ) { ?>
+                                <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                            <?php } else { ?>
+                                <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                            <?php } ?>
+                          <?php endforeach; ?>   
+                      </select>                  
+                  <?php endforeach; ?>
+                  <span class="help-block"></span>
+                  <label>Entrada a la actividad</label>
+                  <select class="input-sm" id="status_subact" name="status_subact">
+                      <option>Status</option>
+                      <?php 
+                      $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');
+                      foreach ($status_subact as $key => $value ) : ?>
+                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                      <?php endforeach; ?>   
+                  </select>            
+            </div>
+            <div class="span1">
+              <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </fieldset>
+            
               
-              <select class="input-small" id="hora_ini" name="hora_ini">
-                  <option>Inicia</option>
-                  <?php foreach ($get_horarios as $horaini ) : ?>
-                    <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
-                  <?php endforeach; ?>   
-              </select>
-              <select class="input-small" id="hora_fin" name="hora_fin">
-                  <option>Termina</option>
-                  <?php foreach ($get_horarios as $horafin ) : ?>
-                    <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
-                  <?php endforeach; ?>   
-              </select>
-              <select class="input-md" id="sede" name="sede">
-                  <option>Sede</option>
-                  <?php foreach ($show_sedes as $sede ) : ?>
-                    <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
-                  <?php endforeach; ?>   
-              </select>
-              <select class="input-md" id="ubicacion" name="ubicacion">
-                  <option>Ubicacion</option>
-                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
-                    <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
-                  <?php endforeach; ?>   
-              </select>
               
-              <select class="input-small" id="status_subact" name="status_subact">
-                  <option>Status</option>
-                  <?php 
-                  $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');
-                  foreach ($status_subact as $key => $value ) : ?>
-                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                  <?php endforeach; ?>   
-              </select>
-              <button type="submit" class="btn btn-success">Agregar Nueva Actividad/Taller al Programa Detallado</button>
+
+              
+              
         <?php echo form_close(); ?>
+
+
+              </div>
+
+
 
         <div class="well"><h3 class="text-center">Programa Detallado de Actividades/Talleres</h3>
           <table class="table table-condensed">
@@ -302,13 +391,13 @@ color:white;
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Editar</a>
+                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Actualizar</a>
                         </li>
                         <li><!-- Button to trigger modal -->
                             <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
                         </li>
                         <li><!-- Button to trigger modal -->
-                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/actividades">Repetir</a>
+                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/actividades">Duplicar</a>
                         </li>
                         
                       </ul>
@@ -327,56 +416,75 @@ color:white;
                                         <input type="hidden" name="objeto" id="objeto" value="actividades">
                                         <input type="hidden" name="id_subact" id="id_subact" value="<?php echo $subact->id_subact; ?>">
                                         <input type="hidden" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>">
-                                        <input type="text" name="subactividad" id="subactividad" value="<?php echo $subact->subactividad; ?>">
-                                        <input type="text" name="fecha_taller" id="fecha" value="<?php echo $subact->fecha_taller; ?>">
-              
-              <select class="input-md" id="sede" name="sede">
-                  <option>Sede</option>
-                  <?php foreach ($show_sedes as $sede ) : ?>
-                    <?php if ( $subact->sede == $sede->sede ) { ?>
-                        <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
-                    <?php } else { ?>
-                        <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
-                    <?php } ?>
-                  <?php endforeach; ?>   
-              </select>
-              
-              
-              <select class="input-md" id="ubicacion" name="ubicacion">
-                  <option>Ubicacion</option>
-                  <?php foreach ($show_ubicaciones as $ubic ) : ?>
-                    <?php if ( $subact->ubicacion == $ubic->ubicacion ) { ?>
-                        <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
-                    <?php } else { ?>
-                        <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
-                    <?php } ?>                    
-                  <?php endforeach; ?>   
-              </select> 
+                                        <textarea rows="1" type="text" name="subactividad" id="subactividad"><?php echo $subact->subactividad; ?></textarea>
+           
 
-              <select class="input-small" id="hora_ini" name="hora_ini">
-                  <option>Inicia</option>
-                  <?php foreach ($get_horarios as $horaini ) : ?>
-                      <?php if ( $subact->hora_ini == $horaini->horario ) { ?>
-                          <option value="<?php echo $horaini->horario; ?>" selected><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
-                      <?php } else { ?>
-                          <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
-                      <?php } ?>
-                  <?php endforeach; ?>
-              </select>
-              <select class="input-small" id="hora_fin" name="hora_fin">
-                  <option>Termina</option>
-                  <?php foreach ($get_horarios as $horafin ) : ?>
+                                        <script>
+                                          $(document).ready(function(){
+                                            $(function() {
+                                              $( "#fecha_taller_edit_<?php echo $subact->id_subact; ?>" ).datepicker({ 
+                                                dateFormat: 'yy-mm-dd', 
+                                                showWeek: true, 
+                                                firstDay:1
+                                              });
+                                              $( "#fecha_aut" ).datepicker({ 
+                                                dateFormat: 'yy-mm-dd', 
+                                                showWeek: true, 
+                                                firstDay:1
+                                              });
+                                            });
+                                          });      
+                                        </script>
 
-                      <?php if ( $subact->hora_fin == $horafin->horario ) { ?>
-                          <option value="<?php echo $horafin->horario; ?>" selected><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
-                      <?php } else { ?>
-                          <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
-                      <?php } ?>
-                  <?php endforeach; ?>   
-              </select>
+                                        <br><input type="text" name="fecha_taller" id="fecha_taller_edit_<?php echo $subact->id_subact; ?>" value="<?php echo $subact->fecha_taller; ?>"><br>
+              
+                                        <select class="input-md" id="sede" name="sede">
+                                            <option>Sede</option>
+                                            <?php foreach ($show_sedes as $sede ) : ?>
+                                              <?php if ( $subact->sede == $sede->sede ) { ?>
+                                                  <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                                              <?php } else { ?>
+                                                  <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                                              <?php } ?>
+                                            <?php endforeach; ?>   
+                                        </select>
+              
+              
+                                        <select class="input-md" id="ubicacion" name="ubicacion">
+                                            <option>Ubicacion</option>
+                                            <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                                              <?php if ( $subact->ubicacion == $ubic->ubicacion ) { ?>
+                                                  <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                                              <?php } else { ?>
+                                                  <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                                              <?php } ?>                    
+                                            <?php endforeach; ?>   
+                                        </select> <br>
 
-                                        
-                                        <select class="input-small" id="status_subact" name="status_subact">
+                                        <select class="input-small" id="hora_ini" name="hora_ini">
+                                            <option>Inicia</option>
+                                            <?php foreach ($get_horarios as $horaini ) : ?>
+                                                <?php if ( $subact->hora_ini == $horaini->horario ) { ?>
+                                                    <option value="<?php echo $horaini->horario; ?>" selected><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                                                <?php } ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <select class="input-small" id="hora_fin" name="hora_fin">
+                                            <option>Termina</option>
+                                            <?php foreach ($get_horarios as $horafin ) : ?>
+
+                                                <?php if ( $subact->hora_fin == $horafin->horario ) { ?>
+                                                    <option value="<?php echo $horafin->horario; ?>" selected><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                                                <?php } ?>
+                                            <?php endforeach; ?>   
+                                        </select>
+
+                                        <br>
+                                        <select class="input-sm" id="status_subact" name="status_subact">
                                             <option>Status</option>
                                             <?php 
                                             $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');

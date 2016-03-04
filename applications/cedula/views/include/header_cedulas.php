@@ -7,15 +7,15 @@
                         </span>
                     </span>                    
                 </thead>
-                <tbodyz>
+                <tbody>
                   <tr>
-                    <th colspan="1">OPERACIONES</th>
-                    <th>ID</th>
-                    <th>CEDULA</th>
-                    <th>CATEGORIA</th>
-                    <th>RESPONSABLE</th>                
-                    <th>COSTO SECTURE CON IVA</th>
+                    <th colspan="1"><small>OPERACIONES</small></th>
+                    <th><small>ID</small></th>
+                    <th><small>EVENTO</small></th>
+                    <th><small>CATEGORIA</small></th>
+                    <th><small>RESPONSABLE</small></th>                
+                    <th><small>COSTO EVENTO CON IVA</small></th>
                     
-                    <th>STATUS</th>
+                    <th><small>STATUS</small></th>
                 
                   </tr>
