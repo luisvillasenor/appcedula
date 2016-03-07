@@ -243,6 +243,8 @@ color:white;
 
       <div class="">
 
+
+
               <button type="button" class="btn btn-inverse" data-toggle="collapse" data-target="#demo">
                 <i class="icon-plus icon-white"></i> Formato Agregar Nueva Actividad
               </button>
@@ -372,7 +374,8 @@ color:white;
               <th>Termina</th>
               <th>Actividad/Taller</th>
               <th>Sede</th>
-              <th>Ubicacion</th>              
+              <th>Ubicacion</th>
+              <th>Status Actual</th>
               <th></th>
             </tr>
             <?php foreach ($show_subactividades as $subact) { ?>
@@ -382,8 +385,51 @@ color:white;
                   <td><?php echo date("H:s",strtotime($subact->hora_fin));?> hrs</td>
                   <td><?php echo $subact->subactividad; ?><br>(</small><?php echo $subact->status_subact; ?></small>)</td>
                   <td><?php echo $subact->sede; ?></td>
-                  <td><?php echo $subact->ubicacion; ?></td>                  
+                  <td><?php echo $subact->ubicacion; ?></td>
                   <td>
+                    <?php
+                      switch ($status_contenido = 0) {
+                          case '2':      ?>
+                            <span class="label label-danger">Contenido No Autorizado</span>
+                          <?php break;      
+                          case '1':      ?>
+                            <span class="label label-success">Contenido Autorizado</span>
+                          <?php break;
+                          default:    ?>
+                            <span class="label label-warning">Autorizacion Pendiente</span>  
+                          <?php break; 
+                        } 
+                    ?>
+                    <br>
+                    <?php
+                      switch ($status_ortografia = 0) {
+                          case '1':      ?>
+                            <span class="label label-success">Ortografía Limpia</span>
+                          <?php break;
+                          default:    ?>
+                            <span class="label label-warning">Revision Ortográfica Pendiente</span>  
+                          <?php break; 
+                        } 
+                    ?>
+                    
+                  </td>
+                  <td>
+
+
+<?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
+$app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
+  switch ($app) {
+      case 'rabingarcia@app.com':      
+        foreach ($get_one_act_edit as $actividades2 ) : 
+            include 'include/nav_ops_aut_subacts.php';  
+        endforeach;        
+        break;      
+      case 'appcedula@app.com':      
+        foreach ($get_one_act_edit as $actividades2 ) : 
+            include 'include/nav_ops_aut_subacts.php';  
+        endforeach;        
+        break;
+      default:                                            ?>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Opciones
@@ -402,6 +448,12 @@ color:white;
                         
                       </ul>
                     </div>
+<?php
+        break; 
+    } 
+?>
+
+
                   </td>
                 </tr>              
                               <!-- Modal Editar -->

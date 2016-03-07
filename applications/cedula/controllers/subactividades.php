@@ -544,9 +544,37 @@ class Subactividades extends CI_Controller {
                 #redirect('ups.html');            
         }         
     }
+
+    // Actualizar datos de una ubicacion, por POST
+    public function ortografia() {
+        $e_mail = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['get_fc'] = $this->fc_model->get_fc();
+        
+        $ortografia = array(
+            'id_subact'     => $this->input->post('id_subact'),
+            'status_ortografia' => $this->input->post('status_ortografia')
+        );
+
+        #var_dump($ortografia['status_ortografia']); die();
+
+        $updated = $this->subactividades_model->update_status($ortografia);
+
+        if (isset($updated) AND $updated == true) {
+            print($updated);
+        } else {
+            print("ERROR, NO SE ACTUALIZO STATUS");
+        }
+        
+    }
     
 
 }
 
-/* End of file ubicaciones.php */
-/* Location: ./application/controllers/ubicaciones.php */
+/* End of file subactividades.php */
+/* Location: ./application/controllers/subactividades.php */
