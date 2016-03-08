@@ -22,7 +22,7 @@ class Subactividades_model extends CI_Model
             if ( isset($id_subact) || isset($id_act) ) {
 
                 if ( isset($id_subact) ) {
-                    // Si el parametro no es null, get id_subact
+                    // Si el parametro no es null, get id_subact. Devuelve UN SOLO registro.
                     $this->db->limit(1);
                     $this->db->where('id_subact',$id_subact);
                     $query = $this->db->get('subactividades');     
@@ -30,7 +30,7 @@ class Subactividades_model extends CI_Model
                 }
 
                 if( isset($id_act) ) {
-                    // Si el parametro no es null, get id_subact
+                    // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
                     $this->db->order_by('fecha_taller','desc');
                     $this->db->order_by('hora_ini','asc');
                     $this->db->where('id_act',$id_act);
@@ -39,8 +39,22 @@ class Subactividades_model extends CI_Model
                 }
             }
                 else{
-                    $query = $this->db->get('subactividades');     
-                    return $query->result();
+                    switch ($_SESSION['grupo']) {
+                        case 'ortografia':
+                            $this->db->order_by('status_contenido','des');
+                            $this->db->order_by('status_ortografia','asc');
+                            $this->db->order_by('fecha_taller','asc');
+                            $this->db->order_by('hora_ini','asc');
+                            $this->db->where('status_contenido','1');
+                            $query = $this->db->get('subactividades');     
+                            return $query->result();
+                        break;
+                        default:
+                            $query = $this->db->get('subactividades');     
+                            return $query->result();
+                        break;
+                    }
+
                 }
         }
 

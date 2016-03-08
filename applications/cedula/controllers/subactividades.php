@@ -42,7 +42,7 @@ class Subactividades extends CI_Controller {
         $id_coord        = $_SESSION['id_coord'];
         $edicion         = $_SESSION['fc'];
         $data['edicion'] = $edicion;
-        $data['title']   = 'Mis Cédulas';
+        $data['title']   = 'Actividades y/o Talleres';
         $e_mail          = $_SESSION['username'];
 		$data['onlyusername'] = strstr($e_mail,'@',true);
         
@@ -545,7 +545,7 @@ class Subactividades extends CI_Controller {
         }         
     }
 
-    // Actualizar datos de una ubicacion, por POST
+    // Actualizar datos 
     public function ortografia() {
         $e_mail = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
@@ -569,8 +569,7 @@ class Subactividades extends CI_Controller {
             print($updated);
         } else {
             print("ERROR, NO SE ACTUALIZO STATUS");
-        }
-        
+        }        
     }
     
 

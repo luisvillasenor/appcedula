@@ -67,7 +67,7 @@
                   <td><?php echo $subact->ubicacion; ?><br> (</small><?php echo $subact->status_subact; ?></small>)</td>
                   <td>
                     <?php
-                      switch ($status_contenido = 1) {
+                      switch ($subact->status_contenido) {
                           case '2':      ?>
                             <span class="label label-danger">Contenido No Autorizado</span>
                           <?php break;      
@@ -98,97 +98,97 @@
                   <td>
 
 
-<?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
-$app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
-  switch ($app) {
-      case 'rabingarcia@app.com':      
-        #       
-                ?>
+                                <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
+                                $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
+                                  switch ($app) {
+                                      case 'minerva@app.com':      
 
-                    <div>
-                      <?php 
-                        switch ($subact->status_ortografia) { 
-                          case '0': ?>
-                            <label class="checkbox">
-                              <input type="checkbox" id="ortografia<?php echo $subact->id_subact; ?>" onchange="myFunctioncheckortografia<?php echo $subact->id_subact; ?>()"> <small>Ortografía</small>
-                            </label>                              
-                        <?php break;
-                          case '1': ?>
-                            <label class="checkbox">
-                              <input type="checkbox" id="ortografia<?php echo $subact->id_subact; ?>" checked onchange="myFunctioncheckortografia<?php echo $subact->id_subact; ?>()"> <small>Ortografía</small>
-                            </label>                              
-                        <?php break;
-                        }
-                      ?>
-                      
-                    </div>
-                      <script>
-                      function myFunctioncheckortografia<?php echo $subact->id_subact; ?>() {
-                          var valor = document.getElementById('ortografia<?php echo $subact->id_subact; ?>').checked;
-                          if (valor == false) {
-                            document.getElementById("ortografia<?php echo $subact->id_subact; ?>").setAttribute("checked",false);
-                            //alert("The input value has changed. The new value is: " + "NO SELECTED");
-                            $.post("<?php echo base_url('subactividades/ortografia');?>",
-                                {
-                                  status_ortografia:0,
-                                  id_subact:<?php echo $subact->id_subact; ?>
-                                },
-                                function(data, status){
-                                  document.getElementById("miStatusOrtografia<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-warning'>Revision Ortográfica Pendiente</span>";
-                            });
+                                                ?>
 
-                          } else if (valor == true) {
-                            document.getElementById("ortografia<?php echo $subact->id_subact; ?>").setAttribute("checked",true);
-                            //alert("The input value has changed. The new value is: " + "SELECTED");
-                            $.post("<?php echo base_url('subactividades/ortografia');?>",
-                                {
-                                  status_ortografia:1,
-                                  id_subact:<?php echo $subact->id_subact; ?>
-                                },
-                                function(data, status){
-                                  document.getElementById("miStatusOrtografia<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-success'>Ortografía Limpia</span>";
-                            });
+                                                    <div>
+                                                      <?php 
+                                                        switch ($subact->status_ortografia) { 
+                                                          case '0': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $subact->id_subact; ?>" onchange="myFunctioncheckortografia<?php echo $subact->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                          case '1': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $subact->id_subact; ?>" checked onchange="myFunctioncheckortografia<?php echo $subact->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                        }
+                                                      ?>
+                                                      
+                                                    </div>
+                                                      <script>
+                                                      function myFunctioncheckortografia<?php echo $subact->id_subact; ?>() {
+                                                          var valor = document.getElementById('ortografia<?php echo $subact->id_subact; ?>').checked;
+                                                          if (valor == false) {
+                                                            document.getElementById("ortografia<?php echo $subact->id_subact; ?>").setAttribute("checked",false);
+                                                            //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:0,
+                                                                  id_subact:<?php echo $subact->id_subact; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-warning'>Revision Ortográfica Pendiente</span>";
+                                                            });
 
-                          };
-                          
+                                                          } else if (valor == true) {
+                                                            document.getElementById("ortografia<?php echo $subact->id_subact; ?>").setAttribute("checked",true);
+                                                            //alert("The input value has changed. The new value is: " + "SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:1,
+                                                                  id_subact:<?php echo $subact->id_subact; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-success'>Ortografía Limpia</span>";
+                                                            });
+
+                                                          };
+                                                          
 
 
 
-                          
-                      }
-                      </script>                    
-                <?php 
-        break;      
-      case 'appcedula@app.com':      
-        #       ?>
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-mini dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Opciones
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> <small>Editar</small></a>
-                        </li>                        
-                      </ul>
-                    </div>
-                <?php
-        break;
-      default:                                            ?>
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-mini dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Opciones
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> <small>Editar</small></a>
-                        </li>
-                      </ul>
-                    </div>
+                                                          
+                                                      }
+                                                      </script>                    
+                                                <?php 
+                                        break;      
+                                      case 'appcedula@app.com':      
+                                        #       ?>
+                                                    <div class="dropdown">
+                                                      <button class="btn btn-default btn-mini dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Opciones
+                                                        <span class="caret"></span>
+                                                      </button>
+                                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><!-- Button to trigger modal -->
+                                                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> <small>Editar</small></a>
+                                                        </li>                        
+                                                      </ul>
+                                                    </div>
+                                                <?php
+                                        break;
+                                      default:                                            ?>
+                                                    <div class="dropdown">
+                                                      <button class="btn btn-default btn-mini dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Opciones
+                                                        <span class="caret"></span>
+                                                      </button>
+                                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><!-- Button to trigger modal -->
+                                                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>"><i class="icon-edit"></i> <small>Editar</small></a>
+                                                        </li>
+                                                      </ul>
+                                                    </div>
 
-      <?php break; 
-  } ?>                    
+                                      <?php break; 
+                                  } ?>                    
 
                   </td>
                 </tr>              
@@ -200,11 +200,11 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                                 </div>
                                 <?php echo form_open(base_url('subactividades/update'),'class=""'); ?>
                                     <div class="modal-body">
-                                      <div class="well">
+                                      <div class="">
+                                        <textarea rows="10" cols="50" name="subactividad" id="subactividad"><?php echo $subact->subactividad; ?></textarea>
                                         <input type="hidden" name="objeto" id="objeto" value="subactividades">
                                         <input type="hidden" name="id_subact" id="id_subact" value="<?php echo $subact->id_subact; ?>"><br>
-                                        <input type="hidden" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>"><br>
-                                        <label>Actividad</label><textarea name="subactividad" id="subactividad"><?php echo $subact->subactividad; ?></textarea><br>
+                                        <input type="hidden" name="id_act" id="id_act" value="<?php echo $subact->id_act; ?>"><br>                                        
                                         <input type="hidden" name="fecha_taller" id="fecha_taller" value="<?php echo $subact->fecha_taller; ?>"><br>
                                         <input type="hidden" name="sede" id="sede" value="<?php echo $subact->sede; ?>"><br>
                                         <input type="hidden" name="ubicacion" id="ubicacion" value="<?php echo $subact->ubicacion; ?>"><br>

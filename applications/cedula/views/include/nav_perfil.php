@@ -12,6 +12,9 @@
               case 'administrador':
                 include 'menu_admin.php'; 
                 break;
+              case 'ortografia':
+                include 'menu_ortografia.php'; 
+                break;
               default:
                 echo '<div class="alert alert-block alert-error">';
                 echo '<button type="button" class="close" data-dismiss="alert">x</button>';
