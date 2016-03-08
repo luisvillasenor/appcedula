@@ -2,9 +2,18 @@
 <div class="container-fluid">
 
     <div id="wrapper" class="row-fluid">
-        
-      <?php include 'include/nav_subactividades.php';   ?>      
-        
+      <div class="span2 sidebar-nav">
+        <!--Body content-->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a><small>MENÚ</small></a></li>
+                <li><a href="<?php echo base_url('sedes/index');?>" ><span><small>SEDES</small></span></a></li>
+                <li><a href="<?php echo base_url('ubicaciones/index');?>" ><span><small>UBICACIONES</small></span> </a></li>      
+                <li><a href="<?php echo base_url('subactividades/index');?>"><span><small>SUBACTIVIDADES</small></span></a></li>
+                <div class="text-center">
+                    <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
+                </div>
+            </ul>
+        </div><!-Body content-->  
     
     <div class="row-fluid span10 control-group warning">              
     <!--Body content-->
@@ -13,6 +22,40 @@
         <div class="well well-small text-center">
           <h2>Subactividades del Festival de Calaveras <?php echo $anioTrabajo;?></h2>
         </div>
+        <div>
+        <!--Body content-->
+            <?php
+              switch ($grupo) {
+                case 'administrador': ?>
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="<?php echo base_url('subactividades/show');?>" ><span><i class="icon-list"></i> </span> </a></li>
+                        <li><a href="<?php echo base_url('subactividades/new_subact');?>" ><span><i class="icon-plus"></i> </span></a></li>                        
+                        <li><a href="<?php echo base_url('actividades/calendario_act');?>"><span><i class="icon-calendar"></i> </span></a></li>
+                      </ul>
+                <?php break;
+                case 'ortografia':?>
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="<?php echo base_url('subactividades/show');?>" ><span><i class="icon-list"></i> </span> </a></li>
+                      </ul>
+                <?php break;
+                default:
+                  echo '<div class="alert alert-block alert-error">';
+                  echo '<button type="button" class="close" data-dismiss="alert">x</button>';
+                  echo '<h4 class="alert-heading">Ups ! Parece ser que Usted no es Miembo de este Sitio !</h4>';
+                  echo '<p>';
+                  echo 'Por favor solicite ayuda al administrador del sitio';
+                  echo '</p>';
+                  echo '<p>';
+                  echo '<a class="btn btn-danger" href="'.base_url('admin/logout').'">Cerrar</a>';
+                  echo '</p>';
+                  echo '</div>';
+                  break;
+              } 
+
+            ?>
+            
+        </div><!--Body content-->
+
         <!--
         <div class="offset8">
             

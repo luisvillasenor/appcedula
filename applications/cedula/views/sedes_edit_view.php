@@ -1,7 +1,20 @@
 <div class="container-fluid">
     <div id="wrapper" class="row-fluid">
-      <?php include 'include/nav_actividades.php';  ?>      
-        <div class="row-fluid span8 control-group info">              
+
+        <div class="span2 sidebar-nav">
+        <!--Body content-->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a><small>MENÚ</small></a></li>
+                <li><a href="<?php echo base_url('sedes/index');?>" ><span><small>SEDES</small></span></a></li>
+                <li><a href="<?php echo base_url('ubicaciones/index');?>" ><span><small>UBICACIONES</small></span> </a></li>      
+                <li><a href="<?php echo base_url('subactividades/index');?>"><span><small>SUBACTIVIDADES</small></span></a></li>
+                <div class="text-center">
+                    <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
+                </div>
+            </ul>
+        </div><!-Body content-->
+
+        <div class="row-fluid span10 control-group info">              
         <!--Body content-->
             <div class="well text-center">
               <h2>Actualizar Sede</h2>
@@ -36,7 +49,8 @@
               <?php echo form_close(); ?>
               
             </div>
-          
         </div><!— /row span8 —>
+
+        
     </div>
 </div><!— /container —>

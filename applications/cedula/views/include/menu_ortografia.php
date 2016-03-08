@@ -3,32 +3,18 @@
   <div class="navbar-inner">     
       <ul class="nav">  
         <li>
-          <a href="<?php echo base_url('subactividades/index');?>"><i class="icon-home icon-white"></i>
+          <a>
             <?php foreach ($get_fc as $fc) {
               if ($fc->id_fc === $edicion) {
-                echo $fc->edicion ." (".$fc->anio.")";
+                echo "FESTIVAL DE CALAVERAS - ". $fc->edicion ." (".$fc->anio.")";
               }
             } ?>
             
           </a>
-
-            
         </li>
-              <li>                
-                <!--
-                <?php //*  FORMULARIO PARA BUSCAR  **//
-                    $atributos = array('class' => 'navbar-form pull-left'); 
-                    echo form_open(base_url('actividades/buscar_act'), $atributos); ?>
-                    <input id="txt" name="txt" type="text" class="span4">
-                    <button type="submit" class="btn"><small>Buscar Cédula</small></button>
-                <?php echo form_close(); ?>
-              -->
-            </li>
           <li class="divider-vertical"></li>
-          <li>                
-        
+          <li>
           </li>
-                  
       </ul>      
       <ul class="nav pull-right">
 
