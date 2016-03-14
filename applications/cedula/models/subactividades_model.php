@@ -93,7 +93,19 @@ class Subactividades_model extends CI_Model
                 }
         }
 
-        // UPDATE STATUS
+        // UPDATE STATUS CONTENIDO
+        function update_status_contenido($status_contenido = null) {
+            if ( isset($status_contenido) ) {
+                $this->db->where('id_subact', $status_contenido['id_subact']);
+                $this->db->update('subactividades', $status_contenido);
+                return true;
+            }
+                else {
+                    return null;
+                }
+        }
+
+        // UPDATE STATUS ORTOGRAFIA
         function update_status($ortografia = null) {
             if ( isset($ortografia) ) {
                 $this->db->where('id_subact', $ortografia['id_subact']);

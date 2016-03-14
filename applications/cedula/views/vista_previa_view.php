@@ -122,11 +122,6 @@ color:white;
 <?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
 $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
   switch ($app) {
-      case 'rabingarcia@app.com':      
-        foreach ($get_one_act_edit as $actividades2 ) : 
-            include 'include/nav_ops_aut_2.php';  
-        endforeach;        
-        break;      
       case 'appcedula@app.com':      
         foreach ($get_one_act_edit as $actividades2 ) : 
             include 'include/nav_ops_aut_2.php';  

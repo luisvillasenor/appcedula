@@ -388,70 +388,138 @@ color:white;
                   <td><?php echo $subact->ubicacion; ?></td>
                   <td>
                     <?php
-                      switch ($status_contenido = 0) {
-                          case '2':      ?>
-                            <span class="label label-danger">Contenido No Autorizado</span>
-                          <?php break;      
-                          case '1':      ?>
-                            <span class="label label-success">Contenido Autorizado</span>
-                          <?php break;
-                          default:    ?>
-                            <span class="label label-warning">Autorizacion Pendiente</span>  
-                          <?php break; 
-                        } 
-                    ?>
-                    <br>
-                    <?php
-                      switch ($status_ortografia = 0) {
-                          case '1':      ?>
-                            <span class="label label-success">Ortografía Limpia</span>
-                          <?php break;
-                          default:    ?>
-                            <span class="label label-warning">Revision Ortográfica Pendiente</span>  
-                          <?php break; 
-                        } 
-                    ?>
-                    
+                    if ($subact->status_contenido == TRUE AND $subact->status_ortografia == TRUE) { ?>
+                      <span class="label label-inverse">Programa General</span>
+                    <?php } else {
+                      # code...
+                        ?>
+                        <div id="miStatusContenido<?php echo $subact->id_subact; ?>">
+                        <?php
+                          switch ($subact->status_contenido) {
+                              case '2':      ?>
+                                <span class="label label-danger">Contenido No Autorizado</span>
+                              <?php break;      
+                              case '1':      ?>
+                                <span class="label label-success">Contenido Autorizado</span>
+                              <?php break;
+                              default:    ?>
+                                <span class="label label-warning">Autorizacion Pendiente</span>  
+                              <?php break; 
+                            } 
+                        ?>
+                        </div>
+                        <div id="miStatusOrtografia<?php echo $subact->id_subact; ?>">
+                        <?php
+                          switch ($subact->status_ortografia) {
+                              case '1':      ?>
+                                <span class="label label-success">Ortografía Limpia</span>
+                              <?php break;
+                              default:    ?>
+                                <span class="label label-warning">Revision Ortográfica Pendiente</span>  
+                              <?php break; 
+                            } 
+                        ?>
+                        </div>
+                    <?php } ?>
                   </td>
                   <td>
 
+                    <?php
+                    if ($subact->status_contenido == TRUE AND $subact->status_ortografia == TRUE) { ?>
+                      <span class="label"><i class="icon-lock"></i><small> Bloqueado</small></span>
+                    <?php } else {
 
-<?php /* APROBACION CONCEPTUAL.- VISTA SOLO PARA LOS COORDINADORES */
-$app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
-  switch ($app) {
-      case 'rabingarcia@app.com':      
-        foreach ($get_one_act_edit as $actividades2 ) : 
-            include 'include/nav_ops_aut_subacts.php';  
-        endforeach;        
-        break;      
-      case 'appcedula@app.com':      
-        foreach ($get_one_act_edit as $actividades2 ) : 
-            include 'include/nav_ops_aut_subacts.php';  
-        endforeach;        
-        break;
-      default:                                            ?>
-                    <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Opciones
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Actualizar</a>
-                        </li>
-                        <li><!-- Button to trigger modal -->
-                            <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
-                        </li>
-                        <li><!-- Button to trigger modal -->
-                            <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/actividades">Duplicar</a>
-                        </li>
-                        
-                      </ul>
-                    </div>
-<?php
-        break; 
-    } 
-?>
+                          $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
+                            switch ($app) {
+                                case 'rabingarcia@app.com':      
+                                  foreach ($get_one_act_edit as $actividades2 ) : 
+                                      #include 'include/nav_ops_aut_subacts.php';  
+                                    ?>
+                                      <div>
+                                        <?php 
+                                          switch ($subact->status_contenido) { 
+                                            case '0': ?>
+                                              <label class="checkbox">
+                                                <input type="checkbox" id="status_contenido<?php echo $subact->id_subact; ?>" onchange="myFunctioncheckcontenido<?php echo $subact->id_subact; ?>()"> <small>Contenido</small>
+                                              </label>                              
+                                          <?php break;
+                                            case '1': ?>
+                                              <label class="checkbox">
+                                                <input type="checkbox" id="status_contenido<?php echo $subact->id_subact; ?>" checked onchange="myFunctioncheckcontenido<?php echo $subact->id_subact; ?>()"> <small>Contenido</small>
+                                              </label>                              
+                                          <?php break;
+                                          }
+                                        ?>                                                      
+                                      </div>
+                                      <script>
+                                        function myFunctioncheckcontenido<?php echo $subact->id_subact; ?>() {
+                                            var valor = document.getElementById('status_contenido<?php echo $subact->id_subact; ?>').checked;
+                                            if (valor == false) {
+                                              document.getElementById("status_contenido<?php echo $subact->id_subact; ?>").setAttribute("checked",false);
+                                              //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                  {
+                                                    status_contenido:0,
+                                                    id_subact:<?php echo $subact->id_subact; ?>,
+                                                    id_act:<?php echo $subact->id_act; ?>
+                                                  },
+                                                  function(data, status){
+                                                    document.getElementById("miStatusContenido<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-warning'>Autorización Pendiente</span>";
+                                              });
+                                            } else if (valor == true) {
+                                              document.getElementById("status_contenido<?php echo $subact->id_subact; ?>").setAttribute("checked",true);
+                                              //alert("The input value has changed. The new value is: " + "SELECTED");
+                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                  {
+                                                    status_contenido:1,
+                                                    id_subact:<?php echo $subact->id_subact; ?>,
+                                                    id_act:<?php echo $subact->id_act; ?>
+                                                  },
+                                                  function(data, status){
+                                                    document.getElementById("miStatusContenido<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-success'>Contrenido Autorizado</span>";
+                                              });
+                                            };
+                                        }
+                                      </script>
+                                    <?php
+                                  endforeach;        
+                                  break;      
+                                case 'appcedula@app.com':      
+                                  foreach ($get_one_act_edit as $actividades2 ) : 
+                                      include 'include/nav_ops_aut_subacts.php';  
+                                  endforeach;        
+                                  break;
+                                default:                                            
+                                      ?>
+                                        <div class="dropdown">
+                                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Opciones
+                                            <span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><!-- Button to trigger modal -->
+                                                <a data-toggle="modal" href="#Editar<?php echo $subact->id_subact; ?>">Actualizar</a>
+                                            </li>
+                                            <li><!-- Button to trigger modal -->
+                                                <a data-toggle="modal" href="#Eliminar<?php echo $subact->id_subact; ?>">Eliminar</a>
+                                            </li>
+                                            <li><!-- Button to trigger modal -->
+                                                <a href="<?php echo base_url('subactividades/repetir');?>/<?php echo $subact->id_subact; ?>/actividades">Duplicar</a>
+                                            </li>
+                                            
+                                          </ul>
+                                        </div>
+                                      <?php
+                                  break; 
+                          } 
+                      
+                    }                    
+                    ?>
+
+                    
+
+
+                     
 
 
                   </td>

@@ -21,6 +21,7 @@ class Subactividades extends CI_Controller {
         $this->load->model('sedes_model');
         $this->load->model('horarios_model');
         $this->load->model('fc_model');
+        $this->load->model('actividades_model');
 
         /**
         * DEFINE AÑO ACTUAL
@@ -438,9 +439,11 @@ class Subactividades extends CI_Controller {
             if ( isset($objeto) || !empty($objeto) ) {
                 switch ($objeto) {
                     case 'actividades':
+                        // Redirecciona al Calendario y Programa Detallado
                         redirect(base_url('actividades/editar_fechas_act')."/".$subactividad['id_act']);
                         break;
                     case 'subactividades':
+                        // Redirecciona al Módulo de Subactividades
                         redirect(base_url('subactividades/show'));
                         break;
                 }
@@ -557,7 +560,8 @@ class Subactividades extends CI_Controller {
         $data['get_fc'] = $this->fc_model->get_fc();
         
         $ortografia = array(
-            'id_subact'     => $this->input->post('id_subact'),
+            'id_subact'         => $this->input->post('id_subact'),
+            'id_act'            => $this->input->post('id_act'),
             'status_ortografia' => $this->input->post('status_ortografia')
         );
 
@@ -571,7 +575,51 @@ class Subactividades extends CI_Controller {
             print("ERROR, NO SE ACTUALIZO STATUS");
         }        
     }
+
+    // Actualizar datos de una ubicacion, por POST
+    public function autoriza_contenido() {
+        $e_mail = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $id_coord = $_SESSION['id_coord'];
+        $edicion  = $_SESSION['fc'];
+        $data['edicion']  = $edicion;
+        $data['title']= 'Mis Cédulas';
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['get_fc'] = $this->fc_model->get_fc();
+        
+        $status_contenido = array(
+            'id_subact'         => $this->input->post('id_subact'),
+            'id_act'            => $this->input->post('id_act'),
+            'status_contenido'  => $this->input->post('status_contenido')#{0 = pendiente, 1 = autorizado}
+        );
+
+        $updated = $this->subactividades_model->update_status_contenido($status_contenido);
+
+        if (isset($updated) AND $updated == true) {            
+            print($updated);
+
+            switch ($status_contenido['status_contenido']) {
+                case '0':
+                    # code...
+                    $this->actividades_model->pendiente($status_contenido['id_act'],$pend = '0');
+                    break;
+                case '1':
+                    # code...
+                    $this->actividades_model->si_autorizar($status_contenido['id_act'],$succes = '2');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+        }
+            else {
+                print("ERROR, NO SE ACTUALIZO STATUS");
+            }
+
+    }
     
+
 
 }
 
