@@ -16,18 +16,18 @@
   <!--Body content-->
   <div style="text-align:center; margin:0 auto;">
           
-            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/logofc.png" width="100%">
+            <!--<img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/logofc.png" width="100%">-->
           
         </div>
          
 
          <div class="text-center">
-            <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
+            <!--<img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">-->
           </div>
 
 
     <ul class="nav nav-pills nav-stacked">
-      <li class="active"><a><small>MENÚ</small></a></li><br>    
+      <li class="active"><a><small>MENÚ</small></a></li>    
       <li><a href="<?php echo base_url('actividades/agregar_act');?>" ><span><small>Nueva Cédula</small></span></a></li>
       <li><a href="<?php echo base_url('actividades/index');?>" ><span><small>Mis Cédulas</small></span> </a></li>      
       <li><a href="<?php echo base_url('actividades/calendario_act');?>"><span><small>Mi Calendario</small></span></a></li>
@@ -56,6 +56,11 @@
                   case 'blancamartinez@app.com':?>
                         <li class="active"><a href="<?php echo base_url('actividades/dashboard');?>"><i class="icon-home"></i> CONTROL PRESUPUESTO Y GASTO</a></li>
       
+                  <?php break;
+                  case 'alerodriguez@app.com':?>
+                        <li class="active"><a><small>GESTIÓN</small></a></li>
+                        <li><a data-toggle="modal" href="<?php echo base_url('sedes/index');?>"><small> Gestión de Sedes</small></a></li>
+                        <li><a data-toggle="modal" href="<?php echo base_url('ubicaciones/index');?>"><small> Gestión de Ubicaciones</small></a></li>
                   <?php break;
       
                 } 

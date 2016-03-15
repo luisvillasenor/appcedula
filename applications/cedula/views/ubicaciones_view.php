@@ -5,15 +5,7 @@
         
       <div class="span2 sidebar-nav">
         <!--Body content-->
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a><small>MENÚ</small></a></li>
-                <li><a href="<?php echo base_url('sedes/index');?>" ><span><small>SEDES</small></span></a></li>
-                <li><a href="<?php echo base_url('ubicaciones/index');?>" ><span><small>UBICACIONES</small></span> </a></li>      
-                <li><a href="<?php echo base_url('subactividades/index');?>"><span><small>SUBACTIVIDADES</small></span></a></li>
-                <div class="text-center">
-                    <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
-                </div>
-            </ul>
+            <?php include 'include/nav_gestiones.php';  ?>
         </div><!-Body content-->
     
     <div class="row-fluid span10 control-group warning">              
@@ -25,8 +17,9 @@
         <p>Las ubicaciones son todos aquellas áreas ó zonas dentro de una sede 
           donde se lleva a cabo un evento o actividad ya sea en la Capital ó en algún
           Municipio</p>
-        <p>Si faltara algúna ubicacion favor de avisar a Informática.</p>
-        <p><a href="<?php echo base_url('ubicaciones/show');?>" class="btn btn-primary btn-large">Ubicaciones en el Festival de Calaveras &raquo;</a></p>
+        <p>Para la correcta gestión, el Sistema le permitirá realizar las siguientes acciones: Agregar, Listar, Actualizar y Filtrar</p>
+        <p>Cualquier ayuda que necesite marque a informática a la extensión 4336 ó 4306</p>
+        <p><a href="<?php echo base_url('ubicaciones/show');?>" class="btn btn-primary btn-large">Ir a Ubicaciones &raquo;</a></p>
       </div>
                         
           

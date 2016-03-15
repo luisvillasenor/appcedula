@@ -27,8 +27,6 @@
           </a>  
           <ul class="dropdown-menu"> 
             <!-- dropdown menu links -->                                              
-            <li><a data-toggle="modal" href="<?php echo base_url('sedes/index');?>"><i class="icon-comment"></i> Administración de Sedes &raquo;</a></li>
-            <li><a data-toggle="modal" href="<?php echo base_url('ubicaciones/index');?>"><i class="icon-comment"></i> Administración de Ubicaciones &raquo;</a></li>
             <li><a data-toggle="modal" href="<?php echo base_url('subactividades/index');?>"><i class="icon-comment"></i> Administración de Subactividades &raquo;</a></li>
           </ul>
         </li>

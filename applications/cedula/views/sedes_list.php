@@ -3,15 +3,7 @@
         
         <div class="span2 sidebar-nav">
         <!--Body content-->
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a><small>MENÚ</small></a></li>
-                <li><a href="<?php echo base_url('sedes/index');?>" ><span><small>SEDES</small></span></a></li>
-                <li><a href="<?php echo base_url('ubicaciones/index');?>" ><span><small>UBICACIONES</small></span> </a></li>      
-                <li><a href="<?php echo base_url('subactividades/index');?>"><span><small>SUBACTIVIDADES</small></span></a></li>
-                <div class="text-center">
-                    <img class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca1.png">
-                </div>
-            </ul>
+            <?php include 'include/nav_gestiones.php';  ?>
         </div><!-Body content-->
         
     
