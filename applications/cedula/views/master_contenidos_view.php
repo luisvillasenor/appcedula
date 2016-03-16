@@ -23,7 +23,7 @@
                         
                         <th>CATEGORÍA</th>                        
                         <th>EVENTO</th>                        
-                        <th colspan="8" style="text-align:center">PROGRAMA DETALLADO</th>                        
+                        <th colspan="9" style="text-align:center">PROGRAMA DETALLADO</th>                        
                         
                         
                         <?php /*
@@ -44,9 +44,8 @@
                                     <?php if($cats->id_categoria == $act->id_categoria AND $coord->id_coord == $act->id_coord){ ?>
                              
                                         
-                                        <td><?php echo $cats->categoria;?></td>
-                                        <td>
-                                            <?php echo $act->actividad;?><br>
+                                        <td><small><?php echo $cats->categoria;?></small></td>
+                                        <td><small><?php echo $act->actividad;?></small><br>
 
                                             <?php switch ($act->status_act) {
                                                   case '1':?>
@@ -81,7 +80,8 @@
                                                  <th><small>Horario</small></th>
                                                  <th><small>Sede</small></th>
                                                  <th><small>Ubicacion</small></th>
-                                                 <th><small>Status</small></th>                                                 
+                                                 <th><small>Status</small></th>
+                                                 <th><small></small></th>
                                                </tr>
                                         <?php foreach ($get_all as $necs ) : ?>                                                
                                             <?php if ($act->id_act == $necs->id_act){ ?>
@@ -140,7 +140,224 @@
                                                                       ?>
                                                                     </div>
                                                                   <?php } ?> 
-                                                        </td> 
+                                                        </td>
+                                                        <td>
+                    <?php
+                    $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
+
+                    if ($necs->status_contenido == TRUE AND $necs->status_ortografia == TRUE) { ?>
+                      <span class="label"><i class="icon-lock"></i><small> Bloqueado</small></span>
+                      <?php
+                          switch ($app) {
+                            case 'rabingarcia@app.com':
+                              # code...
+                                                  ?>
+                                                    <div>
+                                                        <?php 
+                                                          switch ($necs->status_contenido) { 
+                                                            case '0': ?>
+                                                              <label class="checkbox">
+                                                                <input type="checkbox" id="status_contenido<?php echo $necs->id_subact; ?>" onchange="myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>()"> <small>Contenido</small>
+                                                              </label>                              
+                                                          <?php break;
+                                                            case '1': ?>
+                                                              <label class="checkbox">
+                                                                <input type="checkbox" id="status_contenido<?php echo $necs->id_subact; ?>" checked onchange="myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>()"> <small>Contenido</small>
+                                                              </label>                              
+                                                          <?php break;
+                                                          }
+                                                        ?>                                                      
+                                                      </div>
+                                                      <div>
+                                                      <?php 
+                                                        switch ($necs->status_ortografia) { 
+                                                          case '0': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $necs->id_subact; ?>" onchange="myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                          case '1': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $necs->id_subact; ?>" checked onchange="myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                        }
+                                                      ?>                                                      
+                                                    </div>
+                                                      <script>
+                                                        function myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>() {
+                                                            var valor = document.getElementById('status_contenido<?php echo $necs->id_subact; ?>').checked;
+                                                            if (valor == false) {
+                                                              document.getElementById("status_contenido<?php echo $necs->id_subact; ?>").setAttribute("checked",false);
+                                                              //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                                  {
+                                                                    status_contenido:0,
+                                                                    id_subact:<?php echo $necs->id_subact; ?>,
+                                                                    id_act:<?php echo $necs->id_act; ?>
+                                                                  },
+                                                                  function(data, status){
+                                                                    document.getElementById("miStatusContenido<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-warning'>Autorización Pendiente</span>";
+                                                              });
+                                                            } else if (valor == true) {
+                                                              document.getElementById("status_contenido<?php echo $necs->id_subact; ?>").setAttribute("checked",true);
+                                                              //alert("The input value has changed. The new value is: " + "SELECTED");
+                                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                                  {
+                                                                    status_contenido:1,
+                                                                    id_subact:<?php echo $necs->id_subact; ?>,
+                                                                    id_act:<?php echo $necs->id_act; ?>
+                                                                  },
+                                                                  function(data, status){
+                                                                    document.getElementById("miStatusContenido<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-success'>Contrenido Autorizado</span>";
+                                                              });
+                                                            };
+                                                        }
+
+                                                        function myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>() {
+                                                          var valor = document.getElementById('ortografia<?php echo $necs->id_subact; ?>').checked;
+                                                          if (valor == false) {
+                                                            document.getElementById("ortografia<?php echo $necs->id_subact; ?>").setAttribute("checked",false);
+                                                            //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:0,
+                                                                  id_subact:<?php echo $necs->id_subact; ?>,
+                                                                  id_act:<?php echo $necs->id_act; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-warning'>Revision Ortográfica Pendiente</span>";
+                                                            });
+                                                          } else if (valor == true) {
+                                                            document.getElementById("ortografia<?php echo $necs->id_subact; ?>").setAttribute("checked",true);
+                                                            //alert("The input value has changed. The new value is: " + "SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:1,
+                                                                  id_subact:<?php echo $necs->id_subact; ?>,
+                                                                  id_act:<?php echo $necs->id_act; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-success'>Ortografía Limpia</span>";
+                                                            });
+                                                          };
+                                                      }
+                                                      </script>
+                                                     
+                                                
+                                                    
+                                                   
+                                                <?php
+                              break;
+                            
+                          } 
+                  
+                    }
+                            else {                                
+                                  
+                                  switch ($app) {
+                                      case 'rabingarcia@app.com':                             ?>
+
+                                                      <div>
+                                                        <?php 
+                                                          switch ($necs->status_contenido) { 
+                                                            case '0': ?>
+                                                              <label class="checkbox">
+                                                                <input type="checkbox" id="status_contenido<?php echo $necs->id_subact; ?>" onchange="myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>()"> <small>Contenido</small>
+                                                              </label>                              
+                                                          <?php break;
+                                                            case '1': ?>
+                                                              <label class="checkbox">
+                                                                <input type="checkbox" id="status_contenido<?php echo $necs->id_subact; ?>" checked onchange="myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>()"> <small>Contenido</small>
+                                                              </label>                              
+                                                          <?php break;
+                                                          }
+                                                        ?>                                                      
+                                                      </div>
+                                                      <script>
+                                                        function myFunctioncheckcontenidogeneral<?php echo $necs->id_subact; ?>() {
+                                                            var valor = document.getElementById('status_contenido<?php echo $necs->id_subact; ?>').checked;
+                                                            if (valor == false) {
+                                                              document.getElementById("status_contenido<?php echo $necs->id_subact; ?>").setAttribute("checked",false);
+                                                              //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                                  {
+                                                                    status_contenido:0,
+                                                                    id_subact:<?php echo $necs->id_subact; ?>,
+                                                                    id_act:<?php echo $necs->id_act; ?>
+                                                                  },
+                                                                  function(data, status){
+                                                                    document.getElementById("miStatusContenido<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-warning'>Autorización Pendiente</span>";
+                                                              });
+                                                            } else if (valor == true) {
+                                                              document.getElementById("status_contenido<?php echo $necs->id_subact; ?>").setAttribute("checked",true);
+                                                              //alert("The input value has changed. The new value is: " + "SELECTED");
+                                                              $.post("<?php echo base_url('subactividades/autoriza_contenido');?>",
+                                                                  {
+                                                                    status_contenido:1,
+                                                                    id_subact:<?php echo $necs->id_subact; ?>,
+                                                                    id_act:<?php echo $necs->id_act; ?>
+                                                                  },
+                                                                  function(data, status){
+                                                                    document.getElementById("miStatusContenido<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-success'>Contenido Autorizado</span>";
+                                                              });
+                                                            };
+                                                        }
+                                                      </script>
+                                              
+                                                    <div>
+                                                      <?php 
+                                                        switch ($necs->status_ortografia) { 
+                                                          case '0': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $necs->id_subact; ?>" onchange="myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                          case '1': ?>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" id="ortografia<?php echo $necs->id_subact; ?>" checked onchange="myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>()"> <small>Ortografía</small>
+                                                            </label>                              
+                                                        <?php break;
+                                                        }
+                                                      ?>                                                      
+                                                    </div>
+                                                    <script>
+                                                      function myFunctioncheckortografiageneral<?php echo $necs->id_subact; ?>() {
+                                                          var valor = document.getElementById('ortografia<?php echo $necs->id_subact; ?>').checked;
+                                                          if (valor == false) {
+                                                            document.getElementById("ortografia<?php echo $necs->id_subact; ?>").setAttribute("checked",false);
+                                                            //alert("The input value has changed. The new value is: " + "NO SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:0,
+                                                                  id_subact:<?php echo $necs->id_subact; ?>,
+                                                                  id_act:<?php echo $necs->id_act; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-warning'>Revision Ortográfica Pendiente</span>";
+                                                            });
+                                                          } else if (valor == true) {
+                                                            document.getElementById("ortografia<?php echo $necs->id_subact; ?>").setAttribute("checked",true);
+                                                            //alert("The input value has changed. The new value is: " + "SELECTED");
+                                                            $.post("<?php echo base_url('subactividades/ortografia');?>",
+                                                                {
+                                                                  status_ortografia:1,
+                                                                  id_subact:<?php echo $necs->id_subact; ?>,
+                                                                  id_act:<?php echo $necs->id_act; ?>
+                                                                },
+                                                                function(data, status){
+                                                                  document.getElementById("miStatusOrtografia<?php echo $necs->id_subact; ?>").innerHTML = "<span class='label label-success'>Ortografía Limpia</span>";
+                                                            });
+                                                          };
+                                                      }
+                                                    </script>
+
+                                                <?php
+                                        break; 
+                                  }
+                        } ?>
+
+                  </td> 
 
                                                         <!-- Modal EditarContenido -->
                                                           <div id="EditarContenido<?php echo $necs->id_subact; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
