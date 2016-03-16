@@ -9,6 +9,8 @@ class Actividades extends CI_Controller {
         $this->load->model('sedes_model');
         $this->load->model('fc_model');
         $this->load->model('subactividades_model');
+
+
 		if ( !isset($_SESSION['username'])){
 			redirect(base_url('admin/logout')); // Redirecciona la controlador "admin/logout"
 		}
@@ -1976,11 +1978,19 @@ class Actividades extends CI_Controller {
         #$marca = '0'; // Es una referencia a la variable Global definida en el __contructor
         
 
-        $this->load->model('actividades_model');
+        
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
         $this->load->model('coordinadores_model');
+        
+
         $this->load->model('subactividades_model');
+        $this->load->model('ubicaciones_model');
+        $this->load->model('municipios_model');
+        $this->load->model('sedes_model');
+        $this->load->model('horarios_model');
+        $this->load->model('fc_model');
+        $this->load->model('actividades_model');
         
         // Código que pone en el encabezado de la página la Coordinación del Usuario.
         /////////////////////////////////////////////////////////////////////////////
@@ -2011,6 +2021,11 @@ class Actividades extends CI_Controller {
         $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
         $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
         
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
+        $data['show_municipios'] = $this->municipios_model->show();
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
+
 
         $data['marca'] = $marca;
         $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);

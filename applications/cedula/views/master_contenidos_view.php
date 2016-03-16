@@ -15,22 +15,22 @@
                     <tr>
                         <th colspan="2" style="text-align:center"></th>
                         <th colspan="" style="text-align:center"></th>
-                        <th colspan="1" style="text-align:center"></th>
+                        <!--<th colspan="" style="text-align:center"></th>
                         <th colspan="" style="text-align:center"></th>
-                        <th colspan="10" style="text-align:center"></th>
+                        <th colspan="10" style="text-align:center"></th>-->
                     </tr>
                     <tr>
                         
-                        <th>Categoría</th>                        
-                        <th>Actividad, Descripción</th>                        
-                        <th colspan="" style="text-align:center">PROGRAMA DETALLADO</th>                        
+                        <th>CATEGORÍA</th>                        
+                        <th>EVENTO</th>                        
+                        <th colspan="8" style="text-align:center">PROGRAMA DETALLADO</th>                        
                         
                         
-                        <?php
+                        <?php /*
                           $fechas =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
                           foreach ($fechas as $value) {?>
                             <th><?php echo date("d M",strtotime($value));?></th>
-                        <?php }?>
+                        <?php }*/?>
                         
                     </tr>
                     <?php foreach ($get_all_coords as $coord ) : ?>
@@ -47,67 +47,27 @@
                                         <td><?php echo $cats->categoria;?></td>
                                         <td>
                                             <?php echo $act->actividad;?><br>
+
                                             <?php switch ($act->status_act) {
-      case '1':?>
-        <span name="flag" id="flag" class="label label-important"><small>No Aprobado</small></span>
-<?php break;
-      case '2':?>
-        <span name="flag" id="flag" class="label label-success"><small>Aprobado Conceptual</small></span>
-<?php break;
-    case '3':?>
-        <span name="flag" id="flag" class="label label-info"><small>Integrado al Programa General</small></span>
-<?php break;
-    case '4':?>
-        
-          <?php if ( $act->pres_eje < 0 ) { ?>
-          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto AUTORIZADO</small><br>
-            <?php if ($act->pres_aut == 0) { ?>
-              <span class="label label-warning">$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
-            <?php } else {?>
-              <span>$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
-            <?php } ?>            
-          </span><br>
-          <span id="flag" class="label label-important"><small>[AUTORIZADO vs PLANEADO]</small><br>$ <?php echo number_format($act->pres_eje,2,".",",");?></span>
-          <span id="flag" class="label label-inverse"><small>Presupuesto EJERCIDO</small><br>$ <?php echo number_format($act->pres_gas,2,".",",");?></span>
-          
-              <?php
-                if ( $act->pres_aut-$act->pres_gas < 0 ) { ?>
-                  <span id="flag" class="label label-important">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
-              <?php } else { ?>
-                  <span id="flag" class="label label-success">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
-              <?php } ?>
-
-          
-          <?php }else{ ?>
-          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto AUTORIZADO</small><br>
-            <?php if ($act->pres_aut == 0) { ?>
-              <span class="label label-warning">$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
-            <?php } else {?>
-              <span>$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
-            <?php } ?>            
-          </span><br>
-          <span id="flag" class="label label-inverse"><small>Presupuesto EJERCIDO</small><br>$ <?php echo number_format($act->pres_gas,2,".",",");?></span>
-
-          
-              <?php
-                if ( $act->pres_aut-$act->pres_gas < 0 ) { ?>
-                  <span id="flag" class="label label-important">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
-              <?php } else { ?>
-                  <span id="flag" class="label label-success">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
-              <?php } ?>
-
-          
-          
-          <?php } ?>
-        
-<?php break;
-    case '5':?>
-        <span name="flag" id="flag" class="label"><i class="icon-lock"></i><small> Bloqueada</small></span>
-<?php break;
-      default: ?>
-        <span name="flag" id="flag" class="label label-warning"><small>Pendiente</small></span>
-<?php break;
-      } ?>
+                                                  case '1':?>
+                                                    <span name="flag" id="flag" class="label label-important"><small>No Aprobado</small></span>
+                                            <?php break;
+                                                  case '2':?>
+                                                    <span name="flag" id="flag" class="label label-success"><small>Aprobado Conceptual</small></span>
+                                            <?php break;
+                                                case '3':?>
+                                                    <span name="flag" id="flag" class="label label-info"><small>Integrado al Programa General</small></span>
+                                            <?php break;
+                                                case '4':?>        
+                                                      <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto AUTORIZADO</small></span>        
+                                            <?php break;
+                                                case '5':?>
+                                                    <span name="flag" id="flag" class="label"><i class="icon-lock"></i><small> Bloqueada</small></span>
+                                            <?php break;
+                                                  default: ?>
+                                                    <span name="flag" id="flag" class="label label-warning"><small>Pendiente</small></span>
+                                            <?php break;
+                                                  } ?>
 
 
                                         </td>
@@ -116,28 +76,199 @@
                                             <table>
                                                 <tr>
                                                  <th><small>Actividad/Taller</small></th>
+                                                 <th><small>Costo</small></th>
                                                  <th><small>Fecha</small></th>
+                                                 <th><small>Horario</small></th>
+                                                 <th><small>Sede</small></th>
                                                  <th><small>Ubicacion</small></th>
-                                                 <th><small>Inicia</small></th>
-                                                 <th><small>Termina</small></th>
+                                                 <th><small>Status</small></th>                                                 
                                                </tr>
                                         <?php foreach ($get_all as $necs ) : ?>                                                
                                             <?php if ($act->id_act == $necs->id_act){ ?>
                                                 
                                                    <tr>
-                                                     <td><small><?php echo $necs->subactividad;?></small><br>
-                                                        <small><?php echo $necs->status_subact;?></small></td>
-                                                       <td><small><?php echo $necs->fecha_taller;?></small></td>
-                                                       <td><?php echo $necs->ubicacion;?></td>
-                                                       <td><?php echo date("H:s",strtotime($necs->hora_ini));?></td>
-                                                       <td><?php echo $necs->hora_fin;?></td>
+                                                        <td>
+                                                            <p ondblclick="myFunctionXsubactividadcontenido<?php echo $necs->id_subact; ?>()">
+                                                                <span class="label label-default">
+                                                                <small>
+                                                                <?php echo $necs->subactividad; ?>
+                                                                </small>
+                                                                </span>
+                                                            <p>
+                                                              <script>
+                                                              function myFunctionXsubactividadcontenido<?php echo $necs->id_subact; ?>() {
+                                                                  $('#EditarContenido<?php echo $necs->id_subact; ?>').modal('show')
+                                                              }
+                                                              </script>
+                                                            
+                                                        </td>
+                                                        <td><small><?php echo $necs->status_subact;?></small></td>
+                                                        <td><small><?php echo $necs->fecha_taller;?></small></td>
+                                                        <td><small>De <?php echo date("H:s",strtotime($necs->hora_ini));?> a <?php echo date("H:s",strtotime($necs->hora_fin));?></small></td>
+                                                        <td><small><?php echo $necs->sede;?></small></td>
+                                                        <td><small><?php echo $necs->ubicacion;?></td>
+                                                        <td>
+                                                            <?php
+                                                            if ($necs->status_contenido == TRUE AND $necs->status_ortografia == TRUE) { ?>
+                                                              <span class="label label-inverse">Programa General</span>
+                                                            <?php } else { ?>
+                                                                    <div id="miStatusContenido<?php echo $necs->id_subact; ?>">
+                                                                    <?php  
+                                                                        switch ($necs->status_contenido) {
+                                                                          case '2':      ?>
+                                                                            <span class="label label-danger">Contenido No Autorizado</span>
+                                                                          <?php break;      
+                                                                          case '1':      ?>
+                                                                            <span class="label label-success">Contenido Autorizado</span>
+                                                                          <?php break;
+                                                                          default:    ?>
+                                                                            <span class="label label-warning">Autorizacion Pendiente</span>  
+                                                                          <?php break; 
+                                                                        } 
+                                                                    ?>
+                                                                    </div>
+                                                                    <div id="miStatusOrtografia<?php echo $necs->id_subact; ?>">
+                                                                      <?php
+                                                                        switch ($necs->status_ortografia) {
+                                                                            case '1':      ?>
+                                                                              <span class="label label-success">Ortografía Limpia</span>
+                                                                            <?php break;
+                                                                            case '0':      ?>
+                                                                              <span class="label label-warning">Revision Ortográfica Pendiente</span>  
+                                                                            <?php break;
+                                                                          } 
+                                                                      ?>
+                                                                    </div>
+                                                                  <?php } ?> 
+                                                        </td> 
+
+                                                        <!-- Modal EditarContenido -->
+                                                          <div id="EditarContenido<?php echo $necs->id_subact; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                              <h3 id="myModalLabel">Actualiza Actividad/Taller</h3><small>ID: <?php echo $necs->id_subact; ?></small>
+                                                            </div>
+                                                            <?php echo form_open(base_url('subactividades/update'),'class=""'); ?>
+                                                                <div class="modal-body">
+                                                                  <div class="well">
+                                                                    <input type="hidden" name="objeto" id="objeto" value="mastercontenido">
+                                                                    <input type="hidden" name="id_subact" id="id_subact" value="<?php echo $necs->id_subact; ?>">
+                                                                    <input type="hidden" name="id_act" id="id_act" value="<?php echo $necs->id_act; ?>">
+                                                                    <textarea rows="1" type="text" name="subactividad" id="subactividad"><?php echo $necs->subactividad; ?></textarea>
+                                       
+                                                                    <script>
+                                                                      $(function() {
+                                                                        $( "#fecha_taller_editcontenido_<?php echo $necs->id_subact; ?>" ).datepicker({
+                                                                          dateFormat: "yy-mm-dd",
+                                                                          defaultDate: "+1w",
+                                                                          changeMonth: true,
+                                                                          numberOfMonths: 2,
+                                                                          onClose: function( selectedDate ) {
+                                                                            $( "#to" ).datepicker( "option", "minDate", selectedDate );
+                                                                          }
+                                                                        });
+                                                                        $( "#to" ).datepicker({
+                                                                          dateFormat: "yy-mm-dd",
+                                                                          defaultDate: "+1w",
+                                                                          changeMonth: true,
+                                                                          numberOfMonths: 2,
+                                                                          onClose: function( selectedDate ) {
+                                                                            $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                                                                          }
+                                                                        });
+                                                                      });
+                                                                      </script>
+                                                                    <script>
+                                                                      $(document).ready(function(){
+                                                                        $(function() {
+                                                                          $( "#fecha_taller_editcontenido_<?php echo $necs->id_subact; ?>" ).datepicker({ 
+                                                                            dateFormat: 'yy-mm-dd', 
+                                                                            showWeek: true, 
+                                                                            firstDay:1
+                                                                          });                                              
+                                                                        });
+                                                                      });      
+                                                                    </script>
+
+                                                                    <br><input type="text" name="fecha_taller" id="fecha_taller_editcontenido_<?php echo $necs->id_subact; ?>" value="<?php echo $necs->fecha_taller; ?>"><br>
+                                          
+                                                                    <select class="input-md" id="sede" name="sede">
+                                                                        <option>Sede</option>
+                                                                        <?php foreach ($show_sedes as $sede ) : ?>
+                                                                          <?php if ( $necs->sede == $sede->sede ) { ?>
+                                                                              <option value="<?php echo $sede->sede; ?>" selected><?php echo $sede->sede; ?></option>
+                                                                          <?php } else { ?>
+                                                                              <option value="<?php echo $sede->sede; ?>"><?php echo $sede->sede; ?></option>
+                                                                          <?php } ?>
+                                                                        <?php endforeach; ?>   
+                                                                    </select>
+                                          
+                                          
+                                                                    <select class="input-md" id="ubicacion" name="ubicacion">
+                                                                        <option>Ubicacion</option>
+                                                                        <?php foreach ($show_ubicaciones as $ubic ) : ?>
+                                                                          <?php if ( $necs->ubicacion == $ubic->ubicacion ) { ?>
+                                                                              <option value="<?php echo $ubic->ubicacion; ?>" selected><?php echo $ubic->ubicacion; ?></option>
+                                                                          <?php } else { ?>
+                                                                              <option value="<?php echo $ubic->ubicacion; ?>"><?php echo $ubic->ubicacion; ?></option>
+                                                                          <?php } ?>                    
+                                                                        <?php endforeach; ?>   
+                                                                    </select> <br>
+
+                                                                    <select class="input-small" id="hora_ini" name="hora_ini">
+                                                                        <option>Inicia</option>
+                                                                        <?php foreach ($get_horarios as $horaini ) : ?>
+                                                                            <?php if ( $necs->hora_ini == $horaini->horario ) { ?>
+                                                                                <option value="<?php echo $horaini->horario; ?>" selected><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                                                                            <?php } else { ?>
+                                                                                <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                                                                            <?php } ?>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                    <select class="input-small" id="hora_fin" name="hora_fin">
+                                                                        <option>Termina</option>
+                                                                        <?php foreach ($get_horarios as $horafin ) : ?>
+
+                                                                            <?php if ( $necs->hora_fin == $horafin->horario ) { ?>
+                                                                                <option value="<?php echo $horafin->horario; ?>" selected><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                                                                            <?php } else { ?>
+                                                                                <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                                                                            <?php } ?>
+                                                                        <?php endforeach; ?>   
+                                                                    </select>
+
+                                                                    <br>
+                                                                    <select class="input-sm" id="status_subact" name="status_subact">
+                                                                        <option>Status</option>
+                                                                        <?php 
+                                                                        $status_subact = array('1' => 'Entrada Gratuita', '2' => 'Entrada Con Costo');
+                                                                        foreach ($status_subact as $key => $value ) : ?>
+                                                                          <?php if ( $necs->status_subact == $value ) { ?>
+                                                                            <option value="<?php echo $value; ?>" selected><?php echo $value; ?></option>
+                                                                          <?php } else { ?>
+                                                                            <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                                          <?php } ?>                                              
+                                                                        <?php endforeach; ?>   
+                                                                    </select>
+
+
+                                                                    
+                                                                  </div>                                  
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                  <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i> Cancelar</button>
+                                                                  <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Actualizar</button>
+                                                                </div>
+                                                            <?php echo form_close(); ?>
+                                                          </div>
+
                                                    </tr>                                            
                                                 
                                             <?php } ?>                                                    
                                         <?php endforeach; ?>
                                             </table>
                                         </td>
-                        
+                                        <!--
                                         <td>
                                             <?php foreach ($get_all as $necss ) : ?>                       
                                                 <?php if ($act->d1 == $necss->fecha_taller AND $act->id_act == $necss->id_act) 
@@ -269,7 +400,7 @@
                                                 } ?>                                                
                                             <?php endforeach;   ?>
                                         </td>
-                                        
+                                        -->
                                     
                                     <?php } ?>
                                 </tr>                        

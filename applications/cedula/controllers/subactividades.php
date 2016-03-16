@@ -446,6 +446,10 @@ class Subactividades extends CI_Controller {
                         // Redirecciona al Módulo de Subactividades
                         redirect(base_url('subactividades/show'));
                         break;
+                    case 'mastercontenido':
+                        // Redirecciona al Módulo de Subactividades
+                        redirect(base_url('actividades/master_contenidos'));
+                        break;
                 }
             }
         }
