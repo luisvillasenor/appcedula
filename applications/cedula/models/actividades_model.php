@@ -834,17 +834,22 @@ class Actividades_model extends CI_Model
     {
         $this->db->delete(ACTIVIDADES, array('id_act' => $id_act)); 
     }
-    function get_master_plan($edicion)
-    {                
-        $this->db->select('*');
-        $this->db->from(ACTIVIDADES);
-        $this->db->where('id_fc', $edicion);
-        //$this->db->join('coordinadores','actividades.id_coord = coordinadores.id_coord');
-        $this->db->order_by('id_coord','ASC');
-        
-        $query = $this->db->get();
-        
+    function get_master_plan($edicion = null, $id_categoria = null)
+    {
+        if ( isset($edicion) AND $id_categoria == null ) {
+            $this->db->select('*');
+            $this->db->from(ACTIVIDADES);
+            $this->db->where('id_fc', $edicion);            
+            $query = $this->db->get();            
+        } else {
+            $this->db->select('*');
+            $this->db->from(ACTIVIDADES);
+            $this->db->where('id_fc', $edicion);
+            $this->db->where('id_categoria', $id_categoria);
+            $query = $this->db->get();            
+        }
         return $query->result();
+        
     }
     function get_master_plan_coord($id_coord,$edicion)
     {                

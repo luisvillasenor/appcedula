@@ -7,7 +7,7 @@
             <div class="span4">          
               <li>                
                 <?php $atributos = array('class' => 'navbar-form pull-left'); 
-                    echo form_open(base_url('#'), $atributos); ?>                    
+                    echo form_open(base_url('actividades/master_contenidos'), $atributos); ?>                    
                     <select name="id_categoria" id="id_categoria" onchange="this.form.submit()">
                       <option>Categorías</option>
                       <?php foreach ($get_all_cats as $cats ) :?>                      

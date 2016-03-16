@@ -1967,12 +1967,12 @@ class Actividades extends CI_Controller {
         $grupo    = $_SESSION['grupo'];
         $data['grupo'] = $grupo;
         $id_coord = $_SESSION['id_coord'];
-        $edicion  = $_SESSION['fc'];
-        $data['edicion']  = $_SESSION['fc'];
+        $edicion = ( isset($_SESSION['fc']) ) ? $_SESSION['fc'] : null ;
+        $data['edicion']  = $edicion;
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $data['title']= 'Master Plan del Festival de Calaveras';
-        
+
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
         $this->load->model('categorias_model');
@@ -2002,8 +2002,11 @@ class Actividades extends CI_Controller {
             }
         }
         /////////////////////////////////////////////////////////////////////////////
-        
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion);
+
+        $id_categoria = $this->input->post('id_categoria');
+        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
