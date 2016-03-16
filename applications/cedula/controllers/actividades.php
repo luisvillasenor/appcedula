@@ -15,6 +15,7 @@ class Actividades extends CI_Controller {
         $date = new DateTime();
         $anioActual = $date->format('Y'); // Calcula en año actual
         define('anioActual', $anioActual);
+
 	}
 
     public function index(){
@@ -1972,6 +1973,8 @@ class Actividades extends CI_Controller {
         $data['get_fc'] = $this->fc_model->get_fc();
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $data['title']= 'Master Plan del Festival de Calaveras';
+        #$marca = '0'; // Es una referencia a la variable Global definida en el __contructor
+        
 
         $this->load->model('actividades_model');
         $this->load->model('necesidades_model');
@@ -2004,9 +2007,13 @@ class Actividades extends CI_Controller {
         /////////////////////////////////////////////////////////////////////////////
 
         $id_categoria = $this->input->post('id_categoria');
+        $marca = $this->input->post('marca');
         $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+        $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
+        
 
-        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria);
+        $data['marca'] = $marca;
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);

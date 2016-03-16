@@ -5,6 +5,7 @@
             <div class=""><h3>MASTER CONTENIDOS FC EDICIÓN 201<?php echo $edicion;?></h3></div>            
             
             <?php include 'include/menu_filtros_master_contenidos.php';  ?>
+
             
             <hr>
             
@@ -44,7 +45,72 @@
                              
                                         
                                         <td><?php echo $cats->categoria;?></td>
-                                        <td><?php echo $act->actividad;?></td>
+                                        <td>
+                                            <?php echo $act->actividad;?><br>
+                                            <?php switch ($act->status_act) {
+      case '1':?>
+        <span name="flag" id="flag" class="label label-important"><small>No Aprobado</small></span>
+<?php break;
+      case '2':?>
+        <span name="flag" id="flag" class="label label-success"><small>Aprobado Conceptual</small></span>
+<?php break;
+    case '3':?>
+        <span name="flag" id="flag" class="label label-info"><small>Integrado al Programa General</small></span>
+<?php break;
+    case '4':?>
+        
+          <?php if ( $act->pres_eje < 0 ) { ?>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto AUTORIZADO</small><br>
+            <?php if ($act->pres_aut == 0) { ?>
+              <span class="label label-warning">$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
+            <?php } else {?>
+              <span>$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
+            <?php } ?>            
+          </span><br>
+          <span id="flag" class="label label-important"><small>[AUTORIZADO vs PLANEADO]</small><br>$ <?php echo number_format($act->pres_eje,2,".",",");?></span>
+          <span id="flag" class="label label-inverse"><small>Presupuesto EJERCIDO</small><br>$ <?php echo number_format($act->pres_gas,2,".",",");?></span>
+          
+              <?php
+                if ( $act->pres_aut-$act->pres_gas < 0 ) { ?>
+                  <span id="flag" class="label label-important">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
+              <?php } else { ?>
+                  <span id="flag" class="label label-success">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
+              <?php } ?>
+
+          
+          <?php }else{ ?>
+          <span name="flag" id="flag" class="label label-inverse"><small>Presupuesto AUTORIZADO</small><br>
+            <?php if ($act->pres_aut == 0) { ?>
+              <span class="label label-warning">$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
+            <?php } else {?>
+              <span>$ <?php echo number_format($act->pres_aut,2,".",",");?></span>
+            <?php } ?>            
+          </span><br>
+          <span id="flag" class="label label-inverse"><small>Presupuesto EJERCIDO</small><br>$ <?php echo number_format($act->pres_gas,2,".",",");?></span>
+
+          
+              <?php
+                if ( $act->pres_aut-$act->pres_gas < 0 ) { ?>
+                  <span id="flag" class="label label-important">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
+              <?php } else { ?>
+                  <span id="flag" class="label label-success">SALDO: $ <?php echo number_format($act->pres_aut-$act->pres_gas,2,".",",");?></span>
+              <?php } ?>
+
+          
+          
+          <?php } ?>
+        
+<?php break;
+    case '5':?>
+        <span name="flag" id="flag" class="label"><i class="icon-lock"></i><small> Bloqueada</small></span>
+<?php break;
+      default: ?>
+        <span name="flag" id="flag" class="label label-warning"><small>Pendiente</small></span>
+<?php break;
+      } ?>
+
+
+                                        </td>
                                         
                                         <td>
                                             <table>

@@ -834,22 +834,52 @@ class Actividades_model extends CI_Model
     {
         $this->db->delete(ACTIVIDADES, array('id_act' => $id_act)); 
     }
-    function get_master_plan($edicion = null, $id_categoria = null)
+    function get_master_plan($edicion = null, $id_categoria = null, $marca)
     {
-        if ( isset($edicion) AND $id_categoria == null ) {
-            $this->db->select('*');
-            $this->db->from(ACTIVIDADES);
-            $this->db->where('id_fc', $edicion);            
-            $query = $this->db->get();            
-        } else {
-            $this->db->select('*');
-            $this->db->from(ACTIVIDADES);
-            $this->db->where('id_fc', $edicion);
-            $this->db->where('id_categoria', $id_categoria);
-            $query = $this->db->get();            
-        }
-        return $query->result();
-        
+        switch ($marca) {
+            case '0':
+                if ( isset($edicion) AND $id_categoria == null ) {
+                    $this->db->select('*');
+                    $this->db->from(ACTIVIDADES);
+                    $this->db->where('id_fc', $edicion);            
+                    $query = $this->db->get();            
+                } elseif($id_categoria == 'todo') {
+                    $this->db->select('*');
+                    $this->db->from(ACTIVIDADES);
+                    $this->db->where('id_fc', $edicion);
+                    $query = $this->db->get();            
+                    } else {
+                        $this->db->select('*');
+                        $this->db->from(ACTIVIDADES);
+                        $this->db->where('id_fc', $edicion);
+                        $this->db->where('id_categoria', $id_categoria);
+                        $query = $this->db->get();            
+                    }
+                break;
+            case '1':
+                if ( isset($edicion) AND $id_categoria == null ) {
+                    $this->db->select('*');
+                    $this->db->from(ACTIVIDADES);
+                    $this->db->where('id_fc', $edicion);
+                    $this->db->where('status_act', '0');
+                    $query = $this->db->get();            
+                } elseif($id_categoria == 'todo') {
+                    $this->db->select('*');
+                    $this->db->from(ACTIVIDADES);
+                    $this->db->where('id_fc', $edicion);
+                    $this->db->where('status_act', '2');
+                    $query = $this->db->get();            
+                    } else {
+                        $this->db->select('*');
+                        $this->db->from(ACTIVIDADES);
+                        $this->db->where('id_fc', $edicion);
+                        $this->db->where('id_categoria', $id_categoria);
+                        $this->db->where('status_act', '2');
+                        $query = $this->db->get();
+                    }
+                break;
+        }        
+        return $query->result();        
     }
     function get_master_plan_coord($id_coord,$edicion)
     {                
