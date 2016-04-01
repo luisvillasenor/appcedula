@@ -15,6 +15,9 @@
               case 'ortografia':
                 include 'menu_ortografia.php'; 
                 break;
+              case 'merca':
+                include 'menu_merca.php'; 
+                break;
               default:
                 echo '<div class="alert alert-block alert-error">';
                 echo '<button type="button" class="close" data-dismiss="alert">x</button>';

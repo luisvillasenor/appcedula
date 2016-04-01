@@ -128,6 +128,13 @@ class Admin extends CI_Controller {
                         $_SESSION['id_coord'] = $clean_coord;
 						redirect('subactividades/index');
 						break;	
+					case 'merca':
+						$_SESSION['username'] = $clean_email_address;
+						$_SESSION['grupo'] 	  = $clean_grupo;
+                        $_SESSION['fc'] 	  = $clean_edicion;
+                        $_SESSION['id_coord'] = $clean_coord;
+						redirect('merca/programa');
+						break;
 					default:
 						echo '<div class="alert alert-block alert-error">';
 						echo '<p>';

@@ -2034,7 +2034,8 @@ class Actividades extends CI_Controller {
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
                 
         $this->load->view('header_view',$data);
-        $this->load->view('master_contenidos_view',$data);
+        #$this->load->view('master_contenidos_view',$data);
+        $this->load->view('programa_resumido_view',$data);
         $this->load->view('footer_view',$data);
     }
     
