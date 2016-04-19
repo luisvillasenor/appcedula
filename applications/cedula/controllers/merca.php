@@ -83,19 +83,58 @@ public function programa(){
 
 
         $data['marca'] = $marca;
+        $data['id_categoria'] = $id_categoria;
         $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
-                
+
+                        
         $this->load->view('header_view',$data);
         $this->load->view('programa_resumido_view',$data);
         $this->load->view('footer_view',$data);
     }
 
+    # Exportar a PDF
+    function pdf($edicion = '', $id_categoria = '', $marca = ''){
 
+        $this->load->helper('pdf_helper');
+        /*
+        -------------
+        Aqui el codigo
+        -------------
+        */
+        $data['titles']= 'Master del Programa General para el Festival de Calaveras Edición 201'.$edicion;
+        $this->load->model('necesidades_model');
+        $this->load->model('categorias_model');
+        $this->load->model('subactividades_model');
+        $this->load->model('ubicaciones_model');
+        $this->load->model('municipios_model');
+        $this->load->model('sedes_model');
+        $this->load->model('horarios_model');
+        $this->load->model('fc_model');
+        $this->load->model('actividades_model');
+        
+        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+        $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
+        
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
+        $data['show_municipios'] = $this->municipios_model->show();
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
+
+        $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        #$data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
+                
+        #$this->load->view('header_view',$data);
+        $this->load->view('pdfreport', $data);
+        #$this->load->view('footer_view',$data);
+
+    }
 
 }
 
 /* End of file solicitud.php */
-/* Location: ./application/controllers/solicitud.php */
+/* Location: ./application/controllers/merca.php */

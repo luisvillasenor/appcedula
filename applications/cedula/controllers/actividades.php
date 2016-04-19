@@ -2028,6 +2028,7 @@ class Actividades extends CI_Controller {
 
 
         $data['marca'] = $marca;
+        $data['id_categoria'] = $id_categoria;
         $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();

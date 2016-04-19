@@ -4,7 +4,7 @@
       <a class="brand">Filtrar por: </a>
       <ul class="nav">  
         <div class="controls controls-row">
-            <div class="span4">          
+            <div class="span8">          
               <li>                
                 <?php $atributos = array('class' => 'navbar-form pull-left'); 
                     echo form_open(base_url('actividades/master_contenidos'), $atributos); ?>                    
@@ -48,8 +48,12 @@
                     </script>
 
                 <?php echo form_close(); ?>
-              </li>          
-            </div>            
+              </li>
+              <li></li>
+
+            </div>
+
+            
         </div>
       </ul>      
   </div>  

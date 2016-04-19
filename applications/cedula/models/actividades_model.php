@@ -118,6 +118,7 @@ class Actividades_model extends CI_Model
         
         return $query->result();
     }
+
     function get_resp($e_mail,$grupo,$id_coord)
     {
                 

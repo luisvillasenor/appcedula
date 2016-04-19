@@ -5,6 +5,7 @@
             <div class=""><h3>PROGRAMA RESUMIDO FC EDICIÓN 201<?php echo $edicion;?></h3></div>            
             
             <?php include 'include/menu_filtros_master_contenidos.php';  ?>
+            <a href="<? echo base_url('merca/pdf');?>/<?php echo $edicion;?>/<?php echo $id_categoria;?>/<?php echo $marca;?>" target="_blank">Descargar en PDF</a>
 
             
             <hr>
@@ -36,7 +37,6 @@
                                         
                                         <td><small><?php echo $cats->categoria;?></small></td>
                                         <td>
-
                                             <table>
                                               <b><?php echo $act->actividad;?></b><br>
                                               <i><?php echo strtoupper($act->ubicacion) ;?> / <?php echo strtoupper($act->sede) ;?></i><br>
@@ -46,7 +46,7 @@
 
                                               <ul>
                                                 <li>
-                                                <?php echo $necs->subactividad;?> [ <small><?php echo $necs->status_subact;?></small> ]<br>
+                                                <?php echo $necs->subactividad;?> [<small><?php echo strtolower($necs->status_subact); ?></small>]<br>
                                                 <small><?php echo $necs->ubicacion;?></small> / <small><?php echo $necs->sede;?></small><br>
                                                 <small><?php echo $necs->fecha_taller;?></small>, 
                                                 <small>De <?php echo date("H:s",strtotime($necs->hora_ini));?> a <?php echo date("H:s",strtotime($necs->hora_fin));?></small><br>
@@ -57,6 +57,7 @@
                                             <?php } ?>                                                    
                                         <?php endforeach; ?>
                                             </table>
+                                            <hr>
                                         </td>
                                     
                                     <?php } ?>
