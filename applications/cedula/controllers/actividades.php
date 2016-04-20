@@ -2018,7 +2018,7 @@ class Actividades extends CI_Controller {
 
         $id_categoria = $this->input->post('id_categoria');
         $marca = $this->input->post('marca');
-        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : 'todo' ;
         $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
         
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();

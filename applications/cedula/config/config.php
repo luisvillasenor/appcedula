@@ -25,9 +25,13 @@ $config['base_url']	= 'http://10.1.17.224/appcedula';
 | something else. If you are using mod_rewrite to remove the page set this
 | variable so that it is blank.
 |
+|
+| Para utilizar de manera perzonalizada para mas de 2 aplicaciones pero con
+| el mismo sistema, se debe crear un index personalizado y tambien un 
+| archivo en raiz .htaccess
 */
-//$config['index_page'] = 'appcedula.php';
 $config['index_page'] = '';
+//$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

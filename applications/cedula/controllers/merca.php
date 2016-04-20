@@ -20,7 +20,7 @@ class Merca extends CI_Controller {
 
 	}
 
-public function programa(){
+public function programa($id_categoria = 'todo'){
         $e_mail   = $_SESSION['username'];
         $grupo    = $_SESSION['grupo'];
         $data['grupo'] = $grupo;
@@ -73,7 +73,7 @@ public function programa(){
 
         $id_categoria = $this->input->post('id_categoria');
         $marca = $this->input->post('marca');
-        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : 'todo' ;
         $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
         
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();
@@ -96,7 +96,7 @@ public function programa(){
     }
 
     # Exportar a PDF
-    function pdf($edicion = '', $id_categoria = '', $marca = ''){
+    function pdf($edicion = '', $id_categoria = 'todo', $marca = ''){
 
         $this->load->helper('pdf_helper');
         /*
@@ -115,7 +115,7 @@ public function programa(){
         $this->load->model('fc_model');
         $this->load->model('actividades_model');
         
-        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : null ;
+        $id_categoria = ( isset($id_categoria) ) ? $id_categoria : 'todo' ;
         $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
         
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();
