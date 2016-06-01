@@ -24,17 +24,16 @@
                         <?php }*/?>
                         
                     </tr>
-                    <?php foreach ($get_all_coords as $coord ) : ?>
+                    
                                                     
                     <?php foreach ($get_all_cats as $cats ) : ?>
                                             
-                        <?php if ($coord->id_coord == $cats->id_coord){ ?>
+                        
                                                                                 
                                 <?php foreach ($get_master_plan as $act ) : ?>
-                                <tr>                                                            
-                                    <?php if($cats->id_categoria == $act->id_categoria AND $coord->id_coord == $act->id_coord){ ?>
-                             
-                                        
+                                <tr>
+                                    <?php if($cats->id_categoria == $act->id_categoria ){ ?>
+
                                         <td><small><?php echo $cats->categoria;?></small></td>
                                         <td>
                                             <table>
@@ -61,14 +60,14 @@
                                         </td>
                                     
                                     <?php } ?>
-                                </tr>                        
+                                </tr>
                                 <?php endforeach; ?>
                         
-                        <?php } ?>
+                        
                     
                     <?php endforeach; ?>                        
                                                 
-                <?php endforeach; ?>
+                    
                     
                 </table>
                 <hr>

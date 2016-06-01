@@ -847,11 +847,13 @@ class Actividades_model extends CI_Model
                 } elseif($id_categoria == 'todo') {
                     $this->db->select('*');
                     $this->db->from(ACTIVIDADES);
+                    $this->db->order_by('id_categoria','asc');
                     $this->db->where('id_fc', $edicion);
                     $query = $this->db->get();            
                     } else {
                         $this->db->select('*');
                         $this->db->from(ACTIVIDADES);
+                        $this->db->order_by('id_categoria','asc');
                         $this->db->where('id_fc', $edicion);
                         $this->db->where('id_categoria', $id_categoria);
                         $query = $this->db->get();            
@@ -867,12 +869,14 @@ class Actividades_model extends CI_Model
                 } elseif($id_categoria == 'todo') {
                     $this->db->select('*');
                     $this->db->from(ACTIVIDADES);
+                    $this->db->order_by('id_categoria','asc');
                     $this->db->where('id_fc', $edicion);
                     $this->db->where('status_act', '2');
                     $query = $this->db->get();            
                     } else {
                         $this->db->select('*');
                         $this->db->from(ACTIVIDADES);
+                        $this->db->order_by('id_categoria','asc');
                         $this->db->where('id_fc', $edicion);
                         $this->db->where('id_categoria', $id_categoria);
                         $this->db->where('status_act', '2');

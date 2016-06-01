@@ -11,9 +11,9 @@
             parent::__construct();
             $this->load->database();
         }
-        function get_all_cats() 
+        function get_all_cats($order = 'asc') 
         {   
-            $this->db->order_by('categoria','asc');
+            $this->db->order_by('categoria',$order);
             $query = $this->db->get('categorias');
             return $query->result();
         }

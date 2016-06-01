@@ -124,7 +124,7 @@ public function programa($id_categoria = 'todo'){
         $data['get_horarios'] = $this->horarios_model->get_horarios();
 
         $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
-        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats($order = 'asc');
         #$data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
                 
