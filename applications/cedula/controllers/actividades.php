@@ -1977,21 +1977,23 @@ class Actividades extends CI_Controller {
         $data['title']= 'Master Plan del Festival de Calaveras';
         #$marca = '0'; // Es una referencia a la variable Global definida en el __contructor
         
-
-        
-        $this->load->model('necesidades_model');
-        $this->load->model('categorias_model');
-        $this->load->model('coordinadores_model');
-        
-
-        $this->load->model('subactividades_model');
-        $this->load->model('ubicaciones_model');
-        $this->load->model('municipios_model');
-        $this->load->model('sedes_model');
-        $this->load->model('horarios_model');
-        $this->load->model('fc_model');
-        $this->load->model('actividades_model');
-        
+        #CARGA LOS MODELOS A USAR
+        $modelos = array(
+            'necesidades_model',
+            'categorias_model',
+            'coordinadores_model',
+            'subactividades_model',
+            'ubicaciones_model',
+            'municipios_model',
+            'sedes_model',
+            'horarios_model',
+            'fc_model',
+            'actividades_model'
+        );
+        foreach ($modelos as $value) {
+            $this->load->model($value);
+        }        
+       
         // Código que pone en el encabezado de la página la Coordinación del Usuario.
         /////////////////////////////////////////////////////////////////////////////
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -2026,7 +2028,6 @@ class Actividades extends CI_Controller {
         $data['show_sedes'] = $this->sedes_model->show();
         $data['get_horarios'] = $this->horarios_model->get_horarios();
 
-
         $data['marca'] = $marca;
         $data['id_categoria'] = $id_categoria;
         $data['get_master_plan'] = $this->actividades_model->get_master_plan($edicion, $id_categoria, $marca);
@@ -2035,7 +2036,6 @@ class Actividades extends CI_Controller {
         $data['get_all'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
                 
         $this->load->view('header_view',$data);
-        #$this->load->view('master_contenidos_view',$data);
         $this->load->view('programa_resumido_view',$data);
         $this->load->view('footer_view',$data);
     }

@@ -14,7 +14,7 @@ $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $obj_pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $obj_pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $obj_pdf->SetFont('helvetica', '', 9);
-$obj_pdf->setFontSubsetting(false);
+$obj_pdf->setFontSubsetting(true);
 $obj_pdf->AddPage(	);
 ob_start();
     // we can have any view part here like HTML, PHP etc

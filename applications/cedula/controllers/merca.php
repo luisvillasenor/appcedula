@@ -105,18 +105,25 @@ public function programa($id_categoria = 'todo'){
         -------------
         */
         $data['titles']= 'Master del Programa General para el Festival de Calaveras Edición 201'.$edicion;
-        $this->load->model('necesidades_model');
-        $this->load->model('categorias_model');
-        $this->load->model('subactividades_model');
-        $this->load->model('ubicaciones_model');
-        $this->load->model('municipios_model');
-        $this->load->model('sedes_model');
-        $this->load->model('horarios_model');
-        $this->load->model('fc_model');
-        $this->load->model('actividades_model');
+        
+        #CARGA LOS MODELOS A USAR
+        $modelos = array(
+            'necesidades_model',
+            'categorias_model',
+            'subactividades_model',
+            'ubicaciones_model',
+            'municipios_model',
+            'sedes_model',
+            'horarios_model',
+            'fc_model',
+            'actividades_model'
+        );
+        foreach ($modelos as $value) {
+            $this->load->model($value);
+        }
         
         $id_categoria = ( isset($id_categoria) ) ? $id_categoria : 'todo' ;
-        $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
+        $marca        = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
         
         $data['show_ubicaciones'] = $this->ubicaciones_model->show();
         $data['show_municipios'] = $this->municipios_model->show();
