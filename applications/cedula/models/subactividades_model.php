@@ -118,6 +118,71 @@ class Subactividades_model extends CI_Model
         }
 
 
+        // JOIN sin categoria de Conciertos
+        function show_programa_diario($fechaPrograma = null) {   
+            if ( isset($fechaPrograma)) {
+                if ($fechaPrograma !== "todo") {
+                    // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
+                    $this->db->select('*');
+                    $this->db->from('actividades');
+                    $this->db->join('subactividades','actividades.id_act = subactividades.id_act','inner');
+                    $this->db->where('fecha_taller',$fechaPrograma);
+                    $this->db->where('id_categoria !=','14');
+                    $this->db->order_by('subactividades.id_act','asc');
+                    $this->db->order_by('subactividades.hora_ini','asc');                    
+                    $query = $this->db->get();     
+                    return $query->result();
+                } else {
+                    // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
+                    $this->db->select('*');
+                    $this->db->from('actividades');
+                    $this->db->join('subactividades','actividades.id_act = subactividades.id_act','inner');
+                    $this->db->where('id_categoria !=','14');
+                    $this->db->order_by('subactividades.id_act','asc');
+                    $this->db->order_by('subactividades.hora_ini','asc');
+                    $query = $this->db->get();     
+                    return $query->result();
+                }
+                
+                
+            } else {
+                return null;
+            }
+        }
+
+        // JOIN sin categoria de Conciertos
+        function show_conciertos_diario($fechaPrograma = null) {   
+            if ( isset($fechaPrograma)) {
+                if ($fechaPrograma !== "todo") {
+                    // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
+                    $this->db->select('*');
+                    $this->db->from('actividades');
+                    $this->db->join('subactividades','actividades.id_act = subactividades.id_act','inner');
+                    $this->db->where('fecha_taller',$fechaPrograma);
+                    $this->db->where('id_categoria','14');
+                    $this->db->order_by('subactividades.id_act','asc');
+                    $this->db->order_by('subactividades.hora_ini','asc');                    
+                    $query = $this->db->get();     
+                    return $query->result();
+                } else {
+                    // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
+                    $this->db->select('*');
+                    $this->db->from('actividades');
+                    $this->db->join('subactividades','actividades.id_act = subactividades.id_act','inner');
+                    $this->db->where('id_categoria','14');
+                    $this->db->order_by('subactividades.id_act','asc');
+                    $this->db->order_by('subactividades.hora_ini','asc');
+                    $query = $this->db->get();     
+                    return $query->result();
+                }
+                
+                
+            } else {
+                return null;
+            }
+        }
+
+
     }
 
 /* End of file subactividades_model.php */

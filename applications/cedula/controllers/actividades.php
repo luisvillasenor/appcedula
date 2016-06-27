@@ -2039,7 +2039,84 @@ class Actividades extends CI_Controller {
         $this->load->view('programa_resumido_view',$data);
         $this->load->view('footer_view',$data);
     }
+
+    public function programa_diario(){
+        $e_mail   = $_SESSION['username'];
+        $grupo    = $_SESSION['grupo'];
+        $data['grupo'] = $grupo;
+        $id_coord = $_SESSION['id_coord'];
+        $edicion = ( isset($_SESSION['fc']) ) ? $_SESSION['fc'] : null ;
+        $data['edicion']  = $edicion;
+        $data['get_fc'] = $this->fc_model->get_fc();
+        $data['onlyusername'] = strstr($e_mail,'@',true);
+        $data['title']= 'Master Plan del Festival de Calaveras';
+        #$marca = '0'; // Es una referencia a la variable Global definida en el __contructor
+        
+        #CARGA LOS MODELOS A USAR
+        /////////////////////////////////////////////////
+        $modelos = array(
+            'necesidades_model',
+            'categorias_model',
+            'coordinadores_model',
+            'subactividades_model',
+            'ubicaciones_model',
+            'municipios_model',
+            'sedes_model',
+            'horarios_model',
+            'fc_model',
+            'actividades_model'
+        );
+        foreach ($modelos as $modelo) {
+            $this->load->model($modelo);
+        }
+        /////////////////////////////////////////////////
+       
+        // Código que pone en el encabezado de la página la Coordinación del Usuario.
+        /////////////////////////////////////////////////////////////////////////////
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        foreach ($data['get_all_coords'] as $coords ) {
     
+                        if($id_coord == $coords->id_coord) {
+                            
+                            $data['miCoordinacion']= $coords->coordinacion;
+                        }
+        }
+            // Obtiene los años de cada edicion
+            $edicionesTrabajo = array();
+            $idsfcTrabajo = array();
+            $fcTrabajo = false;
+            foreach ($data['get_fc'] as $anio) {
+                array_push($edicionesTrabajo, $anio->anio);
+                array_push($idsfcTrabajo, $anio->id_fc);
+                if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
+                    $fcTrabajo = $anio->id_fc ;
+                }
+            }
+        /////////////////////////////////////////////////////////////////////////////
+
+        $fechaPrograma = $this->input->post('fecha');
+        $marca = $this->input->post('marca');
+        $fechaPrograma = ( isset($fechaPrograma) ) ? $fechaPrograma : 'todo' ;
+        $marca = ( isset($marca) AND empty($marca) ) ? '0' : '1' ;
+        
+        $data['show_ubicaciones'] = $this->ubicaciones_model->show();
+        $data['show_municipios'] = $this->municipios_model->show();
+        $data['show_sedes'] = $this->sedes_model->show();
+        $data['get_horarios'] = $this->horarios_model->get_horarios();
+
+        $data['marca'] = $marca;
+        $data['fechaPrograma'] = $fechaPrograma;
+        $data['fechas_oficiales'] =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
+        #$data['get_master_diario'] = $this->actividades_model->get_master_diario($edicion, $fechaPrograma, $marca);
+        #$data['get_all_cats'] = $this->categorias_model->get_all_cats($order = 'asc');
+        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        $data['get_all_subactividades'] = $this->subactividades_model->show_programa_diario($fechaPrograma);
+        $data['get_all_conciertos'] = $this->subactividades_model->show_conciertos_diario($fechaPrograma);
+                
+        $this->load->view('header_view',$data);
+        $this->load->view('programa_diario_view',$data);
+        $this->load->view('footer_view',$data);
+    }    
     
     
     

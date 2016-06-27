@@ -59,6 +59,7 @@
                   elseif ($onlyusername == 'rabingarcia') { ?>
                       <!-- Menu solo para Rabin -->
                       <li><a data-toggle="modal" href="<?php echo base_url('actividades/master_contenidos');?>"><i class="icon-book"></i> MASTER CONTENIDOS &raquo;</a></li>
+                      <li><a data-toggle="modal" href="<?php echo base_url('actividades/programa_diario');?>"><i class="icon-book"></i> PROGRAMA DIARIO &raquo;</a></li>
                       <li class="dropdown">  
                         <a class="dropdown-toggle" data-toggle="dropdown">  
                           <small><strong><?php echo $onlyusername; ?></strong> (<?php echo $_SESSION['grupo'];?>)</small>
