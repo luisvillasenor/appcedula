@@ -12,59 +12,44 @@
                     </tr>
                     <?php 
                     if ($fechaPrograma == "todo") {
-                        
                         foreach ($fechas_oficiales as $value) { ?>
-                            
                                 <tr>
-                                    <td><h1><?php echo date("d M",strtotime($value));?></h1><br>
-                                        <h2>
-                                            Concierto: 
+                                    <td><h2><?php echo date("d M",strtotime($value));?></h2>
                                             <?php
-                                                foreach ($get_all_conciertos as $concierto) {
-                                            
-                                                        if ($value == $concierto->fecha_taller) {
-                                                            echo " ";
-                                                            echo $concierto->subactividad;
-                                                            echo " ";
-                                                            echo $concierto->sede;
-                                                            echo " ";
-                                                            echo $concierto->ubicacion;
-                                                            echo " ";
-                                                            echo $concierto->status_subact;
-                                                            echo " ";
-                                                            echo $concierto->hora_ini;
-                                                            echo "<br>";
-                                                        }
+                                                foreach ($get_all_conciertos as $concierto) {                                            
+                                                    if ($value == $concierto->fecha_taller) {?>
+                                                        <h2><?php echo $concierto->subactividad; ?></h2>
+                                                        <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
+                                                        <h5><?php echo $concierto->hora_ini; ?> [<?php echo $concierto->status_subact; ?>]</h5>
+                                                    <?php }
+                                                }                                                
+                                            ?>
+                                        <p>
+                                        <?php 
+                                        foreach ($get_all_cats as $catego) { ?>
+                                            <p>
+                                            <?php 
+                                            echo "<hr>";
+                                            echo $catego->categoria;
+                                            echo "<br>";
+
+                                            foreach ($activities as $key => $act) {
+                                                foreach ($get_all_subactividades as $subact) {
+                                                    if ($act == $subact->id_act AND $subact->fecha_taller == $value AND $catego->id_categoria == $subact->id_categoria) {
+                                                        echo "<br>";
+                                                        echo $subact->id_subact;
+                                                    }
                                                 }
                                                 
-                                            ?>
-                                        </h2><br>
-                                        <h2>Categoría: </h2><br>
-                                        <h2>Sede / Ubicación: </h2><br>
-                                        <h3>
-                                        <?php 
-                                        foreach ($get_all_subactividades as $value2) {
+                                            }
                                             
-                                                if ($value == $value2->fecha_taller) {
-                                                    echo $value2->hora_ini;
-                                                    echo " ";
-                                                    echo $value2->subactividad;
-                                                    echo " ";
-                                                    echo $value2->sede;
-                                                    echo " ";
-                                                    echo $value2->ubicacion;
-                                                    echo " ";
-                                                    echo $value2->status_subact;
-                                                    echo "<br>";
-                                                }
-                                        } ?>
-                                        </h3>
+                                            
+                                            ?>
+                                            </p>
+                                        <?php } ?>
+                                        </p>
                                     </td>                                
                                 </tr>
-                            
-
-
-                            
                         <?php }
 
                     } else { 

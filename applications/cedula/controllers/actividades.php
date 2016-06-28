@@ -2108,9 +2108,16 @@ class Actividades extends CI_Controller {
         $data['fechaPrograma'] = $fechaPrograma;
         $data['fechas_oficiales'] =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
         #$data['get_master_diario'] = $this->actividades_model->get_master_diario($edicion, $fechaPrograma, $marca);
-        #$data['get_all_cats'] = $this->categorias_model->get_all_cats($order = 'asc');
+        $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all_subactividades'] = $this->subactividades_model->show_programa_diario($fechaPrograma);
+        $activities = array();
+        
+        foreach ($data['get_all_subactividades'] as $value) {
+            $activities[] = $value->id_act;
+        }
+        
+        $data['activities'] = $activities;
         $data['get_all_conciertos'] = $this->subactividades_model->show_conciertos_diario($fechaPrograma);
                 
         $this->load->view('header_view',$data);
