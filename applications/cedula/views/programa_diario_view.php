@@ -6,33 +6,39 @@
             <?php include 'include/menu_filtros_master_diario.php';  ?>
             <hr>
             <div class="">                
-                <table class="well table table-bordered">                    
-                    <tr>
-                        <th>PROGRAMA DIARIO</th>
-                    </tr>
+                
+                    
                     <?php 
                     if ($fechaPrograma == "todo") {
                         foreach ($fechas_oficiales as $value) { ?>
-                                <tr>
-                                    <td><h2><?php echo date("d M",strtotime($value));?></h2>
-                                            <?php
-                                                foreach ($get_all_conciertos as $concierto) {                                            
-                                                    if ($value == $concierto->fecha_taller) {?>
-                                                        <h2><?php echo $concierto->subactividad; ?></h2>
-                                                        <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
-                                                        <h5><?php echo $concierto->hora_ini; ?> [<?php echo $concierto->status_subact; ?>]</h5>
-                                                    <?php }
-                                                }                                                
-                                            ?>
-                                        <p>
+                            <div class=""><h1 class="alert-info"><?php echo date("d M",strtotime($value));?></h1></div>
+                
+                                    <div class="well">
+                                        
+                                        <?php
+                                            foreach ($get_all_conciertos as $concierto) {                                            
+                                                if ($value == $concierto->fecha_taller) {?>
+                                                <div class="alert-danger">
+                                                    <div class="well">
+                                                    <h2><?php echo $concierto->subactividad; ?><small> [<?php echo $concierto->status_subact; ?>]</small></h2>
+                                                    <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
+                                                    <h5><?php echo $concierto->hora_ini; ?> </h5>
+                                                </div>
+                                                </div>
+                                                <?php }
+                                            }                                                
+                                        ?>
+                                        
                                         <?php 
                                         foreach ($get_all_cats as $catego) { ?>
-                                            <p>
-                                            <?php 
-                                            echo "<hr>";
-                                            echo $catego->categoria;
-                                            echo "<br>";
-
+                                            <div class="alert-success">
+                                            <div class="well">
+                                                <h4>
+                                                <?php echo $catego->categoria; ?>
+                                                </h4>
+                                                <hr>
+                                                <h5>
+                                            <?php
                                             foreach ($activities as $act) {
                                                 foreach ($get_all_subactividades as $subact) {
 
@@ -40,21 +46,39 @@
                                                         
                                                         echo "<br>";
                                                         echo $subact->actividad;
-                                                        echo "-";
-                                                        echo $subact->subactividad;
+                                                        echo "<br>";
+                                                        echo $subact->hora_ini . " a " . $subact->hora_fin;
+                                                        echo "<br>";
+                                                        
+                                                            foreach ($get_all_subactividades as $subact) {
+
+                                                                if ($act == $subact->id_act && $subact->fecha_taller == $value && $catego->id_categoria == $subact->id_categoria) {
+                                                                    
+                                                                    echo "<ul>";
+                                                                    echo "<li>";
+                                                                    echo $subact->subactividad;
+                                                                    echo "</li>";
+                                                                    echo "</ul>";
+                                                                } 
+                                                            }
+                                                        echo "<br>";
+                                                        
                                                     
-                                                    }
+                                                    } 
                                                 }
                                                 
-                                            }
+                                            } ?>
+
                                             
-                                            
-                                            ?>
-                                            </p>
+
+                                                </h5>
+                                            </div>
+                                            </div>
                                         <?php } ?>
-                                        </p>
-                                    </td>                                
-                                </tr>
+                                        
+                                    </div>
+                                                                    
+                
                         <?php }
 
                     } else { 
@@ -106,7 +130,7 @@
                           
                         
                     
-                </table>
+                
                 <hr>
             </div><!-- -->            
         </div><!-- /span12 -->        
