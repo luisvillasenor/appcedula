@@ -33,11 +33,16 @@
                                             echo $catego->categoria;
                                             echo "<br>";
 
-                                            foreach ($activities as $key => $act) {
+                                            foreach ($activities as $act) {
                                                 foreach ($get_all_subactividades as $subact) {
-                                                    if ($act == $subact->id_act AND $subact->fecha_taller == $value AND $catego->id_categoria == $subact->id_categoria) {
+
+                                                    if ($act == $subact->id_act && $subact->fecha_taller == $value && $catego->id_categoria == $subact->id_categoria) {
+                                                        
                                                         echo "<br>";
-                                                        echo $subact->id_subact;
+                                                        echo $subact->actividad;
+                                                        echo "-";
+                                                        echo $subact->subactividad;
+                                                    
                                                     }
                                                 }
                                                 

@@ -2112,12 +2112,16 @@ class Actividades extends CI_Controller {
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all_subactividades'] = $this->subactividades_model->show_programa_diario($fechaPrograma);
         $activities = array();
+        $activities2 = array();
         
         foreach ($data['get_all_subactividades'] as $value) {
-            $activities[] = $value->id_act;
+            array_push($activities, $value->id_act);
         }
-        
-        $data['activities'] = $activities;
+        # ELIMINA LOS DATOS DUPLICADOS
+        $activities2 = array_unique($activities);
+        #var_dump($data['get_all_subactividades']);
+        #die();
+        $data['activities'] = $activities2;
         $data['get_all_conciertos'] = $this->subactividades_model->show_conciertos_diario($fechaPrograma);
                 
         $this->load->view('header_view',$data);
