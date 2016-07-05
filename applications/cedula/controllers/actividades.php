@@ -1795,7 +1795,6 @@ class Actividades extends CI_Controller {
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
 
-
         $this->load->view('cal_act_view',$data);        
     }
     public function tree_file_view()
@@ -2090,6 +2089,7 @@ class Actividades extends CI_Controller {
                 array_push($idsfcTrabajo, $anio->id_fc);
                 if ( ($fcTrabajo == false) && ($anio->anio == anioActual) ) {
                     $fcTrabajo = $anio->id_fc ;
+                    $data['fcTrabajo'] = $fcTrabajo;
                 }
             }
         /////////////////////////////////////////////////////////////////////////////
@@ -2107,6 +2107,8 @@ class Actividades extends CI_Controller {
         $data['marca'] = $marca;
         $data['fechaPrograma'] = $fechaPrograma;
         $data['fechas_oficiales'] =  $this->config->item('fechas_oficiales_201'.$edicion); // Ver las fechas en config.php
+        $data['show_subacts'] = $this->subactividades_model->show($id_subact = null,$id_act = null);
+        $data['get_cal_act'] = $this->actividades_model->get_cal_act($e_mail,$grupo,$id_coord,$edicion);
         #$data['get_master_diario'] = $this->actividades_model->get_master_diario($edicion, $fechaPrograma, $marca);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
         $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
@@ -2117,7 +2119,7 @@ class Actividades extends CI_Controller {
         foreach ($data['get_all_subactividades'] as $value) {
             array_push($activities, $value->id_act);
         }
-        # ELIMINA LOS DATOS DUPLICADOS
+        # ELIMINA LAS ACTIVIDADES DUPLICADOS
         $activities2 = array_unique($activities);
         #var_dump($data['get_all_subactividades']);
         #die();

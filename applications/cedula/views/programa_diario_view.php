@@ -30,54 +30,86 @@
                                         ?>
                                         
                                         <?php 
-                                        foreach ($get_all_cats as $catego) { ?>
+                                        foreach ($get_all_cats as $catego) { 
+                                        #Si la categoria es "Conciertos" No hacer nada.
+                                        if ($catego->id_categoria != 14) { ?>
+                                        
+                                        
                                             <div class="alert-success">
                                             <div class="well">
-                                                <h4>
-                                                <?php echo $catego->categoria; ?>
-                                                </h4>
-                                                <hr>
-                                                <h5>
-                                            <?php
-                                            foreach ($activities as $act) {
-                                                foreach ($get_all_subactividades as $subact) {
+                                            <h4>
+                                            <?php echo $catego->categoria; ?>
+                                            </h4>
+                                            <hr>
+                                            <h5>
+                                                <?php                                            
+                                                foreach ($get_cal_act as $actividades) {
 
-                                                    if ($act == $subact->id_act && $subact->fecha_taller == $value && $catego->id_categoria == $subact->id_categoria) {
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d1 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
                                                         
-                                                        echo "<br>";
-                                                        echo $subact->actividad;
-                                                        echo "<br>";
-                                                        echo $subact->hora_ini . " a " . $subact->hora_fin;
-                                                        echo "<br>";
+                                                    <?php }  
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d2 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
                                                         
-                                                            foreach ($get_all_subactividades as $subact) {
+                                                    <?php } 
 
-                                                                if ($act == $subact->id_act && $subact->fecha_taller == $value && $catego->id_categoria == $subact->id_categoria) {
-                                                                    
-                                                                    echo "<ul>";
-                                                                    echo "<li>";
-                                                                    echo $subact->subactividad;
-                                                                    echo "</li>";
-                                                                    echo "</ul>";
-                                                                } 
-                                                            }
-                                                        echo "<br>";
-                                                        
-                                                    
-                                                    } 
-                                                }
-                                                
-                                            } ?>
-
-                                            
-
-                                                </h5>
+                                                } ?>
+                                            </h5>
                                             </div>
                                             </div>
-                                        <?php } ?>
+                                        <?php 
+                                        }
+                                        } ?>
                                         
-                                    </div>
-                                                                    
+                                    </div>                                                                    
                 
                         <?php }
 
