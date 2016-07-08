@@ -101,6 +101,230 @@
                                                         
                                                     <?php } 
 
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d3 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d4 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d5 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d6 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d7 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d8 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d9 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d10 == $value)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $value == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
                                                 } ?>
                                             </h5>
                                             </div>
@@ -116,47 +340,329 @@
                     } else { 
 
                         if ( in_array($fechaPrograma, $fechas_oficiales) ) { ?>
-                            <tr>
-                                <td><h1><?php echo date("d M",strtotime($fechaPrograma));?></h1><br>
-                                    <h2>
-                                        Concierto: 
-                                            <?php
-                                                foreach ($get_all_conciertos as $concierto) {
-                                            
-                                                        if ($fechaPrograma == $concierto->fecha_taller) {
-                                                            echo " ";
-                                                            echo $concierto->subactividad;
-                                                            echo " ";
-                                                            echo $concierto->sede;
-                                                            echo " ";
-                                                            echo $concierto->ubicacion;
-                                                            echo " ";
-                                                            echo $concierto->status_subact;
-                                                            echo " ";
-                                                            echo $concierto->hora_ini;
-                                                            echo "<br>";
-                                                        }
-                                                }
-                                                
-                                            ?>
-                                    </h2><br>
-                                        <h2>Categoría: </h2><br>
-                                        <h2>Sede / Ubicación: </h2><br>
-                                        <h3>
+                            <div class=""><h1 class="alert-info"><?php echo date("d M",strtotime($fechaPrograma));?></h1></div>
+                
+                                    <div class="well">
+                                        
+                                        <?php
+                                            foreach ($get_all_conciertos as $concierto) {                                            
+                                                if ($fechaPrograma == $concierto->fecha_taller) {?>
+                                                <div class="alert-danger">
+                                                    <div class="well">
+                                                    <h2><?php echo $concierto->subactividad; ?><small> [<?php echo $concierto->status_subact; ?>]</small></h2>
+                                                    <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
+                                                    <h5><?php echo $concierto->hora_ini; ?> </h5>
+                                                </div>
+                                                </div>
+                                                <?php }
+                                            }                                                
+                                        ?>
+                                        
                                         <?php 
-                                        foreach ($get_all_subactividades as $value2) {
-                                            if ($fechaPrograma == $value2->fecha_taller) {
-                                                echo $value2->hora_ini;
-                                                echo " ";
-                                                echo $value2->subactividad;
-                                                echo " ";
-                                                echo $value2->status_subact;
-                                                echo "<br>";
-                                            } 
+                                        foreach ($get_all_cats as $catego) { 
+                                        #Si la categoria es "Conciertos" No hacer nada.
+                                        if ($catego->id_categoria != 14) { ?>                                        
+                                            <div class="alert-success">
+                                            <div class="well">
+                                            <h4>
+                                            <?php echo $catego->categoria; ?>
+                                            </h4>
+                                            <hr>
+                                            <h5>
+                                                <?php                                            
+                                                foreach ($get_cal_act as $actividades) {
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d1 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d2 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d3 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d4 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d5 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d6 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d7 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d8 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d9 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    if (($catego->id_categoria == $actividades->id_categoria) AND ($actividades->d10 == $fechaPrograma)) { ?>
+
+                                                        <?php
+                                                        if ( $fcTrabajo != $edicion ) { echo "ERROR , Revisar EDICION o AÑO DE TRABAJO"; ?>
+                                                                
+                                                        <?php  } else { ?>
+                                                                    <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+
+                                                                    <br>
+                                                            <ul>
+                                                                <?php foreach ($get_all_subactividades as $necs ) : 
+                                                                    if ($actividades->id_act == $necs->id_act AND $fechaPrograma == $necs->fecha_taller){ ?>
+                                                                    <li>
+                                                                        <?php include 'include/subactividad.php';  ?>
+                                                                    </li>        
+                                                                    <?php } ?>                                                    
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                            <div class="text-left">
+                                                                <img style="width:20%;height:3%;" class="img-rounded" src="<?php echo base_url();?>bootstrap/img/pleca-redes.png">
+                                                            </div>
+
+                                                        <?php  } ?>
+                                                        
+                                                    <?php }
+
+                                                    
+
+                                                } ?>
+                                            </h5>
+                                            </div>
+                                            </div>
+                                        <?php 
+                                        }
                                         } ?>
-                                        </h3>
-                                </td>                                
-                            </tr>
+                                        
+                                    </div> 
                         <?php }
                     } ?>
                           

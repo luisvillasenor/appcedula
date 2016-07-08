@@ -120,7 +120,7 @@ class Subactividades_model extends CI_Model
         // JOIN sin categoria de Conciertos
         function show_programa_diario($fechaPrograma = null) {   
             if ( isset($fechaPrograma)) {
-                if ($fechaPrograma !== "todo") {
+                if ($fechaPrograma != "todo") {
                     // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
                     $this->db->select('*');
                     $this->db->from('actividades as A');
@@ -130,7 +130,7 @@ class Subactividades_model extends CI_Model
                     $this->db->order_by('B.id_act','asc');
                     $this->db->order_by('B.hora_ini','asc');                    
                     $query = $this->db->get();     
-                    return $query->result();
+                    
                 } else {
                     // Si el parametro no es null, get id_subact. Devuelte TODOS los registro de UN SOLO cedula
                     $this->db->select('*');
@@ -140,8 +140,9 @@ class Subactividades_model extends CI_Model
                     $this->db->order_by('subactividades.id_act','asc');
                     $this->db->order_by('subactividades.hora_ini','asc');
                     $query = $this->db->get();     
-                    return $query->result();
+                    
                 }
+                return $query->result();
             } else {
                 return null;
             }
