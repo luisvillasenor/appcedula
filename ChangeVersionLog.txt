@@ -1,0 +1,17 @@
+VERSION 2.3.39 -- Actualizado 25 julio 2016
+
+Se genera el archivo de historial de versiones que permite a cualquier 
+interesado saber la evolucion de los cambios a partir de la version 2.3.38
+..............................................................................
+
+VERSION 2.3.38 -- Actualizado 25 julio 2016
+
+Visualiza en pantalla el Programa General Diario del Festival de Calaveras
+ya sea que quieras ver TODOS los dias o filtrar por dia. Esto te permitira
+el enfoque diario asi como un enfoque global. Esta funcionalidad solo
+aplica para el perfil de Mercadotecnia y el Coordinador General.
+..............................................................................
+
+Nota inicial:
+Este archivo inicia el la version 2.3.38 del 25 de Julio del 2016.
+No se utilizan los acentos en este documento.

@@ -110,7 +110,9 @@
                   <div class="alert alert-success">
                     <strong>Descarga !</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula2016.pdf'); ?>" target="_blank">La Guía para Activar Cédulas</a>
                   </div>
-                  <span><small>Versión 2.3.37</small></span>
+                  <span><small><a href="<?php echo site_url('ChangeVersionLog.txt'); ?>" target="_blank">Versión 2.3.39</a></small></span><br>
+                  
+
             <?php echo form_close(); ?> 
 
 
