@@ -169,34 +169,7 @@ color:white;
 
               </div>
                                 
-                <!--                
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">Se ABRE a las </label>
-                    <div class="controls">
-                      <select class="span4" id="hora_ini" name="hora_ini">
-                          <?php foreach ($get_horarios as $hora ) : 
-                            if($act->hora_ini == $hora->horario){ ?>
-                                <option value="<?php echo $hora->horario; ?>" selected><?php echo $hora->horario; ?></option>                                
-                            <?php } else { ?>
-                                <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
-                            <?php } ?>
-                          <?php endforeach; ?>   
-                      </select>                
-                    </div><p>
-                    <label class="control-label" for="inputEmail">Se CIERRA a las </label>
-                    <div class="controls">
-                      <select class="span4" id="hora_fin" name="hora_fin">
-                          <?php foreach ($get_horarios as $hora ) : 
-                            if($act->hora_fin == $hora->horario){ ?>
-                                <option value="<?php echo $hora->horario; ?>" selected><?php echo $hora->horario; ?></option>                                
-                            <?php } else { ?>
-                                <option value="<?php echo $hora->horario; ?>"><?php echo $hora->horario; ?></option>
-                            <?php } ?>
-                          <?php endforeach; ?>   
-                        </select>                
-                    </div>
-                </div>
-                -->
+                
                 
             </td>
             </tr>
@@ -225,13 +198,35 @@ color:white;
                     <?php } ?>
                   <?php endforeach; ?>   
               </select>   
-                <!--                
-                <label>Sede / Ubicación 
-                  <input class="input-large" id="sede" name="sede" type="text" value="<?php echo $act->sede;?>"> / 
-                  <input class="input-large" id="ubicacion" name="ubicacion" type="text" value="<?php echo $act->ubicacion;?>"> 
-                </label>
-              -->
-                <button type="submit" class="btn btn-success">Actualizar Días de Acceso</button>  
+              
+              
+                
+                      <select class="input-sm" id="hora_ini" name="hora_ini">
+                        <option>Se ABRE a las...</option>
+                          <?php foreach ($get_horarios as $hora ) : 
+                            if($act->hora_ini == $hora->horario){ ?>
+                                <option value="<?php echo $hora->horario; ?>" selected><?php echo date("H:i",strtotime($hora->horario)); ?> hrs.</option>                                
+                            <?php } else { ?>
+                                <option value="<?php echo $hora->horario; ?>"><?php echo date("H:i",strtotime($hora->horario)); ?> hrs.</option>
+                            <?php } ?>
+                          <?php endforeach; ?>   
+                      </select>                
+                
+                
+                
+                      <select class="input-sm" id="hora_fin" name="hora_fin">
+                        <option>Se CIERRA a las...</option>
+                          <?php foreach ($get_horarios as $hora ) : 
+                            if($act->hora_fin == $hora->horario){ ?>
+                                <option value="<?php echo $hora->horario; ?>" selected><?php echo date("H:i",strtotime($hora->horario)); ?> hrs.</option>                                
+                            <?php } else { ?>
+                                <option value="<?php echo $hora->horario; ?>"><?php echo date("H:i",strtotime($hora->horario)); ?> hrs.</option>
+                            <?php } ?>
+                          <?php endforeach; ?>   
+                        </select>                
+                
+
+                <button class="btn btn-success" type="submit" class="btn btn-success">Actualizar</button>  
             </td>
            </table>
         </fieldset>
@@ -300,13 +295,13 @@ color:white;
                   <select class="input-small" id="hora_ini" name="hora_ini">
                       <option>Inicia</option>
                       <?php foreach ($get_horarios as $horaini ) : ?>
-                        <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:s",strtotime($horaini->horario)); ?></option>
+                        <option value="<?php echo $horaini->horario; ?>"><?php echo date("H:i",strtotime($horaini->horario)); ?> hrs.</option>
                       <?php endforeach; ?>   
                   </select>
                   <select class="input-small" id="hora_fin" name="hora_fin">
                       <option>Termina</option>
                       <?php foreach ($get_horarios as $horafin ) : ?>
-                        <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:s",strtotime($horafin->horario)); ?></option>
+                        <option value="<?php echo $horafin->horario; ?>"><?php echo date("H:i",strtotime($horafin->horario)); ?> hrs.</option>
                       <?php endforeach; ?>   
                   </select>
                   <span class="help-block"></span>

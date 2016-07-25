@@ -13,7 +13,7 @@
   body {
     background-color: transparent;
     background-repeat: no-repeat;
-    background-image: url('<?php echo base_url('slide32015.jpg'); ?>') !important;
+    background-image: url('<?php echo base_url('calaveras.jpg'); ?>') !important;
     background-size: cover;
     background-position: left top;
     width: 100%;
@@ -47,6 +47,7 @@
     }
      #wrapper2 {
       background-color: transparent;
+      opacity: .8;
       margin-top: 20px;
       padding-top: 5px;
       padding-left: 10px;
@@ -68,7 +69,7 @@
 <!--Body content container-fluid-->
     
     <div id="wrapper2" class="row">
-        <div class="span6">
+        <div class="span4">
           <!--Body content-->
 
 
@@ -109,10 +110,12 @@
                   <div class="alert alert-success">
                     <strong>Descarga !</strong> <a href="<?php echo base_url('GuiaRapidaActivarCedula2016.pdf'); ?>" target="_blank">La Guía para Activar Cédulas</a>
                   </div>
+                  <span><small>Versión 2.0.37</small></span>
             <?php echo form_close(); ?> 
 
 
             </div>            
+
           </div>
                         
 

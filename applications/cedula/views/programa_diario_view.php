@@ -22,7 +22,7 @@
                                                     <div class="well">
                                                     <h2><?php echo $concierto->subactividad; ?><small> [<?php echo $concierto->status_subact; ?>]</small></h2>
                                                     <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
-                                                    <h5><?php echo $concierto->hora_ini; ?> </h5>
+                                                    <h5><?php echo date("H:i",strtotime($concierto->hora_ini)); ?> hrs.</h5>
                                                 </div>
                                                 </div>
                                                 <?php }
@@ -53,7 +53,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))."</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -81,7 +81,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -109,7 +109,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -137,7 +137,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -165,7 +165,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -193,7 +193,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -221,7 +221,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -249,7 +249,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -277,7 +277,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -305,7 +305,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -351,10 +351,11 @@
                                                     <div class="well">
                                                     <h2><?php echo $concierto->subactividad; ?><small> [<?php echo $concierto->status_subact; ?>]</small></h2>
                                                     <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
-                                                    <h5><?php echo $concierto->hora_ini; ?> </h5>
+                                                    <h5><?php echo date("H:i",strtotime($concierto->hora_ini)); ?> hrs.</h5>
                                                 </div>
                                                 </div>
                                                 <?php }
+                                                
                                             }                                                
                                         ?>
                                         
@@ -380,7 +381,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -408,7 +409,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -436,7 +437,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -464,7 +465,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -492,7 +493,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -520,7 +521,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -548,7 +549,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -576,7 +577,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -604,7 +605,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
@@ -632,7 +633,7 @@
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
                                                                     <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->hora_ini." a ".$actividades->hora_fin."</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))." hrs.</small></b>";?></span><br>
 
                                                                     <br>
                                                             <ul>
