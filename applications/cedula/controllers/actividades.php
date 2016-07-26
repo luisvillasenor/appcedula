@@ -2111,7 +2111,7 @@ class Actividades extends CI_Controller {
         $data['get_cal_act'] = $this->actividades_model->get_cal_act($e_mail,$grupo,$id_coord,$edicion);
         #$data['get_master_diario'] = $this->actividades_model->get_master_diario($edicion, $fechaPrograma, $marca);
         $data['get_all_cats'] = $this->categorias_model->get_all_cats();
-        $data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
+        #$data['get_all_coords'] = $this->coordinadores_model->get_all_coords();
         $data['get_all_subactividades'] = $this->subactividades_model->show_programa_diario($fechaPrograma);
         $activities = array();
         $activities2 = array();
@@ -3615,7 +3615,37 @@ function test_ajax(){
 ///////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////
+
+# Funcion para permitir o denegar el uso de los metodos segun el perfil.
+static public function test($action = "") {
+        if (empty($action)) {
+            echo "Vacio";
+            echo "<br>";
+            echo "Return Deny";
+        } else {
+            $get_class_methods = get_class_methods(get_called_class());
+            if (in_array($action, $get_class_methods)) {
+                echo "Validar permisos para la funcion: ".$action." en ".get_called_class();
+                echo "<br>";
+                echo "Obtiene Nivel del query Recursos Join Perfiles";
+                echo "si Nivel <= Permiso";
+                echo "Return Allow";
+            } else {
+                echo "La Función ".$action." no se encuentra en ".get_called_class();
+                echo "Return Deny";
+                die();
+            }
+            
+        }
+        
+    }
+
+
 }
+
+#Actividades::test();
+
+
 
 /* End of file solicitud.php */
 /* Location: ./application/controllers/solicitud.php */
