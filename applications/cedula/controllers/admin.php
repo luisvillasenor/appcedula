@@ -166,6 +166,7 @@ class Admin extends CI_Controller {
             	$_SESSION['id_coord']
             );
 			session_destroy();
+			#unset($_COOKIE[]);
 		
 		}
 		//CARGA LOGIN VIEW

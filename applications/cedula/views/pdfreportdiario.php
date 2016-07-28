@@ -8,52 +8,53 @@ $obj_pdf->SetTitle($title);
 $obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, PDF_HEADER_STRING);
 $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-$obj_pdf->SetDefaultMonospacedFont('helvetica');
+$obj_pdf->SetDefaultMonospacedFont('');
 $obj_pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $obj_pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $obj_pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-$obj_pdf->SetFont('helvetica', '', 9);
-$obj_pdf->setFontSubsetting(true);
+// set image scale factor
+$obj_pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+$obj_pdf->AddFont('Times','','/home/luisvillasenor/TTF/Lato-Lig.z');
 $obj_pdf->AddPage(	);
+
+// set default font subsetting mode
+#$obj_pdf->setFontSubsetting(false);
+
+$obj_pdf->SetFont('Times','', 14,'lato-lig');
+#$obj_pdf->SetFont('helvetica', 'BI', 14);
+
 ob_start();
     // we can have any view part here like HTML, PHP etc
 ?>
 	
         <!--Body content-->
-            <div class=""><h3>PROGRAMA DIARIO FC EDICIÓN 201<?php echo $edicion;?></h3></div>
+            <div class=""></div>
             <div class="">                
                 
                     
                     <?php 
                     if ($fechaPrograma == "todo") {
                         foreach ($fechas_oficiales as $value) { ?>
-                            <div class=""><h1 class="alert-info"><?php echo date("d M",strtotime($value));?></h1></div>
-                
+                            <h1><?php echo date("d M",strtotime($value));?></h1>
                                     <div class="">
-                                        
                                         <?php
                                             foreach ($get_all_conciertos as $concierto) {                                            
-                                                if ($value == $concierto->fecha_taller) {?>
-                                                <div class="alert-danger">
-                                                    <div class="">
+                                                if ($value == $concierto->fecha_taller) {?>                                                
                                                     <h2><?php echo $concierto->subactividad; ?><small> [<?php echo $concierto->status_subact; ?>]</small></h2>
                                                     <h4><?php echo $concierto->sede; ?> (<?php echo $concierto->ubicacion; ?>)</h4>
-                                                    <h5><?php echo date("H:i",strtotime($concierto->hora_ini)); ?> hrs.</h5>
-                                                </div>
-                                                </div>
+                                                    <h5><?php echo date("H:i",strtotime($concierto->hora_ini)); ?> hrs.</h5>                                                
                                                 <?php }
                                             }                                                
-                                        ?>
-                                        
+                                        ?>                                        
                                         <?php 
                                         foreach ($get_all_cats as $catego) { 
                                         #Si la categoria es "Conciertos" No hacer nada.
                                         if ($catego->id_categoria != 14) { ?>
                                         
                                         
-                                            <div class="">
-                                            <div class="">
+                                            <div class="alert-success">
+                                            <div class="well">
                                             <h4>
                                             <?php echo $catego->categoria; ?>
                                             </h4>
@@ -695,9 +696,9 @@ ob_start();
     
 <?php
 
-    $content = ob_get_contents();
+$content = ob_get_contents();
 ob_end_clean();
 date_default_timezone_set("America/Mexico_City");
 $obj_pdf->writeHTML($content, true, false, true, false, '');
-$obj_pdf->Output('programa_'.date("Ymdhis",now()).'.pdf', 'I');
+$obj_pdf->Output('programa_diario_'.date("Ymdhis",now()).'.pdf', 'I');
 ?>

@@ -123,10 +123,14 @@ class Actividades extends CI_Controller {
         $data['suma_costo_secture'] = $costo_secture;
         $data['suma_pres_eje']      = $pres_eje;
         $data['suma_fuera_pres']    = $fuera_pres;
-                
+
 		$this->load->view('header_view',$data); 
+
         $this->load->view('actividades_view',$data);
+
         $this->load->view('footer_view',$data); 
+
+        
 	}
     public function resumen(){
         

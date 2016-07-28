@@ -158,7 +158,7 @@ public function programa($id_categoria = 'todo'){
         Aqui el codigo
         -------------
         */
-        $data['titles']= 'Master del Programa General DIARIO para el Festival de Calaveras Edición 201'.$edicion;
+        $data['titles']= 'Programa General DIARIO Edición 201'.$edicion;
         
         #CARGA LOS MODELOS A USAR
         $modelos = array(
@@ -225,6 +225,7 @@ public function programa($id_categoria = 'todo'){
                 
         #$this->load->view('header_view',$data);
         $this->load->view('pdfreportdiario', $data);
+        #$this->load->view('../helpers/tcpdf/examples/example_033');
         #$this->load->view('footer_view',$data);
 
     }
