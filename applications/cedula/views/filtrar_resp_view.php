@@ -105,7 +105,7 @@
                 <?php foreach ($get_filtro_por_resp as $actividades ) : ?>
                   <!-- Código dentro del FOREACH de todas las actividades -->
                   <tr>
-                      <td><!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
+                      <!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
                           <?php
                               switch ($_SESSION['grupo']) {
                                           case 'coordinador':
@@ -135,7 +135,7 @@
                                             break;
                                         } 
                             ?>                          
-                      </td>
+                      
                       <td><?php echo $actividades->id_act;?></td>
                       <td><?php echo $actividades->actividad;?></td>
                       
@@ -154,8 +154,8 @@
                       <td>$<?php echo number_format($actividades->costo_secture*1.16,2,".",","); ?></td>                     
                       <?php include 'include/nav_status_act.php';  ?>                     
                   </tr>
-                    <?php endforeach; ?>
-                </tbody>
+                <?php endforeach; ?>
+              </tbody>
               </table>
           
           

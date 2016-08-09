@@ -105,7 +105,7 @@
                 <?php foreach ($get_filtro_por_ced as $actividades ) : ?>
                   <!-- Código dentro del FOREACH de todas las actividades -->
                   <tr>
-                      <td><!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
+                      <!-- MENU DE OPERACIONES PARA CAD REGISTRO-->                          
                           <?php
                               switch ($_SESSION['grupo']) {
                                           case 'coordinador':
@@ -135,7 +135,7 @@
                                             break;
                                         } 
                             ?>                       
-                      </td>
+                      
                       <td><?php echo $actividades->id_act;?></td>
                       <td><?php echo $actividades->actividad;?></td>
                       
