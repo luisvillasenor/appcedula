@@ -249,7 +249,7 @@ $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                   case 'appcedula@app.com':      
                         include 'include/nav_ops_aut_4B.php';
                     break;
-                  case 'jorgeandrade@app.com':      
+                  case 'rabingarcia@app.com':      
                         include 'include/nav_ops_aut_4B.php';
                     break;
                   case 'blancamartinez@app.com':      
