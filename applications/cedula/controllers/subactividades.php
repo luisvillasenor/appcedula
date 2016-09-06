@@ -594,35 +594,41 @@ class Subactividades extends CI_Controller {
         $status_contenido = array(
             'id_subact'         => $this->input->post('id_subact'),
             'id_act'            => $this->input->post('id_act'),
-            'status_contenido'  => $this->input->post('status_contenido')#{0 = pendiente, 1 = autorizado}
+            'status_contenido'  => $this->input->post('status_contenido')#{0 = pendiente, 2 = autorizado}
         );
 
         $updated = $this->subactividades_model->update_status_contenido($status_contenido);
 
         if (isset($updated) AND $updated == true) {            
-            print($updated);
+            #print($updated);
 
             switch ($status_contenido['status_contenido']) {
                 case '0':
-                    # code...
+                    # code... PENDIENTE
                     $this->actividades_model->pendiente($status_contenido['id_act'],$pend = '0');
+                    #redirect(base_url('actividades/editar_fechas_act')."/".$status_contenido['id_act']);
                     break;
                 case '1':
-                    # code...
+                    # code... APROBADO CONCEPTUAL
                     $this->actividades_model->si_autorizar($status_contenido['id_act'],$succes = '2');
-                    break;
-                default:
-                    # code...
+                    #redirect(base_url('actividades/editar_fechas_act')."/".$status_contenido['id_act']);
                     break;
             }
-
         }
             else {
-                print("ERROR, NO SE ACTUALIZO STATUS");
+                print("ERROR, NO SE ACTUALIZO STATUS DE LA SUBACTIVIDAD");
             }
 
     }
     
+    public function num_registros(){
+        
+        $id_act            = $this->input->post('id_act');
+        $status_contenido  = $this->input->post('status_contenido');#{0 = pendiente, 2 = autorizado}
+        
+        $registros_pendientes = $this->subactividades_model->num_registros($status_contenido,$id_act);
+        print $registros_pendientes;
+    }
 
 
 }

@@ -368,6 +368,7 @@ color:white;
 
 
         <div class="well"><h3 class="text-center">Programa Detallado de Actividades/Talleres</h3>
+          <h1 id="misPendientes"><?php echo $registros_pendientes; ?></h1>
           <table class="table table-condensed">
             <tr>
               <th>Fecha</th>
@@ -415,7 +416,7 @@ color:white;
                               case '1':      ?>
                                 <span class="label label-success">Ortografía Limpia</span>
                               <?php break;
-                              default:    ?>
+                              case '0':    ?>
                                 <span class="label label-warning">Revision Ortográfica Pendiente</span>  
                               <?php break; 
                             } 
@@ -428,12 +429,14 @@ color:white;
                     <?php
                     if ($subact->status_contenido == TRUE AND $subact->status_ortografia == TRUE) { ?>
                       <span class="label"><i class="icon-lock"></i><small> Bloqueado</small></span>
-                    <?php } else {
+                      <?php                     
+                      
+                     } else {
 
                           $app = $_SESSION['username']; /** Cacho la sesion del usaurio **/
                             switch ($app) {
                                 case 'rabingarcia@app.com':      
-                                  foreach ($get_one_act_edit as $actividades2 ) : 
+                                  
                                       #include 'include/nav_ops_aut_subacts.php';  
                                     ?>
                                       <div>
@@ -466,6 +469,15 @@ color:white;
                                                   },
                                                   function(data, status){
                                                     document.getElementById("miStatusContenido<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-warning'>Autorización Pendiente</span>";
+                                                 
+                                              });
+                                              $.post("<?php echo base_url('subactividades/num_registros');?>",
+                                                  {
+                                                    status_contenido:0,
+                                                    id_act:<?php echo $subact->id_act; ?>
+                                                  },
+                                                  function(data, status){                                                 
+                                                    document.getElementById("misPendientes").innerHTML = data;
                                               });
                                             } else if (valor == true) {
                                               document.getElementById("status_contenido<?php echo $subact->id_subact; ?>").setAttribute("checked",true);
@@ -478,17 +490,26 @@ color:white;
                                                   },
                                                   function(data, status){
                                                     document.getElementById("miStatusContenido<?php echo $subact->id_subact; ?>").innerHTML = "<span class='label label-success'>Contrenido Autorizado</span>";
+                                                 
+                                              });
+                                              $.post("<?php echo base_url('subactividades/num_registros');?>",
+                                                  {
+                                                    status_contenido:0,
+                                                    id_act:<?php echo $subact->id_act; ?>
+                                                  },
+                                                  function(data, status){                                                 
+                                                    document.getElementById("misPendientes").innerHTML = data;
                                               });
                                             };
                                         }
                                       </script>
                                     <?php
-                                  endforeach;        
+                                  
                                   break;      
                                 case 'appcedula@app.com':      
-                                  foreach ($get_one_act_edit as $actividades2 ) : 
+                                  
                                       include 'include/nav_ops_aut_subacts.php';  
-                                  endforeach;        
+                                  
                                   break;
                                 default:                                            
                                       ?>

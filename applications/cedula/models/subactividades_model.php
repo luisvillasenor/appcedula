@@ -180,6 +180,14 @@ class Subactividades_model extends CI_Model
             }
         }
 
+        # Numero de registros "Pendientes"
+        function num_registros($status_contenido = null,$id_act = null) {   
+            $this->db->where('status_contenido',$status_contenido);
+            $this->db->where('id_act',$id_act);
+            $query = $this->db->get('subactividades');     
+            return $query->num_rows(); #$query->result();                
+        }
+
 
     }
 

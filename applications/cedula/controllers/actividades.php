@@ -1474,6 +1474,10 @@ class Actividades extends CI_Controller {
         $data['anioTrabajo'] = $anioTrabajo;
         $data['idfcTrabajo'] = $idfcTrabajo;
         $data['fcTrabajo']   = $fcTrabajo;
+
+        # Numero de registros "Pendientes"
+        $status_contenido = 0;
+        $data['registros_pendientes'] = $this->subactividades_model->num_registros($status_contenido,$id_act);
         
 		$data['get_one_act_edit'] = $this->actividades_model->get_one_act_edit($id_act,$e_mail,$grupo,$id_coord,$edicion);
 		$this->load->view('fechas_editar_view',$data);
