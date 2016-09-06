@@ -110,6 +110,12 @@ color:white;
                 <input id="id_fc" name="id_fc" type="hidden" value="<?php echo $act->id_fc;?>">
                 <input id="id_resp" name="id_resp" type="hidden" value="<?php echo $act->id_resp;?>">
                 <input id="fecha_alta" name="fecha_alta" type="hidden" value="<?php echo $act->fecha_alta;?>">
+                <!-- DATOS DE PRESUPUESTO SE TOMAN LOS MISMOS PARA QUE NO HAYA CAMBIO -->
+                <input id="pres_ant" name="pres_ant" type="hidden" value="<?php echo $act->pres_ant;?>">
+                <input id="pres_aut" name="pres_aut" type="hidden" value="<?php echo $act->pres_aut;?>">
+                <input id="pres_eje" name="pres_eje" type="hidden" value="<?php echo $act->pres_eje;?>">
+                <input id="pres_soli" name="pres_soli" type="hidden" value="<?php echo $act->pres_soli;?>">
+                <input id="pres_gas" name="pres_gas" type="hidden" value="<?php echo $act->pres_gas;?>">
 
                 
             

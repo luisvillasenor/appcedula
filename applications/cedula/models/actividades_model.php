@@ -721,6 +721,12 @@ class Actividades_model extends CI_Model
                 $this->hora_fin         = $_POST['hora_fin'];
                 $this->id_fc            = $edicion;
                 $this->id_resp          = $_POST['id_resp'];
+
+                $this->pres_ant          = $_POST['pres_ant'];
+                $this->pres_aut          = $_POST['pres_aut'];
+                $this->pres_eje          = $_POST['pres_eje'];
+                $this->pres_soli          = $_POST['pres_soli'];
+                $this->pres_gas          = $_POST['pres_gas'];
                 
                 $this->db->where('id_act', $this->id_act);
                 $this->db->update(ACTIVIDADES, $this);
