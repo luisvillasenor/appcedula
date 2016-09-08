@@ -34,7 +34,18 @@
                                         <?php 
                                         foreach ($get_all_cats as $catego) { 
                                         #Si la categoria es "Conciertos" No hacer nada.
-                                        if ($catego->id_categoria != 14) { ?>
+                                        if ($catego->id_categoria != 14 
+                                            AND $catego->id_categoria != 18
+                                            AND $catego->id_categoria != 22
+                                            AND $catego->id_categoria != 11
+                                            AND $catego->id_categoria != 12
+                                            AND $catego->id_categoria != 9
+                                            AND $catego->id_categoria != 17
+                                            AND $catego->id_categoria != 15
+                                            AND $catego->id_categoria != 16
+                                            AND $catego->id_categoria != 10
+
+                                        ) { ?>
                                         
                                         
                                             <div class="alert-success">
@@ -364,7 +375,18 @@
                                         <?php 
                                         foreach ($get_all_cats as $catego) { 
                                         #Si la categoria es "Conciertos" No hacer nada.
-                                        if ($catego->id_categoria != 14) { ?>                                        
+                                        if ($catego->id_categoria != 14
+                                            AND $catego->id_categoria != 18
+                                            AND $catego->id_categoria != 22
+                                            AND $catego->id_categoria != 11
+                                            AND $catego->id_categoria != 12
+                                            AND $catego->id_categoria != 9
+                                            AND $catego->id_categoria != 17
+                                            AND $catego->id_categoria != 15
+                                            AND $catego->id_categoria != 16
+                                            AND $catego->id_categoria != 10
+
+                                        ) { ?>                                        
                                             <div class="alert-success">
                                             <div class="well">
                                             <h4>
