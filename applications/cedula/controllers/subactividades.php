@@ -591,31 +591,38 @@ class Subactividades extends CI_Controller {
         $data['onlyusername'] = strstr($e_mail,'@',true);
         $data['get_fc'] = $this->fc_model->get_fc();
         
-        $status_contenido = array(
+        $contenido = array(
             'id_subact'         => $this->input->post('id_subact'),
             'id_act'            => $this->input->post('id_act'),
-            'status_contenido'  => $this->input->post('status_contenido')#{0 = pendiente, 2 = autorizado}
+            'status_contenido'  => $this->input->post('status_contenido')#{0 = pendiente, 1 = autorizado}
         );
 
-        $updated = $this->subactividades_model->update_status_contenido($status_contenido);
+        $id_act = $contenido['id_act'];
 
-        if (isset($updated) AND $updated == true) {            
-            #print($updated);
+        $updated = $this->subactividades_model->update_status_contenido($contenido);
 
-            switch ($status_contenido['status_contenido']) {
-                case '0':
+        # Numero de registros "Pendientes"
+        $status_contenido = 0;
+        $registros_pendientes = $this->subactividades_model->num_registros($status_contenido,$id_act);
+
+        if (isset($updated) AND $updated == true) {
+
                     # code... PENDIENTE
-                    $this->actividades_model->pendiente($status_contenido['id_act'],$pend = '0');
+                    if ($registros_pendientes > 0) {
+                        # code...
+                        $this->actividades_model->pendiente($id_act,$pend = 0);
+                    }
                     #redirect(base_url('actividades/editar_fechas_act')."/".$status_contenido['id_act']);
-                    break;
-                case '1':
+            
                     # code... APROBADO CONCEPTUAL
-                    $this->actividades_model->si_autorizar($status_contenido['id_act'],$succes = '2');
+                    if ($registros_pendientes <= 0) {
+                        # code...
+                        $this->actividades_model->si_autorizar($id_act,$succes = 2);
+                    }                    
                     #redirect(base_url('actividades/editar_fechas_act')."/".$status_contenido['id_act']);
-                    break;
-            }
-        }
-            else {
+            
+
+        } else {
                 print("ERROR, NO SE ACTUALIZO STATUS DE LA SUBACTIVIDAD");
             }
 
@@ -627,7 +634,7 @@ class Subactividades extends CI_Controller {
         $status_contenido  = $this->input->post('status_contenido');#{0 = pendiente, 2 = autorizado}
         
         $registros_pendientes = $this->subactividades_model->num_registros($status_contenido,$id_act);
-        print $registros_pendientes;
+        return print $registros_pendientes;
     }
 
 
