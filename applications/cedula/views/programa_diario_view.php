@@ -65,7 +65,7 @@
                                                                 
                                                         <?php  } else { ?>
                                                                     <span><?php echo "<b>".$actividades->actividad ."</b>"?></span><br>
-                                                                    <span><?php echo "<b><small>".$actividades->sede."(".$actividades->ubicacion.")</small></b>";?></span><br>
+                                                                    <span><?php echo "<b><small>".$actividades->sede." (".$actividades->ubicacion.")</small></b>";?></span><br>
                                                                     <span><?php echo "<b><small>".date("H:i",strtotime($actividades->hora_ini))." a ".date("H:i",strtotime($actividades->hora_fin))."</small></b>";?></span><br>
 
                                                                     <br>
