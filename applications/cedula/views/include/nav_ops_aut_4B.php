@@ -1,5 +1,5 @@
 <table class="table table-bordered table-responsive">
-                <?php foreach ($get_one_act_edit as $actividades ) : ?>
+<?php foreach ($get_one_act_edit as $actividades ) : ?>
                       <h2>BALANCE FINANCIERO <small>(Cédula - <?php echo $actividades->id_act;?>)</small></h2>
               <tr>                
                 <th>Año Anterior</th>
@@ -60,14 +60,15 @@
                     
 
                     <?php
-                    if ( $onlyusername == 'appcedula' OR $onlyusername == 'blancamartinez' OR $onlyusername == 'oscarmorales' OR $onlyusername == 'rabingarcia' OR $onlyusername == 'jorgeandrade' ) { ?>
+                    if ( $onlyusername == 'appcedula' OR $onlyusername == 'blancamartinez' OR $onlyusername == 'oscarmorales' OR $onlyusername == 'rabingarcia') { ?>
                         <!-- Menu solo para appcedula -->
                         <button id="actualizar_calculo" class="btn btn-success btn-block" type="submit">Actualizar Calculo</button>
                        <?php echo form_close(); ?>
 
                        <br>
-                
-                                <?php
+                       <?php
+                        if ($actividades->status_act == "2") { ?>
+                                  <?php
                                       $atributos = array('class' => 'form-inline'); 
                                       echo form_open(base_url('actividades/fuera_presupuesto'), $atributos); ?>                    
                                       <input type="hidden" name="out" id="out" class="input-small" value="6">
@@ -84,10 +85,17 @@
                                       <input type="hidden" name="usuario" id="usuario" value="<?php echo $actividades->e_mail;?>">
                                       <button type="submit" class="btn btn-inverse btn-block" data-toggle="tooltip" title="Notificar Autorización Presupuestal por Administrativo"><i class="icon-envelope icon-white"></i> Notificar Autorización <br>Presupuestal por Administrativo</button>
                                   <?php echo form_close(); ?>   
+
+                        <?php } else {
+                          echo "Para poder guardar el presupuesto autorizado, la cédula debe estar como Autorizado Conceptual";
+                        }
+                        
+                        ?>
+                
+                              
                         <!-- Menu solo para appcedula -->          
                     <?php } ?>
                   </td>
               </tr>
-                <?php endforeach; ?>
-            </table>
-
+<?php endforeach; ?>
+</table>
