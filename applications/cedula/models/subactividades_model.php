@@ -122,7 +122,7 @@ class Subactividades_model extends CI_Model
                     $this->db->join('subactividades as B','A.id_act = B.id_act','inner');
                     $this->db->where('B.fecha_taller',$fechaPrograma);
                     $this->db->where('A.id_categoria !=','14');
-                    $this->db->group_by('B.subactividad','B.hora_ini');
+                    #$this->db->group_by('B.subactividad');
                     $this->db->order_by('B.id_act','asc');
                     $this->db->order_by('B.hora_ini','asc');                    
                     $query = $this->db->get();     
@@ -133,7 +133,7 @@ class Subactividades_model extends CI_Model
                     $this->db->from('actividades');
                     $this->db->join('subactividades','actividades.id_act = subactividades.id_act','inner');
                     $this->db->where('id_categoria !=','14');
-                    $this->db->group_by('subactividad','hora_ini');
+                    #$this->db->group_by('subactividad');
                     $this->db->order_by('subactividades.id_act','asc');
                     $this->db->order_by('subactividades.hora_ini','asc');
                     $query = $this->db->get();     
